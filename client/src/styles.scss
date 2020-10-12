@@ -6,11 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .inner-component {
     height: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.centered-div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.stepper-controls {
+    display: flex !important;
+    justify-content: flex-end !important;
 }
