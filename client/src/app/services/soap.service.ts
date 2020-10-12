@@ -10,15 +10,20 @@ export class SOAPService {
   client: Client;
 
   constructor(private soap: NgxSoapService) {
+
+    const body = {
+      SourceSystem: "PC",
+    };
+
     let headers = new HttpHeaders();
     headers.append('Access-Control-Allow-Origin', '*');
-    //this.soap.createClient('assets/SI_WS_Orders_OutboundService.wsdl', {headers: headers})
-    this.soap.createClient('assets/SI_Ping_OutboundService.wsdl', {headers: headers})
+    //this.soap.createClient('assets/SI_Ping_OutboundService.wsdl', {headers: headers})
+    /*this.soap.createClient('assets/SI_WS_Orders_OutboundService.wsdl', {headers: headers})
       .then(client => {
         console.log('Client', client);
         this.client = client;
-        //(<any>this.client).AvailabilityChecks("").subscribe(
-        (<any>this.client).SI_Ping_Outbound("").subscribe(
+        //(<any>this.client).SI_Ping_Outbound("").subscribe(
+        (<any>this.client).AvailabilityChecks(body).subscribe(
           (res: ISoapMethodResponse) => {
             console.log('method response', res);
             //this.xmlResponse = res.xml;
@@ -29,6 +34,6 @@ export class SOAPService {
           err => console.log(err)
         );
       })
-      .catch(err => console.log('Error', err));
+      .catch(err => console.log('Error', err));*/
   }
 }

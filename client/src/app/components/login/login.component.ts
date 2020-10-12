@@ -1,18 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  
-  emailForm = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor() { }
-
-  ngOnInit(): void {
+export class LoginComponent {
+  constructor(private router: Router,){
+    this.router.navigate(['/main'])
   }
-
 }
