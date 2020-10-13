@@ -22,10 +22,21 @@ export class NewKEAComponent implements OnInit {
     { name: 'OHG' },
     { name: 'UG' },
     { name: 'eG E. Genossenschaft' },
-    { name: 'eV Eigetr. Verein' },
+    { name: 'eV Eingetr. Verein' },
+    { name: 'Eingetragener Kfm.' },
+    { name: 'GbR Ges. bürg. Rechts' },
+    { name: 'Gewerbebetrieb' },
+    { name: 'GFreier Beruf' },
+    { name: 'Landwirt' },
     { name: 'Stiftung' },
     { name: 'Staatl. Einrichtung' },
+    { name: 'Einzelunternehmer' },
   ];
+
+  locations: { name: string }[] = [
+    { name: 'Deutschland' },
+  ];
+
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService) { }
 
