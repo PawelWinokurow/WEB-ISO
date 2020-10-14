@@ -112,6 +112,38 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
+
+                            <div style="display: flex;">
+                                <div class="paddinglr10px" style="width: 50%;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                                        <input matInput formControlName="phone" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="paddinglr10px" style="width: 50%;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{dictionaryService.get('FAX')}}</mat-label>
+                                        <input matInput formControlName="fax">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div style="display: flex;">
+                                <div class="paddinglr10px" style="width: 50%;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                                        <input matInput formControlName="mobilePhone" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="paddinglr10px" style="width: 50%;">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+                                        <input matInput formControlName="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                     <div class="stepper-controls">

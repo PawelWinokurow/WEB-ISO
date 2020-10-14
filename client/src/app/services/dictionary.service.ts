@@ -29,6 +29,11 @@ export class DictionaryService {
     ['ZIP', 'Postleitzahl'],
     ['LOC', 'Ort'],
     ['COU', 'Land'],
+    ['TEL', 'Telefon'],
+    ['FAX', 'Telefax'],
+    ['MOB', 'Mobiltelefon'],
+    ['EMA', 'E-Mail'],
+
   ])
 
   dictionaryEN = new Map([
@@ -54,6 +59,10 @@ export class DictionaryService {
     ['ZIP', 'ZIP'],
     ['LOC', 'Location'],
     ['COU', 'Country'],
+    ['TEL', 'Phone'],
+    ['FAX', 'Fax'],
+    ['MOB', 'Mobile phone'],
+    ['EMA', 'E-Mail'],
   ])
 
   dictionary = new Map([
