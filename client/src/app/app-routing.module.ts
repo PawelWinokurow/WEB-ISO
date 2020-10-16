@@ -5,9 +5,8 @@ import { MainComponent } from './components/main/main.component';
 import { NewKEAComponent } from './components/new-kea/new-kea.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'main', component: MainComponent },
   { path: 'new-kea', component: NewKEAComponent },
 ];
 @NgModule({

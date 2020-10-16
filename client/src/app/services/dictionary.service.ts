@@ -13,6 +13,10 @@ export class DictionaryService {
   ]);
 
   dictionaryDE = new Map([
+    ['LOG', 'Anmeldung'],
+    ['USR', 'Benutzername'],
+    ['PSW', 'Passwort'],
+
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
     ['RST', 'Zurücksetzen'],
@@ -45,6 +49,10 @@ export class DictionaryService {
   ])
 
   dictionaryEN = new Map([
+    ['LOG', 'Log In'],
+    ['USR', 'Username'],
+    ['PSW', 'Password'],
+
     ['BCK', 'Back'],
     ['NXT', 'Next'],
     ['RST', 'Reset'],

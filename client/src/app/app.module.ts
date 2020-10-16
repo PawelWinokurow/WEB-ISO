@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NewKEAComponent } from './components/new-kea/new-kea.component';
-import { FormGroup , FormControl , ReactiveFormsModule , FormsModule } from '@angular/forms';
+import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 
 @NgModule({

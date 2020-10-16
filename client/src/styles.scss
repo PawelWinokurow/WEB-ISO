@@ -1,17 +1,32 @@
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .inner-component {
-    height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .stepper-controls {
-    display: flex !important;
-    justify-content: flex-end !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.spacer {
+  flex: 1;
+}
+
+mat-form-field {
+  width: 100%;
 }

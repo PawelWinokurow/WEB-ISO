@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DictionaryService } from 'src/app/services/dictionary.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,17 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  constructor(private router: Router,){
-    this.router.navigate(['/main'])
+
+  hide = true;
+  username = new FormControl('');
+  password = new FormControl('');
+
+  constructor(private router: Router, public dictionaryService: DictionaryService){
+    //this.router.navigate(['/main'])
+  }
+
+  login(){
+    console.log("login");
+    this.router.navigate(['/new-kea'])
   }
 }

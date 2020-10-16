@@ -11,6 +11,6 @@ import { SOAPService } from './services/soap.service';
 
 export class AppComponent {
   constructor(private router: Router,){
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 }
