@@ -2,3 +2,11 @@
 .mat-toolbar {
     height:  60px;
 }
+
+mat-toolbar-row {
+    display: flex;
+}
+
+.spacer {
+    flex: 1;
+}

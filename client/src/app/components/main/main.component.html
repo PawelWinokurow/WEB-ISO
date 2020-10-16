@@ -6,7 +6,9 @@
       <div>
         <h1 style="color:white;">WEB-KEA</h1>
       </div>
-      <span class="menu-spacer"></span>
+      <span class="spacer"></span>
+      <button mat-raised-button (click)="dictionaryService.switchLanguage()">{{dictionaryService.getCurrentLanguage()}}</button>
+
       <!--<div>
         
         <a mat-button [routerLink]="'/accounts'"> Accounts </a>

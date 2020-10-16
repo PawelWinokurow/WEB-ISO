@@ -6,6 +6,12 @@ import { Injectable } from '@angular/core';
 export class DictionaryService {
 
   currrentLanguage: string = 'de';
+
+  languages = new Map([
+    ['de', 'Deutsch'],
+    ['en', 'English'],
+  ]);
+
   dictionaryDE = new Map([
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
@@ -20,8 +26,10 @@ export class DictionaryService {
     ['LEF', 'Rechtsform'],
 
     ['CND', 'Kontaktdaten'],
+    ['CND2', 'Kontaktdaten 2'],
     ['NIF', 'Namensangaben'],
     ['ADR', 'Adresse'],
+    ['ADI', 'Weitere Informationen'],
     ['CNA', 'Firma'],
     ['ANI', 'Zus. Namensangaben'],
     ['STR', 'Straße'],
@@ -43,15 +51,17 @@ export class DictionaryService {
 
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
-    ['PRV', 'Commercial customer'],
-    ['COM', 'Gewerbe'],
+    ['PRV', 'Private'],
+    ['COM', 'Commercial'],
     ['DEB', 'Debtor'],
     ['KRE', 'Creditor'],
     ['LEF', 'Legal form'],
 
     ['CND', 'Contact information'],
+    ['CND2', 'Contact information 2'],
     ['NIF', 'Name information'],
     ['ADR', 'Address'],
+    ['ADI', 'Additional information'],
     ['CNA', 'Company'],
     ['ANI', 'Additional name information'],
     ['STR', 'Street'],
@@ -76,6 +86,10 @@ export class DictionaryService {
 
   switchLanguage() {
     this.currrentLanguage = (this.currrentLanguage == 'de' ? 'en' : 'de')
+  }
+
+  getCurrentLanguage() {
+    return this.languages.get(this.currrentLanguage);
   }
 
   get(abbreviation: string) {

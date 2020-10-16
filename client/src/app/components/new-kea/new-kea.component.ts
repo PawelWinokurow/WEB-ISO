@@ -11,6 +11,7 @@ export class NewKEAComponent implements OnInit {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
+  contactInformation2: FormGroup;
 
 
   legalForms: { name: string }[] = [
@@ -43,54 +44,57 @@ export class NewKEAComponent implements OnInit {
 
   ngOnInit(): void {
     this.preselection = this.formBuilder.group({
-      customerType: ['private', Validators.required],
-      debCreType: ['debit', Validators.required]
+      customerType: ['private'],
+      debCreType: ['debit']
     });
     this.initSharedForm();
   }
 
   changeCustomerType(event: any) {
     if (event.value === 'commercial') {
-      this.preselection.get('customerType').setValue('commercial', Validators.required);
+      this.preselection.get('customerType').setValue('commercial');
       this.initCommercialForm();
     } else {
-      this.preselection.get('customerType').setValue('private', Validators.required);
+      this.preselection.get('customerType').setValue('private');
       this.initPrivateForm();
     }
   }
 
   changeDebCreType(event: any) {
     if (event.value === 'credit') {
-      this.preselection.get('debCreType').setValue('credit', Validators.required);
+      this.preselection.get('debCreType').setValue('credit');
     } else {
-      this.preselection.get('debCreType').setValue('debit', Validators.required);
+      this.preselection.get('debCreType').setValue('debit');
     }
   }
 
   initSharedForm() {
     this.contactInformation = this.formBuilder.group({
-      street: ['', Validators.required],
-      houseNumber: ['', Validators.required],
-      zipCode: ['', Validators.required],
-      location: ['', Validators.required],
-      country: ['', Validators.required],
-      phone: ['', Validators.required],
-      fax: ['', Validators.required],
-      mobilePhone: ['', Validators.required],
-      email: ['', Validators.required],
+      street: [''],
+      houseNumber: [''],
+      zipCode: [''],
+      location: [''],
+      country: [''],
+    });
+
+    this.contactInformation2 = this.formBuilder.group({
+      phone: [''],
+      fax: [''],
+      mobilePhone: [''],
+      email: [''],
     });
   }
 
 
   initCommercialForm() {
     this.initSharedForm();
-    this.contactInformation.addControl('company', new FormControl('', Validators.required));
+    this.contactInformation.addControl('company', new FormControl(''));
     this.contactInformation.addControl('additionalInformation', new FormControl(''));
+    this.preselection.addControl('legalForm', new FormControl(''));
 
 
     //Init form for credit and commercial
     if (this.preselection.get('debCreType').value === 'credit') {
-      this.preselection.addControl('legalForm', new FormControl('', Validators.required));
 
     }
     //Init form for debit and commercial
