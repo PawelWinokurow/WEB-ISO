@@ -20,12 +20,20 @@ export class DictionaryService {
     ['LEF', 'Rechtsform'],
 
     ['CND', 'Kontaktdaten'],
+    ['NIF', 'Namensangaben'],
+    ['ADR', 'Adresse'],
     ['CNA', 'Firma'],
+    ['ANI', 'Zus. Namensangaben'],
     ['STR', 'Straße'],
-    ['HNU', 'Hausnummer'],
+    ['HNU', 'Hausnr.'],
     ['ZIP', 'Postleitzahl'],
     ['LOC', 'Ort'],
     ['COU', 'Land'],
+    ['TEL', 'Telefon'],
+    ['FAX', 'Telefax'],
+    ['MOB', 'Mobiltelefon'],
+    ['EMA', 'E-Mail'],
+
   ])
 
   dictionaryEN = new Map([
@@ -42,12 +50,19 @@ export class DictionaryService {
     ['LEF', 'Legal form'],
 
     ['CND', 'Contact information'],
+    ['NIF', 'Name information'],
+    ['ADR', 'Address'],
     ['CNA', 'Company'],
+    ['ANI', 'Additional name information'],
     ['STR', 'Street'],
-    ['HNU', 'House number'],
+    ['HNU', 'HN'],
     ['ZIP', 'ZIP'],
     ['LOC', 'Location'],
     ['COU', 'Country'],
+    ['TEL', 'Phone'],
+    ['FAX', 'Fax'],
+    ['MOB', 'Mobile phone'],
+    ['EMA', 'E-Mail'],
   ])
 
   dictionary = new Map([
