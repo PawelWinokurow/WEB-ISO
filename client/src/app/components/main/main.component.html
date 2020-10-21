@@ -1,13 +1,13 @@
 <mat-toolbar style="background-color: #009650;">
     <mat-toolbar-row>
-      <button mat-icon-button>
+      <!--<button mat-icon-button>
         <mat-icon (click)="sidenav.toggle()" style="color:white;">menu</mat-icon>
-      </button>
-      <div>
+      </button>-->
+      <div style="padding-left:10px;">
         <h1 style="color:white;">WEB-KEA</h1>
       </div>
-      <span class="spacer"></span>
-      <button mat-raised-button (click)="dictionaryService.switchLanguage()">{{dictionaryService.getCurrentLanguage()}}</button>
+      <span class="horizontal-space"></span>
+      <button mat-raised-button (click)="dictionaryService.switchLanguage()">{{dictionaryService.currentLanguage}}</button>
 
       <!--<div>
         
@@ -38,7 +38,7 @@
   
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content style="height: 88vh;">
+    <mat-sidenav-content style="height: calc(100vh - 64px);">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

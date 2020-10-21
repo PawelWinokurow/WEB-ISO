@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class DictionaryService {
 
-  currrentLanguage: string = 'de';
+  currentLanguage: string = 'DE';
 
   languages = new Map([
-    ['de', 'Deutsch'],
-    ['en', 'English'],
+    ['DE', 'Deutsch'],
+    ['EN', 'English'],
   ]);
 
   dictionaryDE = new Map([
@@ -84,8 +84,8 @@ export class DictionaryService {
   ])
 
   dictionary = new Map([
-    ['de', this.dictionaryDE],
-    ['en', this.dictionaryEN]
+    ['DE', this.dictionaryDE],
+    ['EN', this.dictionaryEN]
   ])
 
 
@@ -93,14 +93,10 @@ export class DictionaryService {
   constructor() { }
 
   switchLanguage() {
-    this.currrentLanguage = (this.currrentLanguage == 'de' ? 'en' : 'de')
-  }
-
-  getCurrentLanguage() {
-    return this.languages.get(this.currrentLanguage);
+    this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
   }
 
   get(abbreviation: string) {
-    return this.dictionary.get(this.currrentLanguage).get(abbreviation);
+    return this.dictionary.get(this.currentLanguage).get(abbreviation);
   }
 }

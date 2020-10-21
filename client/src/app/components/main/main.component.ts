@@ -11,8 +11,7 @@ import { SOAPService } from 'src/app/services/soap.service';
 export class MainComponent implements OnInit {
 
   constructor(private soapService: SOAPService, private router: Router, public dictionaryService: DictionaryService){
-    this.router.navigate(['/login'])
-    //this.router.navigate(['/new-kea'])
+    this.router.navigate(['/kea'])
   }
   ngOnInit(): void {
   }

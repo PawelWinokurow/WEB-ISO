@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { NgxSoapModule } from 'ngx-soap';
 import { SOAPService } from './services/soap.service';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
@@ -17,7 +16,6 @@ import { DictionaryService } from './services/dictionary.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     MainComponent,
     NewKEAComponent,
   ],
