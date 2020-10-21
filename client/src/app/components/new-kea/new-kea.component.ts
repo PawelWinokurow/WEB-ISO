@@ -11,7 +11,8 @@ export class NewKEAComponent implements OnInit {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
-  contactInformation2: FormGroup;
+  employee: FormGroup;
+  company: FormGroup;
 
 
   legalForms: { name: string }[] = [
@@ -34,6 +35,16 @@ export class NewKEAComponent implements OnInit {
     { name: 'Staatl. Einrichtung' },
     { name: 'Einzelunternehmer' },
   ];
+
+  titles: { name: string }[] = [
+    { name: 'Dr.' },
+    { name: 'Prof. Dr.' },
+  ]
+
+  salutations: { name: string }[] = [
+    { name: 'Herr' },
+    { name: 'Frau' },
+  ]
 
   locations: { name: string }[] = [
     { name: 'Deutschland' },
@@ -80,19 +91,26 @@ export class NewKEAComponent implements OnInit {
       mobilePhone: [''],
       email: [''],
     });
-
-    this.contactInformation2 = this.formBuilder.group({
-
+    this.employee = this.formBuilder.group({
+      title: [''],
+      salutation: ['', Validators.required],
+      firstName: ['', Validators.required],
+      secondName: ['', Validators.required],
+      phone: [''],
+      fax: [''],
+      mobilePhone: [''],
+      email: ['', Validators.required],
+    });
+    this.company = this.formBuilder.group({
+      industryField: [''],
     });
   }
 
-
   initCommercialForm() {
     this.initSharedForm();
+    this.preselection.addControl('legalForm', new FormControl(''));
     this.contactInformation.addControl('company', new FormControl(''));
     this.contactInformation.addControl('additionalInformation', new FormControl(''));
-    this.preselection.addControl('legalForm', new FormControl(''));
-
 
     //Init form for credit and commercial
     if (this.preselection.get('debCreType').value === 'credit') {
@@ -115,5 +133,9 @@ export class NewKEAComponent implements OnInit {
     if (this.preselection.get('debCreType').value === 'debit') {
 
     }
+  }
+
+  sendSOAP() {
+
   }
 }

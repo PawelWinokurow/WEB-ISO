@@ -19,7 +19,7 @@ export class DictionaryService {
 
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
-    ['RST', 'Zurücksetzen'],
+    ['SND', 'Senden'],
 
     ['PRS', 'Vorauswahl'],
     ['CUT', 'Kundentyp'],
@@ -30,10 +30,9 @@ export class DictionaryService {
     ['LEF', 'Rechtsform'],
 
     ['CND', 'Kontaktdaten'],
-    ['CND2', 'Kontaktdaten 2'],
     ['NIF', 'Namensangaben'],
-    ['ADR', 'Adresse'],
-    ['ADI', 'Weitere Informationen'],
+    ['ADR', 'Anschrift'],
+    ['CON', 'Kontakt'],
     ['CNA', 'Firma'],
     ['ANI', 'Zus. Namensangaben'],
     ['STR', 'Straße'],
@@ -46,6 +45,15 @@ export class DictionaryService {
     ['MOB', 'Mobiltelefon'],
     ['EMA', 'E-Mail'],
 
+    ['EMP', 'Angestellter'],
+    ['EMN', 'Angestellter Name'],
+    ['EMC', 'Angestellter Kontakt'],
+    ['TLE', 'Titel'],
+    ['SAL', 'Anrede'],
+    ['FNA', 'Vorname'],
+    ['SNA', 'Nachname'],
+    
+    ['COM', 'Unternehmen'],
   ])
 
   dictionaryEN = new Map([
@@ -55,7 +63,7 @@ export class DictionaryService {
 
     ['BCK', 'Back'],
     ['NXT', 'Next'],
-    ['RST', 'Reset'],
+    ['SND', 'Send'],
 
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
@@ -65,13 +73,12 @@ export class DictionaryService {
     ['KRE', 'Creditor'],
     ['LEF', 'Legal form'],
 
-    ['CND', 'Contact information'],
-    ['CND2', 'Contact information 2'],
-    ['NIF', 'Name information'],
+    ['CND', 'Contact'],
+    ['NIF', 'Name'],
     ['ADR', 'Address'],
-    ['ADI', 'Additional information'],
+    ['CON', 'Contact'],
     ['CNA', 'Company'],
-    ['ANI', 'Additional name information'],
+    ['ANI', 'Additional name'],
     ['STR', 'Street'],
     ['HNU', 'HN'],
     ['ZIP', 'ZIP'],
@@ -81,6 +88,16 @@ export class DictionaryService {
     ['FAX', 'Fax'],
     ['MOB', 'Mobile phone'],
     ['EMA', 'E-Mail'],
+
+    ['EMP', 'Employee'],
+    ['EMN', 'Employee name'],
+    ['EMC', 'Employee contact'],
+    ['TLE', 'Title'],
+    ['SAL', 'Salutation'],
+    ['FNA', 'Name'],
+    ['SNA', 'Surname'],
+
+    ['COM', 'Company'],
   ])
 
   dictionary = new Map([

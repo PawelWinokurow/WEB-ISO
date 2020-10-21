@@ -1,6 +1,6 @@
 <div class="inner-component">
     <div class="stepper-container">
-        <mat-horizontal-stepper linear="true" #stepper>
+        <mat-horizontal-stepper linear="false" #stepper>
             <mat-step [stepControl]="preselection">
                 <form [formGroup]="preselection">
                     <ng-template matStepLabel>{{dictionaryService.get('PRS')}}</ng-template>
@@ -117,14 +117,14 @@
                                 </div>
 
                                 <div class="padding10px">
-                                    <mat-label>{{dictionaryService.get('ADI')}}</mat-label>
+                                    <mat-label>{{dictionaryService.get('CON')}}</mat-label>
                                     <mat-divider></mat-divider>
                                 </div>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field appearance="outline">
                                             <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
-                                            <input matInput formControlName="phone" required>
+                                            <input matInput formControlName="phone">
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -139,13 +139,13 @@
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field appearance="outline">
                                             <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
-                                            <input matInput formControlName="mobilePhone" required>
+                                            <input matInput formControlName="mobilePhone">
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field appearance="outline">
                                             <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
-                                            <input matInput formControlName="email">
+                                            <input matInput formControlName="email" required>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -162,15 +162,90 @@
                 </form>
             </mat-step>
 
-            <mat-step [stepControl]="contactInformation2">
-                <form [formGroup]="contactInformation2">
-                    <ng-template matStepLabel>{{dictionaryService.get('CND2')}}</ng-template>
+            <mat-step [stepControl]="employee">
+                <form [formGroup]="employee">
+                    <ng-template matStepLabel>{{dictionaryService.get('EMP')}}</ng-template>
                     <div class="vertical-flex">
 
                         <div class="stepper-data">
                             <div *ngIf="preselection.get('customerType').value === 'commercial'">
 
+                                <div class="padding10px">
+                                    <mat-label>{{dictionaryService.get('EMN')}}</mat-label>
+                                    <mat-divider></mat-divider>
+                                </div>
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline" color="accent" style="width: 240px;">
+                                            <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
+                                            <mat-select formControlName="title">
+                                                <mat-option *ngFor="let title of titles" [value]="title">
+                                                    {{title.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
 
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline" color="accent" style="width: 240px;">
+                                            <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
+                                            <mat-select formControlName="salutation">
+                                                <mat-option *ngFor="let salutation of salutations" [value]="salutation">
+                                                    {{salutation.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
+                                            <input matInput formControlName="firstName" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
+                                            <input matInput formControlName="secondName" required>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="padding10px">
+                                    <mat-label>{{dictionaryService.get('EMC')}}</mat-label>
+                                    <mat-divider></mat-divider>
+                                </div>
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                                            <input matInput formControlName="phone">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('FAX')}}</mat-label>
+                                            <input matInput formControlName="fax">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                                            <input matInput formControlName="mobilePhone">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+                                            <input matInput formControlName="email" required>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="vertical-space"></div>
@@ -185,15 +260,40 @@
                 </form>
             </mat-step>
 
+            <mat-step [stepControl]="company">
+                <form [formGroup]="company">
+                    <ng-template matStepLabel>{{dictionaryService.get('COM')}}</ng-template>
+                    <div class="vertical-flex">
+
+                        <div class="stepper-data">
+
+                        </div>
+                        <div class="vertical-space"></div>
+                        <div class="stepper-controls">
+                            <button mat-raised-button matStepperPrevious
+                                #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
+                            <button mat-raised-button matStepperNext
+                                #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
+                        </div>
+                    </div>
+
+                </form>
+            </mat-step>
 
             <mat-step>
                 <ng-template matStepLabel>Done</ng-template>
-                <p>You are now done.</p>
-                <div class="stepper-controls">
-                    <button mat-raised-button matStepperPrevious
-                        #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
-                    <button mat-raised-button (click)="stepper.reset()"
-                        #StepperControlButton>{{dictionaryService.get('RST')}}</button>
+                <div class="vertical-flex">
+
+                    <div class="stepper-data">
+
+                    </div>
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-raised-button matStepperPrevious
+                            #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
+                        <button mat-raised-button (click)="sendSOAP()"
+                            #StepperControlButton>{{dictionaryService.get('SND')}}</button>
+                    </div>
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
