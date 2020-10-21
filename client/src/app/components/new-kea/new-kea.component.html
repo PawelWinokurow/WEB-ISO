@@ -115,26 +115,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-raised-button matStepperPrevious
-                                #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
-                            <button mat-raised-button matStepperNext
-                                #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
-                        </div>
-                    </div>
-                </form>
-            </mat-step>
 
-            <mat-step [stepControl]="contactInformation2">
-                <form [formGroup]="contactInformation2">
-                    <ng-template matStepLabel>{{dictionaryService.get('CND2')}}</ng-template>
-                    <div class="vertical-flex">
-
-                        <div class="stepper-data">
-                            <div *ngIf="preselection.get('customerType').value === 'commercial'">
                                 <div class="padding10px">
                                     <mat-label>{{dictionaryService.get('ADI')}}</mat-label>
                                     <mat-divider></mat-divider>
@@ -168,6 +149,27 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="vertical-space"></div>
+                        <div class="stepper-controls">
+                            <button mat-raised-button matStepperPrevious
+                                #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
+                            <button mat-raised-button matStepperNext
+                                #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="contactInformation2">
+                <form [formGroup]="contactInformation2">
+                    <ng-template matStepLabel>{{dictionaryService.get('CND2')}}</ng-template>
+                    <div class="vertical-flex">
+
+                        <div class="stepper-data">
+                            <div *ngIf="preselection.get('customerType').value === 'commercial'">
+
 
                             </div>
                         </div>

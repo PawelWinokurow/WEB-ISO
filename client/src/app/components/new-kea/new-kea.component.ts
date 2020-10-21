@@ -75,13 +75,14 @@ export class NewKEAComponent implements OnInit {
       zipCode: [''],
       location: [''],
       country: [''],
-    });
-
-    this.contactInformation2 = this.formBuilder.group({
       phone: [''],
       fax: [''],
       mobilePhone: [''],
       email: [''],
+    });
+
+    this.contactInformation2 = this.formBuilder.group({
+
     });
   }
 
