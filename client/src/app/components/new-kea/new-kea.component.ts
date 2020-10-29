@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { SendDirectMaskComponent } from 'src/app/dialogs/send-direct-mask/send-direct-mask.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
+import { HttpService } from 'src/app/services/http.service';
+import { SOAPService } from 'src/app/services/soap.service';
 
 @Component({
   selector: 'app-new-kea',
@@ -13,7 +17,6 @@ export class NewKEAComponent implements OnInit {
   contactInformation: FormGroup;
   employee: FormGroup;
   company: FormGroup;
-
 
   legalForms: { name: string }[] = [
     { name: 'AG' },
@@ -50,8 +53,8 @@ export class NewKEAComponent implements OnInit {
     { name: 'Deutschland' },
   ];
 
-
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService) { }
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService,
+    private dialog: MatDialog, private soapService: SOAPService, private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.preselection = this.formBuilder.group({
@@ -135,7 +138,20 @@ export class NewKEAComponent implements OnInit {
     }
   }
 
-  sendSOAP() {
 
+  openSendSOAPDialog() {
+    const dialogRef = this.dialog.open(SendDirectMaskComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.soapService.sendMask({ name: "direct" });
+      } else {
+        this.httpService.sendMask({ name: "to server" }).subscribe(res => {
+          console.log(res);
+        });
+      }
+    });
   }
 }

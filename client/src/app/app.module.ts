@@ -12,12 +12,15 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NewKEAComponent } from './components/new-kea/new-kea.component';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
+import { HttpService } from './services/http.service';
+import { SendDirectMaskComponent } from './dialogs/send-direct-mask/send-direct-mask.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     NewKEAComponent,
+    SendDirectMaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { DictionaryService } from './services/dictionary.service';
   ],
   providers: [
     SOAPService, 
-    DictionaryService
+    DictionaryService,
+    HttpService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

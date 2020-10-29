@@ -13,6 +13,9 @@ export class DictionaryService {
   ]);
 
   dictionaryDE = new Map([
+    ['YES', 'Ja'],
+    ['NOO', 'Nein'],
+
     ['LOG', 'Anmeldung'],
     ['USR', 'Benutzername'],
     ['PSW', 'Passwort'],
@@ -54,9 +57,13 @@ export class DictionaryService {
     ['SNA', 'Nachname'],
     
     ['COM', 'Unternehmen'],
+    ['DIS', 'Direkt senden'],
   ])
 
   dictionaryEN = new Map([
+    ['YES', 'Yes'],
+    ['NOO', 'No'],
+
     ['LOG', 'Log In'],
     ['USR', 'Username'],
     ['PSW', 'Password'],
@@ -98,6 +105,8 @@ export class DictionaryService {
     ['SNA', 'Surname'],
 
     ['COM', 'Company'],
+
+    ['DIS', 'Send directly'],
   ])
 
   dictionary = new Map([

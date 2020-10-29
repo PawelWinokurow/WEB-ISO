@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap';
+import { Mask } from '../interfaces/mask';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class SOAPService {
       SourceSystem: "PC",
     };
     //this.sendSOAP(body, 'assets/SI_WS_Orders_OutboundService.wsdl')
+  }
+
+  sendMask(mask: Mask){
+    
   }
 
   sendSOAP(body, path = 'assets/SI_WS_Orders_OutboundService.wsdl') {

@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>{{dictionaryService.get('DIS')}}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()" cdkFocusInitial>{{dictionaryService.get('YES')}}</button>
+    <button mat-button (click)="onNoClick()">{{dictionaryService.get('NOO')}}</button>
+</div>
