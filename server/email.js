@@ -1,4 +1,3 @@
-var random = require('./random')
 const nodemailer = require('nodemailer');
 
 
@@ -11,12 +10,12 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-exports.sendMail = function() {
+exports.sendMail = function(hash) {
     var mailOptions = {
         from: 'youremail@gmail.com',
         to: 'myfriend@yahoo.com',
         subject: 'Sending Email using Node.js',
-        text: 'URL:' + random.generateHash()
+        html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the mask.</p>'
       };
     
     transporter.sendMail(mailOptions, function (error, info) {

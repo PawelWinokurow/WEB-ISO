@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask/send-direct-mask.component';
@@ -9,7 +9,8 @@ import { SOAPService } from 'src/app/services/soap.service';
 @Component({
   selector: 'app-new-kea',
   templateUrl: './new-kea.component.html',
-  styleUrls: ['./new-kea.component.scss']
+  styleUrls: ['./new-kea.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewKEAComponent implements OnInit {
 
@@ -151,7 +152,7 @@ export class NewKEAComponent implements OnInit {
       } else {
         isDirect = false;
       }
-      this.httpService.sendMask({ isDirect: isDirect }).subscribe(res => {
+      this.httpService.sendMask({ isDirect: isDirect, name: "some name" }).subscribe(res => {
         console.log(res);
       });
     });

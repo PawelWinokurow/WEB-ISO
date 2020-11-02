@@ -1,33 +1,33 @@
 var express = require('express');
 var db = require('./database')
-var email = require('./email')
 var soap = require('./soap')
+var email = require('./email')
+var random = require('./random')
 var app = express();
 
+db.connect();
 app.use(express.json());
-
-var dbConnection = db.connectToDB();
 
 app.all("/request", function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  let body = req.body;
-
-  connection.end();
-  if (body.isDirect) {
-
+  let mask = req.body;
+  
+  if (mask.isDirect) {
+    soap.sendMask(mask);
   } else {
-    //email.sendMail();
-
+    const hash = random.generateHash();
+    db.storeMask(hash, mask);
+    email.sendMail(hash);
   }
   next();
 });
 
 app.all("/confirm", function (req, res, next) {
-  let body = req.body;
-  console.log(body.isDirect);
-
+  db.checkConfirmation(req.query.hash)
+    .then(mask => soap.sendMask(mask))
+    .catch(err => console.log(err))
   next();
 });
 
