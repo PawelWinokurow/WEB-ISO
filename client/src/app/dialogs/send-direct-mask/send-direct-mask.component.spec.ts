@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SendDirectMaskComponent } from './send-direct-mask.component';
+import { SendMaskConfirmationDialogComponent } from './send-direct-mask.component';
 
-describe('SendDirectMaskComponent', () => {
-  let component: SendDirectMaskComponent;
-  let fixture: ComponentFixture<SendDirectMaskComponent>;
+describe('SendMaskConfirmationDialogComponent', () => {
+  let component: SendMaskConfirmationDialogComponent;
+  let fixture: ComponentFixture<SendMaskConfirmationDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SendDirectMaskComponent ]
+      declarations: [ SendMaskConfirmationDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SendDirectMaskComponent);
+    fixture = TestBed.createComponent(SendMaskConfirmationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

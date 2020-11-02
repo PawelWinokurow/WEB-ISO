@@ -1,3 +1,3 @@
 export interface Mask {
-    name: string;
+    isDirect: boolean;
 }

@@ -8,7 +8,7 @@ import { Mask } from '../interfaces/mask';
 export class HttpService {
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json');
-  tempNodeJS = "http://127.0.0.1:3000";
+  tempNodeJS = "http://127.0.0.1:3000/request";
 
   constructor(private http: HttpClient) {}
 

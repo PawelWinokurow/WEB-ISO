@@ -1,0 +1,5 @@
+
+
+exports.sendMask = function (mask){
+
+}

@@ -7,9 +7,9 @@ import { DictionaryService } from 'src/app/services/dictionary.service';
   templateUrl: './send-direct-mask.component.html',
   styleUrls: ['./send-direct-mask.component.scss']
 })
-export class SendDirectMaskComponent implements OnInit {
+export class SendMaskConfirmationDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SendDirectMaskComponent>, public dictionaryService: DictionaryService,) { }
+  constructor(public dialogRef: MatDialogRef<SendMaskConfirmationDialogComponent>, public dictionaryService: DictionaryService,) { }
 
   ngOnInit(): void {
   }

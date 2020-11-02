@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SendDirectMaskComponent } from 'src/app/dialogs/send-direct-mask/send-direct-mask.component';
+import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask/send-direct-mask.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { HttpService } from 'src/app/services/http.service';
 import { SOAPService } from 'src/app/services/soap.service';
@@ -54,7 +54,7 @@ export class NewKEAComponent implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService,
-    private dialog: MatDialog, private soapService: SOAPService, private httpService: HttpService) { }
+    private dialog: MatDialog, private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.preselection = this.formBuilder.group({
@@ -140,18 +140,20 @@ export class NewKEAComponent implements OnInit {
 
 
   openSendSOAPDialog() {
-    const dialogRef = this.dialog.open(SendDirectMaskComponent, {
+    const dialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       width: '250px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      let isDirect = false;
       if (result) {
-        this.soapService.sendMask({ name: "direct" });
+        isDirect = true;
       } else {
-        this.httpService.sendMask({ name: "to server" }).subscribe(res => {
-          console.log(res);
-        });
+        isDirect = false;
       }
+      this.httpService.sendMask({ isDirect: isDirect }).subscribe(res => {
+        console.log(res);
+      });
     });
   }
 }
