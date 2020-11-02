@@ -42,8 +42,13 @@ exports.checkConfirmation = function (hash) {
     const sql = 'SELECT * FROM masks WHERE hash = ?';
     connection.query(sql, [hash],
       function (err, result, fields) {
-        if (err) reject(err);
-        resolve(result[0]);
+        if (err) throw err;
+        if (Array.isArray(result) && result.length) {
+          resolve(result[0]);
+        } else {
+          reject(result);
+        }
+        
       });
   });
 }

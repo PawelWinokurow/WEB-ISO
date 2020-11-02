@@ -26,9 +26,16 @@ app.all("/request", function (req, res, next) {
 
 app.all("/confirm", function (req, res, next) {
   db.checkConfirmation(req.query.hash)
-    .then(mask => soap.sendMask(mask))
-    .catch(err => console.log(err))
-  next();
+    .then(mask => {
+      soap.sendMask(mask);
+      res.send('<p>Success! The mask was confirmed.</p>');
+      next();
+    })
+    .catch(() => {
+      res.send('<p>Error! The mask was not confirmed.</p>');
+      next();
+    })
+
 });
 
 // start the server in the port 3000 !
