@@ -3,9 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 
 @Component({
-  selector: 'app-send-direct-mask',
-  templateUrl: './send-direct-mask.component.html',
-  styleUrls: ['./send-direct-mask.component.scss']
+  selector: 'app-send-direct-mask-dialog',
+  templateUrl: './send-direct-mask-dialog.component.html',
+  styleUrls: ['./send-direct-mask-dialog.component.scss']
 })
 export class SendMaskConfirmationDialogComponent implements OnInit {
 

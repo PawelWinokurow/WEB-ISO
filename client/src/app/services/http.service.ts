@@ -12,7 +12,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  sendMask(mask: Mask){
+  sendMask(mask){
     return this.http.post(this.tempNodeJS, JSON.stringify(mask), {
       headers: this.headers
     })

@@ -19,7 +19,7 @@ app.all("/request", function (req, res, next) {
   } else {
     const hash = random.generateHash();
     db.storeMask(hash, mask);
-    email.sendMail(hash);
+    email.sendEmail(hash, mask.emailTo);
   }
   next();
 });
@@ -38,7 +38,6 @@ app.all("/confirm", function (req, res, next) {
 
 });
 
-// start the server in the port 3000 !
 app.listen(3000, function () {
   console.log('Example app listening on port 3000.');
 });

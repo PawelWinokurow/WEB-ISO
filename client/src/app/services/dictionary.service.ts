@@ -15,6 +15,7 @@ export class DictionaryService {
   dictionaryDE = new Map([
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
+    ['ABR', 'Abbrechen'],
 
     ['LOG', 'Anmeldung'],
     ['USR', 'Benutzername'],
@@ -63,6 +64,7 @@ export class DictionaryService {
   dictionaryEN = new Map([
     ['YES', 'Yes'],
     ['NOO', 'No'],
+    ['ABR', 'Cancel'],
 
     ['LOG', 'Log In'],
     ['USR', 'Username'],

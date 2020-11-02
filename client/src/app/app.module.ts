@@ -13,7 +13,8 @@ import { NewKEAComponent } from './components/new-kea/new-kea.component';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
-import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask/send-direct-mask.component';
+import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
+import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask/
     MainComponent,
     NewKEAComponent,
     SendMaskConfirmationDialogComponent,
+    EmailDialogComponent,
   ],
   imports: [
     BrowserModule,

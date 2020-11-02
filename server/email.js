@@ -10,14 +10,15 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-exports.sendMail = function(hash) {
+exports.sendEmail = function (hash, emailTo) {
+    console.log(emailTo)
     var mailOptions = {
-        from: 'youremail@gmail.com',
-        to: 'myfriend@yahoo.com',
-        subject: 'Sending Email using Node.js',
+        from: "BayWa",
+        to: emailTo,
+        subject: 'Mask confirmation',
         html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the mask.</p>'
-      };
-    
+    };
+
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);

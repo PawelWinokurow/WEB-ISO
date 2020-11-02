@@ -1,0 +1,17 @@
+<h1 mat-dialog-title style="text-align:center;">{{dictionaryService.get('EMA')}}</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+    <input matInput [formControl]="email">
+</mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center" style="padding-top: 10px;">
+  <div style="display: inline-block; padding-right: 5px;">
+    <button mat-raised-button (click)="onYesClick()" [disabled]="!email.valid">{{dictionaryService.get('SND')}}</button>
+  </div>
+  <div style="display: inline-block; padding-left: 5px;">
+    <button mat-raised-button (click)="onNoClick()">{{dictionaryService.get('ABR')}}</button>
+  </div>
+</div>
