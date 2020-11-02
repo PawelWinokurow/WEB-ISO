@@ -2,6 +2,7 @@
 const { response } = require('express');
 var express = require('express');
 var db = require('./database')
+var email = require('./email')
 var rnd = require('./random')
 var app = express();
 
