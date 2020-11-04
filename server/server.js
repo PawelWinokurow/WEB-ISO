@@ -1,14 +1,21 @@
-var express = require('express');
-var db = require('./database')
-var soap = require('./soap')
-var email = require('./email')
-var random = require('./random')
-var app = express();
+const express = require('express');
+const db = require('./database')
+const soap = require('./soap')
+const email = require('./email')
+const random = require('./random')
+const config = require('./config');
+const schedule = require('node-schedule');
+
+const app = express();
 
 db.connect();
 app.use(express.json());
 
-app.all("/request", function (req, res, next) {
+schedule.scheduleJob('0 0 * * *', function(){
+  db.removeOldMasks();
+});
+
+app.post("/request", function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
@@ -24,7 +31,7 @@ app.all("/request", function (req, res, next) {
   next();
 });
 
-app.all("/confirm", function (req, res, next) {
+app.get("/confirm", function (req, res, next) {
   db.checkConfirmation(req.query.hash)
     .then(mask => {
       soap.sendMask(mask);
@@ -38,6 +45,6 @@ app.all("/confirm", function (req, res, next) {
 
 });
 
-app.listen(3000, function () {
+app.listen(config.web.port, function () {
   console.log('Example app listening on port 3000.');
 });

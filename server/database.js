@@ -1,19 +1,15 @@
-var mysql = require('mysql');
+const mysql = require("mysql");
+const config = require('./config');
 
-const host = "localhost";
-const user = "root";
-const password = "root";
-const database = "kea";
-
-const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, name VARCHAR (255) NOT NULL);";
+const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, name VARCHAR (255) NOT NULL, datetime DATETIME NOT NULL);";
 
 var connection;
 exports.connect = function () {
   connection = mysql.createConnection({
-    host: host,
-    user: user,
-    password: password,
-    database: database,
+    host: config.mysql.host,
+    user: config.mysql.user,
+    password: config.mysql.password,
+    database: config.mysql.database,
   });
 
   connection.connect(function (err) {
@@ -29,8 +25,9 @@ exports.connect = function () {
 }
 
 exports.storeMask = function (hash, mask) {
-  const sql = 'INSERT INTO masks (hash, name) VALUES (?)';
-  values = [hash, mask.name];
+  const sql = 'INSERT INTO masks (hash, name, datetime) VALUES (?)';
+  var currentDatetime = time.getCurrentDatetime();
+  values = [hash, mask.name, currentDatetime];
   connection.query(sql, [values], function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
@@ -48,7 +45,7 @@ exports.checkConfirmation = function (hash) {
         } else {
           reject(result);
         }
-        
+
       });
   });
 }
@@ -56,3 +53,12 @@ exports.checkConfirmation = function (hash) {
 exports.close = function () {
   connection.end();
 }
+
+exports.removeOldMasks = function() {
+  const sql = "DELETE FROM masks WHERE datetime < NOW() - INTERVAL ? DAY";
+  connection.query(sql, [config.mysql.maskStorageTime], function (err, result) {
+    if (err) throw err;
+    console.log("Number of records deleted: " + result.affectedRows);
+  });
+}
+
