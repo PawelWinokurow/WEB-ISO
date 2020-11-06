@@ -1,10 +1,10 @@
 const express = require('express');
+const schedule = require('node-schedule');
 const db = require('./database')
 const soap = require('./soap')
 const email = require('./email')
 const random = require('./random')
 const config = require('./config');
-const schedule = require('node-schedule');
 
 const app = express();
 
@@ -46,5 +46,6 @@ app.get("/confirm", function (req, res, next) {
 });
 
 app.listen(config.web.port, function () {
+  soap.test()
   console.log('Example app listening on port 3000.');
 });

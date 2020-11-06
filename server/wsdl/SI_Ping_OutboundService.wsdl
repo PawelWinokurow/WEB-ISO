@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_Ping_Outbound" targetNamespace="urn:Ping" xmlns:p1="urn:Ping" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:documentation/>
+	<wsp:UsingPolicy wsdl:required="true"/>
+	<wsp:Policy wsu:Id="OP_SI_Ping_Outbound"/>
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:Ping" xmlns="urn:Ping" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:element name="MT_Ping_response" type="DT_Ping_response"/>
+			<xsd:element name="MT_Ping" type="DT_Ping"/>
+			<xsd:element name="FMT_Error">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="standard" type="ExchangeFaultData"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="DT_Ping_response">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">2c3afc8903e811e2b6a50000012e9b62</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Ping_response" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ExchangeLogData">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">e9300f05598311e6c2c2000000e77d23</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="severity" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="text" type="xsd:string"/>
+					<xsd:element name="url" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="id" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ExchangeFaultData">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">e91fc09d598311e6cb32000000e77d23</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="faultText" type="xsd:string"/>
+					<xsd:element name="faultUrl" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="faultDetail" type="ExchangeLogData" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DT_Ping">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">e5d2916303e711e2a6550000012e9b62</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Ping" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="MT_Ping">
+		<wsdl:documentation/>
+		<wsdl:part name="MT_Ping" element="p1:MT_Ping"/>
+	</wsdl:message>
+	<wsdl:message name="MT_Ping_response">
+		<wsdl:documentation/>
+		<wsdl:part name="MT_Ping_response" element="p1:MT_Ping_response"/>
+	</wsdl:message>
+	<wsdl:message name="FMT_Error">
+		<wsdl:documentation/>
+		<wsdl:part name="FMT_Error" element="p1:FMT_Error"/>
+	</wsdl:message>
+	<wsdl:portType name="SI_Ping_Outbound">
+		<wsdl:documentation/>
+		<wsdl:operation name="SI_Ping_Outbound">
+			<wsdl:documentation/>
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_SI_Ping_Outbound"/>
+			</wsp:Policy>
+			<wsdl:input message="p1:MT_Ping"/>
+			<wsdl:output message="p1:MT_Ping_response"/>
+			<wsdl:fault name="FMT_Error" message="p1:FMT_Error"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SI_Ping_OutboundBinding" type="p1:SI_Ping_Outbound">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		<wsdl:operation name="SI_Ping_Outbound">
+			<soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			<wsdl:input>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			</wsdl:output>
+			<wsdl:fault name="FMT_Error">
+				<soap:fault use="literal" name="FMT_Error" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SI_Ping_OutboundService">
+		<wsdl:port name="HTTPS_Port" binding="p1:SI_Ping_OutboundBinding">
+			<soap:address location="https://sapinterfaces-qas.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_Ping_over_External_AAE&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Ping_Outbound&amp;interfaceNamespace=urn%3APing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

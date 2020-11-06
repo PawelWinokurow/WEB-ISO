@@ -56,9 +56,10 @@ export class NewKEAComponent implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService,
-    private dialog: MatDialog, private httpService: HttpService) { }
+    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService) { }
 
   ngOnInit(): void {
+    this.soapService.sendSOAP("");
     this.preselection = this.formBuilder.group({
       customerType: ['private'],
       debCreType: ['debit']
