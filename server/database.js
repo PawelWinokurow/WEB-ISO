@@ -1,5 +1,5 @@
-const mysql = require("mysql");
-const config = require('./config');
+var mysql = require("mysql");
+var config = require('./config');
 
 const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, name VARCHAR (255) NOT NULL, datetime DATETIME NOT NULL);";
 

@@ -94,7 +94,7 @@
 	</wsdl:binding>
 	<wsdl:service name="SI_Ping_OutboundService">
 		<wsdl:port name="HTTPS_Port" binding="p1:SI_Ping_OutboundBinding">
-			<soap:address location="https://sapinterfaces-qas.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_Ping_over_External_AAE&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Ping_Outbound&amp;interfaceNamespace=urn%3APing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			<soap:address location="https://sapinterfaces-qas2.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_Ping_over_External_AAE&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Ping_Outbound&amp;interfaceNamespace=urn%3APing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

@@ -15,6 +15,7 @@ import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
 import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
+import { ListService } from './services/list.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.compon
   providers: [
     SOAPService, 
     DictionaryService,
-    HttpService
+    HttpService, 
+    ListService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,10 +1,10 @@
-const express = require('express');
-const schedule = require('node-schedule');
-const db = require('./database')
-const soap = require('./soap')
-const email = require('./email')
-const random = require('./random')
-const config = require('./config');
+var express = require('express');
+var schedule = require('node-schedule');
+var db = require('./database')
+var soap = require('./soap')
+var email = require('./email')
+var random = require('./random')
+var config = require('./config');
 
 const app = express();
 
