@@ -15,11 +15,7 @@ export class DictionaryService {
   dictionaryDE = new Map([
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
-    ['ABR', 'Abbrechen'],
-
-    ['LOG', 'Anmeldung'],
-    ['USR', 'Benutzername'],
-    ['PSW', 'Passwort'],
+    ['CAN', 'Abbrechen'],
 
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
@@ -33,7 +29,6 @@ export class DictionaryService {
     ['KRE', 'Kreditor'],
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
-    
 
     ['CND', 'Kontaktdaten'],
     ['NIF', 'Namensangaben'],
@@ -54,6 +49,19 @@ export class DictionaryService {
     ['MOB', 'Mobiltelefon'],
     ['EMA', 'E-Mail'],
 
+    ['PAY', 'Zahlung'],
+    ['TAX', 'Steuernummer'],
+    ['VAT', 'Umsatzsteuer-ID'],
+    ['IFI', 'Branche'],
+    ['IFC', 'Branchencode'],
+    ['HSP', 'Lieferant hat SEPA-Lastschrift'],
+    ['GSP', 'SEPA-Lastschrift erteilen'],
+    ['IBA', 'IBAN'],
+    ['BIC', 'BIC'],
+    ['BNK', 'Kreditinstitut'],
+    ['TPA', 'Zahlungsbedingung'],
+    ['REF', 'Bemerkungsfeld'],
+
     ['EMP', 'Angestellter'],
     ['EMN', 'Angestellter Name'],
     ['EMC', 'Angestellter Kontakt'],
@@ -69,11 +77,7 @@ export class DictionaryService {
   dictionaryEN = new Map([
     ['YES', 'Yes'],
     ['NOO', 'No'],
-    ['ABR', 'Cancel'],
-
-    ['LOG', 'Log In'],
-    ['USR', 'Username'],
-    ['PSW', 'Password'],
+    ['CAN', 'Cancel'],
 
     ['BCK', 'Back'],
     ['NXT', 'Next'],
@@ -86,8 +90,8 @@ export class DictionaryService {
     ['DEB', 'Debtor'],
     ['KRE', 'Creditor'],
     ['LEF', 'Legal form'],
+    
     ['SSN', 'Interface number'],
-
 
     ['CND', 'Contact'],
     ['NIF', 'Name'],
@@ -107,6 +111,21 @@ export class DictionaryService {
     ['FAX', 'Fax'],
     ['MOB', 'Mobile phone'],
     ['EMA', 'E-Mail'],
+
+    ['PAY', 'Payment'],
+    ['TAX', 'Tax ID'],
+    ['VAT', 'VAT ID'],
+    ['IFI', 'Industry field'],
+    ['IFC', 'Industry field code'],
+    ['HSP', 'Supplier has SEPA direct debit'],
+    ['GSP', 'Grant SEPA direct debit'],
+    ['IBA', 'IBAN'],
+    ['BIC', 'BIC'],
+    ['BNK', 'Credit institution'],
+    ['TPA', 'Terms of payment'],
+    ['REF', 'Remarks field'],
+
+
 
     ['EMP', 'Employee'],
     ['EMN', 'Employee name'],

@@ -24,11 +24,13 @@ export class NewKEAComponent implements OnInit {
   titles;
   salutations;
   locations;
+  paymentTerms;
 
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, private listService: ListService,
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService,
     private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService) {
     this.legalForms = this.listService.legalFormsPerson;
     this.salutations = this.listService.salutationsPerson;
+    this.paymentTerms = this.listService.paymentTermsDebit;
     this.titles = this.listService.titles;
     this.locations = this.listService.locations;
   }
@@ -44,8 +46,10 @@ export class NewKEAComponent implements OnInit {
       this.salutations = this.listService.salutationsOrganization;
       this.preselection.get('customerType').setValue('organization');
       if (this.preselection.get('debCreType').value === 'debit') {
+        this.paymentTerms = this.listService.paymentTermsDebit;
         this.initOrganizationDebit()
       } else {
+        this.paymentTerms = this.listService.paymentTermsCredit;
         this.initOrganizationCredit()
       }
     } else {
@@ -53,8 +57,10 @@ export class NewKEAComponent implements OnInit {
       this.salutations = this.listService.salutationsPerson;
       this.preselection.get('customerType').setValue('person');
       if (this.preselection.get('debCreType').value === 'debit') {
+        this.paymentTerms = this.listService.paymentTermsDebit;
         this.initPersonDebit()
       } else {
+        this.paymentTerms = this.listService.paymentTermsCredit;
         this.initPersonCredit()
       }
     }
@@ -114,7 +120,7 @@ export class NewKEAComponent implements OnInit {
     this.initSharedForm();
     this.initPerson();
 
-    this.payment.addControl('grantSEPA', new FormControl(true));
+    this.payment.addControl('grantSEPA', new FormControl(false));
     this.payment.addControl('agb', new FormControl(false));
     this.payment.addControl('creditLimit', new FormControl(false));
   }
@@ -157,7 +163,6 @@ export class NewKEAComponent implements OnInit {
     this.contactInformation.addControl('emailA2', new FormControl(''));
     this.contactInformation.addControl('phoneA2', new FormControl(''));
     this.contactInformation.addControl('mobilePhoneA2', new FormControl(''));
-
 
     this.payment.addControl('agb', new FormControl(false));
     this.payment.addControl('creditLimit', new FormControl(false));

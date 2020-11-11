@@ -14,11 +14,27 @@ var auth = "Basic " + Buffer.from(username + ":" + password).toString("base64");
 
 
 exports.test = function(){
-    var args ="";
-
+    var args = "";
+    //var args = {"intA": 3, "intB": 5}
+    const soap = require('soap');
+    
+    soap.createClient(url, function (err, soapClient) {
+        console.log("soap.createClient();");
+        if (err) {
+            console.log("error", err);
+        }
+        soapClient.setSecurity(new soap.BasicAuthSecurity(username, password));
+        console.log(soapClient)
+        soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
+            if (err) {
+                console.log("Security_Authenticate error", err);
+            }
+            console.log(result)
+        })
+    })
     
     // Creates the client which is returned in the callback.
-    soap.createClient(url, (err, client) => {
+    /*soap.createClient(url, (err, client) => {
         if (err) throw err;
         //console.log(client)
         client.setEndpoint("https://sapinterfaces-qas2.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_Ping_over_External_AAE&receiverParty=&receiverService=&interface=SI_Ping_Outbound&interfaceNamespace=urn%3APing");
@@ -26,7 +42,7 @@ exports.test = function(){
         client.SI_Ping_Outbound(args, (err, result) => {
             console.log(`Result: ${"\n" + JSON.stringify(result)}`)
         })
-    })
+    })*/
 
 /*
     soap.createClient(url, function(err, client) {
