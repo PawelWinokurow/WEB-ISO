@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ɵINTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic';
 import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -42,9 +43,26 @@ export class NewKEAComponent implements OnInit {
 
   changeCustomerType(event: any) {
     if (event.value === 'organization') {
+      this.preselection.get('customerType').setValue('organization');
+    } else {
+      this.preselection.get('customerType').setValue('person');
+    }
+    this.initForms();
+  }
+
+  changeDebCreType(event: any) {
+    if (event.value === 'credit') {
+      this.preselection.get('debCreType').setValue('credit');
+    } else {
+      this.preselection.get('debCreType').setValue('debit');
+    }
+    this.initForms();
+  }
+
+  initForms(){
+    if (this.preselection.get('customerType').value === 'organization') {
       this.legalForms = this.listService.legalFormsOrganization;
       this.salutations = this.listService.salutationsOrganization;
-      this.preselection.get('customerType').setValue('organization');
       if (this.preselection.get('debCreType').value === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initOrganizationDebit()
@@ -55,7 +73,6 @@ export class NewKEAComponent implements OnInit {
     } else {
       this.legalForms = this.listService.legalFormsPerson;
       this.salutations = this.listService.salutationsPerson;
-      this.preselection.get('customerType').setValue('person');
       if (this.preselection.get('debCreType').value === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initPersonDebit()
@@ -63,14 +80,6 @@ export class NewKEAComponent implements OnInit {
         this.paymentTerms = this.listService.paymentTermsCredit;
         this.initPersonCredit()
       }
-    }
-  }
-
-  changeDebCreType(event: any) {
-    if (event.value === 'credit') {
-      this.preselection.get('debCreType').setValue('credit');
-    } else {
-      this.preselection.get('debCreType').setValue('debit');
     }
   }
 
@@ -104,7 +113,8 @@ export class NewKEAComponent implements OnInit {
       bic: [''],
       bank: [''],
       paymentTerm: [''],
-      notes: ['']
+      notes: [''],
+      sepa: [false],
     });
   }
 
@@ -120,15 +130,13 @@ export class NewKEAComponent implements OnInit {
     this.initSharedForm();
     this.initPerson();
 
-    this.payment.addControl('grantSEPA', new FormControl(false));
     this.payment.addControl('agb', new FormControl(false));
-    this.payment.addControl('creditLimit', new FormControl(false));
+    this.payment.addControl('creditLimit', new FormControl(''));
   }
 
   initPersonCredit() {
     this.initSharedForm();
     this.initPerson();
-    this.payment.addControl('hasSEPA', new FormControl(true));
   }
 
   initOrganization() {

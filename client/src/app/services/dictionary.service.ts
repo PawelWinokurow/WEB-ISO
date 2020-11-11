@@ -40,7 +40,7 @@ export class DictionaryService {
     ['STR', 'Straße'],
     ['HNU', 'Hausnr.'],
     ['MBX', 'Postfach'],
-    ['MBP', 'Postfach PLZ'],
+    ['MBP', 'Postfach Postleitzahl'],
     ['ZIP', 'Postleitzahl'],
     ['LOC', 'Ort'],
     ['COU', 'Land'],
@@ -60,6 +60,7 @@ export class DictionaryService {
     ['BIC', 'BIC'],
     ['BNK', 'Kreditinstitut'],
     ['TPA', 'Zahlungsbedingung'],
+    ['CRL', 'Kreditlimit'],
     ['REF', 'Bemerkungsfeld'],
 
     ['EMP', 'Angestellter'],
@@ -103,7 +104,7 @@ export class DictionaryService {
     ['STR', 'Street'],
     ['HNU', 'House no.'],
     ['MBX', 'Mailbox'],
-    ['MBP', 'Mailbox Zip'],
+    ['MBP', 'Mailbox ZIP'],
     ['ZIP', 'ZIP'],
     ['LOC', 'Location'],
     ['COU', 'Country'],
@@ -122,6 +123,7 @@ export class DictionaryService {
     ['IBA', 'IBAN'],
     ['BIC', 'BIC'],
     ['BNK', 'Credit institution'],
+    ['CRL', 'Credit limit'],
     ['TPA', 'Terms of payment'],
     ['REF', 'Remarks field'],
 

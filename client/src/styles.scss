@@ -42,9 +42,10 @@ mat-form-field {
 }
 
 .vertical-flex{
-  height: calc(100vh - 176px);
+  height: calc(100vh - 196px);
   display: flex;
   flex-flow: column;
+  padding-top: 20px;
 }
 
 .padding10px {
