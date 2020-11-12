@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ɵINTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic';
 import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
+import { PreselectionDialogComponent } from 'src/app/dialogs/preselection-dialog/preselection-dialog.component';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -19,51 +19,49 @@ export class NewKEAComponent implements OnInit {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
+  applicant: FormGroup;
   payment: FormGroup;
+  
+  show = false;
 
   legalForms;
   titles;
   salutations;
   locations;
   paymentTerms;
+  customerType;
+  debitCreditType
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService,
     private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService) {
-    this.legalForms = this.listService.legalFormsPerson;
-    this.salutations = this.listService.salutationsPerson;
-    this.paymentTerms = this.listService.paymentTermsDebit;
     this.titles = this.listService.titles;
     this.locations = this.listService.locations;
   }
 
   ngOnInit(): void {
     this.initPersonDebit();
+    this.openPreselectionDialog();
     //this.soapService.sendSOAP("")
   }
 
-  changeCustomerType(event: any) {
-    if (event.value === 'organization') {
-      this.preselection.get('customerType').setValue('organization');
-    } else {
-      this.preselection.get('customerType').setValue('person');
-    }
-    this.initForms();
+  openPreselectionDialog(){
+    this.show = false;
+    const preselectionDialogRef = this.dialog.open(PreselectionDialogComponent, { disableClose: true });
+    preselectionDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.customerType = result.customerType;
+        this.debitCreditType = result.debitCreditType;
+        this.initForms();
+        this.show = true;
+      }
+    });
   }
 
-  changeDebCreType(event: any) {
-    if (event.value === 'credit') {
-      this.preselection.get('debCreType').setValue('credit');
-    } else {
-      this.preselection.get('debCreType').setValue('debit');
-    }
-    this.initForms();
-  }
-
-  initForms(){
-    if (this.preselection.get('customerType').value === 'organization') {
+  initForms() {
+    if (this.customerType === 'organization') {
       this.legalForms = this.listService.legalFormsOrganization;
       this.salutations = this.listService.salutationsOrganization;
-      if (this.preselection.get('debCreType').value === 'debit') {
+      if (this.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initOrganizationDebit()
       } else {
@@ -73,7 +71,7 @@ export class NewKEAComponent implements OnInit {
     } else {
       this.legalForms = this.listService.legalFormsPerson;
       this.salutations = this.listService.salutationsPerson;
-      if (this.preselection.get('debCreType').value === 'debit') {
+      if (this.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initPersonDebit()
       } else {
@@ -84,10 +82,6 @@ export class NewKEAComponent implements OnInit {
   }
 
   initSharedForm() {
-    this.preselection = this.formBuilder.group({
-      customerType: ['person'],
-      debCreType: ['debit']
-    });
     this.contactInformation = this.formBuilder.group({
       legalForm: [''],
       interfaceNumber: [''],
@@ -99,11 +93,12 @@ export class NewKEAComponent implements OnInit {
       country: [''],
       phone: [''],
       fax: [''],
-      mobilePhone: [''],
+      mobile: [''],
       email: [''],
       mailbox: [''],
       zipMailbox: [''],
     });
+
     this.payment = this.formBuilder.group({
       taxId: [''],
       vatId: [''],
@@ -147,33 +142,37 @@ export class NewKEAComponent implements OnInit {
   initOrganizationDebit() {
     this.initSharedForm();
     this.initOrganization();
-    this.contactInformation.addControl('salutationA', new FormControl(''));
-    this.contactInformation.addControl('titleA', new FormControl(''));
-    this.contactInformation.addControl('firstNameA', new FormControl(''));
-    this.contactInformation.addControl('secondNameA', new FormControl(''));
-    this.contactInformation.addControl('birthdayA', new FormControl(''));
-    this.contactInformation.addControl('emailA', new FormControl(''));
-    this.contactInformation.addControl('phoneA', new FormControl(''));
-    this.contactInformation.addControl('mobilePhoneA', new FormControl(''));
-    this.contactInformation.addControl('salutationA1', new FormControl(''));
-    this.contactInformation.addControl('titleA1', new FormControl(''));
-    this.contactInformation.addControl('firstNameA1', new FormControl(''));
-    this.contactInformation.addControl('secondNameA1', new FormControl(''));
-    this.contactInformation.addControl('birthdayA1', new FormControl(''));
-    this.contactInformation.addControl('emailA1', new FormControl(''));
-    this.contactInformation.addControl('phoneA1', new FormControl(''));
-    this.contactInformation.addControl('mobilePhoneA1', new FormControl(''));
-    this.contactInformation.addControl('salutationA2', new FormControl(''));
-    this.contactInformation.addControl('titleA2', new FormControl(''));
-    this.contactInformation.addControl('firstNameA2', new FormControl(''));
-    this.contactInformation.addControl('secondNameA2', new FormControl(''));
-    this.contactInformation.addControl('birthdayA2', new FormControl(''));
-    this.contactInformation.addControl('emailA2', new FormControl(''));
-    this.contactInformation.addControl('phoneA2', new FormControl(''));
-    this.contactInformation.addControl('mobilePhoneA2', new FormControl(''));
+    this.applicant = this.formBuilder.group({
+      salutation: [''],
+      title: [''],
+      firstName: [''],
+      secondName: [''],
+      birthDate: [''],
+      phone: [''],
+      mobile: [''],
+      email: [''],
+
+      salutation1: [''],
+      title1: [''],
+      firstName1: [''],
+      secondName1: [''],
+      birthDate1: [''],
+      phone1: [''],
+      mobile1: [''],
+      email1: [''],
+
+      salutation2: [''],
+      title2: [''],
+      firstName2: [''],
+      secondName2: [''],
+      birthDate2: [''],
+      phone2: [''],
+      mobile2: [''],
+      email2: [''],
+    });
 
     this.payment.addControl('agb', new FormControl(false));
-    this.payment.addControl('creditLimit', new FormControl(false));
+    this.payment.addControl('creditLimit', new FormControl(''));
     this.payment.addControl('sepaRequest', new FormControl(false));
   }
 
@@ -182,7 +181,6 @@ export class NewKEAComponent implements OnInit {
     this.initOrganization();
     this.payment.addControl('hasSEPA', new FormControl(false));
   }
-
 
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
@@ -195,9 +193,7 @@ export class NewKEAComponent implements OnInit {
           console.log(res);
         });
       } else {
-        const emailDialogRef = this.dialog.open(EmailDialogComponent, {
-
-        });
+        const emailDialogRef = this.dialog.open(EmailDialogComponent);
         emailDialogRef.afterClosed().subscribe(result => {
           if (result) {
             this.httpService.sendMask({ isDirect: false, emailTo: result, name: "some name" }).subscribe(res => {
@@ -205,9 +201,7 @@ export class NewKEAComponent implements OnInit {
             });
           }
         });
-
       }
-
     });
   }
 }

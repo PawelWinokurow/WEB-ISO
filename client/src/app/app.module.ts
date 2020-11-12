@@ -9,13 +9,14 @@ import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NewKEAComponent } from './components/new-kea/new-kea.component';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
 import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
-import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { ListService } from './services/list.service';
+import { PreselectionDialogComponent } from './dialogs/preselection-dialog/preselection-dialog.component';
+import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
+import { NewKEAComponent } from './components/new-kea/new-kea.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ListService } from './services/list.service';
     NewKEAComponent,
     SendMaskConfirmationDialogComponent,
     EmailDialogComponent,
+    PreselectionDialogComponent,
   ],
   imports: [
     BrowserModule,

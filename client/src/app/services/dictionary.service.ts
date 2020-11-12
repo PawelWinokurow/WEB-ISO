@@ -16,14 +16,16 @@ export class DictionaryService {
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
     ['CAN', 'Abbrechen'],
-
+    
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
     ['SND', 'Senden'],
 
+    ['MGE', 'Maske generieren'],
+
     ['PRS', 'Vorauswahl'],
     ['CUT', 'Kundentyp'],
-    ['PRS', 'Person'],
+    ['PER', 'Person'],
     ['COM', 'Organisation'],
     ['DEB', 'Debitor'],
     ['KRE', 'Kreditor'],
@@ -56,6 +58,7 @@ export class DictionaryService {
     ['IFC', 'Branchencode'],
     ['HSP', 'Lieferant hat SEPA-Lastschrift'],
     ['GSP', 'SEPA-Lastschrift erteilen'],
+    ['RSP', 'SEPA-Lastschrift anfordern'],
     ['IBA', 'IBAN'],
     ['BIC', 'BIC'],
     ['BNK', 'Kreditinstitut'],
@@ -63,11 +66,14 @@ export class DictionaryService {
     ['CRL', 'Kreditlimit'],
     ['REF', 'Bemerkungsfeld'],
 
-    ['EMP', 'Angestellter'],
-    ['EMN', 'Angestellter Name'],
-    ['EMC', 'Angestellter Kontakt'],
+    ['APP', 'Antragsteller'],
+    ['AP1', '1. Antragsteller'],
+    ['AP2', '2. Antragsteller'],
+   
     ['TLE', 'Titel'],
     ['SAL', 'Anrede'],
+    ['COP', 'Firma / Personen'],
+
     ['FNA', 'Vorname'],
     ['SNA', 'Nachname'],
     
@@ -84,11 +90,14 @@ export class DictionaryService {
     ['NXT', 'Next'],
     ['SND', 'Send'],
 
+    ['MGE', 'Generate mask'],
+
+
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
-    ['PRS', 'Person'],
+    ['PER', 'Person'],
     ['COM', 'Organization'],
-    ['DEB', 'Debtor'],
+    ['DEB', 'Debitor'],
     ['KRE', 'Creditor'],
     ['LEF', 'Legal form'],
     
@@ -120,6 +129,7 @@ export class DictionaryService {
     ['IFC', 'Industry field code'],
     ['HSP', 'Supplier has SEPA direct debit'],
     ['GSP', 'Grant SEPA direct debit'],
+    ['RSP', 'Request SEPA direct debit'],
     ['IBA', 'IBAN'],
     ['BIC', 'BIC'],
     ['BNK', 'Credit institution'],
@@ -127,13 +137,13 @@ export class DictionaryService {
     ['TPA', 'Terms of payment'],
     ['REF', 'Remarks field'],
 
+    ['APP', 'Applicant'],
+    ['AP1', 'Applicant 1'],
+    ['AP2', 'Applicant 2'],
 
-
-    ['EMP', 'Employee'],
-    ['EMN', 'Employee name'],
-    ['EMC', 'Employee contact'],
     ['TLE', 'Title'],
     ['SAL', 'Salutation'],
+    ['COP', 'Company / Persons'],
     ['FNA', 'Name'],
     ['SNA', 'Surname'],
 
