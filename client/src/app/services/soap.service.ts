@@ -25,6 +25,7 @@ export class SOAPService {
     var auth = "Basic " + btoa(username + ":" + password);
     this.soap.createClient('assets/SI_Ping_OutboundService.wsdl')
       .then(client => {
+        console.log(client)
         client.addHttpHeader('Authorization', auth);
         (<any>client).SI_Ping_Outbound(args).subscribe(
           (res: ISoapMethodResponse) => {

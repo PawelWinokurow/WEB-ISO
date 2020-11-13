@@ -41,7 +41,7 @@ export class NewKEAComponent implements OnInit {
   ngOnInit(): void {
     this.initPersonDebit();
     this.openPreselectionDialog();
-    //this.soapService.sendSOAP("")
+    this.soapService.sendSOAP("")
   }
 
   openPreselectionDialog(){
