@@ -14,17 +14,19 @@ var auth = "Basic " + Buffer.from(username + ":" + password).toString("base64");
 
 
 exports.test = function(){
+
+    
     var args = "";
     //var args = {"intA": 3, "intB": 5}
     const soap = require('soap');
     
     soap.createClient(url, function (err, soapClient) {
-        console.log("soap.createClient();");
         if (err) {
             console.log("error", err);
         }
-        soapClient.setSecurity(new soap.BasicAuthSecurity(username, password));
-        console.log(soapClient)
+        //soapClient.setSecurity(new soap.BasicAuthSecurity(username, password));
+        soapClient.addHttpHeader('Authorization', auth);
+        //console.log(soapClient)
         soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
             if (err) {
                 console.log("Security_Authenticate error", err);
