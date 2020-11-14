@@ -31,3 +31,17 @@ d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\ne
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.dll
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.pdb
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.genruntimeconfig.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.deps.json
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.runtimeconfig.json
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.runtimeconfig.dev.json
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.dll
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.pdb
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.csprojAssemblyReference.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.RazorAssemblyInfo.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.RazorAssemblyInfo.cs
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.AssemblyInfoInputs.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.AssemblyInfo.cs
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.RazorTargetAssemblyInfo.cache
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.dll
+C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.pdb

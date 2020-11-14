@@ -15,11 +15,12 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> GetAsync()
         {
-            DT_Ping MT_Ping = new DT_Ping();
+            DT_Ping ping = new DT_Ping();
+            ping.Ping = "";
             SI_Ping_OutboundClient pingClient = new SI_Ping_OutboundClient();
             pingClient.ClientCredentials.UserName.UserName = "T_SI_MONPING";
             pingClient.ClientCredentials.UserName.Password = "a09KIqg?9ofO";
-            var data = await pingClient.SI_Ping_OutboundAsync(MT_Ping);
+            var data = await pingClient.SI_Ping_OutboundAsync(ping);
             return new string[] { "value1", "value2" };
         }
 
