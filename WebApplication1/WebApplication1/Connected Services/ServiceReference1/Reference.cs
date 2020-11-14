@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.ServiceModel;
+
 namespace ServiceReference1
 {
     
@@ -279,39 +282,20 @@ namespace ServiceReference1
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public SI_Ping_OutboundClient() : 
-                base(SI_Ping_OutboundClient.GetDefaultBinding(), SI_Ping_OutboundClient.GetDefaultEndpointAddress())
+
+        public SI_Ping_OutboundClient(string endpointUrl, TimeSpan timeout, string username, string password) :
+         base(SI_Ping_OutboundClient.GetBindingForEndpoint(timeout), SI_Ping_OutboundClient.GetEndpointAddress(endpointUrl))
         {
-            this.Endpoint.Name = EndpointConfiguration.HTTPS_Port.ToString();
+            this.ChannelFactory.Credentials.UserName.UserName = username;
+            this.ChannelFactory.Credentials.UserName.Password = password;
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
-        
-        public SI_Ping_OutboundClient(EndpointConfiguration endpointConfiguration) : 
-                base(SI_Ping_OutboundClient.GetBindingForEndpoint(endpointConfiguration), SI_Ping_OutboundClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public SI_Ping_OutboundClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(SI_Ping_OutboundClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public SI_Ping_OutboundClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(SI_Ping_OutboundClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public SI_Ping_OutboundClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress)
+
+        public SI_Ping_OutboundClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
+         base(binding, remoteAddress)
         {
         }
-        
+
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<ServiceReference1.SI_Ping_OutboundResponse> ServiceReference1.SI_Ping_Outbound.SI_Ping_OutboundAsync(ServiceReference1.SI_Ping_OutboundRequest request)
         {
@@ -334,43 +318,36 @@ namespace ServiceReference1
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
         }
-        
-        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
+
+        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(TimeSpan timeout)
         {
-            if ((endpointConfiguration == EndpointConfiguration.HTTPS_Port))
+            var httpsBinding = new BasicHttpsBinding();
+            httpsBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            httpsBinding.Security.Mode = BasicHttpsSecurityMode.Transport;
+
+            var integerMaxValue = int.MaxValue;
+            httpsBinding.MaxBufferSize = integerMaxValue;
+            httpsBinding.MaxReceivedMessageSize = integerMaxValue;
+            httpsBinding.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+            httpsBinding.AllowCookies = true;
+
+            httpsBinding.ReceiveTimeout = timeout;
+            httpsBinding.SendTimeout = timeout;
+            httpsBinding.OpenTimeout = timeout;
+            httpsBinding.CloseTimeout = timeout;
+
+            return httpsBinding;
+        }
+
+        private static System.ServiceModel.EndpointAddress GetEndpointAddress(string endpointUrl)
+        {
+            if (!endpointUrl.StartsWith("https://"))
             {
-                System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
-                result.MaxBufferSize = int.MaxValue;
-                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
-                result.MaxReceivedMessageSize = int.MaxValue;
-                result.AllowCookies = true;
-                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                return result;
+                throw new UriFormatException("The endpoint URL must start with https://.");
             }
-            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+            return new System.ServiceModel.EndpointAddress(endpointUrl);
         }
-        
-        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
-        {
-            if ((endpointConfiguration == EndpointConfiguration.HTTPS_Port))
-            {
-                return new System.ServiceModel.EndpointAddress("https://sapinterfaces-qas2.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&se" +
-                        "nderService=BC_Ping_over_External_AAE&receiverParty=&receiverService=&interface=" +
-                        "SI_Ping_Outbound&interfaceNamespace=urn%3APing");
-            }
-            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
-        }
-        
-        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
-        {
-            return SI_Ping_OutboundClient.GetBindingForEndpoint(EndpointConfiguration.HTTPS_Port);
-        }
-        
-        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
-        {
-            return SI_Ping_OutboundClient.GetEndpointAddress(EndpointConfiguration.HTTPS_Port);
-        }
-        
+
         public enum EndpointConfiguration
         {
             

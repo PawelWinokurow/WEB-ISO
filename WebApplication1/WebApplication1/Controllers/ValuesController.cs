@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ServiceReference1;
@@ -15,11 +16,14 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> GetAsync()
         {
+            //var url = "https://sapinterfaces-qas2.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_Ping_over_External_AAE&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Ping_Outbound&amp;interfaceNamespace=urn%3APing";
+            var url = "https://sapinterfaces-qas2.baywa.com/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_Ping_over_External_AAE&receiverParty=&receiverService=&interface=SI_Ping_Outbound&interfaceNamespace=urn:Ping";
+            var username = "T_SI_MONPING";
+            var password = "a09KIqg?9ofO";
+
             DT_Ping ping = new DT_Ping();
             ping.Ping = "";
-            SI_Ping_OutboundClient pingClient = new SI_Ping_OutboundClient();
-            pingClient.ClientCredentials.UserName.UserName = "T_SI_MONPING";
-            pingClient.ClientCredentials.UserName.Password = "a09KIqg?9ofO";
+            SI_Ping_OutboundClient pingClient = new SI_Ping_OutboundClient(url, TimeSpan.FromMinutes(1), username, password);
             var data = await pingClient.SI_Ping_OutboundAsync(ping);
             return new string[] { "value1", "value2" };
         }
