@@ -15,7 +15,6 @@ c:\users\pawel\source\repos\WebApplication1\WebApplication1\obj\Debug\netcoreapp
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\appsettings.Development.json
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\appsettings.json
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\Connected Services\ServiceReference1\ConnectedService.json
-d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\Connected Services\ServiceReference2\ConnectedService.json
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.deps.json
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.runtimeconfig.json
 d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\WebApplication1.runtimeconfig.dev.json
@@ -45,3 +44,4 @@ C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcore
 C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.RazorTargetAssemblyInfo.cache
 C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.dll
 C:\Users\Pawel\Desktop\WEB-KEA\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.1\WebApplication1.pdb
+d:\Users\winokurowp\Desktop\WEB-KEA\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.1\Connected Services\ServiceReference2\ConnectedService.json

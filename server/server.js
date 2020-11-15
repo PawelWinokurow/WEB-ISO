@@ -5,8 +5,15 @@ var soap = require('./soap')
 var email = require('./email')
 var random = require('./random')
 var config = require('./config');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
 
 const app = express();
+
+var privateKey  = fs.readFileSync('tls/key.pem');
+var certificate = fs.readFileSync('tls/cert.pem');
+var credentials = {key: privateKey, cert: certificate};
 
 db.connect();
 app.use(express.json());
@@ -45,7 +52,8 @@ app.get("/confirm", function (req, res, next) {
 
 });
 
-app.listen(config.web.port, function () {
-  soap.test()
-  console.log('Example app listening on port 3000.');
-});
+//var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+//httpServer.listen(8080);
+httpsServer.listen(8888);

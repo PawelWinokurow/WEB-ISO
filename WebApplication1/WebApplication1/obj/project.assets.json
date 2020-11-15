@@ -12230,23 +12230,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pawel\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "d:\\Users\\winokurowp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pawel\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "d:\\Users\\winokurowp\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Pawel\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-      "packagesPath": "C:\\Users\\Pawel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pawel\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\obj\\",
+      "projectPath": "d:\\Users\\winokurowp\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "d:\\Users\\winokurowp\\.nuget\\packages\\",
+      "outputPath": "d:\\Users\\winokurowp\\Desktop\\WEB-KEA\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Pawel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "d:\\Users\\winokurowp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12258,6 +12254,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
+          "targetAlias": "netcoreapp2.1",
           "projectReferences": {}
         }
       },
@@ -12269,6 +12266,7 @@
     },
     "frameworks": {
       "netcoreapp2.1": {
+        "targetAlias": "netcoreapp2.1",
         "dependencies": {
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
@@ -12282,6 +12280,7 @@
             "version": "[2.1.2, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -12304,10 +12303,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
