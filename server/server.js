@@ -11,14 +11,10 @@ var https = require('https');
 
 const app = express();
 
-var privateKey  = fs.readFileSync('tls/key.pem');
-var certificate = fs.readFileSync('tls/cert.pem');
-var credentials = {key: privateKey, cert: certificate};
-
-db.connect();
+//db.connect();
 app.use(express.json());
 
-schedule.scheduleJob('0 0 * * *', function(){
+schedule.scheduleJob('0 0 * * *', function () {
   db.removeOldMasks();
 });
 
@@ -27,7 +23,7 @@ app.post("/request", function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   let mask = req.body;
-  
+
   if (mask.isDirect) {
     soap.sendMask(mask);
   } else {
@@ -52,8 +48,16 @@ app.get("/confirm", function (req, res, next) {
 
 });
 
-//var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+app.get('/', (req, res) => {
+  return res.send('Hello, world!');
+});
 
-//httpServer.listen(8080);
-httpsServer.listen(8888);
+https
+  .createServer(
+    {
+      cert: fs.readFileSync('tls/public-cert.pem'),
+      key: fs.readFileSync('tls/private-key.pem'),
+    },
+    app
+  )
+  .listen(8080);
