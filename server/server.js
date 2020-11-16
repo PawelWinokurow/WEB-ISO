@@ -49,6 +49,7 @@ app.get("/confirm", function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
+  soap.test();
   return res.send('Hello, world!');
 });
 
