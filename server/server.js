@@ -1,5 +1,7 @@
 var express = require('express');
 var schedule = require('node-schedule');
+var { createProxyMiddleware } = require('http-proxy-middleware');
+var morgan = require('morgan');
 var db = require('./database')
 var soap = require('./soap')
 var email = require('./email')
@@ -13,6 +15,9 @@ const app = express();
 
 //db.connect();
 app.use(express.json());
+//app.use(morgan('dev'));
+
+//app.use('/', createProxyMiddleware({target: PROXY_URL, changeOrigin: true}))
 
 schedule.scheduleJob('0 0 * * *', function () {
   db.removeOldMasks();
@@ -49,11 +54,10 @@ app.get("/confirm", function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-  soap.test();
   return res.send('Hello, world!');
 });
 
-https
+/*https
   .createServer(
     {
       cert: fs.readFileSync('tls/public-cert.pem'),
@@ -62,3 +66,8 @@ https
     app
   )
   .listen(8080);
+*/
+  app.listen(config.web.port, () => {
+    console.log(`Example app listening at http://localhost:${config.web.port}`)
+    soap.test()
+  })
