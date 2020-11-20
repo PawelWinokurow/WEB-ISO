@@ -10,12 +10,12 @@ import { ListService } from 'src/app/services/list.service';
 import { SOAPService } from 'src/app/services/soap.service';
 
 @Component({
-  selector: 'app-new-kea',
-  templateUrl: './new-kea.component.html',
-  styleUrls: ['./new-kea.component.scss'],
+  selector: 'app-new-iso',
+  templateUrl: './new-iso.component.html',
+  styleUrls: ['./new-iso.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NewKEAComponent implements OnInit {
+export class NewISOComponent implements OnInit {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
@@ -41,12 +41,14 @@ export class NewKEAComponent implements OnInit {
   ngOnInit(): void {
     this.initPersonDebit();
     this.openPreselectionDialog();
-    this.soapService.sendSOAP("")
   }
 
   openPreselectionDialog(){
     this.show = false;
-    const preselectionDialogRef = this.dialog.open(PreselectionDialogComponent, { disableClose: true });
+    const preselectionDialogRef = this.dialog.open(PreselectionDialogComponent, { 
+      disableClose: true,
+      backdropClass: 'backdrop-background',
+     });
     preselectionDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.customerType = result.customerType;
@@ -184,7 +186,9 @@ export class NewKEAComponent implements OnInit {
 
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
+      disableClose: true,
       width: '250px',
+      backdropClass: 'backdrop-background',
     });
 
     sendMaskDialogRef.afterClosed().subscribe(result => {
@@ -193,9 +197,13 @@ export class NewKEAComponent implements OnInit {
           console.log(res);
         });
       } else {
-        const emailDialogRef = this.dialog.open(EmailDialogComponent);
+        const emailDialogRef = this.dialog.open(EmailDialogComponent, { 
+          disableClose: true, 
+          backdropClass: 'backdrop-background',
+        });
         emailDialogRef.afterClosed().subscribe(result => {
           if (result) {
+            console.log(result)
             this.httpService.sendMask({ isDirect: false, emailTo: result, name: "some name" }).subscribe(res => {
               console.log(res);
             });

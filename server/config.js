@@ -19,11 +19,15 @@ config.mysql.user = "root";
 config.mysql.password = "root";
 config.mysql.database = "kea";
 
-config.email.host = "smtp.mailtrap.io";
-config.email.port = 2525;
-config.email.auth.username = "f4f2f215cc54d0";
-config.email.auth.password = "fb5bc5d739aae5";
+//config.email.host = "smtp.mailtrap.io";
+//config.email.port = 2525;
+//config.email.auth.username = "f4f2f215cc54d0";
+//config.email.auth.password = "fb5bc5d739aae5";
 
+config.email.host = "smtp-relay.sendinblue.com";
+config.email.port = 587;
+config.email.auth.username = "paulweinmacher@googlemail.com";
+config.email.auth.password = "aNJM1mbBDEsVZgrQ";
 
 
 config.web.port = process.env.WEB_PORT || 3000;

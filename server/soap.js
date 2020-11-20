@@ -5,7 +5,9 @@ var config = require('./config');
 //var url = path.join(__dirname, "wsdl", "SI_ISO_MGB_BAPI_PARTNER_CREATE_outboundService_dev.wsdl");
 var url = path.join(__dirname, "wsdl", "SI_Ping_OutboundService.wsdl");
 
+
 exports.test = function () {
+
 
     var args = {};
     

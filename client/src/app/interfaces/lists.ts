@@ -3,12 +3,12 @@ export interface Land {
     abbreviation: string,
 }
 
-export interface IndustryFieldCode {
+export interface codeDetails{
     code: string, 
     details: string,
 }
 
-export interface PaymentTerm {
-    code: string, 
-    details: string,
-}
+export interface IndustryFieldCode extends codeDetails {}
+export interface PaymentTerm extends codeDetails {}
+export interface IndustryField extends codeDetails {}
+

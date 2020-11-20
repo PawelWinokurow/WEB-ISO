@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewKEAComponent } from './new-kea.component';
+import { NewISOComponent } from './new-iso.component';
 
-describe('NewKEAComponent', () => {
-  let component: NewKEAComponent;
-  let fixture: ComponentFixture<NewKEAComponent>;
+describe('NewISOComponent', () => {
+  let component: NewISOComponent;
+  let fixture: ComponentFixture<NewISOComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewKEAComponent ]
+      declarations: [ NewISOComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewKEAComponent);
+    fixture = TestBed.createComponent(NewISOComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

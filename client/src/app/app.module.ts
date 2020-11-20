@@ -16,13 +16,13 @@ import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-
 import { ListService } from './services/list.service';
 import { PreselectionDialogComponent } from './dialogs/preselection-dialog/preselection-dialog.component';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
-import { NewKEAComponent } from './components/new-kea/new-kea.component';
+import { NewISOComponent } from './components/new-iso/new-iso.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    NewKEAComponent,
+    NewISOComponent,
     SendMaskConfirmationDialogComponent,
     EmailDialogComponent,
     PreselectionDialogComponent,

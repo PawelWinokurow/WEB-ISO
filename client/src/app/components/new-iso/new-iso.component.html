@@ -11,7 +11,8 @@
                         <div style="display: flex;">
 
                             <div class="stepper-data">
-
+                                <span layout="row">{{dictionaryService.get('GEI')}}
+                                    <hr flex /></span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field appearance="outline" color="accent">
@@ -90,7 +91,8 @@
 
                             <!--<mat-divider vertical style="height:100%"></mat-divider>-->
                             <div class="stepper-data">
-
+                                <span layout="row">{{dictionaryService.get('ADI')}}
+                                    <hr flex /></span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 80%;">
                                         <mat-form-field appearance="outline">
@@ -184,8 +186,6 @@
 
                         <div class="vertical-space"></div>
                         <div class="stepper-controls">
-                            <button mat-raised-button matStepperPrevious
-                                #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
                             <button mat-raised-button matStepperNext
                                 #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
                         </div>
@@ -222,7 +222,7 @@
                                             <mat-select formControlName="industryField" required>
                                                 <mat-option *ngFor="let field of listService.industryFields"
                                                     [value]="field">
-                                                    {{field.name}}
+                                                    {{field.details}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -233,7 +233,7 @@
                                             <mat-select [attr.disabled]="!payment.get('industryField').value"
                                                 formControlName="industryField" required>
                                                 <mat-option
-                                                    *ngFor="let code of listService.industryFieldCodes.get(payment.get('industryField').value.name)"
+                                                    *ngFor="let code of listService.industryFieldCodes.get(payment.get('industryField').value.code)"
                                                     [value]="code">
                                                     {{code.details}}
                                                 </mat-option>
@@ -320,14 +320,7 @@
                                     </div>
                                 </div>
 
-                                <div style="display: flex;">
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field appearance="outline">
-                                            <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
-                                            <input matInput formControlName="email">
-                                        </mat-form-field>
-                                    </div>
-                                </div>
+                             
                             </div>
                             <!--<mat-divider vertical style="height:100%"></mat-divider>-->
                             <!--2. Col-->
@@ -341,8 +334,8 @@
                         <div class="stepper-controls">
                             <button mat-raised-button matStepperPrevious
                                 #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
-                            <button mat-raised-button matStepperNext
-                                #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
+                            <button mat-raised-button color="primary" (click)="openSendSOAPDialog()"
+                                #StepperControlButton>{{dictionaryService.get('SND')}}</button>
                         </div>
                     </div>
 
@@ -357,7 +350,8 @@
                         <div style="display: flex;">
 
                             <div class="stepper-data">
-
+                                <span layout="row">{{dictionaryService.get('GEI')}}
+                                    <hr flex /></span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field appearance="outline" color="accent">
@@ -410,7 +404,8 @@
 
                             <!--<mat-divider vertical style="height:100%"></mat-divider>-->
                             <div class="stepper-data">
-
+                                <span layout="row">{{dictionaryService.get('ADI')}}
+                                    <hr flex /></span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 80%;">
                                         <mat-form-field appearance="outline">
@@ -505,8 +500,6 @@
 
                         <div class="vertical-space"></div>
                         <div class="stepper-controls">
-                            <button mat-raised-button matStepperPrevious
-                                #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
                             <button mat-raised-button matStepperNext
                                 #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
                         </div>
@@ -807,7 +800,7 @@
                                             <mat-select formControlName="industryField" required>
                                                 <mat-option *ngFor="let field of listService.industryFields"
                                                     [value]="field">
-                                                    {{field.name}}
+                                                    {{field.details}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -919,8 +912,8 @@
                         <div class="stepper-controls">
                             <button mat-raised-button matStepperPrevious
                                 #StepperControlButton>{{dictionaryService.get('BCK')}}</button>
-                            <button mat-raised-button matStepperNext
-                                #StepperControlButton>{{dictionaryService.get('NXT')}}</button>
+                            <button mat-raised-button color="primary" (click)="openSendSOAPDialog()"
+                                #StepperControlButton>{{dictionaryService.get('SND')}}</button>
                         </div>
                     </div>
 

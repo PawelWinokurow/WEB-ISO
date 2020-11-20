@@ -25,9 +25,8 @@ exports.connect = function () {
 }
 
 exports.storeMask = function (hash, mask) {
-  const sql = 'INSERT INTO masks (hash, name, datetime) VALUES (?)';
-  var currentDatetime = time.getCurrentDatetime();
-  values = [hash, mask.name, currentDatetime];
+  const sql = 'INSERT INTO masks (hash, name, datetime) VALUES (?, NOW())';
+  values = [hash, mask.name];
   connection.query(sql, [values], function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);

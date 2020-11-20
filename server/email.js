@@ -4,6 +4,8 @@ var config = require('./config');
 var transporter = nodemailer.createTransport({
     host: config.email.host,
     port: config.email.port,
+    secure: true,
+    proxy: "http://proxy.intranet.ri-solution.com:8080",
     auth: {
         user: config.email.auth.username,
         pass: config.email.auth.password
@@ -11,7 +13,6 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.sendEmail = function (hash, emailTo) {
-    console.log(emailTo)
     var mailOptions = {
         from: "BayWa",
         to: emailTo,

@@ -7,17 +7,15 @@ var email = require('./email')
 var random = require('./random')
 var config = require('./config');
 
-
+//BayWa Proxy
 process.env.http_proxy = config.web.PROXY_URL
 
-//db.connect();
+db.connect();
 
 const app = express();
 
 app.use(express.json());
 //app.use(morgan('dev'));
-
-//app.use('/', createProxyMiddleware({target: PROXY_URL, changeOrigin: true}))
 
 schedule.scheduleJob('0 0 * * *', function () {
   db.removeOldMasks();
@@ -36,7 +34,7 @@ app.post("/request", function (req, res, next) {
     db.storeMask(hash, mask);
     email.sendEmail(hash, mask.emailTo);
   }
-  next();
+  res.json({ok:true});
 });
 
 app.get("/confirm", function (req, res, next) {
@@ -68,5 +66,6 @@ app.get('/', (req, res) => {
   .listen(8080);
 */
   app.listen(config.web.port, () => {
+    email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
     console.log(`Example app listening at http://localhost:${config.web.port}`)
   })

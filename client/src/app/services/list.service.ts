@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndustryFieldCode, Land, PaymentTerm } from '../interfaces/lists';
+import { IndustryField, IndustryFieldCode, Land, PaymentTerm } from '../interfaces/lists';
 
 @Injectable({
   providedIn: 'root'
@@ -126,40 +126,39 @@ export class ListService {
     { code: '4540', details: 'K000/045/004: Beleg-Datum + 45 Tg. m.4,0 % Skto.'},
     { code: '9000', details: 'B090/000/000 fällig in 90 Tagen netto'},
     { code: '9999', details: 'FiBu-Erfassung mit vorgegebenen Zahlbar-Daten'},
-
   ];
 
-  industryFields: { name: string }[] = [
-    { name: 'A1' },
-    { name: 'A3' },
-    { name: 'A5' },
-    { name: 'A7' },
-    { name: 'A9' },
-    { name: 'B1' },
-    { name: 'C1' },
-    { name: 'D1' },
-    { name: 'E1' },
-    { name: 'E5' },
-    { name: 'F1' },
-    { name: 'F3' },
-    { name: 'F5' },
-    { name: 'G1' },
-    { name: 'G4' },
-    { name: 'G7' },
-    { name: 'H1' },
-    { name: 'I1' },
-    { name: 'J1' },
-    { name: 'K1' },
-    { name: 'L1' },
-    { name: 'M1' },
-    { name: 'N1' },
-    { name: 'O1' },
-    { name: 'P1' },
-    { name: 'Q1' },
-    { name: 'R1' },
-    { name: 'S1' },
-    { name: 'T1' },
-    { name: 'U1' }
+  industryFields: IndustryField[] = [
+    { code: 'A1', details: 'Acker- und Planzenbau' },
+    { code: 'A3', details: 'Tierhaltung' },
+    { code: 'A5', details: 'sonstige Landwirtschaft' },
+    { code: 'A7', details: 'Forstwirtschaft' },
+    { code: 'A9', details: 'Fischerei und Aquakultur' },
+    { code: 'B1', details: 'Bergbau' },
+    { code: 'C1', details: 'Verarbeitendes Gewerbe' },
+    { code: 'D1', details: 'Energieversorgung' },
+    { code: 'E1', details: 'Wasserversorgung' },
+    { code: 'E5', details: 'Entsorgung Abfall/Abwasser' },
+    { code: 'F1', details: 'Baugewerbe(Hochbau)' },
+    { code: 'F3', details: 'Baugewerbe(Tiefbau)' },
+    { code: 'F5', details: 'sonst.Baugewerbe' },
+    { code: 'G1', details: 'Handel KFZ' },
+    { code: 'G4', details: 'Großhandel' },
+    { code: 'G7', details: 'Einzelhandel' },
+    { code: 'H1', details: 'Verkehr & Personenbeförderung' },
+    { code: 'I1', details: 'Gastgewerbe' },
+    { code: 'J1', details: 'Information und Kommunikation (IT)' },
+    { code: 'K1', details: 'Finanzdienstleistungen' },
+    { code: 'L1', details: 'Grundstücks- und Wohnungswesen' },
+    { code: 'M1', details: 'freiberufliche, wissenschaftl., techn. Dienstleistungen' },
+    { code: 'N1', details: 'sonst. wirtschaftlichen Dienstleistungen' },
+    { code: 'O1', details: 'öffentl. Verwalt., Verteidigung; Sozialversicherung' },
+    { code: 'P1', details: 'Erziehung und Unterricht' },
+    { code: 'Q1', details: 'Gesundheits- und Sozialwesen' },
+    { code: 'R1', details: 'Kunst, Unterhaltung und Erholung' },
+    { code: 'S1', details: 'Erbringung von sonstigen Dienstleistungen' },
+    { code: 'T1', details: 'private Haushalte' },
+    { code: 'U1', details: 'Exterritoriale Organisationen und Körperschaften' }
   ];
 
   industryFieldCodeA1: IndustryFieldCode[] = [

@@ -13,7 +13,7 @@ import { SOAPService } from 'src/app/services/soap.service';
 export class MainComponent implements OnInit {
 
   constructor(private router: Router, public dictionaryService: DictionaryService){
-    this.router.navigate(['/kea'])
+    this.router.navigate(['/iso'])
   }
 
   ngOnInit(): void {
