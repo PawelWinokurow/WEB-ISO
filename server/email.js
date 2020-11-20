@@ -5,7 +5,7 @@ var transporter = nodemailer.createTransport({
     host: config.email.host,
     port: config.email.port,
     auth: {
-        user: config.email.auth.user,
+        user: config.email.auth.username,
         pass: config.email.auth.password
     }
 });

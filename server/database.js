@@ -56,7 +56,7 @@ exports.close = function () {
 
 exports.removeOldMasks = function() {
   const sql = "DELETE FROM masks WHERE datetime < NOW() - INTERVAL ? DAY";
-  connection.query(sql, [config.mysql.maskStorageTime], function (err, result) {
+  connection.query(sql, [config.mysql.maskStorageDuration], function (err, result) {
     if (err) throw err;
     console.log("Number of records deleted: " + result.affectedRows);
   });
