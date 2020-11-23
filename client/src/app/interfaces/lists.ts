@@ -1,4 +1,4 @@
-export interface Land {
+export interface Country {
     name: string, 
     abbreviation: string,
 }

@@ -5,6 +5,7 @@ import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.
 import { PreselectionDialogComponent } from 'src/app/dialogs/preselection-dialog/preselection-dialog.component';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
+import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { HttpService } from 'src/app/services/http.service';
 import { ListService } from 'src/app/services/list.service';
 import { SOAPService } from 'src/app/services/soap.service';
@@ -27,15 +28,15 @@ export class NewISOComponent implements OnInit {
   legalForms;
   titles;
   salutations;
-  locations;
+  countries;
   paymentTerms;
   customerType;
   debitCreditType
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService,
-    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService) {
+    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorService: ErrorMessageService) {
     this.titles = this.listService.titles;
-    this.locations = this.listService.locations;
+    this.countries = this.listService.countries;
   }
 
   ngOnInit(): void {
@@ -85,14 +86,15 @@ export class NewISOComponent implements OnInit {
 
   initSharedForm() {
     this.contactInformation = this.formBuilder.group({
-      legalForm: [''],
+      legalForm: ['', Validators.required],
       interfaceNumber: [''],
-      salutation: [''],
-      street: [''],
-      houseNumber: [''],
-      zip: [''],
-      location: [''],
-      country: [''],
+      salutation: ['', Validators.required],
+      additionalName: [''],
+      street: ['', Validators.required],
+      houseNumber: ['', Validators.required],
+      zip: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
       phone: [''],
       fax: [''],
       mobile: [''],
@@ -104,12 +106,12 @@ export class NewISOComponent implements OnInit {
     this.payment = this.formBuilder.group({
       taxId: [''],
       vatId: [''],
-      industryFieldCode: [''],
-      industryField: [''],
+      industryFieldCode: ['', Validators.required],
+      industryField: ['', Validators.required],
       iban: [''],
       bic: [''],
       bank: [''],
-      paymentTerm: [''],
+      paymentTerm: ['', Validators.required],
       notes: [''],
       sepa: [false],
     });
@@ -117,10 +119,9 @@ export class NewISOComponent implements OnInit {
 
   initPerson() {
     this.contactInformation.addControl('title', new FormControl(''));
-    this.contactInformation.addControl('firstName', new FormControl(''));
-    this.contactInformation.addControl('secondName', new FormControl(''));
-    this.contactInformation.addControl('additionalName', new FormControl(''));
-    this.contactInformation.addControl('birthDate', new FormControl(''));
+    this.contactInformation.addControl('firstName', new FormControl('', Validators.required));
+    this.contactInformation.addControl('secondName', new FormControl('', Validators.required));
+    this.contactInformation.addControl('birthDate', new FormControl('', this.debitCreditType == 'debit' ? Validators.required : []));
   }
 
   initPersonDebit() {
@@ -137,37 +138,36 @@ export class NewISOComponent implements OnInit {
   }
 
   initOrganization() {
-    this.contactInformation.addControl('additionalName', new FormControl(''));
-    this.contactInformation.addControl('orgaPersons', new FormControl(''));
+    this.contactInformation.addControl('orgaPersons', new FormControl('', Validators.required));
   }
 
   initOrganizationDebit() {
     this.initSharedForm();
     this.initOrganization();
     this.applicant = this.formBuilder.group({
-      salutation: [''],
+      salutation: ['', Validators.required],
       title: [''],
-      firstName: [''],
-      secondName: [''],
+      firstName: ['', Validators.required],
+      secondName: ['', Validators.required],
       birthDate: [''],
       phone: [''],
       mobile: [''],
       email: [''],
 
-      salutation1: [''],
+      salutation1: ['', Validators.required],
       title1: [''],
-      firstName1: [''],
-      secondName1: [''],
-      birthDate1: [''],
+      firstName1: ['', Validators.required],
+      secondName1: ['', Validators.required],
+      birthDate1: ['', Validators.required],
       phone1: [''],
       mobile1: [''],
       email1: [''],
 
-      salutation2: [''],
+      salutation2: ['', Validators.required],
       title2: [''],
-      firstName2: [''],
-      secondName2: [''],
-      birthDate2: [''],
+      firstName2: ['', Validators.required],
+      secondName2: ['', Validators.required],
+      birthDate2: ['', Validators.required],
       phone2: [''],
       mobile2: [''],
       email2: [''],
@@ -175,19 +175,16 @@ export class NewISOComponent implements OnInit {
 
     this.payment.addControl('agb', new FormControl(false));
     this.payment.addControl('creditLimit', new FormControl(''));
-    this.payment.addControl('sepaRequest', new FormControl(false));
   }
 
   initOrganizationCredit() {
     this.initSharedForm();
     this.initOrganization();
-    this.payment.addControl('hasSEPA', new FormControl(false));
   }
 
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
-      disableClose: true,
-      width: '250px',
+      disableClose: true,    
       backdropClass: 'backdrop-background',
     });
 
@@ -211,5 +208,16 @@ export class NewISOComponent implements OnInit {
         });
       }
     });
+  }
+
+  setIbanBicRequired(){
+    this.payment.get('iban').setValidators([Validators.required]); 
+    this.payment.get('bic').setValidators([Validators.required]);
+  }
+
+  unsetIbanBicRequired(){
+    this.payment.get('iban').setValidators([]); 
+    this.payment.get('bic').setValidators([]);
+
   }
 }

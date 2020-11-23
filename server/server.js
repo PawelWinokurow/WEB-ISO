@@ -66,6 +66,6 @@ app.get('/', (req, res) => {
   .listen(8080);
 */
   app.listen(config.web.port, () => {
-    email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
+    //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
     console.log(`Example app listening at http://localhost:${config.web.port}`)
   })

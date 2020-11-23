@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndustryField, IndustryFieldCode, Land, PaymentTerm } from '../interfaces/lists';
+import { IndustryField, IndustryFieldCode, Country, PaymentTerm } from '../interfaces/lists';
 
 @Injectable({
   providedIn: 'root'
@@ -197,7 +197,7 @@ export class ListService {
   ])
 
 
-  locations: Land[] = [
+  countries: Country[] = [
     { name: 'Andorra', abbreviation: 'AD' },
     { name: 'Ver.Arab.Emir.', abbreviation: 'AE' },
     { name: 'Afghanistan', abbreviation: 'AF' },
@@ -205,7 +205,7 @@ export class ListService {
     { name: 'Anguilla', abbreviation: 'AI' },
     { name: 'Albanien', abbreviation: 'AL' },
     { name: 'Armenien', abbreviation: 'AM' },
-    { name: ' ', abbreviation: 'AN' },
+    //{ name: ' ', abbreviation: 'AN' },
     { name: 'Angola', abbreviation: 'AO' },
     { name: 'Antarktis', abbreviation: 'AQ' },
     { name: 'Argentinien', abbreviation: 'AR' },
@@ -213,7 +213,7 @@ export class ListService {
     { name: 'Österreich', abbreviation: 'AT' },
     { name: 'Australien', abbreviation: 'AU' },
     { name: 'Aruba', abbreviation: 'AW' },
-    { name: ' ', abbreviation: 'AX' },
+    //{ name: ' ', abbreviation: 'AX' },
     { name: 'Aserbaidschan', abbreviation: 'AZ' },
     { name: 'Bosnien-Herz.', abbreviation: 'BA' },
     { name: 'Barbados', abbreviation: 'BB' },

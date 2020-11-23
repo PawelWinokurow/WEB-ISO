@@ -36,7 +36,7 @@ export class DictionaryService {
     ['CND', 'Kontaktdaten'],
     ['GEI', 'Allgemeine Informationen'],
     ['ADI', 'Adressinformationen'],
-
+    ['PAI', 'Zahlungsinformationen'],
 
     ['NIF', 'Namensangaben'],
     ['ADR', 'Anschrift'],
@@ -45,11 +45,11 @@ export class DictionaryService {
     ['ANI', 'Zus. Namensangaben (c/o)'],
     ['BRT', 'Geburtsdatum'],
     ['STR', 'Straße'],
-    ['HNU', 'Hausnr.'],
+    ['HNU', 'Hnr.'],
     ['MBX', 'Postfach'],
-    ['MBP', 'Postfach Postleitzahl'],
-    ['ZIP', 'Postleitzahl'],
-    ['LOC', 'Ort'],
+    ['MBP', 'Postfach PLZ'],
+    ['ZIP', 'PLZ'],
+    ['CIT', 'Ort'],
     ['COU', 'Land'],
     ['TEL', 'Telefon'],
     ['FAX', 'Telefax'],
@@ -77,13 +77,13 @@ export class DictionaryService {
    
     ['TLE', 'Titel'],
     ['SAL', 'Anrede'],
-    ['COP', 'Firma / Personen'],
+    ['COP', 'Firma/Personen'],
 
     ['FNA', 'Vorname'],
     ['SNA', 'Nachname'],
     
     ['COM', 'Unternehmen'],
-    ['DIS', 'Direkt senden'],
+    ['DIS', 'Maske direkt senden'],
   ])
 
   dictionaryEN = new Map([
@@ -111,6 +111,7 @@ export class DictionaryService {
     ['CND', 'Contact'],
     ['GEI', 'General information'],
     ['ADI', 'Address information'],
+    ['PAI', 'Payment information'],
 
     ['NIF', 'Name'],
     ['ADR', 'Address'],
@@ -123,7 +124,7 @@ export class DictionaryService {
     ['MBX', 'Mailbox'],
     ['MBP', 'Mailbox ZIP'],
     ['ZIP', 'ZIP'],
-    ['LOC', 'Location'],
+    ['CIT', 'City'],
     ['COU', 'Country'],
     ['TEL', 'Phone'],
     ['FAX', 'Fax'],
@@ -157,7 +158,7 @@ export class DictionaryService {
 
     ['COM', 'Organisation'],
 
-    ['DIS', 'Send directly'],
+    ['DIS', 'Send mask directly'],
   ])
 
   dictionary = new Map([

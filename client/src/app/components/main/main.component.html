@@ -7,6 +7,7 @@
         <h1 style="color:white;">WEB-ISO</h1>
       </div>
       <span class="horizontal-space"></span>
+      <button mat-raised-button (click)="reset()"><mat-icon>replay</mat-icon></button>
       <button mat-raised-button (click)="dictionaryService.switchLanguage()">{{dictionaryService.currentLanguage}}</button>
 
       <!--<div>

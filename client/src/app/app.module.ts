@@ -17,6 +17,7 @@ import { ListService } from './services/list.service';
 import { PreselectionDialogComponent } from './dialogs/preselection-dialog/preselection-dialog.component';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
+import { ErrorMessageService } from './services/error-message.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NewISOComponent } from './components/new-iso/new-iso.component';
     SOAPService, 
     DictionaryService,
     HttpService, 
-    ListService
+    ListService,
+    ErrorMessageService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
