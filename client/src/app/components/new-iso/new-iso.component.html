@@ -8,7 +8,7 @@
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="display: flex;">
+                        <div class="flex-overflow-auto">
 
                             <div class="stepper-data">
                                 <span layout="row">
@@ -243,7 +243,7 @@
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAI')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="display: flex; height: 100%;">
+                        <div class="flex-overflow-auto">
                             <div class="stepper-data">
                                 <span layout="row">
                                     <h2 style="margin:0">{{dictionaryService.get('PAY')}}</h2>
@@ -423,7 +423,7 @@
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="display: flex;">
+                        <div class="flex-overflow-auto">
 
                             <div class="stepper-data">
                                 <span layout="row">
@@ -623,7 +623,7 @@
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="display: flex;">
+                        <div class="flex-overflow-auto">
                             <!--1. Col-->
                             <div *ngIf="contactInformation.get('legalForm').value !== 'Privat'" class="stepper-data">
                                 <span layout="row">
@@ -938,7 +938,7 @@
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAY')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="display: flex; height: 100%;">
+                        <div class="flex-overflow-auto">
                             <!--1. Col-->
                             <div class="stepper-data">
                                 <span layout="row">

@@ -32,7 +32,6 @@ export class DictionaryService {
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
 
-
     ['CND', 'Kontaktdaten'],
     ['GEI', 'Allgemeine Informationen'],
     ['ADI', 'Adressinformationen'],
