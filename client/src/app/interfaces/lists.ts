@@ -11,4 +11,5 @@ export interface codeDetails{
 export interface IndustryFieldCode extends codeDetails {}
 export interface PaymentTerm extends codeDetails {}
 export interface IndustryField extends codeDetails {}
+export interface CompanyCode extends codeDetails {}
 

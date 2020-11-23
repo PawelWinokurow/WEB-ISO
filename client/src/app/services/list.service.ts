@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndustryField, IndustryFieldCode, Country, PaymentTerm } from '../interfaces/lists';
+import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode } from '../interfaces/lists';
 
 @Injectable({
   providedIn: 'root'
@@ -189,6 +189,16 @@ export class ListService {
     { code: '0145', details: 'Haltung von Schweinen'},
     { code: '0146', details: 'Haltung von Geflügel'},
     { code: '0149', details: 'Sonstige Tierhaltung'},
+  ];
+
+  companyCode: CompanyCode[] = [
+    { code: '1100', details: 'BayWa Haustechnik GmbH'},
+    { code: '1101', details: 'BayWa Rent GmbH'},
+    { code: '1104', details: 'Peter Frey GmbH'},
+    { code: '1160', details: 'Bölke Handel GmbH'},
+    { code: '1170', details: 'Interlubes GmbH'},
+    { code: '1192', details: 'BSV-Staaten GmbH'},
+    { code: '9500', details: 'Obst vom Bodensee Vertrieb GmbH'},
   ];
 
   industryFieldCodes = new Map([
