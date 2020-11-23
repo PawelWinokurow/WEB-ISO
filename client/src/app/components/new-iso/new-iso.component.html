@@ -8,13 +8,16 @@
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
+                        <div style="width: 700px;">
+                            <span layout="row">
+                                <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
+                                <hr flex />
+                            </span>
+                        </div>
                         <div class="flex-overflow-auto">
 
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
-                                    <hr flex />
-                                </span>
+
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" color="accent" appearance="outline">
