@@ -2,13 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
-import { PreselectionDialogComponent } from 'src/app/dialogs/preselection-dialog/preselection-dialog.component';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { HttpService } from 'src/app/services/http.service';
 import { ListService } from 'src/app/services/list.service';
 import { SOAPService } from 'src/app/services/soap.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-new-iso',
@@ -23,48 +23,28 @@ export class NewISOComponent implements OnInit {
   applicant: FormGroup;
   payment: FormGroup;
   
-  show = false;
-
   legalForms;
   titles;
   salutations;
   countries;
   paymentTerms;
-  customerType;
-  debitCreditType
 
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService,
+
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService,
     private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorService: ErrorMessageService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
 
   ngOnInit(): void {
-    this.initPersonDebit();
-    this.openPreselectionDialog();
-  }
-
-  openPreselectionDialog(){
-    this.show = false;
-    const preselectionDialogRef = this.dialog.open(PreselectionDialogComponent, { 
-      disableClose: true,
-      backdropClass: 'backdrop-background',
-     });
-    preselectionDialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.customerType = result.customerType;
-        this.debitCreditType = result.debitCreditType;
-        this.initForms();
-        this.show = true;
-      }
-    });
+    this.initForms();
   }
 
   initForms() {
-    if (this.customerType === 'organization') {
+    if (this.storageService.customerType === 'organization') {
       this.legalForms = this.listService.legalFormsOrganization;
       this.salutations = this.listService.salutationsOrganization;
-      if (this.debitCreditType === 'debit') {
+      if (this.storageService.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initOrganizationDebit()
       } else {
@@ -74,7 +54,7 @@ export class NewISOComponent implements OnInit {
     } else {
       this.legalForms = this.listService.legalFormsPerson;
       this.salutations = this.listService.salutationsPerson;
-      if (this.debitCreditType === 'debit') {
+      if (this.storageService.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initPersonDebit()
       } else {
@@ -121,7 +101,7 @@ export class NewISOComponent implements OnInit {
     this.contactInformation.addControl('title', new FormControl(''));
     this.contactInformation.addControl('firstName', new FormControl('', Validators.required));
     this.contactInformation.addControl('secondName', new FormControl('', Validators.required));
-    this.contactInformation.addControl('birthDate', new FormControl('', this.debitCreditType == 'debit' ? Validators.required : []));
+    this.contactInformation.addControl('birthDate', new FormControl('', this.storageService.debitCreditType == 'debit' ? Validators.required : []));
   }
 
   initPersonDebit() {
@@ -218,6 +198,7 @@ export class NewISOComponent implements OnInit {
   unsetIbanBicRequired(){
     this.payment.get('iban').setValidators([]); 
     this.payment.get('bic').setValidators([]);
-
   }
+
+
 }

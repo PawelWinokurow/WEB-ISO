@@ -1,17 +1,15 @@
-.mat-button-toggle {
-  width: 120px;
-}
-
 .mat-raised-button {
   margin-left: 10px;
 }
 
-.mat-step-header .mat-step-icon {
-  background-color: rgba(0, 0, 0, 0.3);
-  color: black;
+.alternate-theme .mat-step-header .mat-step-icon {
+  background-color: rgb(177, 177, 177);
 }
 
-.mat-step-header .mat-step-icon-selected {
-  background-color: #4be69d;
-  color: black;
+.alternate-theme .mat-step-header .mat-step-icon-done {
+  background-color:  #55bb8b;
+}
+
+.alternate-theme .mat-step-header .mat-step-icon-selected {
+  background-color:  #55bb8b;
 }

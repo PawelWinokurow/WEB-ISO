@@ -14,7 +14,8 @@ $mat-baywa-accent: (
     50 : #b6b6b6,
     100: #f0f0f0,
     200: #000000,
-
+    300: #e4e4e4,
+    
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -75,7 +76,7 @@ $my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-cus
     $accent: map-get($my-custom-theme, accent);
   
     .mat-button-toggle {
-      background-color: mat-color($accent, 100);
+      background-color: mat-color($accent, 300);
       color: mat-color($primary, default-contrast);
     }
   
@@ -83,12 +84,6 @@ $my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-cus
       background-color: mat-color($primary);
       color: mat-color($accent, default-contrast);
     }
-
-    #StepperControlButton {
-        background-color: mat-color($accent, 100);
-        color: mat-color($primary, default-contrast);    
-    }
-
   }
 
 @include mix-app-theme($my-custom-theme);

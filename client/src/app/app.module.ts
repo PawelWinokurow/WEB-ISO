@@ -14,10 +14,11 @@ import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
 import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { ListService } from './services/list.service';
-import { PreselectionDialogComponent } from './dialogs/preselection-dialog/preselection-dialog.component';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
 import { ErrorMessageService } from './services/error-message.service';
+import { StorageService } from './services/storage.service';
+import { PreselectionComponent } from './components/preselection/preselection.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ErrorMessageService } from './services/error-message.service';
     NewISOComponent,
     SendMaskConfirmationDialogComponent,
     EmailDialogComponent,
-    PreselectionDialogComponent,
+    PreselectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +48,7 @@ import { ErrorMessageService } from './services/error-message.service';
     HttpService, 
     ListService,
     ErrorMessageService,
+    StorageService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

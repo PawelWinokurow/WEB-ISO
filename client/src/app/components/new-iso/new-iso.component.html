@@ -1,23 +1,19 @@
-<div *ngIf="show" class="inner-component">
-
+<div class="inner-component">
     <div class="stepper-container">
         <mat-horizontal-stepper class="alternate-theme" linear="false" #stepper>
 
             <!--contact information mat-step for person-->
-            <mat-step *ngIf="customerType === 'person'" [stepControl]="contactInformation">
+            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="contactInformation">
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
-                        <div style="width: 700px;">
-                            <span layout="row">
-                                <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
-                                <hr flex />
-                            </span>
-                        </div>
                         <div class="flex-overflow-auto">
 
                             <div class="stepper-data">
-
+                                <span layout="row">
+                                    <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
+                                    <hr flex />
+                                </span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" color="accent" appearance="outline">
@@ -102,11 +98,11 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
                                             <input matInput [matDatepicker]="birthDate" formControlName="birthDate"
-                                                [required]="debitCreditType === 'debit'">
+                                                [required]="storageService.debitCreditType === 'debit'">
                                             <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
                                             <mat-datepicker #birthDate></mat-datepicker>
                                             <mat-error
-                                                *ngIf="debitCreditType === 'debit' && contactInformation.get('birthDate').invalid">
+                                                *ngIf="storageService.debitCreditType === 'debit' && contactInformation.get('birthDate').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 <span class="validator">{{errorService.getError('BRT', 'REQ')}}</span>
                                             </mat-error>
@@ -242,7 +238,7 @@
             </mat-step>
 
             <!--payment mat-step for person-->
-            <mat-step [stepControl]="payment" *ngIf="customerType === 'person'">
+            <mat-step [stepControl]="payment" *ngIf="storageService.customerType === 'person'">
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAI')}}</ng-template>
                     <div class="vertical-flex">
@@ -304,9 +300,9 @@
                                 <div style="display: flex; margin-bottom: 20px; margin-left:10px">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <form [formGroup]="payment" appearance="outline" color="accent">
-                                            <mat-label *ngIf="debitCreditType === 'debit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'debit'">
                                                 {{dictionaryService.get('GSP')}}</mat-label>
-                                            <mat-label *ngIf="debitCreditType === 'credit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'credit'">
                                                 {{dictionaryService.get('HSP')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
@@ -354,21 +350,21 @@
 
                                 <div style="display: flex;">
 
-                                    <div *ngIf="debitCreditType !== 'debit'" class="paddinglr10px" style="width: 100%;">
+                                    <div *ngIf="storageService.debitCreditType !== 'debit'" class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BNK')}}</mat-label>
                                             <input matInput formControlName="bank">
                                         </mat-form-field>
                                     </div>
 
-                                    <div  *ngIf="debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
+                                    <div  *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BNK')}}</mat-label>
                                             <input matInput formControlName="bank">
                                         </mat-form-field>
                                     </div>
 
-                                    <div *ngIf="debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
+                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CRL')}}</mat-label>
                                             <input matInput formControlName="creditLimit">
@@ -397,7 +393,7 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REF')}}</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5"
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4"
                                                 cdkAutosizeMaxRows="5">
                                             </textarea>
                                         </mat-form-field>
@@ -422,7 +418,7 @@
             </mat-step>
 
             <!--contact information mat-step for organization-->
-            <mat-step *ngIf="customerType === 'organization'" [stepControl]="contactInformation">
+            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="contactInformation">
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
@@ -622,7 +618,7 @@
             </mat-step>
 
             <!--applicant information mat-step for organization-->
-            <mat-step [stepControl]="applicant" *ngIf="customerType === 'organization' && debitCreditType === 'debit'">
+            <mat-step [stepControl]="applicant" *ngIf="storageService.customerType === 'organization' && storageService.debitCreditType === 'debit'">
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
                     <div class="vertical-flex">
@@ -684,18 +680,6 @@
                                 </div>
 
                                 <div style="display: flex;">
-                                    <!--
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
-                                            <input matInput [matDatepicker]="birthDate" formControlName="birthDate"
-                                                required>
-                                            <mat-datepicker-toggle matSuffix [for]="birthDate">
-                                            </mat-datepicker-toggle>
-                                            <mat-datepicker #birthDate></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                    -->
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
@@ -937,7 +921,7 @@
             </mat-step>
 
             <!--payment mat-step for organization-->
-            <mat-step [stepControl]="payment" *ngIf="customerType === 'organization'">
+            <mat-step [stepControl]="payment" *ngIf="storageService.customerType === 'organization'">
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAY')}}</ng-template>
                     <div class="vertical-flex">
@@ -1001,9 +985,9 @@
                                 <div style="display: flex; margin-bottom: 20px; margin-left:10px">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <form [formGroup]="payment" appearance="outline" color="accent">
-                                            <mat-label *ngIf="debitCreditType === 'debit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'debit'">
                                                 {{dictionaryService.get('GSP')}}</mat-label>
-                                            <mat-label *ngIf="debitCreditType === 'credit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'credit'">
                                                 {{dictionaryService.get('HSP')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
@@ -1047,19 +1031,19 @@
                                 </div>
 
                                 <div style="display: flex;">
-                                    <div *ngIf="debitCreditType === 'credit'" class="paddinglr10px" style="width: 100%;">
+                                    <div *ngIf="storageService.debitCreditType === 'credit'" class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BNK')}}</mat-label>
                                             <input matInput formControlName="bank">
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
+                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BNK')}}</mat-label>
                                             <input matInput formControlName="bank">
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
+                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CRL')}}</mat-label>
                                             <input matInput formControlName="creditLimit">
@@ -1088,8 +1072,8 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REF')}}</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5"
-                                                cdkAutosizeMaxRows="5">
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                                                cdkAutosizeMaxRows="3">
                                             </textarea>
                                         </mat-form-field>
                                     </div>
@@ -1097,12 +1081,7 @@
 
 
                             </div>
-                            <!--<mat-divider vertical style="height:100%"></mat-divider>-->
-                            <!--2. Col-->
-                            <!--<div class="stepper-data">
 
-
-                            </div>-->
                         </div>
 
                         <div class="vertical-space"></div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreselectionDialogComponent } from './preselection-dialog.component';
+import { PreselectionComponent } from './preselection.component';
 
-describe('PreselectionDialogComponent', () => {
-  let component: PreselectionDialogComponent;
-  let fixture: ComponentFixture<PreselectionDialogComponent>;
+describe('PreselectionComponent', () => {
+  let component: PreselectionComponent;
+  let fixture: ComponentFixture<PreselectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PreselectionDialogComponent ]
+      declarations: [ PreselectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreselectionDialogComponent);
+    fixture = TestBed.createComponent(PreselectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

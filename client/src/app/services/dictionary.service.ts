@@ -81,7 +81,6 @@ export class DictionaryService {
     ['FNA', 'Vorname'],
     ['SNA', 'Nachname'],
     
-    ['COM', 'Unternehmen'],
     ['DIS', 'Maske direkt senden'],
   ])
 
@@ -155,7 +154,6 @@ export class DictionaryService {
     ['FNA', 'Name'],
     ['SNA', 'Surname'],
 
-    ['COM', 'Organisation'],
 
     ['DIS', 'Send mask directly'],
   ])

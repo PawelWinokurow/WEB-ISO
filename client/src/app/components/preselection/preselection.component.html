@@ -1,0 +1,27 @@
+<div class="inner-component">
+    <mat-card class="card">
+
+        <mat-card-content align="center">
+            <div class="padding10px" style="display: block;">
+                <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
+                    <mat-button-toggle value="debit">{{ dictionaryService.get('DEB') }}
+                    </mat-button-toggle>
+                    <mat-button-toggle value="credit">{{ dictionaryService.get('KRE') }}
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div class="padding10px" style="display: block;">
+                <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">
+                    <mat-button-toggle value="person">{{ dictionaryService.get('PER') }}
+                    </mat-button-toggle>
+                    <mat-button-toggle value="organization">{{ dictionaryService.get('COM') }}
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="center" style="margin-bottom: 20px;">
+            <button mat-stroked-button color="primary"(click)="onClick()"
+                style="height: 46px;">{{dictionaryService.get('MGE')}} <mat-icon>done</mat-icon></button>
+        </mat-card-actions>
+    </mat-card>
+</div>
