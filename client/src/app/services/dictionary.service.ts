@@ -53,7 +53,7 @@ export class DictionaryService {
     ['TEL', 'Telefon'],
     ['FAX', 'Telefax'],
     ['MOB', 'Mobiltelefon'],
-    ['EMA', 'E-Mail'],
+    ['EMA', 'E-Mail-Adresse'],
 
     ['PAY', 'Zahlung'],
     ['TAX', 'Steuernummer'],
@@ -76,12 +76,14 @@ export class DictionaryService {
    
     ['TLE', 'Titel'],
     ['SAL', 'Anrede'],
-    ['COP', 'Firma/Personen'],
+    ['COP', 'Firma / Personen'],
 
     ['FNA', 'Vorname'],
     ['SNA', 'Nachname'],
     
-    ['DIS', 'Maske direkt senden'],
+    ['EEM', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
+    ['SUB', 'Einreichen'],
+    ['DIS', 'Maske direkt senden?'],
   ])
 
   dictionaryEN = new Map([
@@ -127,7 +129,7 @@ export class DictionaryService {
     ['TEL', 'Phone'],
     ['FAX', 'Fax'],
     ['MOB', 'Mobile phone'],
-    ['EMA', 'E-Mail'],
+    ['EMA', 'Email address'],
 
     ['PAY', 'Payment'],
     ['TAX', 'Tax ID'],
@@ -153,9 +155,10 @@ export class DictionaryService {
     ['COP', 'Company / Persons'],
     ['FNA', 'Name'],
     ['SNA', 'Surname'],
-
-
-    ['DIS', 'Send mask directly'],
+    
+    ['EEM', 'Please enter your email address.'],
+    ['SUB', 'Submit'],
+    ['DIS', 'Send mask directly?'],
   ])
 
   dictionary = new Map([

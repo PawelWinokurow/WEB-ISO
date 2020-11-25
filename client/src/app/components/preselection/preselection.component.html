@@ -20,8 +20,10 @@
             </div>
         </mat-card-content>
         <mat-card-actions align="center" style="margin-bottom: 20px;">
-            <button mat-stroked-button color="primary"(click)="onClick()"
-                style="height: 46px;">{{dictionaryService.get('MGE')}} <mat-icon>done</mat-icon></button>
+            <button mat-stroked-button (click)="onClick()" style="height: 46px;">
+                <mat-icon style="margin-right: 5px;">assignment</mat-icon>
+                <span>{{dictionaryService.get('MGE')}}</span>
+            </button>
         </mat-card-actions>
     </mat-card>
 </div>

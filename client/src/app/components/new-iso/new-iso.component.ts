@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -31,7 +32,7 @@ export class NewISOComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService,
-    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorService: ErrorMessageService) {
+    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorMessageService: ErrorMessageService, private router: Router) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
@@ -172,6 +173,7 @@ export class NewISOComponent implements OnInit {
       if (result) {
         this.httpService.sendMask({ isDirect: true, name: "some name" }).subscribe(res => {
           console.log(res);
+          this.router.navigate(['/preselection']);
         });
       } else {
         const emailDialogRef = this.dialog.open(EmailDialogComponent, { 
@@ -183,6 +185,7 @@ export class NewISOComponent implements OnInit {
             console.log(result)
             this.httpService.sendMask({ isDirect: false, emailTo: result, name: "some name" }).subscribe(res => {
               console.log(res);
+              this.router.navigate(['/preselection']);
             });
           }
         });

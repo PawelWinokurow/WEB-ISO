@@ -13,7 +13,7 @@ body {
 .inner-component {
   height: calc(100vh - 64px);  
   display: flex;
-  background-color: rgb(231, 229, 229);
+  background-color: rgb(229, 229, 229);
 }
 
 .stepper-container {
@@ -76,7 +76,7 @@ mat-form-field {
   padding-left: 30px;
   padding-right: 30px;
   height: 100%;
-  min-width: 500px;
+  min-width: 530px;
   width: 30%;
   overflow: auto;
 }

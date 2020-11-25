@@ -11,10 +11,12 @@ export class ErrorMessageService {
 
   errorsDE = new Map([
     ['REQ', ' ist erforderlich'],
+    ['VAL', ' ist ungültig.'],
   ])
 
   errorsEN = new Map([
     ['REQ', ' is required'],
+    ['VAL', ' is not valid'],
   ])
 
   errors = new Map([
