@@ -26,9 +26,9 @@ export class DictionaryService {
     ['PRS', 'Vorauswahl'],
     ['CUT', 'Kundentyp'],
     ['PER', 'Person'],
-    ['COM', 'Organisation'],
+    ['ORG', 'Organisation'],
     ['DEB', 'Debitor'],
-    ['KRE', 'Kreditor'],
+    ['CRE', 'Kreditor'],
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
 
@@ -40,7 +40,6 @@ export class DictionaryService {
     ['NIF', 'Namensangaben'],
     ['ADR', 'Anschrift'],
     ['CON', 'Kontakt'],
-    ['ORG', 'Firma'],
     ['ANI', 'Zus. Namensangaben (c/o)'],
     ['BRT', 'Geburtsdatum'],
     ['STR', 'Straße'],
@@ -100,13 +99,11 @@ export class DictionaryService {
 
     ['MGE', 'Generate mask'],
 
-
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
     ['PER', 'Person'],
-    ['COM', 'Organization'],
     ['DEB', 'Debitor'],
-    ['KRE', 'Creditor'],
+    ['CRE', 'Creditor'],
     ['LEF', 'Legal form'],
     
     ['SSN', 'Interface number'],
@@ -119,7 +116,7 @@ export class DictionaryService {
     ['NIF', 'Name'],
     ['ADR', 'Address'],
     ['CON', 'Contact'],
-    ['ORG', 'Organisation'],
+    ['ORG', 'Organization'],
     ['ANI', 'Additional name'],
     ['BRT', 'Birth date'],
     ['STR', 'Street'],

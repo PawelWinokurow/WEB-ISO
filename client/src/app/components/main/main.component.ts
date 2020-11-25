@@ -10,7 +10,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService){
+  constructor(private router: Router, public dictionaryService: DictionaryService, public storageService: StorageService){
     this.reset();
   }
 

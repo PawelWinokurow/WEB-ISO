@@ -6,7 +6,7 @@
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
                     <mat-button-toggle value="debit">{{ dictionaryService.get('DEB') }}
                     </mat-button-toggle>
-                    <mat-button-toggle value="credit">{{ dictionaryService.get('KRE') }}
+                    <mat-button-toggle value="credit">{{ dictionaryService.get('CRE') }}
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
@@ -14,7 +14,7 @@
                 <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">
                     <mat-button-toggle value="person">{{ dictionaryService.get('PER') }}
                     </mat-button-toggle>
-                    <mat-button-toggle value="organization">{{ dictionaryService.get('COM') }}
+                    <mat-button-toggle value="organization">{{ dictionaryService.get('ORG') }}
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
