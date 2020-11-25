@@ -84,6 +84,9 @@ export class DictionaryService {
     ['EEM', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
     ['SUB', 'Einreichen'],
     ['DIS', 'Maske direkt senden?'],
+
+    ['SNT', 'Die Maske wurde gesendet.'],
+    ['SUC', 'Erfolg!'],
   ])
 
   dictionaryEN = new Map([
@@ -159,6 +162,9 @@ export class DictionaryService {
     ['EEM', 'Please enter your email address.'],
     ['SUB', 'Submit'],
     ['DIS', 'Send mask directly?'],
+
+    ['SNT', 'The mask was sent.'],
+    ['SUC', 'Success!'],
   ])
 
   dictionary = new Map([

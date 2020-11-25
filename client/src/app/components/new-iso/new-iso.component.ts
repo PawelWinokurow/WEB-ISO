@@ -10,6 +10,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { ListService } from 'src/app/services/list.service';
 import { SOAPService } from 'src/app/services/soap.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-iso',
@@ -17,21 +18,21 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./new-iso.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class NewISOComponent implements OnInit {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
-  
+
   legalForms;
   titles;
   salutations;
   countries;
   paymentTerms;
 
-
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService,
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
     private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorMessageService: ErrorMessageService, private router: Router) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
@@ -165,7 +166,7 @@ export class NewISOComponent implements OnInit {
 
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
-      disableClose: true,    
+      disableClose: true,
       backdropClass: 'backdrop-background',
     });
 
@@ -173,11 +174,11 @@ export class NewISOComponent implements OnInit {
       if (result) {
         this.httpService.sendMask({ isDirect: true, name: "some name" }).subscribe(res => {
           console.log(res);
-          this.router.navigate(['/preselection']);
+          this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
       } else {
-        const emailDialogRef = this.dialog.open(EmailDialogComponent, { 
-          disableClose: true, 
+        const emailDialogRef = this.dialog.open(EmailDialogComponent, {
+          disableClose: true,
           backdropClass: 'backdrop-background',
         });
         emailDialogRef.afterClosed().subscribe(result => {
@@ -185,7 +186,7 @@ export class NewISOComponent implements OnInit {
             console.log(result)
             this.httpService.sendMask({ isDirect: false, emailTo: result, name: "some name" }).subscribe(res => {
               console.log(res);
-              this.router.navigate(['/preselection']);
+              this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
             });
           }
         });
@@ -193,15 +194,14 @@ export class NewISOComponent implements OnInit {
     });
   }
 
-  setIbanBicRequired(){
-    this.payment.get('iban').setValidators([Validators.required]); 
+  setIbanBicRequired() {
+    this.payment.get('iban').setValidators([Validators.required]);
     this.payment.get('bic').setValidators([Validators.required]);
   }
 
-  unsetIbanBicRequired(){
-    this.payment.get('iban').setValidators([]); 
+  unsetIbanBicRequired() {
+    this.payment.get('iban').setValidators([]);
     this.payment.get('bic').setValidators([]);
   }
-
 
 }

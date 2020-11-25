@@ -29,6 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
               "src/theme.scss"
             ],
             "scripts": []
@@ -94,7 +95,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
