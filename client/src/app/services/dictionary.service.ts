@@ -26,10 +26,13 @@ export class DictionaryService {
     ['PRS', 'Vorauswahl'],
     ['CUT', 'Kundentyp'],
     ['PER', 'Person'],
-    ['COM', 'Organisation'],
+    ['ORG', 'Organisation'],
     ['DEB', 'Debitor'],
     ['CRE', 'Kreditor'],
+<<<<<<< HEAD
     ['CCO', 'Buchungskreis'],
+=======
+>>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
 
@@ -41,7 +44,6 @@ export class DictionaryService {
     ['NIF', 'Namensangaben'],
     ['ADR', 'Anschrift'],
     ['CON', 'Kontakt'],
-    ['ORG', 'Firma'],
     ['ANI', 'Zus. Namensangaben (c/o)'],
     ['BRT', 'Geburtsdatum'],
     ['STR', 'Straße'],
@@ -85,6 +87,9 @@ export class DictionaryService {
     ['EEM', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
     ['SUB', 'Einreichen'],
     ['DIS', 'Maske direkt senden?'],
+
+    ['SNT', 'Die Maske wurde gesendet.'],
+    ['SUC', 'Erfolg!'],
   ])
 
   dictionaryEN = new Map([
@@ -97,15 +102,20 @@ export class DictionaryService {
     ['SND', 'Send'],
 
 
+<<<<<<< HEAD
     ['MGE', 'Generate mask'],
 
+=======
+>>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
     ['PER', 'Person'],
-    ['COM', 'Organization'],
     ['DEB', 'Debitor'],
     ['CRE', 'Creditor'],
+<<<<<<< HEAD
     ['CCO', 'Comapny code'],
+=======
+>>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
     ['LEF', 'Legal form'],
     
     ['SSN', 'Interface number'],
@@ -118,7 +128,7 @@ export class DictionaryService {
     ['NIF', 'Name'],
     ['ADR', 'Address'],
     ['CON', 'Contact'],
-    ['ORG', 'Organisation'],
+    ['ORG', 'Organization'],
     ['ANI', 'Additional name'],
     ['BRT', 'Birth date'],
     ['STR', 'Street'],
@@ -161,6 +171,9 @@ export class DictionaryService {
     ['EEM', 'Please enter your email address.'],
     ['SUB', 'Submit'],
     ['DIS', 'Send mask directly?'],
+
+    ['SNT', 'The mask was sent.'],
+    ['SUC', 'Success!'],
   ])
 
   dictionary = new Map([

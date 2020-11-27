@@ -19,6 +19,7 @@ import { NewISOComponent } from './components/new-iso/new-iso.component';
 import { ErrorMessageService } from './services/error-message.service';
 import { StorageService } from './services/storage.service';
 import { PreselectionComponent } from './components/preselection/preselection.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import { PreselectionComponent } from './components/preselection/preselection.co
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(), 
   ],
   providers: [
     SOAPService, 
