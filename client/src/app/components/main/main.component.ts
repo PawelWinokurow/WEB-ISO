@@ -14,11 +14,11 @@ export class MainComponent implements OnInit {
     this.reset();
   }
 
-  reset() {
-    this.router.navigate(['/preselection']);
+  ngOnInit(): void {
   }
 
-  ngOnInit(): void {
+  reset() {
+    this.router.navigate(['/preselection']);
   }
 
   changeLanguage(){

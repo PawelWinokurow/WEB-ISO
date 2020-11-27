@@ -13,11 +13,15 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class PreselectionComponent implements OnInit {
 
-  companyCode: FormControl = new FormControl('', [Validators.required]);
+  companyCode: FormControl;
 
-  constructor(private storageService: StorageService, private router: Router, public dictionaryService: DictionaryService, public listService: ListService, public errorMessageService: ErrorMessageService) { }
+  constructor(public storageService: StorageService, private router: Router, public dictionaryService: DictionaryService, public listService: ListService, public errorMessageService: ErrorMessageService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.companyCode = new FormControl('', [Validators.required]);
+    this.storageService.resetValues();
+    this.companyCode.valueChanges.subscribe(() => this.storageService.companyCode = this.companyCode.value.details);
+  }
 
   changeCustomerType(event: any) {
     if (event.value === 'organization') {
