@@ -29,10 +29,8 @@ export class DictionaryService {
     ['ORG', 'Organisation'],
     ['DEB', 'Debitor'],
     ['CRE', 'Kreditor'],
-<<<<<<< HEAD
     ['CCO', 'Buchungskreis'],
-=======
->>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
+
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
 
@@ -101,21 +99,14 @@ export class DictionaryService {
     ['NXT', 'Next'],
     ['SND', 'Send'],
 
-
-<<<<<<< HEAD
     ['MGE', 'Generate mask'],
-
-=======
->>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
     ['PER', 'Person'],
     ['DEB', 'Debitor'],
     ['CRE', 'Creditor'],
-<<<<<<< HEAD
     ['CCO', 'Comapny code'],
-=======
->>>>>>> 5e53272085c6bca191f02e880ed1e933efa60dc2
+
     ['LEF', 'Legal form'],
     
     ['SSN', 'Interface number'],
