@@ -2,15 +2,15 @@
     <mat-card class="card">
 
         <mat-card-content align="center">
-            <div class="padding10px" style="display: block;">
+            <div class="padding10px">
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
                     <mat-button-toggle value="debit">{{ dictionaryService.get('DEB') }}
                     </mat-button-toggle>
-                    <mat-button-toggle value="credit">{{ dictionaryService.get('KRE') }}
+                    <mat-button-toggle value="credit">{{ dictionaryService.get('CRE') }}
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
-            <div class="padding10px" style="display: block;">
+            <div class="padding10px">
                 <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">
                     <mat-button-toggle value="person">{{ dictionaryService.get('PER') }}
                     </mat-button-toggle>
@@ -18,9 +18,24 @@
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
+
+            <div class="padding10px">
+                <mat-form-field color="accent" appearance="outline">
+                    <mat-label>{{dictionaryService.get('CCO')}}</mat-label>
+                    <mat-select [formControl]="companyCode" required>
+                        <mat-option *ngFor="let field of listService.companyCodes" [value]="field">
+                            {{field.details}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="companyCode.invalid">
+                        <mat-icon style="margin-right: 5px;">error</mat-icon>
+                        <span class="validator">{{errorMessageService.getError('CCO', 'REQ')}}</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </mat-card-content>
         <mat-card-actions align="center" style="margin-bottom: 20px;">
-            <button mat-stroked-button (click)="onClick()" style="height: 46px;">
+            <button mat-stroked-button (click)="onClick()" style="height: 46px;" [disabled]="!companyCode.valid">
                 <mat-icon style="margin-right: 5px;">assignment</mat-icon>
                 <span>{{dictionaryService.get('MGE')}}</span>
             </button>

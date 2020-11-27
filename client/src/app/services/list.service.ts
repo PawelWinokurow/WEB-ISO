@@ -669,8 +669,7 @@ industryFieldCodeU1: IndustryFieldCode[] = [
 { code: '9900', details: 'Exterritoriale Organisationen und Körperschaften' },
 ];
 
-
-companyCode: CompanyCode[] = [
+companyCodes: CompanyCode[] = [
   { code: '1100', details: 'BayWa Haustechnik GmbH' },
   { code: '1101', details: 'BayWa Rent GmbH' },
   { code: '1104', details: 'Peter Frey GmbH' },

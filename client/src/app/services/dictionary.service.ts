@@ -28,7 +28,8 @@ export class DictionaryService {
     ['PER', 'Person'],
     ['COM', 'Organisation'],
     ['DEB', 'Debitor'],
-    ['KRE', 'Kreditor'],
+    ['CRE', 'Kreditor'],
+    ['CCO', 'Buchungskreis'],
     ['LEF', 'Rechtsform'],
     ['SSN', 'Schnittstellennummer'],
 
@@ -95,15 +96,16 @@ export class DictionaryService {
     ['NXT', 'Next'],
     ['SND', 'Send'],
 
-    ['MGE', 'Generate mask'],
 
+    ['MGE', 'Generate mask'],
 
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
     ['PER', 'Person'],
     ['COM', 'Organization'],
     ['DEB', 'Debitor'],
-    ['KRE', 'Creditor'],
+    ['CRE', 'Creditor'],
+    ['CCO', 'Comapny code'],
     ['LEF', 'Legal form'],
     
     ['SSN', 'Interface number'],
