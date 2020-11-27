@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,6 +11,12 @@ import { ListService } from 'src/app/services/list.service';
 import { SOAPService } from 'src/app/services/soap.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ReplaySubject, Subject } from 'rxjs';
+import { IndustryFieldCode } from 'src/app/interfaces/lists';
+import { MatSelect } from '@angular/material/select';
+import { pairwise, take, takeUntil } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-new-iso',
@@ -19,18 +25,25 @@ import { ToastrService } from 'ngx-toastr';
   encapsulation: ViewEncapsulation.None
 })
 
-export class NewISOComponent implements OnInit {
+export class NewISOComponent implements OnInit, OnDestroy {
 
   preselection: FormGroup;
   contactInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
 
+  //Industry field free text search
+  industryFieldCodesSearchCtrl: FormControl = new FormControl('');
+  public filteredFieldCodes: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  protected _onDestroy = new Subject<void>();
+
   legalForms;
   titles;
   salutations;
   countries;
   paymentTerms;
+  industryFields;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
     private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorMessageService: ErrorMessageService, private router: Router) {
@@ -39,7 +52,53 @@ export class NewISOComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     this.initForms();
+    this.payment.get('industryField')
+    .valueChanges.subscribe(() => {
+        this.industryFields = this.listService.industryFieldCodes.get(this.payment.get('industryField').value.code);
+        this.payment.get('industryFieldCode').enable();
+        this.initIndustryCodeFilter();
+    });
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+  initIndustryCodeFilter() {
+    // set initial selection
+    this.payment.get('industryFieldCode').setValue(this.industryFields[0]);
+
+    // load the initial field list
+    this.filteredFieldCodes.next(this.industryFields.slice());
+
+    // listen for search field value changes
+    this.industryFieldCodesSearchCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterIndustryCodes();
+      });
+  }
+
+  protected filterIndustryCodes() {
+    if (!this.industryFields) {
+      return;
+    }
+    // get the search keyword
+    let search = this.industryFieldCodesSearchCtrl.value;
+    if (!search) {
+      this.filteredFieldCodes.next(this.industryFields.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the fields
+    this.filteredFieldCodes.next(
+      this.industryFields.filter(field => field.details.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   initForms() {
@@ -88,7 +147,7 @@ export class NewISOComponent implements OnInit {
     this.payment = this.formBuilder.group({
       taxId: [''],
       vatId: [''],
-      industryFieldCode: ['', Validators.required],
+      industryFieldCode: new FormControl({ value: "", disabled: true }, [Validators.required]),
       industryField: ['', Validators.required],
       iban: [''],
       bic: [''],

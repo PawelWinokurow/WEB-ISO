@@ -25,7 +25,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('legalForm').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -48,7 +49,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('salutation').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -71,7 +73,8 @@
                                             <input matInput formControlName="firstName" required>
                                             <mat-error *ngIf="contactInformation.get('firstName').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -81,7 +84,8 @@
                                             <input matInput formControlName="secondName" required>
                                             <mat-error *ngIf="contactInformation.get('secondName').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -104,7 +108,8 @@
                                             <mat-error
                                                 *ngIf="storageService.debitCreditType === 'debit' && contactInformation.get('birthDate').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('BRT', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('BRT', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -124,7 +129,8 @@
                                             <input matInput formControlName="street" required>
                                             <mat-error *ngIf="contactInformation.get('street').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -134,7 +140,8 @@
                                             <input matInput formControlName="houseNumber" required>
                                             <mat-error *ngIf="contactInformation.get('houseNumber').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -162,7 +169,8 @@
                                             <input matInput formControlName="zip" required>
                                             <mat-error *ngIf="contactInformation.get('zip').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -172,7 +180,8 @@
                                             <input matInput formControlName="city" required>
                                             <mat-error *ngIf="contactInformation.get('city').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -190,7 +199,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('country').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -276,24 +286,27 @@
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('industryField').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
+                                        <mat-form-field  color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('IFC')}}</mat-label>
-                                            <mat-select [attr.disabled]="!payment.get('industryField').value"
-                                                formControlName="industryFieldCode" required>
-                                                <mat-option
-                                                    *ngFor="let code of listService.industryFieldCodes.get(payment.get('industryField').value.code)"
-                                                    [value]="code">
-                                                    {{code.details}}
+                                            <mat-select [attr.disabled]="!payment.get('industryField').value" formControlName="industryFieldCode" #singleSelect required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="industryFieldCodesSearchCtrl">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let code of filteredFieldCodes | async" [value]="code">
+                                                    {{code.details}}                                                
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('industryFieldCode').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -331,7 +344,8 @@
                                             <mat-error
                                                 *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
 
@@ -344,7 +358,8 @@
                                             <mat-error
                                                 *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -388,7 +403,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('paymentTerm').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -398,8 +414,8 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REF')}}</mat-label>
-                                            <textarea matInput formControlName="notes" cdkTextareaAutosize cdkAutosizeMinRows="5"
-                                                cdkAutosizeMaxRows="5">
+                                            <textarea matInput formControlName="notes" cdkTextareaAutosize
+                                                cdkAutosizeMinRows="5" cdkAutosizeMaxRows="5">
                                             </textarea>
                                         </mat-form-field>
                                     </div>
@@ -416,7 +432,8 @@
                                 <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                                 <span>{{dictionaryService.get('BCK')}}</span>
                             </button>
-                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary" (click)="openSendSOAPDialog()" #StepperControlButton> 
+                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
+                                (click)="openSendSOAPDialog()" #StepperControlButton>
                                 <span>{{dictionaryService.get('SND')}}</span>
                                 <mat-icon style="margin-left: 5px;">email</mat-icon>
                             </button>
@@ -449,7 +466,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('legalForm').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -472,7 +490,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('salutation').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -482,7 +501,8 @@
                                             <input matInput formControlName="orgaPersons" required>
                                             <mat-error *ngIf="contactInformation.get('orgaPersons').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('COP', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('COP', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -512,7 +532,8 @@
                                             <input matInput formControlName="street" required>
                                             <mat-error *ngIf="contactInformation.get('street').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -522,7 +543,8 @@
                                             <input matInput formControlName="houseNumber" required>
                                             <mat-error *ngIf="contactInformation.get('houseNumber').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -550,7 +572,8 @@
                                             <input matInput formControlName="zip" required>
                                             <mat-error *ngIf="contactInformation.get('zip').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -560,7 +583,8 @@
                                             <input matInput formControlName="city" required>
                                             <mat-error *ngIf="contactInformation.get('city').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -578,7 +602,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="contactInformation.get('country').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -652,7 +677,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="applicant.get('salutation').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -675,7 +701,8 @@
                                             <input matInput formControlName="firstName" required>
                                             <mat-error *ngIf="applicant.get('firstName').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -685,7 +712,8 @@
                                             <input matInput formControlName="secondName" required>
                                             <mat-error *ngIf="applicant.get('secondName').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -926,7 +954,8 @@
                                 <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                                 <span>{{dictionaryService.get('BCK')}}</span>
                             </button>
-                            <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext #StepperControlButton>
+                            <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                                #StepperControlButton>
                                 <span>{{dictionaryService.get('NXT')}}</span>
                                 <mat-icon style="margin-left: 5px;">forward</mat-icon>
                             </button>
@@ -975,24 +1004,27 @@
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('industryField').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
+                                        <mat-form-field  color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('IFC')}}</mat-label>
-                                            <mat-select [attr.disabled]="!payment.get('industryField').value"
-                                                formControlName="industryFieldCode" required>
-                                                <mat-option
-                                                    *ngFor="let code of listService.industryFieldCodes.get(payment.get('industryField').value.code)"
-                                                    [value]="code">
-                                                    {{code.details}}
+                                            <mat-select [attr.disabled]="!payment.get('industryField').value" formControlName="industryFieldCode" #singleSelect required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="industryFieldCodesSearchCtrl">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let code of filteredFieldCodes | async" [value]="code">
+                                                    {{code.details}}                                                
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('industryFieldCode').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1028,7 +1060,8 @@
                                             <mat-error
                                                 *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1040,7 +1073,8 @@
                                             <mat-error
                                                 *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1081,7 +1115,8 @@
                                             </mat-select>
                                             <mat-error *ngIf="payment.get('paymentTerm').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
+                                                <span
+                                                    class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1109,7 +1144,8 @@
                                 <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                                 <span>{{dictionaryService.get('BCK')}}</span>
                             </button>
-                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary" (click)="openSendSOAPDialog()" #StepperControlButton> 
+                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
+                                (click)="openSendSOAPDialog()" #StepperControlButton>
                                 <span>{{dictionaryService.get('SND')}}</span>
                                 <mat-icon style="margin-left: 5px;">email</mat-icon>
                             </button>
