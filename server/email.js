@@ -4,8 +4,8 @@ var config = require('./config');
 var transporter = nodemailer.createTransport({
     host: config.email.host,
     port: config.email.port,
-    secure: true,
-    proxy: "http://proxy.intranet.ri-solution.com:8080",
+    //secure: true,
+    //proxy: "http://proxy.intranet.ri-solution.com:8080",
     auth: {
         user: config.email.auth.username,
         pass: config.email.auth.password
