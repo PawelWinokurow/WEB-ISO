@@ -6,6 +6,9 @@ var soap = require('./soap')
 var email = require('./email')
 var random = require('./random')
 var config = require('./config');
+require('dotenv').config()
+
+console.log(process.env.DB_HOST)
 
 //BayWa Proxy
 process.env.http_proxy = config.web.PROXY_URL
@@ -66,6 +69,6 @@ app.get('/', (req, res) => {
   .listen(8080);
 */
   app.listen(config.web.port, () => {
-    email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
+    //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
     console.log(`Example app listening at http://localhost:${config.web.port}`)
   })
