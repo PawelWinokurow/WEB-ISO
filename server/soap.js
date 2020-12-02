@@ -1,6 +1,8 @@
 var soap = require('soap');
 var path = require('path');
-require('dotenv').config()
+require('dotenv').config();
+
+console.log(process.env.WSDL_FILENAME)
 
 var url = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
 
@@ -14,6 +16,7 @@ exports.test = function () {
         }
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
         soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
+        //soapClient.SI_ISO_MGB_BAPI_PARTNER_CREATE_outbound(args, function (err, result, raw, headers) {
             if (err) {
                 console.log(err);
             }

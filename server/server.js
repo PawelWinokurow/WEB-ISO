@@ -6,9 +6,7 @@ var email = require('./email')
 var random = require('./random')
 require('dotenv').config()
 
-
-//BayWa Proxy
-//process.env.http_proxy = config.web.PROXY_URL
+console.log(process.env.EMAIL_HOST)
 
 db.connect();
 
@@ -22,9 +20,7 @@ schedule.scheduleJob('0 0 * * *', function () {
 });
 
 app.post("/request", function (req, res, next) {
-  //res.header('Access-Control-Allow-Origin', '*');
-  //res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  //res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
   let mask = req.body;
 
   if (mask.isDirect) {

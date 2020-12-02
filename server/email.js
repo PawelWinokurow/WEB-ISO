@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // use SSL
-    proxy: "http://name:psw@proxy.intranet.ri-solution.com:8080",
+    proxy: process.env.EMAIL_PROXY,
     auth: {
         user: 'paulweinmacher@googlemail.com',
         pass: ''
