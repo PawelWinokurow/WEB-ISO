@@ -1,17 +1,14 @@
 var express = require('express');
 var schedule = require('node-schedule');
-var morgan = require('morgan');
 var db = require('./database')
 var soap = require('./soap')
 var email = require('./email')
 var random = require('./random')
-var config = require('./config');
 require('dotenv').config()
 
-console.log(process.env.DB_HOST)
 
 //BayWa Proxy
-process.env.http_proxy = config.web.PROXY_URL
+//process.env.http_proxy = config.web.PROXY_URL
 
 db.connect();
 
@@ -68,7 +65,7 @@ app.get('/', (req, res) => {
   )
   .listen(8080);
 */
-  app.listen(config.web.port, () => {
+  app.listen(process.env.WEB_PORT || 3000, () => {
     //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
-    console.log(`Example app listening at http://localhost:${config.web.port}`)
+    console.log(`Example app listening at http://localhost:${process.env.WEB_PORT || 3000}`)
   })

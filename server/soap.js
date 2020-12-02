@@ -1,13 +1,10 @@
 var soap = require('soap');
 var path = require('path');
-var config = require('./config');
+require('dotenv').config()
 
-//var url = path.join(__dirname, "wsdl", "SI_ISO_MGB_BAPI_PARTNER_CREATE_outboundService_dev.wsdl");
-var url = path.join(__dirname, "wsdl", "SI_Ping_OutboundService.wsdl");
-
+var url = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
 
 exports.test = function () {
-
 
     var args = {};
     
@@ -15,7 +12,7 @@ exports.test = function () {
         if (err) {
             console.log("error", err);
         }
-        soapClient.setSecurity(new soap.BasicAuthSecurity(config.soap.auth.username, config.soap.auth.password));
+        soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
         soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
             if (err) {
                 console.log(err);

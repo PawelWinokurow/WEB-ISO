@@ -1,15 +1,15 @@
 var mysql = require("mysql");
-var config = require('./config');
+require('dotenv').config()
 
 const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, name VARCHAR (255) NOT NULL, datetime DATETIME NOT NULL);";
 
 var connection;
 exports.connect = function () {
   connection = mysql.createConnection({
-    host: config.mysql.host,
-    user: config.mysql.user,
-    password: config.mysql.password,
-    database: config.mysql.database,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
   });
 
   connection.connect(function (err) {
@@ -55,7 +55,7 @@ exports.close = function () {
 
 exports.removeOldMasks = function() {
   const sql = "DELETE FROM masks WHERE datetime < NOW() - INTERVAL ? DAY";
-  connection.query(sql, [config.mysql.maskStorageDuration], function (err, result) {
+  connection.query(sql, [process.env.DB_STORAGE_DURATION], function (err, result) {
     if (err) throw err;
     console.log("Number of records deleted: " + result.affectedRows);
   });

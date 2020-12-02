@@ -1,15 +1,15 @@
 var nodemailer = require('nodemailer');
-var config = require('./config');
+require('dotenv').config()
 
 
 var transporter = nodemailer.createTransport({
-    host: config.email.host,
-    port: config.email.port,
+    host: process.env.EMAIL_HOST, 
+    port: process.env.EMAIL_PORT,
     secure: false,
-    proxy: "http://winokurowp:baywsPswd@proxy.intranet.ri-solution.com:8080",
+    proxy: process.env.EMAIL_PROXY,
     auth: {
-        user: config.email.auth.username,
-        pass: config.email.auth.password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
     }
 });
 
@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // use SSL
-    proxy: "http://winokurowp:Trombo8919@proxy.intranet.ri-solution.com:8080",
+    proxy: "http://name:psw@proxy.intranet.ri-solution.com:8080",
     auth: {
         user: 'paulweinmacher@googlemail.com',
         pass: ''
