@@ -6,8 +6,6 @@ var email = require('./email')
 var random = require('./random')
 require('dotenv').config()
 
-console.log(process.env.EMAIL_HOST)
-
 db.connect();
 
 const app = express();
@@ -63,5 +61,6 @@ app.get('/', (req, res) => {
 */
   app.listen(process.env.WEB_PORT || 3000, () => {
     //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
+    //soap.test()
     console.log(`Example app listening at http://localhost:${process.env.WEB_PORT || 3000}`)
   })

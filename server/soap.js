@@ -2,8 +2,6 @@ var soap = require('soap');
 var path = require('path');
 require('dotenv').config();
 
-console.log(process.env.WSDL_FILENAME)
-
 var url = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
 
 exports.test = function () {
