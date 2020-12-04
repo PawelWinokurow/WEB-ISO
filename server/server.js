@@ -61,6 +61,6 @@ app.get('/', (req, res) => {
 */
   app.listen(process.env.WEB_PORT || 3000, () => {
     //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
-    //soap.test()
+    soap.test()
     console.log(`Example app listening at http://localhost:${process.env.WEB_PORT || 3000}`)
   })

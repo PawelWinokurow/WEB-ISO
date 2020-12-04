@@ -139,7 +139,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       phone: [''],
       fax: [''],
       mobile: [''],
-      email: [''],
+      email: ['', [Validators.email, Validators.required]],
       mailbox: [''],
       zipMailbox: [''],
     });
@@ -193,7 +193,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       birthDate: [''],
       phone: [''],
       mobile: [''],
-      email: [''],
+      email: ['', Validators.email],
 
       salutation1: ['', Validators.required],
       title1: [''],
@@ -202,7 +202,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       birthDate1: ['', Validators.required],
       phone1: [''],
       mobile1: [''],
-      email1: [''],
+      email1: ['', Validators.email],
 
       salutation2: ['', Validators.required],
       title2: [''],
@@ -211,7 +211,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       birthDate2: ['', Validators.required],
       phone2: [''],
       mobile2: [''],
-      email2: [''],
+      email2: ['', Validators.email],
     });
 
     this.payment.addControl('agb', new FormControl(false));

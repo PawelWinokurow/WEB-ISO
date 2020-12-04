@@ -23,10 +23,9 @@
                                                     {{form.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('legalForm').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
+                                                {{errorMessageService.getError('LEF', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -47,10 +46,9 @@
                                                     {{salutation.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('salutation').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -71,10 +69,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
-                                            <mat-error *ngIf="contactInformation.get('firstName').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('FNA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -82,10 +79,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
                                             <input matInput formControlName="secondName" required>
-                                            <mat-error *ngIf="contactInformation.get('secondName').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('secondName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('SNA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -105,11 +101,9 @@
                                                 [required]="storageService.debitCreditType === 'debit'">
                                             <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
                                             <mat-datepicker #birthDate></mat-datepicker>
-                                            <mat-error
-                                                *ngIf="storageService.debitCreditType === 'debit' && contactInformation.get('birthDate').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('birthDate').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('BRT', 'REQ')}}</span>
+                                                {{errorMessageService.getError('BRT', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -127,10 +121,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('STR')}}</mat-label>
                                             <input matInput formControlName="street" required>
-                                            <mat-error *ngIf="contactInformation.get('street').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('street').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
+                                                {{errorMessageService.getError('STR', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -138,10 +131,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('HNU')}}</mat-label>
                                             <input matInput formControlName="houseNumber" required>
-                                            <mat-error *ngIf="contactInformation.get('houseNumber').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('houseNumber').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
+                                                {{errorMessageService.getError('HNU', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -167,10 +159,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('ZIP')}}</mat-label>
                                             <input matInput formControlName="zip" required>
-                                            <mat-error *ngIf="contactInformation.get('zip').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('zip').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
+                                                {{errorMessageService.getError('ZIP', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -178,10 +169,9 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CIT')}}</mat-label>
                                             <input matInput formControlName="city" required>
-                                            <mat-error *ngIf="contactInformation.get('city').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('city').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
+                                                {{errorMessageService.getError('CIT', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -197,10 +187,9 @@
                                                     {{country.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('country').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
+                                                {{errorMessageService.getError('COU', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -231,6 +220,10 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
                                             <input matInput formControlName="email">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('email').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('EMA', errorType.key)}}
+                                            </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -284,29 +277,29 @@
                                                     {{field.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('industryField').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('industryField').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IFI', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field  color="accent" appearance="outline">
+                                        <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('IFC')}}</mat-label>
-                                            <mat-select [attr.disabled]="!payment.get('industryField').value" formControlName="industryFieldCode" #singleSelect required>
+                                            <mat-select [attr.disabled]="!payment.get('industryField').value"
+                                                formControlName="industryFieldCode" #singleSelect required>
                                                 <mat-option>
                                                     <ngx-mat-select-search [formControl]="industryFieldCodesSearchCtrl">
                                                     </ngx-mat-select-search>
                                                 </mat-option>
-                                                <mat-option *ngFor="let code of filteredFieldCodes | async" [value]="code">
-                                                    {{code.details}}                                                
+                                                <mat-option *ngFor="let code of filteredFieldCodes | async"
+                                                    [value]="code">
+                                                    {{code.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('industryFieldCode').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('industryFieldCode').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IFC', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -341,11 +334,9 @@
                                             <mat-label>{{dictionaryService.get('IBA')}}</mat-label>
                                             <input matInput formControlName="iban"
                                                 [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
+                                            <mat-error *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IBA', 'required')}}
                                             </mat-error>
                                         </mat-form-field>
 
@@ -355,11 +346,9 @@
                                             <mat-label>{{dictionaryService.get('BIC')}}</mat-label>
                                             <input matInput formControlName="bic"
                                                 [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
+                                            <mat-error *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
+                                                {{errorMessageService.getError('BIC', 'required')}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -401,10 +390,9 @@
                                                     {{term.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('paymentTerm').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('paymentTerm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('TPA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -464,10 +452,9 @@
                                                     {{form.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('legalForm').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('LEF', 'REQ')}}</span>
+                                                {{errorMessageService.getError('LEF', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -488,10 +475,9 @@
                                                     {{salutation.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('salutation').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -499,10 +485,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('COP')}}</mat-label>
                                             <input matInput formControlName="orgaPersons" required>
-                                            <mat-error *ngIf="contactInformation.get('orgaPersons').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('orgaPersons').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('COP', 'REQ')}}</span>
+                                                {{errorMessageService.getError('COP', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -530,10 +515,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('STR')}}</mat-label>
                                             <input matInput formControlName="street" required>
-                                            <mat-error *ngIf="contactInformation.get('street').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('street').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('STR', 'REQ')}}</span>
+                                                {{errorMessageService.getError('STR', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -541,10 +525,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('HNU')}}</mat-label>
                                             <input matInput formControlName="houseNumber" required>
-                                            <mat-error *ngIf="contactInformation.get('houseNumber').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('houseNumber').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('HNU', 'REQ')}}</span>
+                                                {{errorMessageService.getError('HNU', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -570,10 +553,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('ZIP')}}</mat-label>
                                             <input matInput formControlName="zip" required>
-                                            <mat-error *ngIf="contactInformation.get('zip').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('zip').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('ZIP', 'REQ')}}</span>
+                                                {{errorMessageService.getError('ZIP', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -581,10 +563,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CIT')}}</mat-label>
                                             <input matInput formControlName="city" required>
-                                            <mat-error *ngIf="contactInformation.get('city').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('city').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('CIT', 'REQ')}}</span>
+                                                {{errorMessageService.getError('CIT', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -600,10 +581,9 @@
                                                     {{country.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="contactInformation.get('country').invalid">
+                                            <mat-error *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('COU', 'REQ')}}</span>
+                                                {{errorMessageService.getError('COU', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -675,10 +655,9 @@
                                                     {{salutation.name}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="applicant.get('salutation').invalid">
+                                            <mat-error *ngFor="let errorType of applicant.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -699,10 +678,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
-                                            <mat-error *ngIf="applicant.get('firstName').invalid">
+                                            <mat-error *ngFor="let errorType of applicant.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('FNA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -710,10 +688,9 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
                                             <input matInput formControlName="secondName" required>
-                                            <mat-error *ngIf="applicant.get('secondName').invalid">
+                                            <mat-error *ngFor="let errorType of applicant.get('secondName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('SNA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -758,10 +735,9 @@
                                                             {{salutation.name}}
                                                         </mat-option>
                                                     </mat-select>
-                                                    <mat-error *ngIf="applicant.get('salutation1').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('salutation1').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('SAL', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -782,10 +758,9 @@
                                                 <mat-form-field color="accent" appearance="outline">
                                                     <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
                                                     <input matInput formControlName="firstName1" required>
-                                                    <mat-error *ngIf="applicant.get('firstName1').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('firstName1').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('FNA', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -793,10 +768,9 @@
                                                 <mat-form-field color="accent" appearance="outline">
                                                     <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
                                                     <input matInput formControlName="secondName1" required>
-                                                    <mat-error *ngIf="applicant.get('secondName1').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('secondName1').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('SNA', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -812,10 +786,9 @@
                                                     <mat-datepicker-toggle matSuffix [for]="birthDate1">
                                                     </mat-datepicker-toggle>
                                                     <mat-datepicker #birthDate1></mat-datepicker>
-                                                    <mat-error *ngIf="applicant.get('birthDate1').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('birthDate1').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('BRT', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('BRT', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -859,10 +832,9 @@
                                                             {{salutation.name}}
                                                         </mat-option>
                                                     </mat-select>
-                                                    <mat-error *ngIf="applicant.get('salutation2').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('salutation2').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('SAL', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('SAL', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -883,10 +855,9 @@
                                                 <mat-form-field color="accent" appearance="outline">
                                                     <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
                                                     <input matInput formControlName="firstName2" required>
-                                                    <mat-error *ngIf="applicant.get('firstName2').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('firstName2').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('FNA', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('FNA', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -894,10 +865,9 @@
                                                 <mat-form-field color="accent" appearance="outline">
                                                     <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
                                                     <input matInput formControlName="secondName2" required>
-                                                    <mat-error *ngIf="applicant.get('secondName2').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('secondName2').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('SNA', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('SNA', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -913,10 +883,9 @@
                                                     <mat-datepicker-toggle matSuffix [for]="birthDate2">
                                                     </mat-datepicker-toggle>
                                                     <mat-datepicker #birthDate2></mat-datepicker>
-                                                    <mat-error *ngIf="applicant.get('birthDate2').invalid">
+                                                    <mat-error *ngFor="let errorType of applicant.get('birthDate2').errors | keyvalue;">
                                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        <span
-                                                            class="validator">{{errorMessageService.getError('BRT', 'REQ')}}</span>
+                                                        {{errorMessageService.getError('BRT', errorType.key)}}
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -1002,29 +971,29 @@
                                                     {{field.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('industryField').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('industryField').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IFI', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IFI', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field  color="accent" appearance="outline">
+                                        <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('IFC')}}</mat-label>
-                                            <mat-select [attr.disabled]="!payment.get('industryField').value" formControlName="industryFieldCode" #singleSelect required>
+                                            <mat-select [attr.disabled]="!payment.get('industryField').value"
+                                                formControlName="industryFieldCode" #singleSelect required>
                                                 <mat-option>
                                                     <ngx-mat-select-search [formControl]="industryFieldCodesSearchCtrl">
                                                     </ngx-mat-select-search>
                                                 </mat-option>
-                                                <mat-option *ngFor="let code of filteredFieldCodes | async" [value]="code">
-                                                    {{code.details}}                                                
+                                                <mat-option *ngFor="let code of filteredFieldCodes | async"
+                                                    [value]="code">
+                                                    {{code.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('industryFieldCode').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('industryFieldCode').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IFC', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IFC', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1057,11 +1026,9 @@
                                             <mat-label>{{dictionaryService.get('IBA')}}</mat-label>
                                             <input matInput formControlName="iban"
                                                 [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
+                                            <mat-error *ngIf="payment.get('sepa').value === true && payment.get('iban').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('IBA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('IBA', 'required')}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1070,11 +1037,9 @@
                                             <mat-label>{{dictionaryService.get('BIC')}}</mat-label>
                                             <input matInput formControlName="bic"
                                                 [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
+                                            <mat-error *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('BIC', 'REQ')}}</span>
+                                                {{errorMessageService.getError('BIC', 'required')}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -1113,10 +1078,9 @@
                                                     {{term.details}}
                                                 </mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="payment.get('paymentTerm').invalid">
+                                            <mat-error *ngFor="let errorType of payment.get('paymentTerm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                <span
-                                                    class="validator">{{errorMessageService.getError('TPA', 'REQ')}}</span>
+                                                {{errorMessageService.getError('TPA', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>

@@ -27,9 +27,9 @@
                             {{field.details}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="companyCode.invalid">
+                    <mat-error *ngFor="let errorType of companyCode.errors | keyvalue;">
                         <mat-icon style="margin-right: 5px;">error</mat-icon>
-                        <span class="validator">{{errorMessageService.getError('CCO', 'REQ')}}</span>
+                        {{errorMessageService.getError('CCO', errorType.key)}}
                     </mat-error>
                 </mat-form-field>
             </div>
