@@ -1,0 +1,1040 @@
+{
+   "Header": null,
+   "Body": {
+      "_-ISO_-MGB_BAPI_PARTNER_CREATE": {
+         "IS_ADDRESS": {
+            "STANDARDADDRESS": "?",
+            "C_O_NAME": "?",
+            "CITY": "?",
+            "DISTRICT": "?",
+            "REGIOGROUP": "?",
+            "POSTL_COD1": "?",
+            "POSTL_COD2": "?",
+            "POSTL_COD3": "?",
+            "PCODE1_EXT": "?",
+            "PCODE2_EXT": "?",
+            "PCODE3_EXT": "?",
+            "PO_BOX": "?",
+            "PO_W_O_NO": "?",
+            "PO_BOX_CIT": "?",
+            "PO_BOX_REG": "?",
+            "POBOX_CTRY": "?",
+            "PO_CTRYISO": "?",
+            "STREET": "?",
+            "STR_ABBR": "?",
+            "HOUSE_NO": "?",
+            "HOUSE_NO2": "?",
+            "HOUSE_NO3": "?",
+            "STR_SUPPL1": "?",
+            "STR_SUPPL2": "?",
+            "STR_SUPPL3": "?",
+            "LOCATION": "?",
+            "BUILDING": "?",
+            "FLOOR": "?",
+            "ROOM_NO": "?",
+            "COUNTRY": "?",
+            "COUNTRYISO": "?",
+            "REGION": "?",
+            "TIME_ZONE": "?",
+            "TAXJURCODE": "?",
+            "HOME_CITY": "?",
+            "TRANSPZONE": "?",
+            "LANGU": "?",
+            "LANGUISO": "?",
+            "COMM_TYPE": "?",
+            "EXTADDRESSNUMBER": "?",
+            "DONT_USE_P": "?",
+            "DONT_USE_S": "?",
+            "MOVE_DATE": "?",
+            "MOVE_ADDRESS": "?",
+            "VALIDFROMDATE": "?",
+            "VALIDTODATE": "?",
+            "MOVE_ADDR_GUID": "?",
+            "CITY_NO": "?",
+            "DISTRCT_NO": "?",
+            "CHCKSTATUS": "?",
+            "PBOXCIT_NO": "?",
+            "STREET_NO": "?",
+            "HOMECITYNO": "?",
+            "PO_BOX_LOBBY": "?",
+            "DELI_SERV_TYPE": "?",
+            "DELI_SERV_NUMBER": "?",
+            "COUNTY": "?",
+            "COUNTY_NO": "?",
+            "TOWNSHIP": "?",
+            "TOWNSHIP_NO": "?"
+         },
+         "IS_CENTRALDATA": {
+            "SEARCHTERM1": "?",
+            "SEARCHTERM2": "?",
+            "PARTNERTYPE": "?",
+            "AUTHORIZATIONGROUP": "?",
+            "PARTNERLANGUAGE": "?",
+            "PARTNERLANGUAGEISO": "?",
+            "DATAORIGINTYPE": "?",
+            "CENTRALARCHIVINGFLAG": "?",
+            "CENTRALBLOCK": "?",
+            "TITLE_KEY": "?",
+            "CONTACTALLOWANCE": "?",
+            "PARTNEREXTERNAL": "?",
+            "TITLELETTER": "?",
+            "NOTRELEASED": "?",
+            "COMM_TYPE": "?",
+            "PRINT_MODE": "?"
+         },
+         "IS_CENTRALDATAGROUP": {
+            "NAMEGROUP1": "?",
+            "NAMEGROUP2": "?",
+            "GROUPTYPE": "?"
+         },
+         "IS_CENTRALDATAORGANIZATION": {
+            "NAME1": "?",
+            "NAME2": "?",
+            "NAME3": "?",
+            "NAME4": "?",
+            "LEGALFORM": "?",
+            "INDUSTRYSECTOR": "?",
+            "FOUNDATIONDATE": "?",
+            "LIQUIDATIONDATE": "?",
+            "LOC_NO_1": "?",
+            "LOC_NO_2": "?",
+            "CHK_DIGIT": "?",
+            "LEGALORG": "?"
+         },
+         "IS_CENTRALDATAPERSON": {
+            "FIRSTNAME": "?",
+            "LASTNAME": "?",
+            "BIRTHNAME": "?",
+            "MIDDLENAME": "?",
+            "SECONDNAME": "?",
+            "TITLE_ACA1": "?",
+            "TITLE_ACA2": "?",
+            "TITLE_SPPL": "?",
+            "PREFIX1": "?",
+            "PREFIX2": "?",
+            "NICKNAME": "?",
+            "INITIALS": "?",
+            "NAMEFORMAT": "?",
+            "NAMCOUNTRY": "?",
+            "NAMCOUNTRYISO": "?",
+            "SEX": "?",
+            "BIRTHPLACE": "?",
+            "BIRTHDATE": "?",
+            "DEATHDATE": "?",
+            "MARITALSTATUS": "?",
+            "CORRESPONDLANGUAGE": "?",
+            "CORRESPONDLANGUAGEISO": "?",
+            "FULLNAME": "?",
+            "EMPLOYER": "?",
+            "OCCUPATION": "?",
+            "NATIONALITY": "?",
+            "NATIONALITYISO": "?",
+            "COUNTRYORIGIN": "?",
+            "BIRTHDT_STATUS": "?"
+         },
+         "IS_COMMUNICATION": {
+            "ADTEL": [
+               {
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "STD_NO": "?",
+                  "TELEPHONE": "?",
+                  "EXTENSION": "?",
+                  "TEL_NO": "?",
+                  "CALLER_NO": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADFAX": [
+               {
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "STD_NO": "?",
+                  "FAX": "?",
+                  "EXTENSION": "?",
+                  "FAX_NO": "?",
+                  "SENDER_NO": "?",
+                  "FAX_GROUP": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADTTX": [
+               {
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "STD_NO": "?",
+                  "TELETEX": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADTLX": [
+               {
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "STD_NO": "?",
+                  "TELEX_NO": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADSMTP": [
+               {
+                  "STD_NO": "?",
+                  "E_MAIL": "?",
+                  "EMAIL_SRCH": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "ENCODE": "?",
+                  "TNEF": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADRML": [
+               {
+                  "STD_NO": "?",
+                  "SYMB_DEST": "?",
+                  "REC_TYPE": "?",
+                  "R_MAIL_CLT": "?",
+                  "R_MAIL": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADX400": [
+               {
+                  "STD_NO": "?",
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "ADM_DOM": "?",
+                  "PRIV_DOM": "?",
+                  "ORGANIZATN": "?",
+                  "ORG_UNIT_1": "?",
+                  "ORG_UNIT_2": "?",
+                  "ORG_UNIT_3": "?",
+                  "ORG_UNIT_4": "?",
+                  "LASTNAME": "?",
+                  "FIRSTNAME": "?",
+                  "INITIALS": "?",
+                  "GENERATION": "?",
+                  "X_121_ADDR": "?",
+                  "TERM_ID": "?",
+                  "TERM_TYPE": "?",
+                  "UANID": "?",
+                  "DDA_TYPE1": "?",
+                  "DDA_VALUE1": "?",
+                  "DDA_TYPE2": "?",
+                  "DDA_VALUE2": "?",
+                  "DDA_TYPE3": "?",
+                  "DDA_VALUE3": "?",
+                  "DDA_TYPE4": "?",
+                  "DDA_VALUE4": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "TXT_ENCODE": "?",
+                  "TNEF": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADRFC": [
+               {
+                  "STD_NO": "?",
+                  "LOG_DEST": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADPRT": [
+               {
+                  "STD_NO": "?",
+                  "PRINT_DEST": "?",
+                  "STD_RECIP": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADSSF": [
+               {
+                  "STD_NO": "?",
+                  "DUMMY": "?",
+                  "STD_RECIP": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "RFCDEST": "?",
+                  "SSFIDSHORT": "?",
+                  "SSF_NS": "?",
+                  "SSF_PROF": "?",
+                  "SSFIDPART1": "?",
+                  "SSFIDPART2": "?",
+                  "SSFIDPART3": "?",
+                  "SSFIDPART4": "?",
+                  "SSFIDPART5": "?",
+                  "SSFIDPART6": "?",
+                  "SSFIDPART7": "?",
+                  "SSFIDPART8": "?",
+                  "SSFIDPART9": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADURI": [
+               {
+                  "STD_NO": "?",
+                  "URI_TYPE": "?",
+                  "URI": "?",
+                  "STD_RECIP": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "URI_PART1": "?",
+                  "URI_PART2": "?",
+                  "URI_PART3": "?",
+                  "URI_PART4": "?",
+                  "URI_PART5": "?",
+                  "URI_PART6": "?",
+                  "URI_PART7": "?",
+                  "URI_PART8": "?",
+                  "URI_PART9": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "ADPAG": [
+               {
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "STD_NO": "?",
+                  "PAGER_TYPE": "?",
+                  "PAGER": "?",
+                  "PAGER_NO": "?",
+                  "CALLER_NO": "?",
+                  "STD_RECIP": "?",
+                  "R_3_USER": "?",
+                  "HOME_FLAG": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?",
+                  "FLG_NOUSE": "?",
+                  "VALID_FROM": "?",
+                  "VALID_TO": "?"
+               }
+            ],
+            "AD_REM": [
+               {
+                  "ADDR_VERS": "?",
+                  "LANGU": "?",
+                  "LANGU_ISO": "?",
+                  "ADR_NOTES": "?",
+                  "ERRORFLAG": "?"
+               }
+            ],
+            "COMREM": [
+               {
+                  "COMM_TYPE": "?",
+                  "LANGU": "?",
+                  "LANGU_ISO": "?",
+                  "COMM_NOTES": "?",
+                  "CONSNUMBER": "?",
+                  "ERRORFLAG": "?"
+               }
+            ]
+         },
+         "IT_ADDRESS": [
+            {
+               "ADDRNUMBER": "?",
+               "ADDRESS": {
+                  "STANDARDADDRESS": "?",
+                  "C_O_NAME": "?",
+                  "CITY": "?",
+                  "DISTRICT": "?",
+                  "REGIOGROUP": "?",
+                  "POSTL_COD1": "?",
+                  "POSTL_COD2": "?",
+                  "POSTL_COD3": "?",
+                  "PCODE1_EXT": "?",
+                  "PCODE2_EXT": "?",
+                  "PCODE3_EXT": "?",
+                  "PO_BOX": "?",
+                  "PO_W_O_NO": "?",
+                  "PO_BOX_CIT": "?",
+                  "PO_BOX_REG": "?",
+                  "POBOX_CTRY": "?",
+                  "PO_CTRYISO": "?",
+                  "STREET": "?",
+                  "STR_ABBR": "?",
+                  "HOUSE_NO": "?",
+                  "HOUSE_NO2": "?",
+                  "HOUSE_NO3": "?",
+                  "STR_SUPPL1": "?",
+                  "STR_SUPPL2": "?",
+                  "STR_SUPPL3": "?",
+                  "LOCATION": "?",
+                  "BUILDING": "?",
+                  "FLOOR": "?",
+                  "ROOM_NO": "?",
+                  "COUNTRY": "?",
+                  "COUNTRYISO": "?",
+                  "REGION": "?",
+                  "TIME_ZONE": "?",
+                  "TAXJURCODE": "?",
+                  "HOME_CITY": "?",
+                  "TRANSPZONE": "?",
+                  "LANGU": "?",
+                  "LANGUISO": "?",
+                  "COMM_TYPE": "?",
+                  "EXTADDRESSNUMBER": "?",
+                  "DONT_USE_P": "?",
+                  "DONT_USE_S": "?",
+                  "MOVE_DATE": "?",
+                  "MOVE_ADDRESS": "?",
+                  "VALIDFROMDATE": "?",
+                  "VALIDTODATE": "?",
+                  "MOVE_ADDR_GUID": "?",
+                  "CITY_NO": "?",
+                  "DISTRCT_NO": "?",
+                  "CHCKSTATUS": "?",
+                  "PBOXCIT_NO": "?",
+                  "STREET_NO": "?",
+                  "HOMECITYNO": "?",
+                  "PO_BOX_LOBBY": "?",
+                  "DELI_SERV_TYPE": "?",
+                  "DELI_SERV_NUMBER": "?",
+                  "COUNTY": "?",
+                  "COUNTY_NO": "?",
+                  "TOWNSHIP": "?",
+                  "TOWNSHIP_NO": "?"
+               },
+               "ADTEL": [
+                  {
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "STD_NO": "?",
+                     "TELEPHONE": "?",
+                     "EXTENSION": "?",
+                     "TEL_NO": "?",
+                     "CALLER_NO": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADFAX": [
+                  {
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "STD_NO": "?",
+                     "FAX": "?",
+                     "EXTENSION": "?",
+                     "FAX_NO": "?",
+                     "SENDER_NO": "?",
+                     "FAX_GROUP": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADTTX": [
+                  {
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "STD_NO": "?",
+                     "TELETEX": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADTLX": [
+                  {
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "STD_NO": "?",
+                     "TELEX_NO": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADSMTP": [
+                  {
+                     "STD_NO": "?",
+                     "E_MAIL": "?",
+                     "EMAIL_SRCH": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "ENCODE": "?",
+                     "TNEF": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADRML": [
+                  {
+                     "STD_NO": "?",
+                     "SYMB_DEST": "?",
+                     "REC_TYPE": "?",
+                     "R_MAIL_CLT": "?",
+                     "R_MAIL": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADX400": [
+                  {
+                     "STD_NO": "?",
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "ADM_DOM": "?",
+                     "PRIV_DOM": "?",
+                     "ORGANIZATN": "?",
+                     "ORG_UNIT_1": "?",
+                     "ORG_UNIT_2": "?",
+                     "ORG_UNIT_3": "?",
+                     "ORG_UNIT_4": "?",
+                     "LASTNAME": "?",
+                     "FIRSTNAME": "?",
+                     "INITIALS": "?",
+                     "GENERATION": "?",
+                     "X_121_ADDR": "?",
+                     "TERM_ID": "?",
+                     "TERM_TYPE": "?",
+                     "UANID": "?",
+                     "DDA_TYPE1": "?",
+                     "DDA_VALUE1": "?",
+                     "DDA_TYPE2": "?",
+                     "DDA_VALUE2": "?",
+                     "DDA_TYPE3": "?",
+                     "DDA_VALUE3": "?",
+                     "DDA_TYPE4": "?",
+                     "DDA_VALUE4": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "TXT_ENCODE": "?",
+                     "TNEF": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADRFC": [
+                  {
+                     "STD_NO": "?",
+                     "LOG_DEST": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADPRT": [
+                  {
+                     "STD_NO": "?",
+                     "PRINT_DEST": "?",
+                     "STD_RECIP": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADSSF": [
+                  {
+                     "STD_NO": "?",
+                     "DUMMY": "?",
+                     "STD_RECIP": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "RFCDEST": "?",
+                     "SSFIDSHORT": "?",
+                     "SSF_NS": "?",
+                     "SSF_PROF": "?",
+                     "SSFIDPART1": "?",
+                     "SSFIDPART2": "?",
+                     "SSFIDPART3": "?",
+                     "SSFIDPART4": "?",
+                     "SSFIDPART5": "?",
+                     "SSFIDPART6": "?",
+                     "SSFIDPART7": "?",
+                     "SSFIDPART8": "?",
+                     "SSFIDPART9": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADURI": [
+                  {
+                     "STD_NO": "?",
+                     "URI_TYPE": "?",
+                     "URI": "?",
+                     "STD_RECIP": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "URI_PART1": "?",
+                     "URI_PART2": "?",
+                     "URI_PART3": "?",
+                     "URI_PART4": "?",
+                     "URI_PART5": "?",
+                     "URI_PART6": "?",
+                     "URI_PART7": "?",
+                     "URI_PART8": "?",
+                     "URI_PART9": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "ADPAG": [
+                  {
+                     "COUNTRY": "?",
+                     "COUNTRYISO": "?",
+                     "STD_NO": "?",
+                     "PAGER_TYPE": "?",
+                     "PAGER": "?",
+                     "PAGER_NO": "?",
+                     "CALLER_NO": "?",
+                     "STD_RECIP": "?",
+                     "R_3_USER": "?",
+                     "HOME_FLAG": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?",
+                     "FLG_NOUSE": "?",
+                     "VALID_FROM": "?",
+                     "VALID_TO": "?"
+                  }
+               ],
+               "AD_REM": [
+                  {
+                     "ADDR_VERS": "?",
+                     "LANGU": "?",
+                     "LANGU_ISO": "?",
+                     "ADR_NOTES": "?",
+                     "ERRORFLAG": "?"
+                  }
+               ],
+               "COMREM": [
+                  {
+                     "COMM_TYPE": "?",
+                     "LANGU": "?",
+                     "LANGU_ISO": "?",
+                     "COMM_NOTES": "?",
+                     "CONSNUMBER": "?",
+                     "ERRORFLAG": "?"
+                  }
+               ],
+               "ADDRESSUSAGE": {
+                  "ADDRESSTYPE": "?",
+                  "STANDARDADDRESSUSAGE": "?",
+                  "USAGEVALIDFROM": "?",
+                  "USAGEVALIDTO": "?",
+                  "VALIDTOREADFORCHANGE": "?"
+               },
+               "ADDRESS_VALIDITY": {
+                  "ADDRESSVALIDFROM": "?",
+                  "ADDRESSVALIDTO": "?",
+                  "ADDRESSMOVEDATE": "?",
+                  "ADDRESSMOVEADDR": "?"
+               }
+            }
+         ],
+         "IT_ADFAX": [
+            {
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "STD_NO": "?",
+               "FAX": "?",
+               "EXTENSION": "?",
+               "FAX_NO": "?",
+               "SENDER_NO": "?",
+               "FAX_GROUP": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADPAG": [
+            {
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "STD_NO": "?",
+               "PAGER_TYPE": "?",
+               "PAGER": "?",
+               "PAGER_NO": "?",
+               "CALLER_NO": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADPRT": [
+            {
+               "STD_NO": "?",
+               "PRINT_DEST": "?",
+               "STD_RECIP": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADREM": [
+            {
+               "ADDR_VERS": "?",
+               "LANGU": "?",
+               "LANGU_ISO": "?",
+               "ADR_NOTES": "?",
+               "ERRORFLAG": "?"
+            }
+         ],
+         "IT_ADRFC": [
+            {
+               "STD_NO": "?",
+               "LOG_DEST": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADRML": [
+            {
+               "STD_NO": "?",
+               "SYMB_DEST": "?",
+               "REC_TYPE": "?",
+               "R_MAIL_CLT": "?",
+               "R_MAIL": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADSMTP": [
+            {
+               "STD_NO": "?",
+               "E_MAIL": "?",
+               "EMAIL_SRCH": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "ENCODE": "?",
+               "TNEF": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADSSF": [
+            {
+               "STD_NO": "?",
+               "DUMMY": "?",
+               "STD_RECIP": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "RFCDEST": "?",
+               "SSFIDSHORT": "?",
+               "SSF_NS": "?",
+               "SSF_PROF": "?",
+               "SSFIDPART1": "?",
+               "SSFIDPART2": "?",
+               "SSFIDPART3": "?",
+               "SSFIDPART4": "?",
+               "SSFIDPART5": "?",
+               "SSFIDPART6": "?",
+               "SSFIDPART7": "?",
+               "SSFIDPART8": "?",
+               "SSFIDPART9": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADTEL": [
+            {
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "STD_NO": "?",
+               "TELEPHONE": "?",
+               "EXTENSION": "?",
+               "TEL_NO": "?",
+               "CALLER_NO": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADTLX": [
+            {
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "STD_NO": "?",
+               "TELEX_NO": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADTTX": [
+            {
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "STD_NO": "?",
+               "TELETEX": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADURI": [
+            {
+               "STD_NO": "?",
+               "URI_TYPE": "?",
+               "URI": "?",
+               "STD_RECIP": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "URI_PART1": "?",
+               "URI_PART2": "?",
+               "URI_PART3": "?",
+               "URI_PART4": "?",
+               "URI_PART5": "?",
+               "URI_PART6": "?",
+               "URI_PART7": "?",
+               "URI_PART8": "?",
+               "URI_PART9": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_ADX400": [
+            {
+               "STD_NO": "?",
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "ADM_DOM": "?",
+               "PRIV_DOM": "?",
+               "ORGANIZATN": "?",
+               "ORG_UNIT_1": "?",
+               "ORG_UNIT_2": "?",
+               "ORG_UNIT_3": "?",
+               "ORG_UNIT_4": "?",
+               "LASTNAME": "?",
+               "FIRSTNAME": "?",
+               "INITIALS": "?",
+               "GENERATION": "?",
+               "X_121_ADDR": "?",
+               "TERM_ID": "?",
+               "TERM_TYPE": "?",
+               "UANID": "?",
+               "DDA_TYPE1": "?",
+               "DDA_VALUE1": "?",
+               "DDA_TYPE2": "?",
+               "DDA_VALUE2": "?",
+               "DDA_TYPE3": "?",
+               "DDA_VALUE3": "?",
+               "DDA_TYPE4": "?",
+               "DDA_VALUE4": "?",
+               "STD_RECIP": "?",
+               "R_3_USER": "?",
+               "TXT_ENCODE": "?",
+               "TNEF": "?",
+               "HOME_FLAG": "?",
+               "CONSNUMBER": "?",
+               "ERRORFLAG": "?",
+               "FLG_NOUSE": "?",
+               "VALID_FROM": "?",
+               "VALID_TO": "?"
+            }
+         ],
+         "IT_BDS": [
+            {
+               "FILENAME": "?",
+               "CONTENT": [
+                  [
+                     "cid:359838844765"
+                  ]
+               ],
+               "FILELENGTH": "?"
+            }
+         ],
+         "IT_IDENTIFICATION": [
+            {
+               "IDENTIFICATIONTYPE": "?",
+               "IDENTIFICATIONNUMBER": "?",
+               "IDINSTITUTE": "?",
+               "IDENTRYDATE": "?",
+               "IDVALIDFROMDATE": "?",
+               "IDVALIDTODATE": "?",
+               "COUNTRY": "?",
+               "COUNTRYISO": "?",
+               "REGION": "?"
+            }
+         ],
+         "IT_INDUSTRYSECTOR": [
+            {
+               "INDUSTRYSECTORKEYSYSTEM": "?",
+               "INDUSTRYSECTOR": "?",
+               "DEFAULTINDUSTRYSECTOR": "?"
+            }
+         ],
+         "IT_NOTE": [
+            "?"
+         ],
+         "IT_TAXNUM": [
+            {
+               "TAXTYPE": "?",
+               "TAXNUMBER": "?",
+               "TAXNUMXL": "?"
+            }
+         ],
+         "IV_BUSINESSPARTNER": "?",
+         "IV_LANGU": "?",
+         "IV_LOGSYS": "?",
+         "IV_PARTNERCATEGORY": "?",
+         "IV_PARTNERGROUP": "?",
+         "IV_PRO_ID": "?",
+         "IV_RESULT_ADDRESS_CHECK": "?",
+         "IV_RESULT_DUPLICATE_CHECK": "?",
+         "IV_SMTP": "?",
+         "IV_XCONTINUE": "?",
+         "IV_XDCHECK": "?",
+         "IV_XISDAT": "?",
+         "IV_XTEST": "?"
+      }
+   }
+}

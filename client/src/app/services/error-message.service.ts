@@ -11,13 +11,11 @@ export class ErrorMessageService {
 
   errorsDE = new Map([
     ['required', ' ist erforderlich'],
-    ['VAL', ' ist ungültig.'],
     ['email', ' ist ungültig.'],
   ])
 
   errorsEN = new Map([
     ['required', ' is required'],
-    ['VAL', ' is not valid'],
     ['email', ' is not valid'],
   ])
 
@@ -27,8 +25,6 @@ export class ErrorMessageService {
   ])
 
   getError(fieldName, errorType){
-    console.log(errorType)
-    
     let name = this.dictionaryService.get(fieldName);
     let text = this.errors.get(this.dictionaryService.currentLanguage).get(errorType);
     return name + text;

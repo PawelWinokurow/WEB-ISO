@@ -20,13 +20,12 @@ schedule.scheduleJob('0 0 * * *', function () {
 app.post("/request", function (req, res, next) {
 
   let mask = req.body;
-
   if (mask.isDirect) {
-    soap.sendMask(mask);
+    soap.sendMask(mask.sapMask);
   } else {
-    const hash = random.generateHash();
-    db.storeMask(hash, mask);
-    email.sendEmail(hash, mask.emailTo);
+    //const hash = random.generateHash();
+    //db.storeMask(hash, mask.sapMask);
+    //email.sendEmail(hash, mask.emailTo);
   }
   res.json({ok:true});
 });
@@ -61,6 +60,6 @@ app.get('/', (req, res) => {
 */
   app.listen(process.env.WEB_PORT || 3000, () => {
     //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
-    soap.test()
+    //soap.test()
     console.log(`Example app listening at http://localhost:${process.env.WEB_PORT || 3000}`)
   })

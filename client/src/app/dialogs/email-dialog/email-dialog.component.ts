@@ -11,7 +11,8 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 })
 export class EmailDialogComponent implements OnInit {
 
-  email: FormControl = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
+  //email: FormControl = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
+  email: FormControl = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(public dialogRef: MatDialogRef<EmailDialogComponent>, public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService) { }
 

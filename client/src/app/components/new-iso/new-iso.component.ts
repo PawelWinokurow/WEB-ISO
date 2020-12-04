@@ -16,6 +16,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { pairwise, take, takeUntil } from 'rxjs/operators';
+import { Mask } from 'src/app/interfaces/mask';
 
 
 @Component({
@@ -27,7 +28,6 @@ import { pairwise, take, takeUntil } from 'rxjs/operators';
 
 export class NewISOComponent implements OnInit, OnDestroy {
 
-  preselection: FormGroup;
   contactInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
@@ -231,8 +231,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
     sendMaskDialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.httpService.sendMask({ isDirect: true, name: "some name" }).subscribe(res => {
-          console.log(res);
+        const mask = this.constructMask(true)
+        this.httpService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
       } else {
@@ -242,9 +242,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
         });
         emailDialogRef.afterClosed().subscribe(result => {
           if (result) {
-            console.log(result)
-            this.httpService.sendMask({ isDirect: false, emailTo: result, name: "some name" }).subscribe(res => {
-              console.log(res);
+            const mask = this.constructMask(false)
+            this.httpService.sendMask(mask).subscribe(res => {
               this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
             });
           }
@@ -261,6 +260,44 @@ export class NewISOComponent implements OnInit, OnDestroy {
   unsetIbanBicRequired() {
     this.payment.get('iban').setValidators([]);
     this.payment.get('bic').setValidators([]);
+  }
+
+  formatDate(date) {
+    var month = '' + (date.getMonth() + 1)
+    var day = '' + date.getDate()
+    var year = date.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('');
+}
+
+  constructMask(isDirect: boolean) {
+    const mask: Mask = {
+      IV_PARTNERGROUP: "01",
+      IV_PARTNERCATEGORY: this.storageService.debitCreditType === "person" ? "1" : "2",
+      IS_CENTRALDATAPERSON: {
+        FIRSTNAME: this.contactInformation.get("firstName").value,
+        LASTNAME: this.contactInformation.get("secondName").value,
+        TITLE_ACA1: this.contactInformation.get("title").value.name,
+        BIRTHDATE: this.formatDate(new Date(this.contactInformation.get("birthDate").value)),
+      },
+      IS_ADDRESS: {
+        C_O_NAME: this.contactInformation.get("additionalName").value,
+        CITY: this.contactInformation.get("city").value,
+        POSTL_COD1: this.contactInformation.get("zip").value,
+        POSTL_COD2: this.contactInformation.get("zipMailbox").value,
+        PO_BOX: this.contactInformation.get("mailbox").value,
+        STREET: this.contactInformation.get("street").value,
+        HOUSE_NO: this.contactInformation.get("houseNumber").value,
+        COUNTRY: this.contactInformation.get("country").value.abbreviation,
+      }
+
+    };
+    return {isDirect: isDirect, sapMask: mask}
   }
 
 }

@@ -5,9 +5,9 @@
     <mat-form-field appearance="outline" color="accent">
       <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
       <input matInput [formControl]="email">
-      <mat-error *ngIf="email.invalid">
+      <mat-error *ngFor="let errorType of email.errors | keyvalue;">
         <mat-icon style="margin-right: 5px;">error</mat-icon>
-        <span class="validator">{{errorMessageService.getError('EMA', 'VAL')}}</span>
+        {{errorMessageService.getError('EMA', errorType.key)}}
     </mat-error>
     </mat-form-field>
   </div>
