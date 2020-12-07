@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSoapModule } from 'ngx-soap';
-import { SOAPService } from './services/soap.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +45,6 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(), 
   ],
   providers: [
-    SOAPService, 
     DictionaryService,
     HttpService, 
     ListService,

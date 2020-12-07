@@ -8,15 +8,13 @@ import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { HttpService } from 'src/app/services/http.service';
 import { ListService } from 'src/app/services/list.service';
-import { SOAPService } from 'src/app/services/soap.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ReplaySubject, Subject } from 'rxjs';
 import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { pairwise, take, takeUntil } from 'rxjs/operators';
-import { Mask } from 'src/app/interfaces/mask';
+import { SahredMask } from 'src/app/interfaces/mask';
 
 
 @Component({
@@ -46,7 +44,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   industryFields;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
-    private dialog: MatDialog, private httpService: HttpService, private soapService: SOAPService, public errorMessageService: ErrorMessageService, private router: Router) {
+    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private router: Router) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
@@ -139,7 +137,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       phone: [''],
       fax: [''],
       mobile: [''],
-      email: ['', [Validators.email, Validators.required]],
+      email: ['', [Validators.email]],
       mailbox: [''],
       zipMailbox: [''],
     });
@@ -240,10 +238,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
           disableClose: true,
           backdropClass: 'backdrop-background',
         });
-        emailDialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            const mask = this.constructMask(false)
-            this.httpService.sendMask(mask).subscribe(res => {
+        emailDialogRef.afterClosed().subscribe(emailTo => {
+          if (emailTo) {
+            var mask = this.constructMask(false)
+            this.httpService.sendMask({emailTo: emailTo, ...mask}).subscribe(res => {
               this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
             });
           }
@@ -272,11 +270,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
     if (day.length < 2) 
         day = '0' + day;
 
-    return [year, month, day].join('');
+    return [year, month, day].join('-');
 }
 
   constructMask(isDirect: boolean) {
-    const mask: Mask = {
+    const mask: SahredMask = {
       IV_PARTNERGROUP: "01",
       IV_PARTNERCATEGORY: this.storageService.debitCreditType === "person" ? "1" : "2",
       IS_CENTRALDATAPERSON: {
@@ -294,6 +292,9 @@ export class NewISOComponent implements OnInit, OnDestroy {
         STREET: this.contactInformation.get("street").value,
         HOUSE_NO: this.contactInformation.get("houseNumber").value,
         COUNTRY: this.contactInformation.get("country").value.abbreviation,
+      },
+      IS_CENTRALDATAORGANIZATION: {
+        LEGALFORM: this.contactInformation.get('legalForm').value,
       }
 
     };

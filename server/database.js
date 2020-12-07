@@ -1,7 +1,7 @@
 var mysql = require("mysql");
 require('dotenv').config()
 
-const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, name VARCHAR (255) NOT NULL, datetime DATETIME NOT NULL);";
+const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, mask TEXT  NOT NULL, datetime DATETIME NOT NULL);";
 
 var connection;
 exports.connect = function () {
@@ -17,25 +17,26 @@ exports.connect = function () {
     connection.query(TABLECREATION,
       function (err, results, fields) {
         if (err) throw err;
-        //console.log(results);
-        //console.log(fields)
+            console.log(results);
+            console.log(fields)
       });
     return connection;
   });
 }
 
 exports.storeMask = function (hash, mask) {
-  const sql = 'INSERT INTO masks (hash, name, datetime) VALUES (?, NOW())';
-  values = [hash, mask.name];
+  var stringJson = JSON.stringify(mask);
+  const sql = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW())';
+    values = [hash, stringJson];
   connection.query(sql, [values], function (err, result) {
     if (err) throw err;
-    console.log("Number of records inserted: " + result.affectedRows);
+      console.log("Number of records inserted: " + result.affectedRows);
   });
 }
 
 exports.checkConfirmation = function (hash) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM masks WHERE hash = ?';
+    const sql = 'SELECT mask FROM masks WHERE hash = ?';
     connection.query(sql, [hash],
       function (err, result, fields) {
         if (err) throw err;
@@ -44,7 +45,6 @@ exports.checkConfirmation = function (hash) {
         } else {
           reject(result);
         }
-
       });
   });
 }

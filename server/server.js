@@ -18,23 +18,21 @@ schedule.scheduleJob('0 0 * * *', function () {
 });
 
 app.post("/request", function (req, res, next) {
-
   let mask = req.body;
   if (mask.isDirect) {
     soap.sendMask(mask.sapMask);
   } else {
-    //const hash = random.generateHash();
-    //db.storeMask(hash, mask.sapMask);
-    //email.sendEmail(hash, mask.emailTo);
+    const hash = random.generateHash();
+    db.storeMask(hash, mask.sapMask);
+    email.sendEmail(hash, mask.emailTo);
   }
   res.json({ok:true});
 });
 
 app.get("/confirm", function (req, res, next) {
-  db.checkConfirmation(req.query.hash)
-    .then(mask => {
+    db.checkConfirmation(req.query.hash).then(result => {
+      var mask = JSON.parse(result.mask)
       soap.sendMask(mask);
-      soap.test()
       res.send('<p>Success! The mask was confirmed.</p>');
       next();
     })

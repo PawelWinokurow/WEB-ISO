@@ -1,4 +1,4 @@
-export interface Mask {
+export interface SahredMask {
     IV_PARTNERCATEGORY: string; //1: Person 2: Organization
     IV_PARTNERGROUP: string,    //01: Debitor/Kreditor
     IS_CENTRALDATAPERSON: {
@@ -16,13 +16,64 @@ export interface Mask {
         STREET: string;
         HOUSE_NO: string;
         COUNTRY: string;
-
-
-
-
-
+    },
+    IS_CENTRALDATAORGANIZATION: {
+        LEGALFORM: string;
     }
 
+    //interfaceNumber
+    //salutation
+    //phone
+    //fax
+    //mobile
+    //email
+    //mailbox
+    //zipMailbox
 
+    //taxId
+    //vatId
+    //industryFieldCode
+    //industryField
+    //iban
+    //bic
+    //bank
+    //paymentTerm
+    //notes
+    //sepa
+    //agb
+    //creditLimit
+    //orgaPersons
 
+    //salutation
+    //title
+    //firstName
+    //secondName
+    //birthDate
+    //phone
+    //mobile
+    //email
+
+    //salutation1
+    //title1
+    //firstName1
+    //secondName1
+    //birthDate1
+    //phone1
+    //mobile1
+    //email1
+
+    //salutation2
+    //title2
+    //firstName2
+    //secondName2
+    //birthDate2
+    //phone2
+    //mobile2
+    //email2
+
+    //companyCode
 }
+
+
+
+

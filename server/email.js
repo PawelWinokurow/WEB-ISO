@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 require('dotenv').config()
 
-
+/*
 var transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST, 
     port: process.env.EMAIL_PORT,
@@ -12,8 +12,10 @@ var transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASSWORD
     }
 });
+*/
 
-/*var transporter = nodemailer.createTransport({
+
+var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // use SSL
@@ -22,7 +24,7 @@ var transporter = nodemailer.createTransport({
         user: 'paulweinmacher@googlemail.com',
         pass: ''
     }
-});*/
+});
 
 exports.sendEmail = function (hash, emailTo) {
     var mailOptions = {
