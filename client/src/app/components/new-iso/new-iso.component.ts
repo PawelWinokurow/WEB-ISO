@@ -280,7 +280,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       IS_CENTRALDATAPERSON: {
         FIRSTNAME: this.contactInformation.get("firstName").value,
         LASTNAME: this.contactInformation.get("secondName").value,
-        TITLE_ACA1: this.contactInformation.get("title").value.name,
+        TITLE_ACA1: this.contactInformation.get("title").value.code,
         BIRTHDATE: this.formatDate(new Date(this.contactInformation.get("birthDate").value)),
       },
       IS_ADDRESS: {
@@ -291,10 +291,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
         PO_BOX: this.contactInformation.get("mailbox").value,
         STREET: this.contactInformation.get("street").value,
         HOUSE_NO: this.contactInformation.get("houseNumber").value,
-        COUNTRY: this.contactInformation.get("country").value.abbreviation,
+        COUNTRY: this.contactInformation.get("country").value.code,
       },
       IS_CENTRALDATAORGANIZATION: {
-        LEGALFORM: this.contactInformation.get('legalForm').value,
+        LEGALFORM: this.contactInformation.get('legalForm').value.code,
       }
 
     };

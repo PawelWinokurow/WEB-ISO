@@ -19,8 +19,8 @@
                                         <mat-form-field color="accent" color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('LEF')}}</mat-label>
                                             <mat-select formControlName="legalForm" required>
-                                                <mat-option *ngFor="let form of legalForms" [value]="form.name">
-                                                    {{form.name}}
+                                                <mat-option *ngFor="let form of legalForms" [value]="form">
+                                                    {{form.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
@@ -43,7 +43,7 @@
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation" required>
                                                 <mat-option *ngFor="let salutation of salutations" [value]="salutation">
-                                                    {{salutation.name}}
+                                                    {{salutation.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
@@ -57,7 +57,7 @@
                                             <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
                                             <mat-select formControlName="title">
                                                 <mat-option *ngFor="let title of titles" [value]="title">
-                                                    {{title.name}}
+                                                    {{title.details}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -184,7 +184,7 @@
                                             <mat-label>{{dictionaryService.get('COU')}}</mat-label>
                                             <mat-select formControlName="country" required>
                                                 <mat-option *ngFor="let country of countries" [value]="country">
-                                                    {{country.name}}
+                                                    {{country.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
@@ -448,8 +448,8 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('LEF')}}</mat-label>
                                             <mat-select formControlName="legalForm" required>
-                                                <mat-option *ngFor="let form of legalForms" [value]="form.name">
-                                                    {{form.name}}
+                                                <mat-option *ngFor="let form of legalForms" [value]="form">
+                                                    {{form.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
@@ -472,7 +472,7 @@
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation" required>
                                                 <mat-option *ngFor="let salutation of salutations" [value]="salutation">
-                                                    {{salutation.name}}
+                                                    {{salutation.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
@@ -578,7 +578,7 @@
                                             <mat-label>{{dictionaryService.get('COU')}}</mat-label>
                                             <mat-select formControlName="country" required>
                                                 <mat-option *ngFor="let country of countries" [value]="country">
-                                                    {{country.name}}
+                                                    {{country.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
@@ -652,7 +652,7 @@
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation" required>
                                                 <mat-option *ngFor="let salutation of salutations" [value]="salutation">
-                                                    {{salutation.name}}
+                                                    {{salutation.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error *ngFor="let errorType of applicant.get('salutation').errors | keyvalue;">
@@ -666,7 +666,7 @@
                                             <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
                                             <mat-select formControlName="title">
                                                 <mat-option *ngFor="let title of titles" [value]="title">
-                                                    {{title.name}}
+                                                    {{title.details}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -732,7 +732,7 @@
                                                     <mat-select formControlName="salutation1" required>
                                                         <mat-option *ngFor="let salutation of salutations"
                                                             [value]="salutation">
-                                                            {{salutation.name}}
+                                                            {{salutation.details}}
                                                         </mat-option>
                                                     </mat-select>
                                                     <mat-error *ngFor="let errorType of applicant.get('salutation1').errors | keyvalue;">
@@ -746,7 +746,7 @@
                                                     <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
                                                     <mat-select formControlName="title1">
                                                         <mat-option *ngFor="let title of titles" [value]="title">
-                                                            {{title.name}}
+                                                            {{title.details}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -829,7 +829,7 @@
                                                     <mat-select formControlName="salutation2" required>
                                                         <mat-option *ngFor="let salutation of salutations"
                                                             [value]="salutation">
-                                                            {{salutation.name}}
+                                                            {{salutation.details}}
                                                         </mat-option>
                                                     </mat-select>
                                                     <mat-error *ngFor="let errorType of applicant.get('salutation2').errors | keyvalue;">
@@ -843,7 +843,7 @@
                                                     <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
                                                     <mat-select formControlName="title2">
                                                         <mat-option *ngFor="let title of titles" [value]="title">
-                                                            {{title.name}}
+                                                            {{title.details}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>

@@ -19,7 +19,6 @@ exports.test = function () {
         console.log(args)
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
         var description = soapClient.describe()
-        console.log(description)
         //soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
         soapClient.SI_ISO_MGB_BAPI_PARTNER_CREATE_outbound(args, function (err, result, raw, headers) {
             if (err) {
