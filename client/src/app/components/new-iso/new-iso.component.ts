@@ -160,7 +160,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.contactInformation.addControl('title', new FormControl(''));
     this.contactInformation.addControl('firstName', new FormControl('', Validators.required));
     this.contactInformation.addControl('secondName', new FormControl('', Validators.required));
-    this.contactInformation.addControl('birthDate', new FormControl('', this.storageService.debitCreditType == 'debit' ? Validators.required : []));
+    this.contactInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debit' ? Validators.required : []));
   }
 
   initPersonDebit() {
@@ -278,23 +278,24 @@ export class NewISOComponent implements OnInit, OnDestroy {
       IV_PARTNERGROUP: "01",
       IV_PARTNERCATEGORY: this.storageService.debitCreditType === "person" ? "1" : "2",
       IS_CENTRALDATAPERSON: {
-        FIRSTNAME: this.contactInformation.get("firstName").value,
-        LASTNAME: this.contactInformation.get("secondName").value,
-        TITLE_ACA1: this.contactInformation.get("title").value.code,
-        BIRTHDATE: this.formatDate(new Date(this.contactInformation.get("birthDate").value)),
+        FIRSTNAME: this.contactInformation?.get("firstName")?.value ?? '',
+        LASTNAME: this.contactInformation?.get("secondName")?.value ?? '',
+        TITLE_ACA1: this.contactInformation?.get("title")?.value.code ?? '',
+        BIRTHDATE: this.contactInformation?.get("birthDate")?.value == null ? '' :
+        this.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
       },
       IS_ADDRESS: {
-        C_O_NAME: this.contactInformation.get("additionalName").value,
-        CITY: this.contactInformation.get("city").value,
-        POSTL_COD1: this.contactInformation.get("zip").value,
-        POSTL_COD2: this.contactInformation.get("zipMailbox").value,
-        PO_BOX: this.contactInformation.get("mailbox").value,
-        STREET: this.contactInformation.get("street").value,
-        HOUSE_NO: this.contactInformation.get("houseNumber").value,
-        COUNTRY: this.contactInformation.get("country").value.code,
+        C_O_NAME: this.contactInformation?.get("additionalName")?.value ?? '',
+        CITY: this.contactInformation?.get("city")?.value ?? '',
+        POSTL_COD1: this.contactInformation?.get("zip")?.value ?? '',
+        POSTL_COD2: this.contactInformation?.get("zipMailbox")?.value ?? '',
+        PO_BOX: this.contactInformation?.get("mailbox")?.value ?? '',
+        STREET: this.contactInformation?.get("street")?.value ?? '',
+        HOUSE_NO: this.contactInformation?.get("houseNumber")?.value ?? '',
+        COUNTRY: this.contactInformation?.get("country")?.value?.code ?? '',
       },
       IS_CENTRALDATAORGANIZATION: {
-        LEGALFORM: this.contactInformation.get('legalForm').value.code,
+        LEGALFORM: this.contactInformation?.get('legalForm')?.value?.code ?? '',
       }
 
     };
