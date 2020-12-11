@@ -6,7 +6,7 @@ var email = require('./email')
 var random = require('./random')
 require('dotenv').config()
 
-db.connect();
+//db.connect();
 
 const app = express();
 

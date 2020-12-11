@@ -20,6 +20,7 @@ export class DictionaryService {
     ['BCK', 'Zurück'],
     ['NXT', 'Weiter'],
     ['SND', 'Senden'],
+    ['ATB', 'Datei hinzufügen'],
 
     ['MGE', 'Maske generieren'],
 
@@ -38,6 +39,7 @@ export class DictionaryService {
     ['GEI', 'Allgemeine Informationen'],
     ['ADI', 'Adressinformationen'],
     ['PAI', 'Zahlungsinformationen'],
+    ['ATF', 'Datei anhängen'],
 
     ['NIF', 'Namensangaben'],
     ['ADR', 'Anschrift'],
@@ -98,23 +100,25 @@ export class DictionaryService {
     ['BCK', 'Back'],
     ['NXT', 'Next'],
     ['SND', 'Send'],
-
+    ['ATB', 'Add file'],
+    
     ['MGE', 'Generate mask'],
     ['PRS', 'Preselection'],
     ['CUT', 'Customer type'],
     ['PER', 'Person'],
     ['DEB', 'Debitor'],
     ['CRE', 'Creditor'],
-    ['CCO', 'Comapny code'],
-
+    ['CCO', 'Comapany code'],
+    
     ['LEF', 'Legal form'],
     
     ['SSN', 'Interface number'],
-
+    
     ['CND', 'Contact'],
     ['GEI', 'General information'],
     ['ADI', 'Address information'],
     ['PAI', 'Payment information'],
+    ['ATF', 'Attach file'],
 
     ['NIF', 'Name'],
     ['ADR', 'Address'],

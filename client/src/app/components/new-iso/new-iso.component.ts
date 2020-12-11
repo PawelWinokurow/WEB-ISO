@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -26,9 +26,12 @@ import { SahredMask } from 'src/app/interfaces/mask';
 
 export class NewISOComponent implements OnInit, OnDestroy {
 
+  @ViewChild('UploadFileInput') uploadFileInput: ElementRef;
+
   contactInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
+  upload: FormGroup;
 
   //Industry field free text search
   industryFieldCodesSearchCtrl: FormControl = new FormControl('');
@@ -43,6 +46,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
   paymentTerms;
   industryFields;
 
+  @ViewChild('fileInput') fileInput: ElementRef;
+
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
     private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private router: Router) {
     this.titles = this.listService.titles;
@@ -50,15 +55,13 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-
     this.initForms();
     this.payment.get('industryField')
-    .valueChanges.subscribe(() => {
+      .valueChanges.subscribe(() => {
         this.industryFields = this.listService.industryFieldCodes.get(this.payment.get('industryField').value.code);
         this.payment.get('industryFieldCode').enable();
         this.initIndustryCodeFilter();
-    });
+      });
   }
 
   ngOnDestroy() {
@@ -154,6 +157,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
       notes: [''],
       sepa: [false],
     });
+
+    this.upload = this.formBuilder.group({
+      files: [[]],
+    });
   }
 
   initPerson() {
@@ -241,7 +248,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
         emailDialogRef.afterClosed().subscribe(emailTo => {
           if (emailTo) {
             var mask = this.constructMask(false)
-            this.httpService.sendMask({emailTo: emailTo, ...mask}).subscribe(res => {
+            this.httpService.sendMask({ emailTo: emailTo, ...mask }).subscribe(res => {
               this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
             });
           }
@@ -265,13 +272,13 @@ export class NewISOComponent implements OnInit, OnDestroy {
     var day = '' + date.getDate()
     var year = date.getFullYear();
 
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
 
     return [year, month, day].join('-');
-}
+  }
 
   constructMask(isDirect: boolean) {
     const mask: SahredMask = {
@@ -282,7 +289,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
         LASTNAME: this.contactInformation?.get("secondName")?.value ?? '',
         TITLE_ACA1: this.contactInformation?.get("title")?.value.code ?? '',
         BIRTHDATE: this.contactInformation?.get("birthDate")?.value == null ? '' :
-        this.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
+          this.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
       },
       IS_ADDRESS: {
         C_O_NAME: this.contactInformation?.get("additionalName")?.value ?? '',
@@ -299,7 +306,26 @@ export class NewISOComponent implements OnInit, OnDestroy {
       }
 
     };
-    return {isDirect: isDirect, sapMask: mask}
+    return { isDirect: isDirect, sapMask: mask }
+  }
+
+  uploadFile($event) {
+    let files = this.upload.get('files').value;
+    console.log(files)
+    for (var file of $event.target.files) {
+      files.push(file);
+    }
+    this.fileInput.nativeElement.value = "";
+    this.upload.get('files').setValue(files);
+  }
+
+  removeFile(file): void {
+    let files = this.upload.get('files').value;
+    const index = files.indexOf(file);
+    if (index >= 0) {
+      files.splice(index, 1);
+    }
+    this.upload.get('files').setValue(files);
   }
 
 }
