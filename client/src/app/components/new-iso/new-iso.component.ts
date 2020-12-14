@@ -15,6 +15,7 @@ import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { pairwise, take, takeUntil } from 'rxjs/operators';
 import { SahredMask } from 'src/app/interfaces/mask';
+import { SearchService } from 'src/app/services/search.service';
 
 
 @Component({
@@ -35,9 +36,12 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   //Industry field free text search
   industryFieldCodesSearchCtrl: FormControl = new FormControl('');
+  countrySearchCtrl: FormControl = new FormControl('');
   public filteredFieldCodes: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
+  public filteredCountries: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
-  protected _onDestroy = new Subject<void>();
+  protected onDestroyIndustryFieldCode = new Subject<void>();
+  protected onDestroyCountry = new Subject<void>();
 
   legalForms;
   titles;
@@ -49,7 +53,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
-    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private router: Router) {
+    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private searchService: SearchService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
@@ -62,45 +66,37 @@ export class NewISOComponent implements OnInit, OnDestroy {
         this.payment.get('industryFieldCode').enable();
         this.initIndustryCodeFilter();
       });
+    this.initCountryFilter();
   }
 
   ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
+    this.onDestroyIndustryFieldCode.next();
+    this.onDestroyIndustryFieldCode.complete();
+    this.onDestroyCountry.next();
+    this.onDestroyCountry.complete();
   }
 
-  initIndustryCodeFilter() {
-    // set initial selection
-    this.payment.get('industryFieldCode').setValue(this.industryFields[0]);
-
-    // load the initial field list
-    this.filteredFieldCodes.next(this.industryFields.slice());
-
-    // listen for search field value changes
-    this.industryFieldCodesSearchCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
+  initCountryFilter() {
+    //this.contactInformation.get('country').setValue('');
+    this.filteredCountries.next(this.countries.slice());
+    this.countrySearchCtrl.valueChanges
+      .pipe(takeUntil(this.onDestroyCountry))
       .subscribe(() => {
-        this.filterIndustryCodes();
+        this.searchService.filter(this.countrySearchCtrl, this.countries, this.filteredCountries);
       });
   }
 
-  protected filterIndustryCodes() {
-    if (!this.industryFields) {
-      return;
-    }
-    // get the search keyword
-    let search = this.industryFieldCodesSearchCtrl.value;
-    if (!search) {
-      this.filteredFieldCodes.next(this.industryFields.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the fields
-    this.filteredFieldCodes.next(
-      this.industryFields.filter(field => field.details.toLowerCase().indexOf(search) > -1)
-    );
+  initIndustryCodeFilter() {
+    //this.payment.get('industryFieldCode').setValue('');
+    this.filteredFieldCodes.next(this.industryFields.slice());
+    this.industryFieldCodesSearchCtrl.valueChanges
+      .pipe(takeUntil(this.onDestroyIndustryFieldCode))
+      .subscribe(() => {
+        this.searchService.filter(this.industryFieldCodesSearchCtrl, this.industryFields, this.filteredFieldCodes);
+      });
   }
+
+
 
   initForms() {
     if (this.storageService.customerType === 'organization') {

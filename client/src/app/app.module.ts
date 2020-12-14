@@ -19,6 +19,7 @@ import { ErrorMessageService } from './services/error-message.service';
 import { StorageService } from './services/storage.service';
 import { PreselectionComponent } from './components/preselection/preselection.component';
 import { ToastrModule } from 'ngx-toastr';
+import { SearchService } from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     ListService,
     ErrorMessageService,
     StorageService,
+    SearchService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

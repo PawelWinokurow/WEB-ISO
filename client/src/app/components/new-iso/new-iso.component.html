@@ -186,21 +186,24 @@
                                     </div>
                                 </div>
                                 <div style="display: flex;">
-
-                                    <div class="paddinglr10px" style="width: 100%">
-
-                                        <mat-form-field color="accent" color="accent" appearance="outline">
+                                    <div class="paddinglr10px" style="width: 100%;">
+                                        <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('COU')}}</mat-label>
-                                            <mat-select formControlName="country" required>
-                                                <mat-option *ngFor="let country of countries" [value]="country">
+                                            <mat-select formControlName="country" #singleSelect required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="countrySearchCtrl">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let country of filteredCountries | async"
+                                                    [value]="country">
                                                     {{country.details}}
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
-                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('COU', errorType.key)}}
-                                            </mat-error>
+                                            *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
+                                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                            {{errorMessageService.getError('COU', errorType.key)}}
+                                        </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -473,7 +476,8 @@
                                             <mat-chip *ngFor="let file of upload.get('files').value" selectable
                                                 removable (removed)="removeFile(file)">
                                                 <div style="display: flex; width: 100%;">
-                                                    <span style="display: block; width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{file.name}}</span>
+                                                    <span
+                                                        style="display: block; width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{file.name}}</span>
                                                     <span class="horizontal-space"></span>
                                                     <mat-icon matChipRemove>cancel</mat-icon>
                                                 </div>
@@ -648,13 +652,16 @@
                                     </div>
                                 </div>
                                 <div style="display: flex;">
-
-                                    <div class="paddinglr10px" style="width: 100%">
-
+                                    <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('COU')}}</mat-label>
-                                            <mat-select formControlName="country" required>
-                                                <mat-option *ngFor="let country of countries" [value]="country">
+                                            <mat-select formControlName="country" #singleSelect required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="countrySearchCtrl">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let country of filteredCountries | async"
+                                                    [value]="country">
                                                     {{country.details}}
                                                 </mat-option>
                                             </mat-select>
@@ -665,6 +672,7 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
+
                                 </div>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -1213,8 +1221,8 @@
                 </form>
             </mat-step>
 
-             <!--upload mat-step for organization-->
-             <mat-step [stepControl]="upload" *ngIf="storageService.customerType === 'organization'">
+            <!--upload mat-step for organization-->
+            <mat-step [stepControl]="upload" *ngIf="storageService.customerType === 'organization'">
                 <form [formGroup]="upload">
                     <ng-template matStepLabel>{{dictionaryService.get('ATF')}}</ng-template>
                     <div class="vertical-flex">
@@ -1239,7 +1247,8 @@
                                             <mat-chip *ngFor="let file of upload.get('files').value" selectable
                                                 removable (removed)="removeFile(file)">
                                                 <div style="display: flex; width: 100%;">
-                                                    <span style="display: block; width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{file.name}}</span>
+                                                    <span
+                                                        style="display: block; width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{file.name}}</span>
                                                     <span class="horizontal-space"></span>
                                                     <mat-icon matChipRemove>cancel</mat-icon>
                                                 </div>
