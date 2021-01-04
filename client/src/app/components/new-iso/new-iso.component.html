@@ -264,7 +264,7 @@
                         <div class="flex-overflow-auto">
                             <div class="stepper-data">
                                 <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('PAY')}}</h2>
+                                    <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
                                     <hr flex />
                                 </span>
                                 <div style="display: flex;">
@@ -1034,13 +1034,13 @@
             <!--payment mat-step for organization-->
             <mat-step [stepControl]="payment" *ngIf="storageService.customerType === 'organization'">
                 <form [formGroup]="payment">
-                    <ng-template matStepLabel>{{dictionaryService.get('PAY')}}</ng-template>
+                    <ng-template matStepLabel>{{dictionaryService.get('PAI')}}</ng-template>
                     <div class="vertical-flex">
                         <div class="flex-overflow-auto">
                             <!--1. Col-->
                             <div class="stepper-data">
                                 <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('PAY')}}</h2>
+                                    <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
                                     <hr flex />
                                 </span>
                                 <div style="display: flex;">

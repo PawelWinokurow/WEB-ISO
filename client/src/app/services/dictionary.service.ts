@@ -58,7 +58,6 @@ export class DictionaryService {
     ['MOB', 'Mobiltelefon'],
     ['EMA', 'E-Mail-Adresse'],
 
-    ['PAY', 'Zahlung'],
     ['TAX', 'Steuernummer'],
     ['VAT', 'Umsatzsteuer-ID'],
     ['IFI', 'Branche'],
@@ -138,7 +137,6 @@ export class DictionaryService {
     ['MOB', 'Mobile phone'],
     ['EMA', 'Email address'],
 
-    ['PAY', 'Payment'],
     ['TAX', 'Tax ID'],
     ['VAT', 'VAT ID'],
     ['IFI', 'Industry field'],
