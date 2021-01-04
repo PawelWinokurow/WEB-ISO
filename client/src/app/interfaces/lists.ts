@@ -1,3 +1,9 @@
+
+/**
+ * Code details fileds:
+ * code: unique identifier also used in SAP system
+ * details: details showed in browser
+ */
 export interface codeDetails{
     code: string, 
     details: string,

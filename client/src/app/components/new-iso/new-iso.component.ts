@@ -14,10 +14,13 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { pairwise, take, takeUntil } from 'rxjs/operators';
-import { SahredMask } from 'src/app/interfaces/mask';
+import { SharedMask } from 'src/app/interfaces/mask';
 import { SearchService } from 'src/app/services/search.service';
 
 
+/**
+ * Component containing mask creation stepper
+ */
 @Component({
   selector: 'app-new-iso',
   templateUrl: './new-iso.component.html',
@@ -34,14 +37,13 @@ export class NewISOComponent implements OnInit, OnDestroy {
   payment: FormGroup;
   upload: FormGroup;
 
-  //Industry field free text search
   industryFieldCodesSearchCtrl: FormControl = new FormControl('');
   countrySearchCtrl: FormControl = new FormControl('');
   public filteredFieldCodes: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
   public filteredCountries: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
-  protected onDestroyIndustryFieldCode = new Subject<void>();
-  protected onDestroyCountry = new Subject<void>();
+  onDestroyIndustryFieldCode = new Subject<void>();
+  onDestroyCountry = new Subject<void>();
 
   legalForms;
   titles;
@@ -59,7 +61,9 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //Initializes forms for selected types
     this.initForms();
+    //Enable 'industryFieldCode' field, if industry field is selected
     this.payment.get('industryField')
       .valueChanges.subscribe(() => {
         this.industryFields = this.listService.industryFieldCodes.get(this.payment.get('industryField').value.code);
@@ -69,6 +73,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.initCountryFilter();
   }
 
+
+  /**
+   * Called on destroy of the component
+   */
   ngOnDestroy() {
     this.onDestroyIndustryFieldCode.next();
     this.onDestroyIndustryFieldCode.complete();
@@ -76,8 +84,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.onDestroyCountry.complete();
   }
 
+  /**
+   * Inits country filter for the country free text search
+   */
   initCountryFilter() {
-    //this.contactInformation.get('country').setValue('');
     this.filteredCountries.next(this.countries.slice());
     this.countrySearchCtrl.valueChanges
       .pipe(takeUntil(this.onDestroyCountry))
@@ -86,8 +96,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Inits industry code filter for the country free text search
+   */
   initIndustryCodeFilter() {
-    //this.payment.get('industryFieldCode').setValue('');
     this.filteredFieldCodes.next(this.industryFields.slice());
     this.industryFieldCodesSearchCtrl.valueChanges
       .pipe(takeUntil(this.onDestroyIndustryFieldCode))
@@ -96,33 +108,37 @@ export class NewISOComponent implements OnInit, OnDestroy {
       });
   }
 
-
-
+  /**
+   * Initializes forms according customer and debit/credit type
+   */
   initForms() {
     if (this.storageService.customerType === 'organization') {
       this.legalForms = this.listService.legalFormsOrganization;
       this.salutations = this.listService.salutationsOrganization;
       if (this.storageService.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
-        this.initOrganizationDebit()
+        this.initOrganizationDebitForms()
       } else {
         this.paymentTerms = this.listService.paymentTermsCredit;
-        this.initOrganizationCredit()
+        this.initOrganizationCreditForms()
       }
     } else {
       this.legalForms = this.listService.legalFormsPerson;
       this.salutations = this.listService.salutationsPerson;
       if (this.storageService.debitCreditType === 'debit') {
         this.paymentTerms = this.listService.paymentTermsDebit;
-        this.initPersonDebit()
+        this.initPersonDebitForms()
       } else {
         this.paymentTerms = this.listService.paymentTermsCredit;
-        this.initPersonCredit()
+        this.initPersonCreditForms()
       }
     }
   }
 
-  initSharedForm() {
+  /**
+   * Initializes forms, which are shared for all types
+   */
+  initSharedForms() {
     this.contactInformation = this.formBuilder.group({
       legalForm: ['', Validators.required],
       interfaceNumber: [''],
@@ -159,33 +175,48 @@ export class NewISOComponent implements OnInit, OnDestroy {
     });
   }
 
-  initPerson() {
+  /**
+   * Initializes FormControls for person
+   */
+  initPersonForms() {
     this.contactInformation.addControl('title', new FormControl(''));
     this.contactInformation.addControl('firstName', new FormControl('', Validators.required));
     this.contactInformation.addControl('secondName', new FormControl('', Validators.required));
     this.contactInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debit' ? Validators.required : []));
   }
 
-  initPersonDebit() {
-    this.initSharedForm();
-    this.initPerson();
+  /**
+   * Initializes FormControls for person and debit type
+   */
+  initPersonDebitForms() {
+    this.initSharedForms();
+    this.initPersonForms();
 
     this.payment.addControl('agb', new FormControl(false));
     this.payment.addControl('creditLimit', new FormControl(''));
   }
 
-  initPersonCredit() {
-    this.initSharedForm();
-    this.initPerson();
+  /**
+   * Initializes FormControls for person and credit type
+   */
+  initPersonCreditForms() {
+    this.initSharedForms();
+    this.initPersonForms();
   }
 
-  initOrganization() {
+  /**
+   * Initializes FormControls for organization
+   */
+  initOrganizationForms() {
     this.contactInformation.addControl('orgaPersons', new FormControl('', Validators.required));
   }
 
-  initOrganizationDebit() {
-    this.initSharedForm();
-    this.initOrganization();
+  /**
+   * Initializes FormControls for organization and debit type
+   */
+  initOrganizationDebitForms() {
+    this.initSharedForms();
+    this.initOrganizationForms();
     this.applicant = this.formBuilder.group({
       salutation: ['', Validators.required],
       title: [''],
@@ -219,11 +250,18 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.payment.addControl('creditLimit', new FormControl(''));
   }
 
-  initOrganizationCredit() {
-    this.initSharedForm();
-    this.initOrganization();
+  /**
+   * Initializes FormControls for organization and credit type
+   */
+  initOrganizationCreditForms() {
+    this.initSharedForms();
+    this.initOrganizationForms();
   }
 
+
+  /**
+   * Opens send mask dialog
+   */
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       disableClose: true,
@@ -253,31 +291,46 @@ export class NewISOComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  /**
+   * Sets IBAN and BIC required validator
+   */
   setIbanBicRequired() {
     this.payment.get('iban').setValidators([Validators.required]);
     this.payment.get('bic').setValidators([Validators.required]);
   }
 
+  /**
+   * Unsets IBAN and BIC required validator
+   */
   unsetIbanBicRequired() {
     this.payment.get('iban').setValidators([]);
     this.payment.get('bic').setValidators([]);
   }
 
-  formatDate(date) {
+  /**
+   * Formats date to YYYY-MM-DD
+   * @param date 
+   * @returns formatted date as string 
+   */
+  formatDate(date: Date) {
     var month = '' + (date.getMonth() + 1)
     var day = '' + date.getDate()
     var year = date.getFullYear();
-
     if (month.length < 2)
       month = '0' + month;
     if (day.length < 2)
       day = '0' + day;
-
-    return [year, month, day].join('-');
+    return `${year}-${month}-${day}`
   }
 
+  /**
+   * Constructs mask from ControlForms
+   * @param isDirect send mask directly to SAP or with confirmation email
+   * @returns mask object to send
+   */
   constructMask(isDirect: boolean) {
-    const mask: SahredMask = {
+    const mask: SharedMask = {
       IV_PARTNERGROUP: "01",
       IV_PARTNERCATEGORY: this.storageService.debitCreditType === "person" ? "1" : "2",
       IS_CENTRALDATAPERSON: {
@@ -305,9 +358,12 @@ export class NewISOComponent implements OnInit, OnDestroy {
     return { isDirect: isDirect, sapMask: mask }
   }
 
+  /**
+   * Uploads file to be sent to the SAP server
+   * @param $event 
+   */
   uploadFile($event) {
     let files = this.upload.get('files').value;
-    console.log(files)
     for (var file of $event.target.files) {
       files.push(file);
     }
@@ -315,6 +371,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.upload.get('files').setValue(files);
   }
 
+  /**
+   * Removes file uploaded file
+   * @param file 
+   */
   removeFile(file): void {
     let files = this.upload.get('files').value;
     const index = files.indexOf(file);

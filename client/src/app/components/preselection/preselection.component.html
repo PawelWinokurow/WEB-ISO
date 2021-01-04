@@ -35,7 +35,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions align="center" style="margin-bottom: 20px;">
-            <button mat-stroked-button (click)="onClick()" style="height: 46px;" [disabled]="!companyCode.valid">
+            <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px;" [disabled]="!companyCode.valid">
                 <mat-icon style="margin-right: 5px;">assignment</mat-icon>
                 <span>{{dictionaryService.get('MGE')}}</span>
             </button>

@@ -1,32 +1,50 @@
 import { Injectable } from '@angular/core';
 import { DictionaryService } from './dictionary.service';
 
+/**
+ * Service to temporarily store data 
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  
-  customerType = 'person';
-  debitCreditType = 'debit';
-  companyCode = ''
+
+  customerType: string = 'person';
+  debitCreditType: string = 'debit';
+  companyCode: string = '';
 
   constructor(private dictionaryService: DictionaryService) { }
 
+  /**
+   * Resets preselection types
+   */
   resetValues() {
     this.customerType = 'person';
     this.debitCreditType = 'debit';
-    this.companyCode = ''
+    this.companyCode = '';
   }
 
-  getCustomerTypeName(){
+  /**
+   * Gets customer type
+   * @returns customer type value
+   */
+  getCustomerTypeName(): string {
     return this.customerType === 'person' ? this.dictionaryService.get('PER') : this.dictionaryService.get('ORG');
   }
 
-  getDebitCreditTypeName(){
+  /**
+   * Gets debit or credit type
+   * @returns debit or credit type value
+   */
+  getDebitCreditTypeName(): string {
     return this.debitCreditType === 'debit' ? this.dictionaryService.get('DEB') : this.dictionaryService.get('CRE');
   }
 
-  getCompanyCodeName() {
+  /**
+   * Gets company code
+   * @returns company code value
+   */
+  getCompanyCodeName(): string {
     return this.companyCode;
   }
 

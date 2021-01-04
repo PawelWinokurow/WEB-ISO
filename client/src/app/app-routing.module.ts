@@ -9,6 +9,10 @@ const routes: Routes = [
   { path: 'iso', component: NewISOComponent },
   { path: 'preselection', component: PreselectionComponent },
 ];
+
+/**
+ * Ng module to define routes
+ */
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

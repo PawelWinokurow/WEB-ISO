@@ -1,4 +1,4 @@
-export interface SahredMask {
+export interface SharedMask {
     IV_PARTNERCATEGORY: string; //1: Person 2: Organization
     IV_PARTNERGROUP: string,    //01: Debitor/Kreditor
     IS_CENTRALDATAPERSON: {
@@ -74,7 +74,7 @@ export interface SahredMask {
     //companyCode
 }
 
-export interface SahredMask2 {
+export interface SharedMask2 {
     //IV_PARTNERCATEGORY: string; //1: Person 2: Organization
     //IV_PARTNERGROUP: string,    //01: Debitor/Kreditor
     IS_EXTERN: {

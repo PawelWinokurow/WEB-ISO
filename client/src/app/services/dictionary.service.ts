@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Service to define Dictionary of abbreviations:
+ * Abbreviation => Translation
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -174,15 +178,21 @@ export class DictionaryService {
     ['EN', this.dictionaryEN]
   ])
 
-
-
   constructor() { }
 
+  /**
+   * Switchs language between English and German
+   */
   switchLanguage() {
     this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
   }
 
-  get(abbreviation: string) {
+  /**
+   * Dictionary getter, takes current language into account
+   * @param abbreviation 
+   * @returns mapping 
+   */
+  get(abbreviation: string): string {
     return this.dictionary.get(this.currentLanguage).get(abbreviation);
   }
 }

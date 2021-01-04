@@ -76,6 +76,9 @@ const materialModules = [
   NgxMatSelectSearchModule
 ];
 
+/**
+ * Ng module to import Angular Material 
+ */
 @NgModule({
   imports: [
     CommonModule,
