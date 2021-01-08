@@ -12,7 +12,9 @@ WEB-ISO is a Angular application for creating customer instances.
 
 ## Documentation
 
-* Client supports Compodoc documentation: ``` compodoc -p tsconfig.json src -s```
+* Client supports Compodoc documentation: 
+ * Run documentation server: ``` compodoc -p tsconfig.json src -s```
+ * Documentation is available on ```http://127.0.0.1:8080```
 
 
 ## License
