@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 
 /**
- * Dialog to enter email address for confirmation email
+ * The dialog to enter the email address for the confirmation email.
  */
 @Component({
   selector: 'email-dialog',
@@ -19,14 +19,14 @@ export class EmailDialogComponent {
   constructor(public dialogRef: MatDialogRef<EmailDialogComponent>, public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService) { }
   
   /**
-   * If yes is clicked
+   * Click on the "send" button triggers this method. The method closes the dialog and returns "email" value as a string. 
    */
   onYesClick() {
     this.dialogRef.close(this.email.value);
   }
 
-    /**
-   * If no is clicked
+  /**
+   * Click on the "cancel" button triggers this method. The method closes the dialog and returns "false" value. 
    */
   onNoClick() {
     this.dialogRef.close(false);

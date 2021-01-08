@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
-import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -13,13 +11,17 @@ import { ToastrService } from 'ngx-toastr';
 import { ReplaySubject, Subject } from 'rxjs';
 import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
-import { pairwise, take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { SharedMask } from 'src/app/interfaces/mask';
 import { SearchService } from 'src/app/services/search.service';
+import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 
 
 /**
- * Component containing mask creation stepper
+ * Contains customer creation stepper. 
+ * The stepper consists of steps, which contain forms required for customer creation. 
+ * There are 4 different settings of steps: Debitor-Person, Debitor-Organization, Creditor-Person, Creditor-Organization.
+ * Which one is currently showed depends on the choice in the preselection. 
  */
 @Component({
   selector: 'app-new-iso',
@@ -75,7 +77,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
 
   /**
-   * Called on destroy of the component
+   * Called on destroy of the component.
    */
   ngOnDestroy() {
     this.onDestroyIndustryFieldCode.next();
@@ -85,7 +87,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Inits country filter for the country free text search
+   * Initializes country filter, required for the country free text search.
    */
   initCountryFilter() {
     this.filteredCountries.next(this.countries.slice());
@@ -97,7 +99,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Inits industry code filter for the country free text search
+   * Initializes industry code filter, required for the country free text search.
    */
   initIndustryCodeFilter() {
     this.filteredFieldCodes.next(this.industryFields.slice());
@@ -109,7 +111,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes forms according customer and debit/credit type
+   * Initializes forms according customer and debit/credit type.
    */
   initForms() {
     if (this.storageService.customerType === 'organization') {
@@ -136,7 +138,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes forms, which are shared for all types
+   * Initializes forms shared by all stepper settings.
    */
   initSharedForms() {
     this.contactInformation = this.formBuilder.group({
@@ -176,7 +178,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes FormControls for person
+   * Initializes FormControls for person type.
    */
   initPersonForms() {
     this.contactInformation.addControl('title', new FormControl(''));
@@ -186,7 +188,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes FormControls for person and debit type
+   * Initializes FormControls for person and debit type.
    */
   initPersonDebitForms() {
     this.initSharedForms();
@@ -197,7 +199,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes FormControls for person and credit type
+   * Initializes FormControls for person and credit type.
    */
   initPersonCreditForms() {
     this.initSharedForms();
@@ -205,14 +207,14 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes FormControls for organization
+   * Initializes FormControls for organization type.
    */
   initOrganizationForms() {
     this.contactInformation.addControl('orgaPersons', new FormControl('', Validators.required));
   }
 
   /**
-   * Initializes FormControls for organization and debit type
+   * Initializes FormControls for organization and debit type.
    */
   initOrganizationDebitForms() {
     this.initSharedForms();
@@ -251,16 +253,15 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes FormControls for organization and credit type
+   * Initializes FormControls for organization and credit type.
    */
   initOrganizationCreditForms() {
     this.initSharedForms();
     this.initOrganizationForms();
   }
 
-
   /**
-   * Opens send mask dialog
+   * Opens send customer mask dialog.
    */
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
@@ -291,9 +292,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
     });
   }
 
-
   /**
-   * Sets IBAN and BIC required validator
+   * Sets IBAN and BIC required validator.
    */
   setIbanBicRequired() {
     this.payment.get('iban').setValidators([Validators.required]);
@@ -301,7 +301,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Unsets IBAN and BIC required validator
+   * Unsets IBAN and BIC required validator.
    */
   unsetIbanBicRequired() {
     this.payment.get('iban').setValidators([]);
@@ -309,9 +309,9 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Formats date to YYYY-MM-DD
-   * @param date 
-   * @returns formatted date as string 
+   * Formats date to YYYY-MM-DD format.
+   * @param date JavaScript Date
+   * @returns Formatted date.
    */
   formatDate(date: Date) {
     var month = '' + (date.getMonth() + 1)
@@ -325,9 +325,9 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Constructs mask from ControlForms
-   * @param isDirect send mask directly to SAP or with confirmation email
-   * @returns mask object to send
+   * Constructs customer mask from ControlForms.
+   * @param isDirect Send customer mask directly to SAP or with confirmation email.
+   * @returns Customer mask object to send.
    */
   constructMask(isDirect: boolean) {
     const mask: SharedMask = {
@@ -359,8 +359,9 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Uploads file to be sent to the SAP server
-   * @param $event 
+   * Click on the "add file" button triggers this method. 
+   * The method allows to choose files to upload. 
+   * @param $event Input event
    */
   uploadFile($event) {
     let files = this.upload.get('files').value;
@@ -372,8 +373,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Removes file uploaded file
-   * @param file 
+   * Remove uploaded file.
+   * @param file Uploaded file
    */
   removeFile(file): void {
     let files = this.upload.get('files').value;

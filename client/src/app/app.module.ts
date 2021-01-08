@@ -11,7 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
-import { SendMaskConfirmationDialogComponent } from './dialogs/send-direct-mask-dialog/send-direct-mask-dialog.component';
+import { SendMaskConfirmationDialogComponent } from './dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 import { ListService } from './services/list.service';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';

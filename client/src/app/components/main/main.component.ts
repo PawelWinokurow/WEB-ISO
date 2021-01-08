@@ -4,7 +4,7 @@ import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 /**
- * Header component
+ * Contains application  header and is also the parent component of the NewISOComponent.
  */
 @Component({
   selector: 'app-main',
@@ -18,7 +18,7 @@ export class MainComponent {
   }
 
   /**
-   * If reset button is clicked, go to /preselection 
+   * Click on the reset button triggers this method. The method navigates to the PreselectionComponent.
    */
   reset() {
     this.router.navigate(['/preselection']);
@@ -26,7 +26,7 @@ export class MainComponent {
 
 
   /**
-   * If switch language button is clicked, change current language
+   * Click on the switch language button triggers this method. The method changes the current language from EN to DE and from DE to EN.
    */
   changeLanguage(){
     this.dictionaryService.switchLanguage();

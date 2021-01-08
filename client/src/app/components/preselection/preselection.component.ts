@@ -7,7 +7,7 @@ import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 /**
- * Component to select customer type and credit/debit type and company code
+ * Allows to choose the customer type, credit/debit type and company code.
  */
 @Component({
   selector: 'app-preselection',
@@ -23,13 +23,13 @@ export class PreselectionComponent implements OnInit {
   ngOnInit(): void {
     this.companyCode = new FormControl('', [Validators.required]);
     this.storageService.resetValues();
-    // set companyCode in StorageService to selected value
+    // Subscribe companyCode: set companyCode in StorageService to selected value
     this.companyCode.valueChanges.subscribe(() => this.storageService.companyCode = this.companyCode.value.details);
   }
 
   /**
-   * If customer type is changed
-   * @param event 
+   * Change of customer type triggers this method. The method set customerType in storageService. 
+   * @param event change event
    */
   changeCustomerType(event: any) {
     if (event.value === 'organization') {
@@ -40,8 +40,8 @@ export class PreselectionComponent implements OnInit {
   }
 
   /**
-   * If debit/credit type is changed
-   * @param event 
+   * Change of debit/credit type triggers this method. The method set debit/credit in storageService. 
+   * @param event change event
    */
   changeDebitCreditType(event: any) {
     if (event.value === 'credit') {
@@ -52,7 +52,7 @@ export class PreselectionComponent implements OnInit {
   }
 
   /**
-   * If generate mask button is clicked
+   * Click on the "generate mask" button triggers this method. The method navigates to the NewISOComponent. 
    */
   onGenerateMask(){
     this.router.navigate(['/iso']);

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SendMaskConfirmationDialogComponent } from '../send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 
-import { SendMaskConfirmationDialogComponent } from './send-direct-mask-dialog.component';
 
 describe('SendMaskConfirmationDialogComponent', () => {
   let component: SendMaskConfirmationDialogComponent;
