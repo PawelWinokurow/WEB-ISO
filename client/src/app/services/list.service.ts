@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode, LegalForm, Title, Salutation } from '../interfaces/lists';
 
 /**
- * ListService contains all lists
+ * Contains the data for the drop-down lists
  */
 @Injectable({
   providedIn: 'root'

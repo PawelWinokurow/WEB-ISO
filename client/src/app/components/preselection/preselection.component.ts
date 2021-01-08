@@ -29,7 +29,7 @@ export class PreselectionComponent implements OnInit {
 
   /**
    * Change of customer type triggers this method. The method set customerType in storageService. 
-   * @param event change event
+   * @param event Change event
    */
   changeCustomerType(event: any) {
     if (event.value === 'organization') {
@@ -41,7 +41,7 @@ export class PreselectionComponent implements OnInit {
 
   /**
    * Change of debit/credit type triggers this method. The method set debit/credit in storageService. 
-   * @param event change event
+   * @param event Change event
    */
   changeDebitCreditType(event: any) {
     if (event.value === 'credit') {

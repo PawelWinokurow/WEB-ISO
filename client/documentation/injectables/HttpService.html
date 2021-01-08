@@ -63,7 +63,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to send masks to the web server</p>
+                <p>Sends customer masks to the web server.</p>
 
             </p>
 
@@ -212,7 +212,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Error handler</p>
+                    <div class="io-description"><p>Error handler.</p>
 </div>
 
                     <div class="io-description">
@@ -266,7 +266,7 @@
 
                     </div>
                     <div class="io-description">
-                        <p>error response observable</p>
+                        <p>Error response observable.</p>
 
                     </div>
                 </td>
@@ -303,7 +303,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sends mask to the server as JSON</p>
+                    <div class="io-description"><p>Sends customer mask to the server as JSON.</p>
 </div>
 
                     <div class="io-description">
@@ -326,7 +326,7 @@
 
 
                                     <td>
-                                        <p>Object { isDirect: boolean, sapMask: SharedMask }}</p>
+                                        <p>Object { isDirect: boolean, sapMask: SharedMask }</p>
 
                                     </td>
                                 </tr>
@@ -340,7 +340,7 @@
 
                     </div>
                     <div class="io-description">
-                        <p>response observable</p>
+                        <p>Response observable.</p>
 
                     </div>
                 </td>
@@ -425,7 +425,7 @@ import { Observable, of } from &#x27;rxjs&#x27;;
 
 
 /**
- * Service to send masks to the web server
+ * Sends customer masks to the web server.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -438,9 +438,9 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Sends mask to the server as JSON
-   * @param mask Object { isDirect: boolean, sapMask: SharedMask }}
-   * @returns response observable
+   * Sends customer mask to the server as JSON.
+   * @param mask Object { isDirect: boolean, sapMask: SharedMask }
+   * @returns Response observable.
    */
   sendMask(mask): Observable&lt;any&gt;{
     return this.http.post(this.tempNodeJS, JSON.stringify(mask), {
@@ -449,11 +449,11 @@ export class HttpService {
   }
 
   /**
-   * Error handler
+   * Error handler.
    * @template T 
    * @param [operation] 
    * @param [result] 
-   * @returns  error response observable
+   * @returns Error response observable.
    */
   private handleError&lt;T&gt;(operation &#x3D; &#x27;operation&#x27;, result?: T) {
     return (error: any): Observable&lt;T&gt; &#x3D;&gt; {

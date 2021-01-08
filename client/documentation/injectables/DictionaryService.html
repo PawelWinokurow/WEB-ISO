@@ -63,8 +63,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to define Dictionary of abbreviations:
-Abbreviation =&gt; Translation</p>
+                <p>Defines a map of labels and texts used in HTML.
+There are two versions of mappings: one for English and one for German.</p>
 
             </p>
 
@@ -181,7 +181,7 @@ Abbreviation =&gt; Translation</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Dictionary getter, takes current language into account</p>
+                    <div class="io-description"><p>Takes an abbreviation and returns the corresponding value.</p>
 </div>
 
                     <div class="io-description">
@@ -192,6 +192,7 @@ Abbreviation =&gt; Translation</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -206,6 +207,10 @@ Abbreviation =&gt; Translation</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>Map key </p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -217,7 +222,7 @@ Abbreviation =&gt; Translation</p>
 
                     </div>
                     <div class="io-description">
-                        <p>mapping </p>
+                        <p>Mapping. </p>
 
                     </div>
                 </td>
@@ -254,7 +259,7 @@ Abbreviation =&gt; Translation</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Switchs language between English and German</p>
+                    <div class="io-description"><p>Switches language between English and German.</p>
 </div>
 
                     <div class="io-description">
@@ -575,8 +580,8 @@ Abbreviation =&gt; Translation</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
 /**
- * Service to define Dictionary of abbreviations:
- * Abbreviation &#x3D;&gt; Translation
+ * Defines a map of labels and texts used in HTML.
+ * There are two versions of mappings: one for English and one for German.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -755,16 +760,16 @@ export class DictionaryService {
   constructor() { }
 
   /**
-   * Switchs language between English and German
+   * Switches language between English and German.
    */
   switchLanguage() {
     this.currentLanguage &#x3D; (this.currentLanguage &#x3D;&#x3D; &#x27;DE&#x27; ? &#x27;EN&#x27; : &#x27;DE&#x27;)
   }
 
   /**
-   * Dictionary getter, takes current language into account
-   * @param abbreviation 
-   * @returns mapping 
+   * Takes an abbreviation and returns the corresponding value.
+   * @param abbreviation Map key 
+   * @returns Mapping. 
    */
   get(abbreviation: string): string {
     return this.dictionary.get(this.currentLanguage).get(abbreviation);

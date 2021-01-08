@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 /**
- * Service to define Dictionary of abbreviations:
- * Abbreviation => Translation
+ * Defines a map of labels and texts used in HTML.
+ * There are two versions of mappings: one for English and one for German.
  */
 @Injectable({
   providedIn: 'root'
@@ -181,16 +181,16 @@ export class DictionaryService {
   constructor() { }
 
   /**
-   * Switchs language between English and German
+   * Switches language between English and German.
    */
   switchLanguage() {
     this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
   }
 
   /**
-   * Dictionary getter, takes current language into account
-   * @param abbreviation 
-   * @returns mapping 
+   * Takes an abbreviation and returns the corresponding value.
+   * @param abbreviation Map key 
+   * @returns Mapping. 
    */
   get(abbreviation: string): string {
     return this.dictionary.get(this.currentLanguage).get(abbreviation);

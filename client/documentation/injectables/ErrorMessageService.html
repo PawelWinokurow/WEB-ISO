@@ -63,7 +63,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to construct error from abbreviations and error type</p>
+                <p>Сonstructs errors from abbreviations and error types.</p>
 
             </p>
 
@@ -201,7 +201,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Construct error from abbreviations and error type </p>
+                    <div class="io-description"><p>Constructs error from abbreviation and error type.</p>
 </div>
 
                     <div class="io-description">
@@ -228,7 +228,7 @@
 
 
                                     <td>
-                                        <p>abbreviation defined in DictionaryService</p>
+                                        <p>Abbreviation defined in DictionaryService map</p>
 
                                     </td>
                                 </tr>
@@ -244,7 +244,7 @@
 
 
                                     <td>
-                                        <p>error type</p>
+                                        <p>Error type</p>
 
                                     </td>
                                 </tr>
@@ -367,7 +367,7 @@
 import { DictionaryService } from &#x27;./dictionary.service&#x27;;
 
 /**
- * Service to construct error from abbreviations and error type
+ * Сonstructs errors from abbreviations and error types.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -392,9 +392,9 @@ export class ErrorMessageService {
   ])
 
   /**
-   * Construct error from abbreviations and error type 
-   * @param fieldName abbreviation defined in DictionaryService
-   * @param errorType error type
+   * Constructs error from abbreviation and error type.
+   * @param fieldName Abbreviation defined in DictionaryService map
+   * @param errorType Error type
    */
   getError(fieldName: string, errorType: string){
     let name &#x3D; this.dictionaryService.get(fieldName);

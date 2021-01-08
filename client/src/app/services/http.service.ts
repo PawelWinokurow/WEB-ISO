@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 
 
 /**
- * Service to send masks to the web server
+ * Sends customer masks to the web server.
  */
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,9 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Sends mask to the server as JSON
-   * @param mask Object { isDirect: boolean, sapMask: SharedMask }}
-   * @returns response observable
+   * Sends customer mask to the server as JSON.
+   * @param mask Object { isDirect: boolean, sapMask: SharedMask }
+   * @returns Response observable.
    */
   sendMask(mask): Observable<any>{
     return this.http.post(this.tempNodeJS, JSON.stringify(mask), {
@@ -29,11 +29,11 @@ export class HttpService {
   }
 
   /**
-   * Error handler
+   * Error handler.
    * @template T 
    * @param [operation] 
    * @param [result] 
-   * @returns  error response observable
+   * @returns Error response observable.
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

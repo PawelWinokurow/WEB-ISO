@@ -63,7 +63,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service enables free text search</p>
+                <p>Enables free text search filtering.</p>
 
             </p>
 
@@ -136,7 +136,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>filter(ctrl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, list: <a href="../interfaces/codeDetails.html">codeDetails[]</a>, filteredValues: ReplaySubject<IndustryFieldCode[]>)</code>
+<code>filter(ctrl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, list: <a href="../interfaces/CodeDetails.html">CodeDetails[]</a>, filteredValues: ReplaySubject<IndustryFieldCode[]>)</code>
                 </td>
             </tr>
 
@@ -151,7 +151,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filters list of values for free text search</p>
+                    <div class="io-description"><p>Filters list of values.</p>
 </div>
 
                     <div class="io-description">
@@ -178,14 +178,14 @@
 
 
                                     <td>
-                                        <p>value to find</p>
+                                        <p>Value to find</p>
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>list</td>
                                     <td>
-                                                <code><a href="../interfaces/codeDetails.html" target="_self" >codeDetails[]</a></code>
+                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >CodeDetails[]</a></code>
                                     </td>
 
                                     <td>
@@ -194,7 +194,7 @@
 
 
                                     <td>
-                                        <p>sheet in which to search for</p>
+                                        <p>List in which to search for</p>
 
                                     </td>
                                 </tr>
@@ -210,7 +210,7 @@
 
 
                                     <td>
-                                        <p>filtered values</p>
+                                        <p>Filtered values</p>
 
                                     </td>
                                 </tr>
@@ -239,10 +239,10 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { FormControl } from &#x27;@angular/forms&#x27;;
 import { ReplaySubject } from &#x27;rxjs&#x27;;
-import { codeDetails, IndustryFieldCode } from &#x27;../interfaces/lists&#x27;;
+import { CodeDetails, IndustryFieldCode } from &#x27;../interfaces/lists&#x27;;
 
 /**
- * Service enables free text search
+ * Enables free text search filtering.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -252,12 +252,12 @@ export class SearchService {
   constructor() { }
 
   /**
-   * Filters list of values for free text search
-   * @param ctrl value to find
-   * @param list sheet in which to search for
-   * @param filteredValues filtered values
+   * Filters list of values.
+   * @param ctrl Value to find
+   * @param list List in which to search for
+   * @param filteredValues Filtered values
    */
-  filter(ctrl: FormControl, list: codeDetails[], filteredValues: ReplaySubject&lt;IndustryFieldCode[]&gt;) {
+  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject&lt;IndustryFieldCode[]&gt;) {
     if (!list) {
       return;
     }

@@ -1,7 +1,7 @@
 import { MatDateFormats, NativeDateAdapter } from '@angular/material/core';
 
 /**
- * App date adapter for Material Datepicker to show date in DD-MM-YYYY format
+ * Date adapter for Material Datepicker to show date in DD-MM-YYYY format.
  */
 export class AppDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {

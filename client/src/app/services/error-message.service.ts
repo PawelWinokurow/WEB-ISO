@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DictionaryService } from './dictionary.service';
 
 /**
- * Service to construct error from abbreviations and error type
+ * Сonstructs errors from abbreviations and error types.
  */
 @Injectable({
   providedIn: 'root'
@@ -27,9 +27,9 @@ export class ErrorMessageService {
   ])
 
   /**
-   * Construct error from abbreviations and error type 
-   * @param fieldName abbreviation defined in DictionaryService
-   * @param errorType error type
+   * Constructs error from abbreviation and error type.
+   * @param fieldName Abbreviation defined in DictionaryService map
+   * @param errorType Error type
    */
   getError(fieldName: string, errorType: string){
     let name = this.dictionaryService.get(fieldName);

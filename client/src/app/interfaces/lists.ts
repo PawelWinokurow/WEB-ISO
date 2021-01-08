@@ -4,17 +4,17 @@
  * code: unique identifier also used in SAP system
  * details: details showed in browser
  */
-export interface codeDetails{
+export interface CodeDetails{
     code: string, 
     details: string,
 }
 
-export interface IndustryFieldCode extends codeDetails {}
-export interface PaymentTerm extends codeDetails {}
-export interface IndustryField extends codeDetails {}
-export interface CompanyCode extends codeDetails {}
-export interface LegalForm extends codeDetails {}
-export interface Title extends codeDetails {}
-export interface Salutation extends codeDetails {}
-export interface Country extends codeDetails {}
+export interface IndustryFieldCode extends CodeDetails {}
+export interface PaymentTerm extends CodeDetails {}
+export interface IndustryField extends CodeDetails {}
+export interface CompanyCode extends CodeDetails {}
+export interface LegalForm extends CodeDetails {}
+export interface Title extends CodeDetails {}
+export interface Salutation extends CodeDetails {}
+export interface Country extends CodeDetails {}
 
