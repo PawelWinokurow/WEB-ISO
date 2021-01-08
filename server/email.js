@@ -26,6 +26,11 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+/**
+ * Sends email.
+ * @param  {string} hash Hash allows to identificate the requestor
+ * @param  {string} emailTo Email of the requestor
+ */
 exports.sendEmail = function (hash, emailTo) {
     var mailOptions = {
         from: "BayWa",

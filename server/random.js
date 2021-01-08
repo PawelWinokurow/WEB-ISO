@@ -1,5 +1,8 @@
 var crypto = require('crypto');
 
+/**
+ * Generates the random hash depending on the current timestamp.
+ */
 exports.generateHash = function(){
     var current_date = (new Date()).valueOf().toString();
     var random = Math.random().toString();

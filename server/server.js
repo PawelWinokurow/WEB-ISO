@@ -6,17 +6,22 @@ var email = require('./email')
 var random = require('./random')
 require('dotenv').config()
 
-//db.connect();
+db.connect();
 
 const app = express();
 
 app.use(express.json());
-//app.use(morgan('dev'));
 
+/**
+ * Runs each day at 00.00 and removes old not confirmed customer masks
+ */
 schedule.scheduleJob('0 0 * * *', function () {
   db.removeOldMasks();
 });
 
+/**
+ * Enpoint to get customer masks from application.
+ */
 app.post("/request", function (req, res, next) {
   let mask = req.body;
   if (mask.isDirect) {
@@ -29,6 +34,9 @@ app.post("/request", function (req, res, next) {
   res.json({ok:true});
 });
 
+/**
+ * Enpoint to get email confirmations.
+ */
 app.get("/confirm", function (req, res, next) {
     db.checkConfirmation(req.query.hash).then(result => {
       var mask = JSON.parse(result.mask)
@@ -42,10 +50,6 @@ app.get("/confirm", function (req, res, next) {
     })
 });
 
-app.get('/', (req, res) => {
-  return res.send('Hello, world!');
-});
-
 /*https
   .createServer(
     {
@@ -56,6 +60,7 @@ app.get('/', (req, res) => {
   )
   .listen(8080);
 */
+
   app.listen(process.env.WEB_PORT || 3000, () => {
     //email.sendEmail("sdfsfsdf","paulweinmacher@gmail.com")
     soap.test()
