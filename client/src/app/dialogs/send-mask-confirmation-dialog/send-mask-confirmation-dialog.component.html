@@ -1,5 +1,12 @@
 <div class="alternate-theme">
-  <h3 mat-dialog-title style="text-align:center;">{{dictionaryService.get('DIS')}}</h3>
+  <h2 mat-dialog-title style="text-align:center;">{{dictionaryService.get('DIS')}}</h2>
+  <mat-dialog-content style="padding-top: 10px;">
+    <h3 mat-dialog-title style="text-align:center;">{{dictionaryService.get('DIQ')}}</h3>
+    <re-captcha (resolved)="resolved($event)" [formControl]="captcha"
+      siteKey="6LdMVTEaAAAAAHpaN12mSQ5NNwR8G6d4txTsLeig">
+    </re-captcha>
+  </mat-dialog-content>
+
   <div mat-dialog-actions align="center" style="padding-top: 10px;">
     <div style="display: inline-block; padding-right: 5px;">
       <button mat-stroked-button (click)="onYesClick()">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DictionaryService } from 'src/app/services/dictionary.service';
+import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 /**

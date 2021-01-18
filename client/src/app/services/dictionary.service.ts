@@ -89,8 +89,8 @@ export class DictionaryService {
     
     ['EEM', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
     ['SUB', 'Einreichen'],
-    ['DIS', 'Maske direkt senden?'],
-
+    ['DIS', 'Maske senden'],
+    ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
     ['SNT', 'Die Maske wurde gesendet.'],
     ['SUC', 'Erfolg!'],
   ])
@@ -167,7 +167,8 @@ export class DictionaryService {
     
     ['EEM', 'Please enter your email address.'],
     ['SUB', 'Submit'],
-    ['DIS', 'Send mask directly?'],
+    ['DIS', 'Send mask'],
+    ['DIQ', 'Do you want to send the mask directly?'],
 
     ['SNT', 'The mask was sent.'],
     ['SUC', 'Success!'],

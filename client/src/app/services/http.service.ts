@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 export class HttpService {
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json');
-  tempNodeJS = "http://127.0.0.1:3000/request";
+  tempNodeJS = "http://127.0.0.1:3000";
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +23,19 @@ export class HttpService {
    * @returns Response observable.
    */
   sendMask(mask): Observable<any>{
-    return this.http.post(this.tempNodeJS, JSON.stringify(mask), {
+    return this.http.post(`${this.tempNodeJS}/request`, JSON.stringify(mask), {
       headers: this.headers
     }).pipe(catchError(this.handleError('send mask')));
+  }
+
+  /**
+   * Sends captcha token to the server.
+   * @param token 
+   */
+  sendToken(token): Observable<any>{
+    return this.http.post(`${this.tempNodeJS}/token_validate`, {recaptcha: token}, {
+      headers: this.headers
+    }).pipe(catchError(this.handleError('send token')));
   }
 
   /**

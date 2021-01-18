@@ -20,6 +20,7 @@ import { StorageService } from './services/storage.service';
 import { PreselectionComponent } from './components/preselection/preselection.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SearchService } from './services/search.service';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import { SearchService } from './services/search.service';
     ReactiveFormsModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), 
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
   providers: [
     DictionaryService,

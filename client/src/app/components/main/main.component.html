@@ -1,31 +1,32 @@
 <mat-toolbar style="background-color: #009650;">
-    <mat-toolbar-row>
+  <mat-toolbar-row>
 
-      <div style="padding-left:10px;">
-        <h1 style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</h1>
-      </div>
-      <div style="padding-left:10px;">
-        <h3>
-          {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
-        </h3>
-      </div>
-      <span class="horizontal-space"></span>
-      <button mat-raised-button (click)="reset()"><mat-icon>replay</mat-icon></button>
-      <button mat-raised-button (click)="dictionaryService.switchLanguage()" style="margin-left: 10px;">{{dictionaryService.currentLanguage}}</button>
+    <div style="padding-left:10px;">
+      <h1 style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</h1>
+    </div>
+    <div style="padding-left:10px;">
+      <h3>
+        {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
+      </h3>
+    </div>
+    <span class="horizontal-space"></span>
+    <button mat-raised-button (click)="reset()">
+      <mat-icon>replay</mat-icon>
+    </button>
+    <button mat-raised-button (click)="dictionaryService.switchLanguage()"
+      style="margin-left: 10px;">{{dictionaryService.currentLanguage}}</button>
 
-    </mat-toolbar-row>
-  
-  </mat-toolbar>
-  
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-    
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content style="height: calc(100vh - 64px);">
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
-  
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="height: calc(100vh - 64px);">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

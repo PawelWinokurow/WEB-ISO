@@ -24,8 +24,8 @@ exports.connect = function () {
     connection.query(TABLECREATION,
       function (err, results, fields) {
         if (err) throw err;
-            console.log(results);
-            console.log(fields)
+            //console.log(results);
+            //console.log(fields)
       });
     return connection;
   });
