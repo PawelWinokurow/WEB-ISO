@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { HttpService } from 'src/app/services/http.service';
-
+import { environment } from './../../../environments/environment';
 /**
  * The dialog to choose the direct or indirect type of customer mask sending.
  */
@@ -13,6 +13,8 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./send-mask-confirmation-dialog.component.scss']
 })
 export class SendMaskConfirmationDialogComponent {
+
+  recaptchaSitekey = environment.recaptchaSitekey;
 
   captcha: FormControl = new FormControl('', [Validators.required]);
 
@@ -24,7 +26,9 @@ export class SendMaskConfirmationDialogComponent {
    */
 
   resolved(event) {
-    this.httpService.sendToken(event).subscribe();
+    this.httpService.sendToken(event).subscribe(res => {
+      //console.log(res);
+    });
   }
 
 

@@ -1,15 +1,14 @@
 var express = require('express');
 var schedule = require('node-schedule');
-var db = require('./database')
-var soap = require('./soap')
-var email = require('./email')
-var random = require('./random')
-var request = require("request");
+var db = require('./database');
+var soap = require('./soap');
+var email = require('./email');
+var random = require('./random');
 var cors = require('cors');
 var logger = require('morgan');
-var https = require('https');
+const fetch = require('node-fetch');
 
-require('dotenv').config()
+require('dotenv').config();
 
 db.connect();
 
@@ -43,7 +42,7 @@ app.post("/request", function (req, res, next) {
 });
 
 /**
- * Enpoint to get email confirmations.
+ * Endpoint to get email confirmations.
  */
 app.get("/confirm", function (req, res, next) {
   db.checkConfirmation(req.query.hash).then(result => {
@@ -58,36 +57,35 @@ app.get("/confirm", function (req, res, next) {
     })
 });
 
+/**
+ * Endpoint to get recaptcha token from the client.
+ */
 app.post('/token_validate', (req, res) => {
 
   let token = req.body.recaptcha;
-  const secretKey = "6LdMVTEaAAAAAPvYbCo516FjdmFluRMinGvVL8Xk"; //the secret key from google admin;
 
-  //token validation url is URL:
-  //const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify'
-  const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&amp;response=${token}&amp;remoteip=${req.connection.remoteAddress}`;
   if (token === null || token === undefined) {
     res.status(201).send({ success: false, message: "Token is empty or invalid" })
     return console.log("token empty");
   }
-  //request.post({url: verificationUrl, form: {secret: secretKey, response: token, remoteip: req.connection.remoteAddress}}, function(err, response, body){
 
-  https.get(verificationUrl, function (response) {
-
-    response.on("data", data => {
-      body = JSON.parse(data)
-
-      if (body.success !== undefined && !data.success) {
-        res.send({ success: false, 'message': "recaptcha failed" });
-        return console.log("failed")
-      }
-      //if passed response success message to client
-      res.send({ "success": true, 'message': "recaptcha passed" });
-    })
-  })
-
+  fetch(process.env.RECAPTCHA_HOST, {
+  method: "post",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+  },
+  body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.connection.remoteAddress}`})
+  .then(res => res.json())
+  .then(json => {
+    if (json.success !== undefined && !json.success) {
+      res.send({ success: false });
+    }
+    //if passed response success message to client
+    res.send({ success: true });
+  });
 })
 
-app.listen(process.env.WEB_PORT || 3000, () => {
-  console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT || 3000}`)
+app.listen(process.env.WEB_PORT, () => {
+  console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
 })
