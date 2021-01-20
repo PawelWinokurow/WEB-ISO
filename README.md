@@ -10,6 +10,12 @@ WEB-ISO is a Angular application for creating customer instances.
   * Go to client folder and install dependencies using ```npm install```
   * Go to server folder and install dependencies using ```npm install```
 
+## Docker
+
+* WEB-ISO Server:
+ * Build docker image: ```docker build -t web-iso-server .```
+ * Run docker container: ```docker run -d -p port:3000 web-iso-server``` 
+
 ## Documentation
 
 * Client uses Compodoc: 
@@ -19,3 +25,4 @@ WEB-ISO is a Angular application for creating customer instances.
   * Documentation is available in ```server/documentation```.
 
 ## License
+

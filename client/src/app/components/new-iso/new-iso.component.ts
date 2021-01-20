@@ -265,8 +265,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   openSendSOAPDialog() {
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
-      disableClose: true,
-      backdropClass: 'backdrop-background',
+      //disableClose: true,
+      //backdropClass: 'backdrop-background',
     });
 
     sendMaskDialogRef.afterClosed().subscribe(result => {
@@ -275,10 +275,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
         this.httpService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
-      } else {
+      } else if (result === false){
         const emailDialogRef = this.dialog.open(EmailDialogComponent, {
-          disableClose: true,
-          backdropClass: 'backdrop-background',
+          //disableClose: true,
+          //backdropClass: 'backdrop-background',
         });
         emailDialogRef.afterClosed().subscribe(emailTo => {
           if (emailTo) {
