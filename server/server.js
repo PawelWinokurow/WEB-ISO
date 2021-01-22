@@ -1,18 +1,18 @@
 var express = require('express');
 var schedule = require('node-schedule');
-var db = require('./database');
-var soap = require('./soap');
-var email = require('./email');
-var random = require('./random');
+var db_service = require('./services/database_service');
+var soap_service = require('./services/soap_service');
+var email_service = require('./services/email_service');
+var random_service = require('./services/random_service');
 var cors = require('cors');
 var logger = require('morgan');
-const fetch = require('node-fetch');
+var fetch = require('node-fetch');
 
 require('dotenv').config();
 
-db.connect();
+db_service.connect();
 
-const app = express();
+var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,7 +23,7 @@ app.use(cors());
  * Runs each day at 00.00 and removes old not confirmed customer masks
  */
 schedule.scheduleJob('0 0 * * *', function () {
-  db.removeOldMasks();
+  db_service.removeOldMasks();
 });
 
 /**
@@ -32,11 +32,11 @@ schedule.scheduleJob('0 0 * * *', function () {
 app.post("/request", function (req, res, next) {
   let mask = req.body;
   if (mask.isDirect) {
-    soap.sendMask(mask.sapMask);
+    soap_service.sendMask(mask.sapMask);
   } else {
-    const hash = random.generateHash();
-    db.storeMask(hash, mask.sapMask);
-    email.sendEmail(hash, mask.emailTo);
+    const hash = random_service.generateHash();
+    db_service.storeMask(hash, mask.sapMask);
+    email_service.sendEmail(hash, mask.emailTo);
   }
   res.json({ ok: true });
 });
@@ -45,9 +45,9 @@ app.post("/request", function (req, res, next) {
  * Endpoint to get email confirmations.
  */
 app.get("/confirm", function (req, res, next) {
-  db.checkConfirmation(req.query.hash).then(result => {
+  db_service.checkConfirmation(req.query.hash).then(result => {
     var mask = JSON.parse(result.mask)
-    soap.sendMask(mask);
+    soap_service.sendMask(mask);
     res.send('<p>Success! The mask was confirmed.</p>');
     next();
   })
