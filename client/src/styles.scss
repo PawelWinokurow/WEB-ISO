@@ -11,8 +11,8 @@ body {
 }
 
 .inner-component {
+  position: relative;
   height: calc(100vh - 64px);  
-  display: flex;
   background-color: rgb(229, 229, 229);
 }
 
