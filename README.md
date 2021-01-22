@@ -13,8 +13,8 @@ WEB-ISO is a Angular application for creating customer instances.
 ## Docker
 
 * WEB-ISO Server:
- * Build docker image: ```docker build -t web-iso-server .```
- * Run docker container: ```docker run -d -p port:3000 web-iso-server``` 
+  * Build docker image: ```docker build -t web-iso-server .```
+  * Run docker container: ```docker run -d -p port:3000 web-iso-server``` 
 
 ## Documentation
 
