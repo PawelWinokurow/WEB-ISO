@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 
 /**
@@ -13,7 +14,6 @@ import { Observable, of } from 'rxjs';
 export class HttpService {
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json');
-  tempNodeJS = "http://127.0.0.1:3000";
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class HttpService {
    * @returns Response observable.
    */
   sendMask(mask): Observable<any>{
-    return this.http.post(`${this.tempNodeJS}/request`, JSON.stringify(mask), {
+    return this.http.post(`${environment.serverURL}/request`, JSON.stringify(mask), {
       headers: this.headers
     }).pipe(catchError(this.handleError('send mask')));
   }
@@ -33,7 +33,7 @@ export class HttpService {
    * @param token 
    */
   sendToken(token): Observable<any>{
-    return this.http.post(`${this.tempNodeJS}/token_validate`, {recaptcha: token}, {
+    return this.http.post(`${environment.serverURL}/token_validate`, {recaptcha: token}, {
       headers: this.headers
     }).pipe(catchError(this.handleError('send token')));
   }
@@ -51,6 +51,4 @@ export class HttpService {
       return of(result as T);
     };
   }
-
-
 }

@@ -10,7 +10,7 @@ var fetch = require('node-fetch');
 
 require('dotenv').config();
 
-db_service.connect();
+//db_service.connect();
 
 var app = express();
 
