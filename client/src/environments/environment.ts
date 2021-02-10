@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  recaptchaSitekey: "6LdMVTEaAAAAAHpaN12mSQ5NNwR8G6d4txTsLeig"
+  recaptchaSitekey: "6LdMVTEaAAAAAHpaN12mSQ5NNwR8G6d4txTsLeig",
+  serverURL: "http://localhost:4301",
+  //serverURL: "http://127.0.0.1:3000",
 };
 
 /*
