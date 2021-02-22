@@ -22,7 +22,7 @@ var transporter = nodemailer.createTransport({
     proxy: process.env.EMAIL_PROXY,
     auth: {
         user: 'paulweinmacher@googlemail.com',
-        pass: ''
+        pass: 'Tromboman8919'
     }
 });
 

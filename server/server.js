@@ -1,14 +1,15 @@
 var express = require('express');
 var schedule = require('node-schedule');
+var cors = require('cors');
+var logger = require('morgan');
+var fetch = require('node-fetch');
 var db_service = require('./services/database_service');
 var soap_service = require('./services/soap_service');
 var email_service = require('./services/email_service');
 var random_service = require('./services/random_service');
-var cors = require('cors');
-var logger = require('morgan');
-var fetch = require('node-fetch');
+var HttpsroxyAgent = require('https-proxy-agent');
+var HttpProxyAgent = require('http-proxy-agent');
 
-require('dotenv').config();
 
 //db_service.connect();
 
@@ -18,9 +19,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
+//Works for email
+//var proxyAgent = new HttpProxyAgent(process.env.EMAIL_PROXY);
+
+var proxyAgent = new HttpsroxyAgent(process.env.EMAIL_PROXY);
 
 /**
- * Runs each day at 00.00 and removes old not confirmed customer masks
+ * Runs each day at 00.00 and removes old not confirmed customer masks.
  */
 schedule.scheduleJob('0 0 * * *', function () {
   db_service.removeOldMasks();
@@ -31,6 +36,7 @@ schedule.scheduleJob('0 0 * * *', function () {
  */
 app.post("/request", function (req, res, next) {
   let mask = req.body;
+  console.log(mask)
   if (mask.isDirect) {
     soap_service.sendMask(mask.sapMask);
   } else {
@@ -38,7 +44,9 @@ app.post("/request", function (req, res, next) {
     db_service.storeMask(hash, mask.sapMask);
     email_service.sendEmail(hash, mask.emailTo);
   }
-  res.json({ ok: true });
+  res.json({
+    ok: true
+  });
 });
 
 /**
@@ -46,11 +54,11 @@ app.post("/request", function (req, res, next) {
  */
 app.get("/confirm", function (req, res, next) {
   db_service.checkConfirmation(req.query.hash).then(result => {
-    var mask = JSON.parse(result.mask)
-    soap_service.sendMask(mask);
-    res.send('<p>Success! The mask was confirmed.</p>');
-    next();
-  })
+      var mask = JSON.parse(result.mask)
+      soap_service.sendMask(mask);
+      res.send('<p>Success! The mask was confirmed.</p>');
+      next();
+    })
     .catch(() => {
       res.send('<p>Error! The mask was not confirmed.</p>');
       next();
@@ -65,27 +73,53 @@ app.post('/token_validate', (req, res) => {
   let token = req.body.recaptcha;
 
   if (token === null || token === undefined) {
-    res.status(201).send({ success: false, message: "Token is empty or invalid" })
+    res.status(201).send({
+      success: false,
+      message: "Token is empty or invalid"
+    })
     return console.log("token empty");
   }
-
   fetch(process.env.RECAPTCHA_HOST, {
-  method: "post",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-  },
-  body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.connection.remoteAddress}`})
-  .then(res => res.json())
-  .then(json => {
-    if (json.success !== undefined && !json.success) {
-      res.send({ success: false });
-    }
-    //if passed response success message to client
-    res.send({ success: true });
-  });
+      agent: proxyAgent,
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+      },
+      body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.socket.remoteAddress}`
+    })
+    .then(res => res.json()).catch(err => {
+      console.log('err')
+      res.send({
+        success: false
+      });
+      return
+    })
+    .then(json => {
+      if (json.success !== undefined && !json.success) {
+        res.send({
+          success: false
+        });
+      }
+      console.log('captcha')
+      //if passed response success message to client.
+      res.send({
+        success: true
+      });
+    });
 })
 
 app.listen(process.env.WEB_PORT, () => {
+
+/*
+  fetch('https://github.com/', {
+      agent: proxyAgent
+    })
+    .then(res => res.text())
+    .then(body => console.log(body));
+*/
+  require('dotenv').config();
+  //soap_service.test()
+  email_service.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
   console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
 })

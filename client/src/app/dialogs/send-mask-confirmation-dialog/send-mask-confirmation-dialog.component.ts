@@ -27,7 +27,10 @@ export class SendMaskConfirmationDialogComponent {
 
   resolved(event) {
     this.httpService.sendToken(event).subscribe(res => {
-      //console.log(res);
+      //console.log(`Resolved: ${res}`);
+      if (res[0] == undefined)
+        this.captcha.setValue('');
+      
     });
   }
 

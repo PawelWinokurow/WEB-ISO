@@ -507,8 +507,9 @@ export class EmailDialogComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;alternate-theme&quot;&gt;
-  &lt;h3 mat-dialog-title style&#x3D;&quot;text-align:center;&quot;&gt;{{dictionaryService.get(&#x27;EEM&#x27;)}}&lt;/h3&gt;
+  &lt;h2 mat-dialog-title style&#x3D;&quot;text-align:center;&quot;&gt;{{dictionaryService.get(&#x27;EMA&#x27;)}}&lt;/h2&gt;
   &lt;div mat-dialog-content&gt;
+    &lt;h3 style&#x3D;&quot;text-align:center;&quot;&gt;{{dictionaryService.get(&#x27;EEM&#x27;)}}&lt;/h3&gt;
 
     &lt;mat-form-field appearance&#x3D;&quot;outline&quot; color&#x3D;&quot;accent&quot;&gt;
       &lt;mat-label&gt;{{dictionaryService.get(&#x27;EMA&#x27;)}}&lt;/mat-label&gt;
@@ -570,7 +571,7 @@ export class EmailDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="alternate-theme">  <h3 mat-dialog-title style="text-align:center;">{{dictionaryService.get(\'EEM\')}}</h3>  <div mat-dialog-content>    <mat-form-field appearance="outline" color="accent">      <mat-label>{{dictionaryService.get(\'EMA\')}}</mat-label>      <input matInput [formControl]="email">      <mat-error *ngFor="let errorType of email.errors | keyvalue;">        <mat-icon style="margin-right: 5px;">error</mat-icon>        {{errorMessageService.getError(\'EMA\', errorType.key)}}    </mat-error>    </mat-form-field>  </div>  <div mat-dialog-actions align="center" style="padding-top: 10px;">    <div style="display: inline-block; padding-right: 5px;">      <button mat-stroked-button (click)="onYesClick()"        [disabled]="!email.valid">        <span>{{dictionaryService.get(\'SUB\')}}</span>        <mat-icon style="margin-left: 5px;">email</mat-icon>      </button>    </div>    <div style="display: inline-block; padding-left: 5px;">      <button  mat-stroked-button (click)="onNoClick()">        <span>{{dictionaryService.get(\'CAN\')}}</span>        <mat-icon style="margin-left: 5px;">cancel</mat-icon>      </button>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="alternate-theme">  <h2 mat-dialog-title style="text-align:center;">{{dictionaryService.get(\'EMA\')}}</h2>  <div mat-dialog-content>    <h3 style="text-align:center;">{{dictionaryService.get(\'EEM\')}}</h3>    <mat-form-field appearance="outline" color="accent">      <mat-label>{{dictionaryService.get(\'EMA\')}}</mat-label>      <input matInput [formControl]="email">      <mat-error *ngFor="let errorType of email.errors | keyvalue;">        <mat-icon style="margin-right: 5px;">error</mat-icon>        {{errorMessageService.getError(\'EMA\', errorType.key)}}    </mat-error>    </mat-form-field>  </div>  <div mat-dialog-actions align="center" style="padding-top: 10px;">    <div style="display: inline-block; padding-right: 5px;">      <button mat-stroked-button (click)="onYesClick()"        [disabled]="!email.valid">        <span>{{dictionaryService.get(\'SUB\')}}</span>        <mat-icon style="margin-left: 5px;">email</mat-icon>      </button>    </div>    <div style="display: inline-block; padding-left: 5px;">      <button  mat-stroked-button (click)="onNoClick()">        <span>{{dictionaryService.get(\'CAN\')}}</span>        <mat-icon style="margin-left: 5px;">cancel</mat-icon>      </button>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailDialogComponent', 'selector': 'email-dialog'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'SendMaskConfirmationDialogComponent', 'selector': 'app-send-mask-confirmation-dialog'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EmailDialogComponent'};
