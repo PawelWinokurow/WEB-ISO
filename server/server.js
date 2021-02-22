@@ -8,7 +8,7 @@ var cors = require('cors');
 var logger = require('morgan');
 var fetch = require('node-fetch');
 var httpsProxyAgent = require('https-proxy-agent');
-var validUrl = require('valid-url');
+
 
 require('dotenv').config();
 
@@ -24,20 +24,21 @@ class Server {
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
     this.proxyAgent = null;
-    this.checkProxy();
-    this.runSchedule();
-    this.initEndPoints();
-  }
-
-  checkProxy() {
-    if (validUrl.isUri(process.env.PROXY)) {
+    fetch(process.env.PROXY).then(() => {
+      console.log('In Proxy');
       process.env.HTTP_PROXY = process.env.PROXY
       process.env.HTTPS_PROXY = process.env.PROXY
 
       // We need HttpsProxyAgent to use proxy for re-captcha
       this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY);
-      console.log('In Proxy');
-    }
+      this.runSchedule();
+      this.initEndPoints();
+    }).catch(() => {
+      console.log('Not in Proxy');
+      this.runSchedule();
+      this.initEndPoints();
+    });
+
   }
 
   /**
@@ -72,11 +73,11 @@ class Server {
      */
     this.expressApp.get("/confirm", function (req, res, next) {
       databaseService.checkConfirmation(req.query.hash).then(result => {
-          var mask = JSON.parse(result.mask)
-          soapService.sendMask(mask);
-          res.send('<p>Success! The mask was confirmed.</p>');
-          next();
-        })
+        var mask = JSON.parse(result.mask)
+        soapService.sendMask(mask);
+        res.send('<p>Success! The mask was confirmed.</p>');
+        next();
+      })
         .catch(() => {
           res.send('<p>Error! The mask was not confirmed.</p>');
           next();
@@ -133,8 +134,8 @@ class Server {
 
   start() {
     this.expressApp.listen(process.env.WEB_PORT, () => {
-        //soap_service.test()
-        emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
+      //soap_service.test()
+      emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
       console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
     })
   }

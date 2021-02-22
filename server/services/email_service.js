@@ -17,7 +17,7 @@ exports.sendEmail = function (hash, emailTo) {
             pass: 'Tromboman8919'
         }
     }
-    
+
     if (process.env.HTTP_PROXY != undefined) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
