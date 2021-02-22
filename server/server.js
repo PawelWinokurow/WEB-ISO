@@ -7,8 +7,7 @@ var db_service = require('./services/database_service');
 var soap_service = require('./services/soap_service');
 var email_service = require('./services/email_service');
 var random_service = require('./services/random_service');
-var HttpsroxyAgent = require('https-proxy-agent');
-var HttpProxyAgent = require('http-proxy-agent');
+var HttpsProxyAgent = require('https-proxy-agent');
 
 
 //db_service.connect();
@@ -19,10 +18,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
-//Works for email
-//var proxyAgent = new HttpProxyAgent(process.env.EMAIL_PROXY);
-
-var proxyAgent = new HttpsroxyAgent(process.env.EMAIL_PROXY);
+// We need HttpsProxyAgent to use proxy for re-captcha
+var proxyAgent = new HttpsProxyAgent(process.env.EMAIL_PROXY);
 
 /**
  * Runs each day at 00.00 and removes old not confirmed customer masks.
@@ -89,11 +86,10 @@ app.post('/token_validate', (req, res) => {
       body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.socket.remoteAddress}`
     })
     .then(res => res.json()).catch(err => {
-      console.log('err')
       res.send({
         success: false
       });
-      return
+      return console.log(`Error: ${err}`);
     })
     .then(json => {
       if (json.success !== undefined && !json.success) {
@@ -102,6 +98,7 @@ app.post('/token_validate', (req, res) => {
         });
       }
       console.log('captcha')
+      console.log(json)
       //if passed response success message to client.
       res.send({
         success: true
@@ -111,14 +108,6 @@ app.post('/token_validate', (req, res) => {
 
 app.listen(process.env.WEB_PORT, () => {
 
-/*
-  fetch('https://github.com/', {
-      agent: proxyAgent
-    })
-    .then(res => res.text())
-    .then(body => console.log(body));
-*/
-  require('dotenv').config();
   //soap_service.test()
   email_service.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
   console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)

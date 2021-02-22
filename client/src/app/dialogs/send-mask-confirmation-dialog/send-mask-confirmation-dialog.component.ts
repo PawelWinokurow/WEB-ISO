@@ -25,15 +25,12 @@ export class SendMaskConfirmationDialogComponent {
    * @param event Recaptcha string token
    */
 
-  resolved(event) {
-    this.httpService.sendToken(event).subscribe(res => {
-      //console.log(`Resolved: ${res}`);
-      if (res[0] == undefined)
-        this.captcha.setValue('');
-      
-    });
+  async resolved(captcha) {
+    if (captcha != null) {
+      this.httpService.sendToken(captcha).subscribe(res => {
+      });
+    }
   }
-
 
   /**
    * Click on the "yes" button triggers this method. The method closes the dialog and returns "true" value. 
