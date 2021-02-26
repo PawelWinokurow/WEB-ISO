@@ -7,7 +7,7 @@ require('dotenv').config()
  * @param  {string} emailTo Email of the requestor
  */
 exports.sendEmail = function (hash, emailTo) {
-
+    
     emailOptions = {
         host: 'smtp.gmail.com',
         port: 465,
@@ -17,20 +17,19 @@ exports.sendEmail = function (hash, emailTo) {
             pass: 'Tromboman8919'
         }
     }
-
+    console.log(process.env.IN_PROXY)
     if (process.env.HTTP_PROXY != undefined) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
     var transporter = nodemailer.createTransport(emailOptions);
-
-
+    
+    
     var message = {
         from: "BayWa",
         to: emailTo,
         subject: 'Mask confirmation',
         html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the mask.</p>'
     };
-
     transporter.sendMail(message, function (error, info) {
         if (error) {
             console.log(error);

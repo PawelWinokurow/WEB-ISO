@@ -25,12 +25,9 @@ class Server {
     this.expressApp.use(cors());
     this.proxyAgent = null;
     fetch(process.env.PROXY).then(() => {
-      console.log('In Proxy');
       process.env.HTTP_PROXY = process.env.PROXY
       process.env.HTTPS_PROXY = process.env.PROXY
-
-      // We need HttpsProxyAgent to use proxy for re-captcha
-      this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY);
+      this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY); // We need HttpsProxyAgent to use proxy for re-captcha
       this.runSchedule();
       this.initEndPoints();
     }).catch(() => {
@@ -88,7 +85,6 @@ class Server {
      * Endpoint to get recaptcha token from the client.
      */
     this.expressApp.post('/token_validate', (req, res) => {
-
       let token = req.body.recaptcha;
 
       if (token === null || token === undefined) {
@@ -107,7 +103,7 @@ class Server {
         body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.socket.remoteAddress}`
       }
       if (this.proxyAgent) {
-        options.agent = proxyAgent;
+        options.agent = this.proxyAgent;
       }
       fetch(process.env.RECAPTCHA_HOST, options)
         .then(res => res.json()).catch(err => {
@@ -134,8 +130,7 @@ class Server {
 
   start() {
     this.expressApp.listen(process.env.WEB_PORT, () => {
-      //soap_service.test()
-      emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
+      
       console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
     })
   }
@@ -143,3 +138,10 @@ class Server {
 }
 
 new Server().start()
+
+setTimeout(function(){ 
+  //soapService.test_xml()
+  soapService.test()
+  //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
+
+}, 1000);
