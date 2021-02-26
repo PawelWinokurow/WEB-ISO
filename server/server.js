@@ -31,7 +31,6 @@ class Server {
       this.runSchedule();
       this.initEndPoints();
     }).catch(() => {
-      console.log('Not in Proxy');
       this.runSchedule();
       this.initEndPoints();
     });
