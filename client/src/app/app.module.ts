@@ -21,6 +21,7 @@ import { PreselectionComponent } from './components/preselection/preselection.co
 import { ToastrModule } from 'ngx-toastr';
 import { SearchService } from './services/search.service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { DateService } from './services/date.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     ErrorMessageService,
     StorageService,
     SearchService,
+    DateService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

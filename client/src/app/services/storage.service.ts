@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CodeDetails } from '../interfaces/lists';
 import { DictionaryService } from './dictionary.service';
 
 /**
@@ -11,7 +12,7 @@ export class StorageService {
 
   customerType: string = 'person';
   debitCreditType: string = 'debit';
-  companyCode: string = '';
+  companyCode: CodeDetails = null;
 
   constructor(private dictionaryService: DictionaryService) { }
 
@@ -21,7 +22,7 @@ export class StorageService {
   resetValues() {
     this.customerType = 'person';
     this.debitCreditType = 'debit';
-    this.companyCode = '';
+    this.companyCode = null;
   }
 
   /**
@@ -45,7 +46,7 @@ export class StorageService {
    * @returns Company code value.
    */
   getCompanyCodeName(): string {
-    return this.companyCode;
+    return this.companyCode.details;
   }
 
 }

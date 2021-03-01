@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SharedMask } from 'src/app/interfaces/mask';
 import { SearchService } from 'src/app/services/search.service';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
+import { DateService } from 'src/app/services/date.service';
 
 
 /**
@@ -57,7 +58,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
-    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private searchService: SearchService) {
+    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
@@ -158,7 +159,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
       mailbox: [''],
       zipMailbox: [''],
     });
-
     this.payment = this.formBuilder.group({
       taxId: [''],
       vatId: [''],
@@ -264,6 +264,13 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer mask dialog.
    */
   openSendSOAPDialog() {
+    const mask = this.constructMask(true)
+    this.httpService.sendMask(mask).subscribe(res => {
+      this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
+    });
+    return 
+
+
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
@@ -275,7 +282,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
         this.httpService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
-      } else if (result === false){
+      } else if (result === false) {
         const emailDialogRef = this.dialog.open(EmailDialogComponent, {
           //disableClose: true,
           //backdropClass: 'backdrop-background',
@@ -309,53 +316,100 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Formats date to YYYY-MM-DD format.
-   * @param date JavaScript Date
-   * @returns Formatted date.
-   */
-  formatDate(date: Date) {
-    var month = '' + (date.getMonth() + 1)
-    var day = '' + date.getDate()
-    var year = date.getFullYear();
-    if (month.length < 2)
-      month = '0' + month;
-    if (day.length < 2)
-      day = '0' + day;
-    return `${year}-${month}-${day}`
-  }
-
-  /**
    * Constructs customer mask from ControlForms.
    * @param isDirect Send customer mask directly to SAP or with confirmation email.
    * @returns Customer mask object to send.
    */
   constructMask(isDirect: boolean) {
-    const mask: SharedMask = {
-      IV_PARTNERGROUP: "01",
-      IV_PARTNERCATEGORY: this.storageService.debitCreditType === "person" ? "1" : "2",
-      IS_CENTRALDATAPERSON: {
-        FIRSTNAME: this.contactInformation?.get("firstName")?.value ?? '',
-        LASTNAME: this.contactInformation?.get("secondName")?.value ?? '',
-        TITLE_ACA1: this.contactInformation?.get("title")?.value.code ?? '',
-        BIRTHDATE: this.contactInformation?.get("birthDate")?.value == null ? '' :
-          this.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
-      },
-      IS_ADDRESS: {
-        C_O_NAME: this.contactInformation?.get("additionalName")?.value ?? '',
-        CITY: this.contactInformation?.get("city")?.value ?? '',
-        POSTL_COD1: this.contactInformation?.get("zip")?.value ?? '',
-        POSTL_COD2: this.contactInformation?.get("zipMailbox")?.value ?? '',
-        PO_BOX: this.contactInformation?.get("mailbox")?.value ?? '',
-        STREET: this.contactInformation?.get("street")?.value ?? '',
-        HOUSE_NO: this.contactInformation?.get("houseNumber")?.value ?? '',
-        COUNTRY: this.contactInformation?.get("country")?.value?.code ?? '',
-      },
-      IS_CENTRALDATAORGANIZATION: {
-        LEGALFORM: this.contactInformation?.get('legalForm')?.value?.code ?? '',
-      }
+    const data = {
+      //Preselection
+      companyCode: this.storageService.companyCode?.code ?? '',
+
+      //Shared forms
+
+      //Contact information
+      legalForm: this.contactInformation?.get('legalForm')?.value?.code ?? '',
+      interfaceNumber: this.contactInformation?.get('interfaceNumber')?.value ?? '',
+      salutation: this.contactInformation?.get('salutation')?.value?.code ?? '',
+      additionalName: this.contactInformation?.get("additionalName")?.value ?? '',
+      city: this.contactInformation?.get("city")?.value ?? '',
+      zip: this.contactInformation?.get("zip")?.value ?? '',
+      zipMailbox: this.contactInformation?.get("zipMailbox")?.value ?? '',
+      mailbox: this.contactInformation?.get("mailbox")?.value ?? '',
+      street: this.contactInformation?.get("street")?.value ?? '',
+      houseNumber: this.contactInformation?.get("houseNumber")?.value ?? '',
+      country: this.contactInformation?.get("country")?.value?.code ?? '',
+      phone: this.contactInformation?.get("phone")?.value ?? '',
+      fax: this.contactInformation?.get("fax")?.value ?? '',
+      mobile: this.contactInformation?.get("mobile")?.value ?? '',
+      email: this.contactInformation?.get("email")?.value ?? '',
+
+      //Payment
+      taxId: this.payment?.get("taxId")?.value ?? '',
+      vatId: this.payment?.get("vatId")?.value ?? '',
+      industryFieldCode: this.payment?.get("industryFieldCode")?.value?.code ?? '',
+      industryField: this.payment?.get("industryField")?.value?.code ?? '',
+      iban: this.payment?.get("iban")?.value ?? '',
+      bic: this.payment?.get("bic")?.value ?? '',
+      bank: this.payment?.get("bank")?.value ?? '',
+      paymentTerm: this.payment?.get("paymentTerm")?.value?.code ?? '',
+      notes: this.payment?.get("notes")?.value ?? '',
+      sepa: this.payment?.get("sepa")?.value ?? '',
+      //Uploaded files
+      files: this.upload?.get("files")?.value ?? '',
+
+      //Person forms
+      title: this.contactInformation?.get('title')?.value?.code ?? '',
+      firstName: this.contactInformation?.get('firstName')?.value ?? '',
+      secondName: this.contactInformation?.get('secondName')?.value ?? '',
+      birthDate: this.contactInformation?.get("birthDate")?.value == null ? '' :
+        this.dateService.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
+
+      //Person debit forms
+      agb: this.payment?.get('agb')?.value ?? '',
+      creditLimit: this.payment?.get('creditLimit')?.value ?? '',
+
+      //Organization forms
+      orgaPersons: this.contactInformation?.get('orgaPersons')?.value ?? '',
+
+      //Organization debit forms
+
+      //Applicant 0
+      applicantSalutation0: this.applicant?.get('salutation')?.value?.code ?? '',
+      applicantTitle0: this.applicant?.get('title')?.value?.code  ?? '',
+      applicantFirstName0: this.applicant?.get('firstName')?.value ?? '',
+      applicantSecondName0: this.applicant?.get('secondName')?.value ?? '',
+      applicantBirthDate0: this.applicant?.get('birthDate')?.value == null ? '' :
+        this.dateService.formatDate(new Date(this.applicant?.get("birthDate").value)),
+      applicantPhone0: this.applicant?.get('phone')?.value ?? '',
+      applicantMobile0: this.applicant?.get('mobile')?.value ?? '',
+      applicantEmail0: this.applicant?.get('email')?.value ?? '',
+
+      //Applicant 1
+      applicantSalutation1: this.applicant?.get('salutation1')?.value?.code ?? '',
+      applicantTitle1: this.applicant?.get('title1')?.value?.code  ?? '',
+      applicantFirstName1: this.applicant?.get('firstName1')?.value ?? '',
+      applicantSecondName1: this.applicant?.get('secondName1')?.value ?? '',
+      applicantBirthDate1: this.applicant?.get('birthDate1')?.value == null ? '' :
+        this.dateService.formatDate(new Date(this.applicant?.get("birthDate1").value)),
+      applicantPhone1: this.applicant?.get('phone1')?.value ?? '',
+      applicantMobile1: this.applicant?.get('mobile1')?.value ?? '',
+      applicantEmail1: this.applicant?.get('email1')?.value ?? '',
+
+      //Applicant 2
+      applicantSalutation2: this.applicant?.get('salutation2')?.value?.code ?? '',
+      applicantTitle2: this.applicant?.get('title2')?.value?.code  ?? '',
+      applicantFirstName2: this.applicant?.get('firstName2')?.value ?? '',
+      applicantSecondName2: this.applicant?.get('secondName2')?.value ?? '',
+      applicantBirthDate2: this.applicant?.get('birthDate2')?.value == null ? '' :
+        this.dateService.formatDate(new Date(this.applicant?.get("birthDate2").value)),
+      applicantPhone2: this.applicant?.get('phone2')?.value ?? '',
+      applicantMobile2: this.applicant?.get('mobile2')?.value ?? '',
+      applicantEmail2: this.applicant?.get('email2')?.value ?? '',
 
     };
-    return { isDirect: isDirect, sapMask: mask }
+    return { isDirect: isDirect, customerType: this.storageService.customerType,
+      debitCreditType: this.storageService.debitCreditType, data: data }
   }
 
   /**

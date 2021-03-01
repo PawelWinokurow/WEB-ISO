@@ -24,7 +24,7 @@ export class PreselectionComponent implements OnInit {
     this.companyCode = new FormControl('', [Validators.required]);
     this.storageService.resetValues();
     // Subscribe companyCode: set companyCode in StorageService to selected value
-    this.companyCode.valueChanges.subscribe(() => this.storageService.companyCode = this.companyCode.value.details);
+    this.companyCode.valueChanges.subscribe(() => this.storageService.companyCode = this.companyCode.value);
   }
 
   /**

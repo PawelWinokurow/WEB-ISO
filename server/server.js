@@ -1,18 +1,42 @@
 var express = require('express');
 var schedule = require('node-schedule');
-var databaseService = require('./services/database_service');
-var soapService = require('./services/soap_service');
-var emailService = require('./services/email_service');
-var randomService = require('./services/random_service');
 var cors = require('cors');
 var logger = require('morgan');
 var fetch = require('node-fetch');
 var httpsProxyAgent = require('https-proxy-agent');
-
-
+var path = require('path');
 require('dotenv').config();
 
+var databaseService = require('./services/database_service');
+var soapService = require('./services/soap_service');
+var emailService = require('./services/email_service');
+var randomService = require('./services/random_service');
+var maskService = require('./services/mask_service');
+
+
+
+//envelope.xml for test
+var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
+
 //databaseService.connect();
+
+async function composeMask(maskData) {
+  var maskFactory = null
+  if (maskData.customerType === 'person') {
+    if (maskData.debitCreditType === 'debit') {
+      maskFactory = new maskService.PersonDebitFactory(maskData, ENVELOPE_URL);
+    } else if (maskData.debitCreditType === 'credit') {
+      maskFactory = new maskService.PersonCreditFactory(maskData, ENVELOPE_URL);
+    }
+  } else if (maskData.customerType === 'organization') {
+    if (maskData.debitCreditType === 'debit') {
+      maskFactory = new maskService.OrganizationDebitFactory(maskData, ENVELOPE_URL);
+    } else if (maskData.debitCreditType === 'credit') {
+      maskFactory = new maskService.OrganizationCreditFactory(maskData, ENVELOPE_URL);
+    }
+  }
+  return await maskFactory.build();
+}
 
 /**
  * Class to to manage the server. It contains node js express application
@@ -51,16 +75,22 @@ class Server {
      * Enpoint to get customer masks from application.
      */
     this.expressApp.post("/request", function (req, res, next) {
-      let mask = req.body;
-      if (mask.isDirect) {
-        soapService.sendMask(mask.sapMask);
-      } else {
-        const hash = randomService.generateHash();
-        databaseService.storeMask(hash, mask.sapMask);
-        emailService.sendEmail(hash, mask.emailTo);
-      }
-      res.json({
-        ok: true
+      let maskData = req.body;
+      
+      composeMask(maskData).then(sapMask => {
+        console.log("sapMask")
+        console.log(sapMask)
+
+        if (maskData.isDirect) {
+          //soapService.sendMask(sapMask);
+        } else {
+          const hash = randomService.generateHash();
+          databaseService.storeMask(hash, sapMask);
+          emailService.sendEmail(hash, maskData.emailTo);
+        }
+        res.json({
+          ok: true
+        });
       });
     });
 
@@ -117,8 +147,6 @@ class Server {
               success: false
             });
           }
-          console.log('captcha')
-          console.log(json)
           //if passed response success message to client.
           res.send({
             success: true
@@ -129,7 +157,6 @@ class Server {
 
   start() {
     this.expressApp.listen(process.env.WEB_PORT, () => {
-      
       console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
     })
   }
@@ -139,8 +166,7 @@ class Server {
 new Server().start()
 
 setTimeout(function(){ 
-  //soapService.test_xml()
-  soapService.test()
+  //soapService.test()
   //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
 
 }, 1000);
