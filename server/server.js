@@ -14,11 +14,11 @@ var randomService = require('./services/random_service');
 var maskService = require('./services/mask_service');
 
 
-
+databaseService.connect();
 //envelope.xml for test
 var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
 
-//databaseService.connect();
+
 
 function composeMask(maskData) {
   var maskFactory = null
@@ -82,7 +82,7 @@ class Server {
           var envelope = sapMask.getJSONArgs();
           console.log(envelope)
           if (maskData.isDirect) {
-            //soapService.sendMask(envelope);
+            soapService.sendMask(envelope);
           } else {
             const hash = randomService.generateHash();
             databaseService.storeMask(hash, envelope);
@@ -104,11 +104,9 @@ class Server {
         var mask = JSON.parse(result.mask)
         soapService.sendMask(mask);
         res.send('<p>Success! The mask was confirmed.</p>');
-        next();
       })
         .catch(() => {
           res.send('<p>Error! The mask was not confirmed.</p>');
-          next();
         })
     });
 
