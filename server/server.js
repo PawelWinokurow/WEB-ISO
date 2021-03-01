@@ -79,10 +79,10 @@ class Server {
 
       composeMask(maskData).then(
         sapMask => {
-          var envelope = sapMask.ENVELOPE
+          var envelope = sapMask.getJSONArgs();
           console.log(envelope)
           if (maskData.isDirect) {
-            soapService.sendMask(envelope);
+            //soapService.sendMask(envelope);
           } else {
             const hash = randomService.generateHash();
             databaseService.storeMask(hash, envelope);
@@ -93,9 +93,6 @@ class Server {
           });
         }
       );
-
-
-
     });
 
 

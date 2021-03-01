@@ -1,6 +1,5 @@
 var xml2js = require('xml2js');
 var fs = require('fs');
-const { resolve } = require('path');
 
 class MaskFactory {
     constructor(maskData, ENVELOPE_URL) {
@@ -12,16 +11,13 @@ class MaskFactory {
         var promise = new Promise((resolve, reject) => {
             fs.readFile(this.ENVELOPE_URL, (err, data) => {
                 xml2js.parseString(data, (err, args) => {
-                    resolve(args);
+                    this.envelope = args.ENVELOPE
+                    resolve(this);
                 });
             });
         });
         return promise
     }
-
-
-
-    createMask() { }
 }
 
 class PersonDebitFactory extends MaskFactory {
@@ -29,7 +25,7 @@ class PersonDebitFactory extends MaskFactory {
         super(maskData, ENVELOPE_URL);
     }
 
-    createMask() {
+    getJSONArgs() {
 
     }
 }
@@ -39,7 +35,7 @@ class PersonCreditFactory extends MaskFactory {
         super(maskData, ENVELOPE_URL);
     }
 
-    createMask() {
+    getJSONArgs() {
 
     }
 }
@@ -49,8 +45,18 @@ class OrganizationDebitFactory extends MaskFactory {
         super(maskData, ENVELOPE_URL);
     }
 
-    createMask() {
+    getJSONArgs() {
+        console.log(this.maskData)
+        //console.log(this.envelope)
+        var before = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM
+        console.log(`before: ${before}`)
 
+        //LegalForm
+        this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.maskData.data.legalForm]
+
+        var after = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM
+        console.log(`after: ${after}`)
+        return this.envelope
     }
 }
 
@@ -59,7 +65,7 @@ class OrganizationCreditFactory extends MaskFactory {
         super(maskData, ENVELOPE_URL);
     }
 
-    createMask() {
+    getJSONArgs() {
 
     }
 }
