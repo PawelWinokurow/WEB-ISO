@@ -20,7 +20,7 @@ var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
 
 //databaseService.connect();
 
-async function composeMask(maskData) {
+function composeMask(maskData) {
   var maskFactory = null
   if (maskData.customerType === 'person') {
     if (maskData.debitCreditType === 'debit') {
@@ -35,7 +35,7 @@ async function composeMask(maskData) {
       maskFactory = new maskService.OrganizationCreditFactory(maskData, ENVELOPE_URL);
     }
   }
-  return await maskFactory.build();
+  return maskFactory.build();
 }
 
 /**
@@ -76,23 +76,28 @@ class Server {
      */
     this.expressApp.post("/request", function (req, res, next) {
       let maskData = req.body;
-      
-      composeMask(maskData).then(sapMask => {
-        console.log("sapMask")
-        console.log(sapMask)
 
-        if (maskData.isDirect) {
-          //soapService.sendMask(sapMask);
-        } else {
-          const hash = randomService.generateHash();
-          databaseService.storeMask(hash, sapMask);
-          emailService.sendEmail(hash, maskData.emailTo);
+      composeMask(maskData).then(
+        sapMask => {
+          var envelope = sapMask.ENVELOPE
+          console.log(envelope)
+          if (maskData.isDirect) {
+            soapService.sendMask(envelope);
+          } else {
+            const hash = randomService.generateHash();
+            databaseService.storeMask(hash, envelope);
+            emailService.sendEmail(hash, maskData.emailTo);
+          }
+          res.json({
+            ok: true
+          });
         }
-        res.json({
-          ok: true
-        });
-      });
+      );
+
+
+
     });
+
 
     /**
      * Endpoint to get email confirmations.
@@ -165,7 +170,7 @@ class Server {
 
 new Server().start()
 
-setTimeout(function(){ 
+setTimeout(function () {
   //soapService.test()
   //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
 

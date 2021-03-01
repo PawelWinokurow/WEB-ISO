@@ -36,20 +36,18 @@ exports.test = function () {
  * Sends mask to the SAP server.
  * @param {object} mask Customer mask
  */
-exports.sendMask = function (mask) {
+exports.sendMask = function (envelope) {
     soap.createClient(WSDL_URL, function (err, soapClient) {
         if (err) {
             console.log("error", err);
         }
-        console.log(soapClient)
-        soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
-        var description = soapClient.describe()
-        /*soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(mask, function (err, result, raw, headers) {
+        soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
+        soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(envelope, function (err, result, raw, headers) {
             if (err) {
                 console.log(err);
             }
             console.log(JSON.stringify(result))
-        })*/
-    })
+        })
+    });
 
 }

@@ -1,5 +1,6 @@
 var xml2js = require('xml2js');
 var fs = require('fs');
+const { resolve } = require('path');
 
 class MaskFactory {
     constructor(maskData, ENVELOPE_URL) {
@@ -7,15 +8,15 @@ class MaskFactory {
         this.ENVELOPE_URL = ENVELOPE_URL
     }
 
-    async build() {
-        fs.readFile(this.ENVELOPE_URL, (err, data) => {
-            console.log(this.ENVELOPE_URL)
-            console.log(data)
-            xml2js.parseString(data, (err, args) => {
-                this.args = args;
-                console.log(args);
+    build() {
+        var promise = new Promise((resolve, reject) => {
+            fs.readFile(this.ENVELOPE_URL, (err, data) => {
+                xml2js.parseString(data, (err, args) => {
+                    resolve(args);
+                });
             });
         });
+        return promise
     }
 
 
