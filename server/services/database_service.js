@@ -1,7 +1,7 @@
-var mysql = require("mysql");
+var mysql = require("mysql2");
 require('dotenv').config()
 
-const TABLECREATION = "CREATE TABLE IF NOT EXISTS MASKS( hash VARCHAR(255) NOT NULL PRIMARY KEY, mask TEXT NOT NULL, datetime DATETIME NOT NULL);";
+const TABLECREATION = "CREATE TABLE IF NOT EXISTS masks ( hash VARCHAR(255) NOT NULL PRIMARY KEY, mask TEXT NOT NULL, datetime DATETIME NOT NULL);";
 
 var connection;
 
@@ -13,10 +13,10 @@ exports.connect = function () {
   connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
+    port: process.env.DB_PORT,
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
   });
-  
   //Connect to database
   connection.connect(function (err) {
     if (err) throw err;
@@ -25,6 +25,7 @@ exports.connect = function () {
       function (err, results, fields) {
         if (err) throw err;
             //console.log(results);
+            //console.log(err);
             //console.log(fields)
       });
     return connection;
