@@ -7,13 +7,13 @@
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
+                                <hr flex />
+                            </div>
 
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
-                                    <hr flex />
-                                </span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" color="accent" appearance="outline">
@@ -115,12 +115,14 @@
                                 </div>
                             </div>
 
-                            <!--<mat-divider vertical style="height:100%"></mat-divider>-->
+                        </div>
+
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('ADI')}}</h2>
+                                <hr flex />
+                            </div>
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('ADI')}}</h2>
-                                    <hr flex />
-                                </span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 65%;">
                                         <mat-form-field color="accent" color="accent" appearance="outline">
@@ -200,10 +202,10 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                            *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
-                                            <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                            {{errorMessageService.getError('COU', errorType.key)}}
-                                        </mat-error>
+                                                *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('COU', errorType.key)}}
+                                            </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -241,17 +243,16 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div>
 
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
-                                <span>{{dictionaryService.get('NXT')}}</span>
-                                <mat-icon style="margin-left: 5px;">forward</mat-icon>
-                            </button>
-                        </div>
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
                     </div>
                 </form>
             </mat-step>
@@ -261,12 +262,13 @@
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAI')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
+                                <hr flex />
+                            </div>
+
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
-                                    <hr flex />
-                                </span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -426,24 +428,21 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
+                    </div>
 
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
-                                <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
-                                <span>{{dictionaryService.get('BCK')}}</span>
-                            </button>
-                            <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
-                                #StepperControlButton>
-                                <span>{{dictionaryService.get('NXT')}}</span>
-                                <mat-icon style="margin-left: 5px;">forward</mat-icon>
-                            </button>
-                        </div>
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                            #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
                     </div>
 
                 </form>
@@ -454,12 +453,13 @@
                 <form [formGroup]="upload">
                     <ng-template matStepLabel>{{dictionaryService.get('ATF')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
-                            <div class="stepper-data" style="min-height: 500px;">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('ATF')}}</h2>
-                                    <hr flex />
-                                </span>
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('ATF')}}</h2>
+                                <hr flex />
+                            </div>
+
+                            <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <button mat-stroked-button style="height: 46px; width: 200px;" color="primary"
@@ -487,18 +487,18 @@
                             </div>
                         </div>
 
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
-                                <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
-                                <span>{{dictionaryService.get('BCK')}}</span>
-                            </button>
-                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
-                                (click)="openSendSOAPDialog()" #StepperControlButton>
-                                <span>{{dictionaryService.get('SND')}}</span>
-                                <mat-icon style="margin-left: 5px;">email</mat-icon>
-                            </button>
-                        </div>
+                    </div>
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
+                            (click)="openSendSOAPDialog()" #StepperControlButton>
+                            <span>{{dictionaryService.get('SND')}}</span>
+                            <mat-icon style="margin-left: 5px;">email</mat-icon>
+                        </button>
                     </div>
                 </form>
             </mat-step>
@@ -509,13 +509,14 @@
                 <form [formGroup]="contactInformation">
                     <ng-template matStepLabel>{{dictionaryService.get('CND')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
+                                <hr flex />
+                            </div>
+
 
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('GEI')}}</h2>
-                                    <hr flex />
-                                </span>
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -580,12 +581,15 @@
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('ADI')}}</h2>
+                                <hr flex />
+                            </div>
 
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('ADI')}}</h2>
-                                    <hr flex />
-                                </span>
+
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 65%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -702,18 +706,16 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
+                    </div>
 
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperNext #StepperControlButton>
-                                <span>{{dictionaryService.get('NXT')}}</span>
-                                <mat-icon style="margin-left: 5px;">forward</mat-icon>
-                            </button>
-                        </div>
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperNext #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
                     </div>
                 </form>
             </mat-step>
@@ -724,13 +726,14 @@
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
+                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details !== 'Privat'">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('APP')}}</h2>
+                                <hr flex />
+                            </div>
+
                             <!--1. Col-->
-                            <div *ngIf="contactInformation.get('legalForm').value !== 'Privat'" class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('APP')}}</h2>
-                                    <hr flex />
-                                </span>
+                            <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -805,228 +808,230 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                        </div>
 
-                            <div *ngIf="contactInformation.get('legalForm').value === 'Privat'">
+                        <!--1. Col-->
+                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('AP1')}}</h2>
+                                <hr flex />
+                            </div>
+
+
+                            <div class="stepper-data">
                                 <div style="display: flex;">
-                                    <div class="stepper-data">
-                                        <span layout="row">
-                                            <h2 style="margin:0">{{dictionaryService.get('AP1')}}</h2>
-                                            <hr flex />
-                                        </span>
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
-                                                    <mat-select formControlName="salutation1" required>
-                                                        <mat-option *ngFor="let salutation of salutations"
-                                                            [value]="salutation">
-                                                            {{salutation.details}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('salutation1').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('SAL', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
-                                                    <mat-select formControlName="title1">
-                                                        <mat-option *ngFor="let title of titles" [value]="title">
-                                                            {{title.details}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
-                                                    <input matInput formControlName="firstName1" required>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('firstName1').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('FNA', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
-                                                    <input matInput formControlName="secondName1" required>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('secondName1').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('SNA', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
-                                                    <input matInput [matDatepicker]="birthDate1"
-                                                        formControlName="birthDate1" required>
-                                                    <mat-datepicker-toggle matSuffix [for]="birthDate1">
-                                                    </mat-datepicker-toggle>
-                                                    <mat-datepicker #birthDate1></mat-datepicker>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('birthDate1').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('BRT', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
-                                                    <input matInput formControlName="phone1">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
-                                                    <input matInput formControlName="mobile1">
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
-                                                    <input matInput formControlName="email1">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
+                                            <mat-select formControlName="salutation1" required>
+                                                <mat-option *ngFor="let salutation of salutations" [value]="salutation">
+                                                    {{salutation.details}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('salutation1').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('SAL', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
                                     </div>
-
-                                    <div class="stepper-data">
-                                        <span layout="row">
-                                            <h2 style="margin:0">{{dictionaryService.get('AP2')}}</h2>
-                                            <hr flex />
-                                        </span>
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
-                                                    <mat-select formControlName="salutation2" required>
-                                                        <mat-option *ngFor="let salutation of salutations"
-                                                            [value]="salutation">
-                                                            {{salutation.details}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('salutation2').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('SAL', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
-                                                    <mat-select formControlName="title2">
-                                                        <mat-option *ngFor="let title of titles" [value]="title">
-                                                            {{title.details}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
-                                                    <input matInput formControlName="firstName2" required>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('firstName2').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('FNA', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
-                                                    <input matInput formControlName="secondName2" required>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('secondName2').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('SNA', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
-                                                    <input matInput [matDatepicker]="birthDate2"
-                                                        formControlName="birthDate2" required>
-                                                    <mat-datepicker-toggle matSuffix [for]="birthDate2">
-                                                    </mat-datepicker-toggle>
-                                                    <mat-datepicker #birthDate2></mat-datepicker>
-                                                    <mat-error
-                                                        *ngFor="let errorType of applicant.get('birthDate2').errors | keyvalue;">
-                                                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                        {{errorMessageService.getError('BRT', errorType.key)}}
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
-                                                    <input matInput formControlName="phone2">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: flex;">
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
-                                                    <input matInput formControlName="mobile2">
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="paddinglr10px" style="width: 50%;">
-                                                <mat-form-field color="accent" appearance="outline">
-                                                    <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
-                                                    <input matInput formControlName="email2">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
+                                            <mat-select formControlName="title1">
+                                                <mat-option *ngFor="let title of titles" [value]="title">
+                                                    {{title.details}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
                                 </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
+                                            <input matInput formControlName="firstName1" required>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('firstName1').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('FNA', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
+                                            <input matInput formControlName="secondName1" required>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('secondName1').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('SNA', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
+                                            <input matInput [matDatepicker]="birthDate1" formControlName="birthDate1"
+                                                required>
+                                            <mat-datepicker-toggle matSuffix [for]="birthDate1">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #birthDate1></mat-datepicker>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('birthDate1').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('BRT', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                                            <input matInput formControlName="phone1">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                                            <input matInput formControlName="mobile1">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+                                            <input matInput formControlName="email1">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
-                                <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
-                                <span>{{dictionaryService.get('BCK')}}</span>
-                            </button>
-                            <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
-                                #StepperControlButton>
-                                <span>{{dictionaryService.get('NXT')}}</span>
-                                <mat-icon style="margin-left: 5px;">forward</mat-icon>
-                            </button>
+                        <!--2. Col-->
+                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('AP2')}}</h2>
+                                <hr flex />
+                            </div>
+
+                            <div class="stepper-data">
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
+                                            <mat-select formControlName="salutation2" required>
+                                                <mat-option *ngFor="let salutation of salutations" [value]="salutation">
+                                                    {{salutation.details}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('salutation2').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('SAL', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('TLE')}}</mat-label>
+                                            <mat-select formControlName="title2">
+                                                <mat-option *ngFor="let title of titles" [value]="title">
+                                                    {{title.details}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('FNA')}}</mat-label>
+                                            <input matInput formControlName="firstName2" required>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('firstName2').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('FNA', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('SNA')}}</mat-label>
+                                            <input matInput formControlName="secondName2" required>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('secondName2').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('SNA', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('BRT')}}</mat-label>
+                                            <input matInput [matDatepicker]="birthDate2" formControlName="birthDate2"
+                                                required>
+                                            <mat-datepicker-toggle matSuffix [for]="birthDate2">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #birthDate2></mat-datepicker>
+                                            <mat-error
+                                                *ngFor="let errorType of applicant.get('birthDate2').errors | keyvalue;">
+                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
+                                                {{errorMessageService.getError('BRT', errorType.key)}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                                            <input matInput formControlName="phone2">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex;">
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                                            <input matInput formControlName="mobile2">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="paddinglr10px" style="width: 50%;">
+                                        <mat-form-field color="accent" appearance="outline">
+                                            <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+                                            <input matInput formControlName="email2">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                            #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </mat-step>
 
@@ -1035,13 +1040,14 @@
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAI')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
-                            <!--1. Col-->
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
+                                <hr flex />
+                            </div>
+
                             <div class="stepper-data">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('PAI')}}</h2>
-                                    <hr flex />
-                                </span>
+
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -1196,26 +1202,22 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-
-
                             </div>
-
-                        </div>
-
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
-                                <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
-                                <span>{{dictionaryService.get('BCK')}}</span>
-                            </button>
-                            <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
-                                #StepperControlButton>
-                                <span>{{dictionaryService.get('NXT')}}</span>
-                                <mat-icon style="margin-left: 5px;">forward</mat-icon>
-                            </button>
                         </div>
                     </div>
 
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                            #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </mat-step>
 
@@ -1224,12 +1226,13 @@
                 <form [formGroup]="upload">
                     <ng-template matStepLabel>{{dictionaryService.get('ATF')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-overflow-auto">
-                            <div class="stepper-data" style="min-height: 500px;">
-                                <span layout="row">
-                                    <h2 style="margin:0">{{dictionaryService.get('ATF')}}</h2>
-                                    <hr flex />
-                                </span>
+                        <div class="flex-column">
+                            <div class="stepper-title">
+                                <h2 style="margin:0">{{dictionaryService.get('ATF')}}</h2>
+                                <hr flex />
+                            </div>
+
+                            <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <button mat-stroked-button style="height: 46px; width: 200px;" color="primary"
@@ -1256,21 +1259,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="vertical-space"></div>
-                        <div class="stepper-controls">
-                            <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
-                                <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
-                                <span>{{dictionaryService.get('BCK')}}</span>
-                            </button>
-                            <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
-                                (click)="openSendSOAPDialog()" #StepperControlButton>
-                                <span>{{dictionaryService.get('SND')}}</span>
-                                <mat-icon style="margin-left: 5px;">email</mat-icon>
-                            </button>
-                        </div>
                     </div>
 
+                    <div class="vertical-space"></div>
+                    <div class="stepper-controls">
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-raised-button class="stepper-button" style="margin-left: 10px;" color="primary"
+                            (click)="openSendSOAPDialog()" #StepperControlButton>
+                            <span>{{dictionaryService.get('SND')}}</span>
+                            <mat-icon style="margin-left: 5px;">email</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </mat-step>
 
