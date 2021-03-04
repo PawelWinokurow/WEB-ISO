@@ -1,8 +1,8 @@
 var mysql = require("mysql2");
 require('dotenv').config()
 
-const TABLECREATION_1 = "CREATE TABLE IF NOT EXISTS masks ( hash TEXT NOT NULL PRIMARY KEY, mask TEXT NOT NULL, datetime DATETIME NOT NULL);";
-const TABLECREATION_2 = "CREATE TABLE IF NOT EXISTS users ( id int NOT NULL AUTO_INCREMENT PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL, salt TEXT, email TEXT NOT NULL, companycode TEXT NOT NULL);";
+const TABLECREATION_1 = "CREATE TABLE IF NOT EXISTS masks ( hash VARCHAR(255) NOT NULL PRIMARY KEY, mask TEXT NOT NULL, datetime DATETIME NOT NULL);";
+const TABLECREATION_2 = "CREATE TABLE IF NOT EXISTS users ( id int NOT NULL AUTO_INCREMENT PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL, salt TEXT, email TEXT NOT NULL, companycode TEXT);";
 
 var connection;
 
@@ -26,9 +26,9 @@ exports.connect = function () {
       connection.query(query,
         function (err, results, fields) {
           if (err) throw err;
-          console.log(results);
-          console.log(err);
-          console.log(fields)
+          //console.log(results);
+          //console.log(err);
+          //console.log(fields)
         });
 
     });
@@ -53,21 +53,19 @@ exports.storeMask = function (hash, mask) {
 }
 
 /**
- * Stores customer mask in the database.
- * @param  {string} hash Hash string
- * @param  {object} mask Mask object 
+ * Stores user in the database.
+ * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
-  var stringJson = JSON.stringify(mask);
-  const insert_statement = 'INSERT INTO users (hash, mask, datetime) VALUES (?, NOW())';
-  values = [hash, stringJson];
+  console.log(user)
+  const insert_statement = 'INSERT INTO users (username, password, salt, email, companycode) VALUES (?)';
+  values = [user.username, user.password, 'salt', user.email, '1'];
   //Insert values
   connection.query(insert_statement, [values], function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
   });
 }
-
 
 exports.checkConfirmation = function (hash) {
   return new Promise((resolve, reject) => {
@@ -103,4 +101,3 @@ exports.removeOldMasks = function () {
     console.log("Number of records deleted: " + result.affectedRows);
   });
 }
-

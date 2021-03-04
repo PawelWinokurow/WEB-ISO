@@ -168,8 +168,7 @@ class Server {
   }
 
   createUser(req, res) {
-    const user = req.body
-    console.log(user)
+    databaseService.storeUser(req.body);
   }
 
   initEndPoints() {

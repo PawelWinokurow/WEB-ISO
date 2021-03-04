@@ -35,8 +35,12 @@ export class RegistrationComponent implements OnInit {
   register() {
     this.submitted = true;
     if (this.registerForm.valid && this.registerForm.controls['password'].value == this.registerForm.controls['confirmPassword'].value) {
-      var newUser = {username: this.registerForm.controls['username'], password: this.registerForm.controls['password'], email: this.registerForm.controls['email']}
-      this.authService.createUser(this.registerForm.value).toPromise()
+      var newUser = {
+        username: this.registerForm.controls['username'].value, 
+        password: this.registerForm.controls['password'].value, 
+        email: this.registerForm.controls['email'].value
+      }
+      this.authService.createUser(newUser).toPromise()
       .then(() => {
         this.toastr.success(this.dictionaryService.get('UWC'), this.dictionaryService.get('SUC'));
         this.router.navigate(['/login']);
