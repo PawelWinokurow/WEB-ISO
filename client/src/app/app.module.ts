@@ -24,6 +24,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { DateService } from './services/date.service';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     ErrorMessageService,
     StorageService,
     SearchService,
-    DateService
+    DateService,
+    AuthService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
