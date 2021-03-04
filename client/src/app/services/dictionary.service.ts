@@ -17,6 +17,17 @@ export class DictionaryService {
   ]);
 
   dictionaryDE = new Map([
+    ['LOG', 'Anmeldung'],
+    ['USR', 'Benutzername'],
+    ['PSW', 'Passwort'],
+    ['EUN', 'E-Mail oder Benutzername'],
+
+    ['SET', 'Einstellungen'],
+    ['LOT', 'Abmelden'],
+
+    ['NAC', 'Konto erstellen'],
+    ['CFM', 'Bestätigen'],
+
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
     ['CAN', 'Abbrechen'],
@@ -96,6 +107,18 @@ export class DictionaryService {
   ])
 
   dictionaryEN = new Map([
+
+    ['LOG', 'Sign in'],
+    ['USR', 'Username'],
+    ['PSW', 'Password'],
+    ['EUN', 'Email or username'],
+    
+    ['NAC', 'Create account'],
+    ['CFM', 'Confirm'],
+
+    ['SET', 'Settings'],
+    ['LOT', 'Sign out'],
+
     ['YES', 'Yes'],
     ['NOO', 'No'],
     ['CAN', 'Cancel'],

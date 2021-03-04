@@ -1,6 +1,6 @@
 <div class="inner-component">
     <mat-card class="card">
-
+        <mat-card-title class="padding10px">{{dictionaryService.get('PRS')}}</mat-card-title>
         <mat-card-content align="center">
             <div class="padding10px">
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
@@ -33,12 +33,15 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+            <div class="paddinglr10px" style="display: flex; padding-bottom: 10px;">
+                <span class="spacer"></span>
+                <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px; width: 50%;"
+                    [disabled]="!companyCode.valid">
+                    <mat-icon style="margin-right: 5px;">assignment</mat-icon>
+                    <span>{{dictionaryService.get('MGE')}}</span>
+                </button>
+            </div>
+
         </mat-card-content>
-        <mat-card-actions align="center" style="margin-bottom: 20px;">
-            <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px;" [disabled]="!companyCode.valid">
-                <mat-icon style="margin-right: 5px;">assignment</mat-icon>
-                <span>{{dictionaryService.get('MGE')}}</span>
-            </button>
-        </mat-card-actions>
     </mat-card>
 </div>

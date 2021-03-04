@@ -13,6 +13,7 @@ export class StorageService {
   customerType: string = 'person';
   debitCreditType: string = 'debit';
   companyCode: CodeDetails = null;
+  isLoggedIn = false
 
   constructor(private dictionaryService: DictionaryService) { }
 

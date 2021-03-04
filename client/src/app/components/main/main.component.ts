@@ -19,10 +19,18 @@ export class MainComponent {
   }
 
   /**
-   * Click on the reset button triggers this method. The method navigates to the PreselectionComponent.
+   * Click on the reset button triggers this method. The method navigates to the LoginComponent.
    */
   reset() {
-    this.router.navigate(['/preselection']);
+    //this.router.navigate(['/preselection']);
+    this.router.navigate(['/login']);
+  }
+
+  /**
+   * Click on the logout button triggers this method. The method navigates to the LoginComponent.
+   */
+  logout() {
+    this.router.navigate(['/login']);
   }
 
 

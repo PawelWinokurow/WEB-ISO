@@ -17,6 +17,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "uuid",
+              "assert",
+              "buffer",
+              "crypto-js/enc-base64",
+              "crypto-js/sha1",
+              "lodash",
+              "sax"
+            ],
             "outputPath": "dist/client",
             "index": "src/index.html",
             "main": "src/main.ts",

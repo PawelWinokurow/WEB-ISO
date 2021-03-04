@@ -15,9 +15,9 @@ var maskService = require('./services/mask_service');
 
 
 databaseService.connect();
+
 //envelope.xml for test
 var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
-
 
 
 function composeMask(maskData) {
@@ -80,7 +80,7 @@ class Server {
       composeMask(maskData).then(
         sapMask => {
           var envelope = sapMask.getJSONArgs();
-          console.log(envelope)
+          //console.log(envelope)
           if (maskData.isDirect) {
             soapService.sendMask(envelope);
           } else {

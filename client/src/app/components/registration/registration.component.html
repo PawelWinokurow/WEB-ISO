@@ -1,0 +1,44 @@
+<div class="inner-component">
+    <mat-card class="card">
+        <mat-card-title style="padding: 10px 0 0 10px;">{{dictionaryService.get('NAC')}}</mat-card-title>
+        <mat-card-content align="center" style="width: 350px; overflow: auto;">
+            <div class="paddinglr10px" style="margin-top:20px;">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('USR')}}</mat-label>
+                    <input matInput [formControl]="username" required>
+                </mat-form-field>
+            </div>
+            <div class="paddinglr10px">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
+                    <input matInput [formControl]="username" required>
+                </mat-form-field>
+            </div>
+            <div class="paddinglr10px">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
+                    <input matInput [formControl]="password" [type]="hide1 ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide1 = !hide1">
+                        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="paddinglr10px">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('CFM')}}</mat-label>
+                    <input matInput [formControl]="password2" [type]="hide2 ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide2 = !hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="padding10px" style="display: flex;">
+                <span class="spacer"></span>
+                <button mat-stroked-button style="height: 40px;" (click)="back()">{{dictionaryService.get('BCK')}}</button>
+                <button mat-raised-button (click)="register()" color="primary"
+                    style="height: 40px; margin-left: 10px;">{{dictionaryService.get('NXT')}}</button>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</div>

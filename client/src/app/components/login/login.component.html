@@ -1,0 +1,27 @@
+<div class="inner-component">
+    <mat-card class="card">
+        <mat-card-title style="padding: 10px 0 0 10px;">{{dictionaryService.get('LOG')}}</mat-card-title>
+        <mat-card-content align="center" style="width: 350px;">
+            <div class="paddinglr10px" style="margin-top:20px;">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('EUN')}}</mat-label>
+                    <input matInput [formControl]="username" required>
+                </mat-form-field>
+            </div>
+            <div class="paddinglr10px">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
+                    <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="padding10px" style="display: flex;">
+                <button mat-stroked-button style="height: 40px;" (click)="register()">{{dictionaryService.get('NAC')}}</button>
+                <span class="spacer"></span>
+                <button mat-raised-button (click)="login()" color="primary" style="height: 40px;">{{dictionaryService.get('NXT')}}</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

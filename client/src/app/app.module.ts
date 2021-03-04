@@ -22,6 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SearchService } from './services/search.service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { DateService } from './services/date.service';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { DateService } from './services/date.service';
     SendMaskConfirmationDialogComponent,
     EmailDialogComponent,
     PreselectionComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
