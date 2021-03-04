@@ -7,7 +7,7 @@ require('dotenv').config();
 
 var WSDL_URL = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
 //envelope.xml for test
-var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
+var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope2.xml');
 exports.test = function () {
 
     fs.readFile(ENVELOPE_URL, function (err, data) {

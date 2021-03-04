@@ -264,12 +264,12 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer mask dialog.
    */
   openSendSOAPDialog() {
-    /*const mask = this.constructMask(true)
+    const mask = this.constructMask(true)
     this.httpService.sendMask(mask).subscribe(res => {
       this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
     });
     return 
-    */
+    
 
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       //disableClose: true,

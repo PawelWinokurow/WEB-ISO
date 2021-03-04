@@ -168,5 +168,4 @@ new Server().start()
 setTimeout(function () {
   //soapService.test()
   //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
-
 }, 1000);
