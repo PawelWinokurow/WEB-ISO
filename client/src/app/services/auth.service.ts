@@ -14,21 +14,18 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post(`${environment.serverURL}/login`, { email, password })
-      .pipe(mergeMap(res => this.setSession(res)));
+    .toPromise().then(res => this.setSession(res));
   }
 
   private setSession(authResult) {
-    var promise = new Promise((resolve, reject) => {
       if (authResult) {
         const expiresAt = moment().add(authResult.expiresIn, 'second');
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
         this.storageService.isLoggedIn = true;
-        resolve(true)
+        return true;
       }
-      reject(false)
-    });
-    return promise;
+      return false;
   }
 
   logout() {
@@ -49,5 +46,9 @@ export class AuthService {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  createUser(user) {
+    return this.http.post(`${environment.serverURL}/createuser`, user);
   }
 }

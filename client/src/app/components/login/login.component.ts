@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.username.value, this.password.value).subscribe(result => {
+    this.authService.login(this.username.value, this.password.value)
+    .then(result => {
       if (result) {
         this.storageService.isLoggedIn = true;
         this.router.navigate(['/preselection']);
@@ -33,12 +34,9 @@ export class LoginComponent implements OnInit {
        //TODO error message 
       }
     });
-
-
   }
 
   register() {
-    console.log("register");
     this.router.navigate(['/registration']);
   }
 

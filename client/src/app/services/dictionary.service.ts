@@ -27,6 +27,9 @@ export class DictionaryService {
 
     ['NAC', 'Konto erstellen'],
     ['CFM', 'Bestätigen'],
+    ['PCO', 'Passwortbestätigung'],
+    ['PNS', 'Die Passwörter stimmen nicht überein'],
+
 
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
@@ -103,7 +106,9 @@ export class DictionaryService {
     ['DIS', 'Maske senden'],
     ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
     ['SNT', 'Die Maske wurde gesendet.'],
+    ['UWC', 'Der Benutzer wurde angelegt.'],
     ['SUC', 'Erfolg!'],
+    ['ERR', 'Fehler!'],
   ])
 
   dictionaryEN = new Map([
@@ -115,6 +120,8 @@ export class DictionaryService {
     
     ['NAC', 'Create account'],
     ['CFM', 'Confirm'],
+    ['PCO', 'Password confirmation'],
+    ['PNS', 'The passwords do not match'],
 
     ['SET', 'Settings'],
     ['LOT', 'Sign out'],
@@ -192,9 +199,10 @@ export class DictionaryService {
     ['SUB', 'Submit'],
     ['DIS', 'Send mask'],
     ['DIQ', 'Do you want to send the mask directly?'],
-
+    ['UWC', 'The user was created.'],
     ['SNT', 'The mask was sent.'],
     ['SUC', 'Success!'],
+    ['ERR', 'Error!'],
   ])
 
   dictionary = new Map([

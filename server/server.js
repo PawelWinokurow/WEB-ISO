@@ -167,6 +167,11 @@ class Server {
     }
   }
 
+  createUser(req, res) {
+    const user = req.body
+    console.log(user)
+  }
+
   initEndPoints() {
     /**
      * Enpoint to get customer masks from application.
@@ -187,6 +192,11 @@ class Server {
      * Endpoint to get recaptcha token from the client.
      */
     this.expressApp.route('/token_validate').post(this.validateRecaptcha);
+
+        /**
+     * Endpoint to create new user.
+     */
+    this.expressApp.route('/createuser').post(this.createUser);
   }
 
   start() {
