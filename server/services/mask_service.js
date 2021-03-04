@@ -8,7 +8,7 @@ class MaskFactory {
     }
 
     build() {
-        var promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             fs.readFile(this.ENVELOPE_URL, (err, data) => {
                 xml2js.parseString(data, (err, args) => {
                     this.envelope = args.ENVELOPE
@@ -16,7 +16,6 @@ class MaskFactory {
                 });
             });
         });
-        return promise
     }
 }
 

@@ -15,13 +15,14 @@ var soapService = require('./services/soap_service');
 var emailService = require('./services/email_service');
 var randomService = require('./services/random_service');
 var maskService = require('./services/mask_service');
+const { env } = require('process');
 
 
 databaseService.connect();
 
 //envelope.xml for test
 var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
-
+const RSA_PRIVATE_KEY = fs.readFileSync(process.env.PRIVATE_KEY);
 
 /**
  * Class to to manage the server. It contains node js express application
@@ -33,19 +34,16 @@ class Server {
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
     this.proxyAgent = null;
-    this.auth_key = fs.readFileSync(process.env.PRIVATE_KEY);
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY
       process.env.HTTPS_PROXY = process.env.PROXY
       this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY); // We need HttpsProxyAgent to use proxy for re-captcha
-      this.runSchedule();
-      this.initEndPoints();
-    }).catch(() => {
+    }).catch(()=>{}).finally(() => {
       this.runSchedule();
       this.initEndPoints();
     });
-
   }
+
 
   /**
    * Runs each day at 00.00 and removes old not confirmed customer masks
@@ -151,17 +149,22 @@ class Server {
     //TODO check identifier and password
     if (true) {
       //Get User ID
-      const userID = 1
-      const jwtBearerToken = jwt.sign({}, this.PRIVATE_KEY, {
+      const userID = "1"
+      const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
         algorithm: 'RS256',
-        expiresIn: 120,
+        expiresIn: process.env.JWT_DURATION,
         subject: userID
-    });
-    //TODO send JWT back
+      });
+      console.log(jwtBearerToken)
+      //Send JWT back
+      res.status(200).json({
+        idToken: jwtBearerToken,
+        expiresIn: process.env.JWT_DURATION
+      });
     } else {
       // send status 401 Unauthorized
-      res.sendStatus(401); 
-  }
+      res.sendStatus(401);
+    }
   }
 
   initEndPoints() {

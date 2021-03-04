@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,7 +15,8 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class MainComponent {
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, public storageService: StorageService){
+  constructor(private router: Router, public dictionaryService: DictionaryService, 
+    public storageService: StorageService, private authService: AuthService){
     this.reset();
   }
 
@@ -30,6 +32,7 @@ export class MainComponent {
    * Click on the logout button triggers this method. The method navigates to the LoginComponent.
    */
   logout() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

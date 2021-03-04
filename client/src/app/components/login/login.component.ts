@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   username = new FormControl('');
   password = new FormControl('');
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService) {
+  constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService, 
+    private authService: AuthService) {
     //this.router.navigate(['/main'])
   }
 
@@ -23,9 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("login");
-    this.storageService.isLoggedIn = true;
-    this.router.navigate(['/preselection']);
+    this.authService.login(this.username.value, this.password.value).subscribe(result => {
+      if (result) {
+        this.storageService.isLoggedIn = true;
+        this.router.navigate(['/preselection']);
+      } else {
+       //TODO error message 
+      }
+    });
+
+
   }
 
   register() {
