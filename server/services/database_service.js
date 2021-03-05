@@ -1,8 +1,16 @@
 var mysql = require("mysql2");
 require('dotenv').config()
 
-const TABLECREATION_1 = "CREATE TABLE IF NOT EXISTS masks ( hash VARCHAR(255) NOT NULL PRIMARY KEY, mask TEXT NOT NULL, datetime DATETIME NOT NULL);";
-const TABLECREATION_2 = "CREATE TABLE IF NOT EXISTS users ( id int NOT NULL AUTO_INCREMENT PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL, salt TEXT, email TEXT NOT NULL, companycode TEXT);";
+const MASKS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS masks ( 
+  hash VARCHAR(255) NOT NULL PRIMARY KEY, 
+  mask TEXT NOT NULL, 
+  datetime DATETIME NOT NULL);`;
+
+const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
+  email VARCHAR(255) NOT NULL PRIMARY KEY, 
+  username VARCHAR(255) NOT NULL, 
+  password VARCHAR(255) NOT NULL, 
+  companycode VARCHAR(255));`;
 
 var connection;
 
@@ -21,7 +29,7 @@ exports.connect = function () {
   //Connect to database
   connection.connect(function (err) {
     if (err) throw err;
-    [TABLECREATION_1, TABLECREATION_2].forEach(query => {
+    [MASKS_TABLE_CREATION, USERS_TABLE_CREATION].forEach(query => {
       //Create table if table not exists
       connection.query(query,
         function (err, results, fields) {
@@ -30,7 +38,6 @@ exports.connect = function () {
           //console.log(err);
           //console.log(fields)
         });
-
     });
     return connection;
   });
@@ -57,13 +64,37 @@ exports.storeMask = function (hash, mask) {
  * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
-  console.log(user)
-  const insert_statement = 'INSERT INTO users (username, password, salt, email, companycode) VALUES (?)';
-  values = [user.username, user.password, 'salt', user.email, '1'];
-  //Insert values
-  connection.query(insert_statement, [values], function (err, result) {
-    if (err) throw err;
-    console.log("Number of records inserted: " + result.affectedRows);
+  return new Promise((resolve, reject) => {
+    const insert_statement = 'INSERT INTO users (email, username, password, companycode) VALUES (?)';
+    values = [user.email, user.username, user.password, user.companyCode];
+    //Insert values
+    connection.query(insert_statement, [values], function (err, result) {
+      if (err) reject(err);
+      console.log("Number of records inserted: " + result.affectedRows);
+      resolve(true);
+    });
+  });
+}
+
+/**
+ * Checks if user not is in the database.
+ * @param  {object} user User object 
+ * @returns true if user is not in the database
+ */
+exports.checkUser = function (user) {
+  return new Promise((resolve, reject) => {
+    const select_statement = 'SELECT * FROM users WHERE email = ?';
+    //Select values
+    connection.query(select_statement, [user.email],
+      function (err, result, fields) {
+        if (err) reject(err);
+        //If row with the given email exists in the database
+        if (Array.isArray(result) && result.length) {
+          reject(false);
+        } else {
+          resolve(true);
+        }
+      });
   });
 }
 
@@ -73,7 +104,7 @@ exports.checkConfirmation = function (hash) {
     //Select values
     connection.query(select_statement, [hash],
       function (err, result, fields) {
-        if (err) throw err;
+        if (err) reject(err);
         //If row with the given hash exists in the database
         if (Array.isArray(result) && result.length) {
           resolve(result[0]);
@@ -85,12 +116,6 @@ exports.checkConfirmation = function (hash) {
 }
 
 /**
- * Closes connectino to the database server.
- */
-exports.close = function () {
-  connection.end();
-}
-/**
  * Removes old customer masks.
  */
 exports.removeOldMasks = function () {
@@ -100,4 +125,32 @@ exports.removeOldMasks = function () {
     if (err) throw err;
     console.log("Number of records deleted: " + result.affectedRows);
   });
+}
+
+/**
+ * Get user passwords by identifier from the database.
+ * @param  {object} identifier email or username 
+ * @returns {Array} users
+ */
+exports.getPasswords = function (identifier) {
+  return new Promise((resolve, reject) => {
+    const select_statement = 'SELECT password FROM users WHERE email = ? OR username = ?';
+    //Select values
+    connection.query(select_statement, [identifier, identifier],
+      function (err, result, fields) {
+        if (err) reject(err);
+        //If row with the given email exists in the database
+        if (Array.isArray(result) && result.length) {
+          result = result.map(val => val.password)
+        }
+        resolve(result);
+      });
+  });
+}
+
+/**
+ * Closes connection to the database server.
+ */
+exports.close = function () {
+  connection.end();
 }

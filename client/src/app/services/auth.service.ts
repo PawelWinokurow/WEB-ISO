@@ -12,8 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  login(email: string, password: string) {
-    return this.http.post(`${environment.serverURL}/login`, { email, password })
+  login(identifier: string, password: string) {
+    return this.http.post(`${environment.serverURL}/login`, { identifier, password })
     .toPromise().then(res => this.setSession(res));
   }
 

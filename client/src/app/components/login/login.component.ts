@@ -12,7 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  username = new FormControl('');
+  identifier = new FormControl('');
   password = new FormControl('');
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService, 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.username.value, this.password.value)
+    this.authService.login(this.identifier.value, this.password.value)
     .then(result => {
       if (result) {
         this.storageService.isLoggedIn = true;

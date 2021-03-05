@@ -19,24 +19,9 @@
                 </mat-button-toggle-group>
             </div>
 
-            <div class="padding10px">
-                <mat-form-field color="accent" appearance="outline">
-                    <mat-label>{{dictionaryService.get('CCO')}}</mat-label>
-                    <mat-select [formControl]="companyCode" required>
-                        <mat-option *ngFor="let field of listService.companyCodes" [value]="field">
-                            {{field.details}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngFor="let errorType of companyCode.errors | keyvalue;">
-                        <mat-icon style="margin-right: 5px;">error</mat-icon>
-                        {{errorMessageService.getError('CCO', errorType.key)}}
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="paddinglr10px" style="display: flex; padding-bottom: 10px;">
+            <div class="paddinglr10px" style="display: flex; padding-bottom: 10px; padding-top: 10px;">
                 <span class="spacer"></span>
-                <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px; width: 50%;"
-                    [disabled]="!companyCode.valid">
+                <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px; width: 50%;">
                     <mat-icon style="margin-right: 5px;">assignment</mat-icon>
                     <span>{{dictionaryService.get('MGE')}}</span>
                 </button>

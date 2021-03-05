@@ -13,7 +13,7 @@ export class ErrorMessageService {
 
   errorsDE = new Map([
     ['required', ' ist erforderlich'],
-    ['email', ' ist ungültig.'],
+    ['email', ' ist ungültig'],
   ])
 
   errorsEN = new Map([
@@ -32,6 +32,8 @@ export class ErrorMessageService {
    * @param errorType Error type
    */
   getError(fieldName: string, errorType: string){
+    if (errorType === 'mustMatch')
+      return 
     let name = this.dictionaryService.get(fieldName);
     let text = this.errors.get(this.dictionaryService.currentLanguage).get(errorType);
     return name + text;

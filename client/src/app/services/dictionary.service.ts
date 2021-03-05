@@ -29,7 +29,7 @@ export class DictionaryService {
     ['CFM', 'Bestätigen'],
     ['PCO', 'Passwortbestätigung'],
     ['PNS', 'Die Passwörter stimmen nicht überein'],
-
+    ['UAE', 'Es existiert bereits ein Benutzerkonto mit dieser E-Mail-Adresse.'],
 
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
@@ -122,6 +122,7 @@ export class DictionaryService {
     ['CFM', 'Confirm'],
     ['PCO', 'Password confirmation'],
     ['PNS', 'The passwords do not match'],
+    ['UAE', 'There is already a user account with this email address.'],
 
     ['SET', 'Settings'],
     ['LOT', 'Sign out'],

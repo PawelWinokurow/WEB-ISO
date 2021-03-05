@@ -7,43 +7,49 @@ var httpsProxyAgent = require('https-proxy-agent');
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
+var util = require('util')
 require('dotenv').config();
 
 
 var databaseService = require('./services/database_service');
 var soapService = require('./services/soap_service');
 var emailService = require('./services/email_service');
-var randomService = require('./services/random_service');
+var cryptoService = require('./services/crypto_service');
 var maskService = require('./services/mask_service');
-const { env } = require('process');
+const { resolve } = require('path');
 
 
 databaseService.connect();
 
 //envelope.xml for test
 var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
-const RSA_PRIVATE_KEY = fs.readFileSync(process.env.PRIVATE_KEY);
 
 /**
  * Class to to manage the server. It contains node js express application
  */
 class Server {
+
   constructor() {
     this.expressApp = express();
     this.expressApp.use(logger('dev'));
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
     this.proxyAgent = null;
+    this.confirm = this.confirm.bind(this);
+    this.validateRecaptcha = this.validateRecaptcha.bind(this);
+    this.createCustomer = this.createCustomer.bind(this);
+    this.loginRoute = this.loginRoute.bind(this);
+    this.createUser = this.createUser.bind(this);
+    this.auth_key = fs.readFileSync(process.env.PRIVATE_KEY);
     fetch(process.env.PROXY).then(() => {
-      process.env.HTTP_PROXY = process.env.PROXY
-      process.env.HTTPS_PROXY = process.env.PROXY
+      process.env.HTTP_PROXY = process.env.PROXY;
+      process.env.HTTPS_PROXY = process.env.PROXY;
       this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY); // We need HttpsProxyAgent to use proxy for re-captcha
-    }).catch(()=>{}).finally(() => {
+    }).catch(() => { }).finally(() => {
       this.runSchedule();
       this.initEndPoints();
     });
   }
-
 
   /**
    * Runs each day at 00.00 and removes old not confirmed customer masks
@@ -55,14 +61,15 @@ class Server {
   }
 
   confirm(req, res) {
-    databaseService.checkConfirmation(req.query.hash).then(result => {
-      var mask = JSON.parse(result.mask)
-      soapService.sendMask(mask);
-      res.send('<p>Success! The mask was confirmed.</p>');
-    })
+    databaseService.checkConfirmation(req.query.hash)
+      .then(result => {
+        var mask = JSON.parse(result.mask)
+        soapService.sendMask(mask);
+        res.send('<p>Success! The mask was confirmed.</p>');
+      })
       .catch(() => {
         res.send('<p>Error! The mask was not confirmed.</p>');
-      })
+      });
   }
 
   validateRecaptcha(req, res) {
@@ -132,7 +139,7 @@ class Server {
         if (maskData.isDirect) {
           soapService.sendMask(envelope);
         } else {
-          const hash = randomService.generateHash();
+          const hash = cryptoService.generateHash();
           databaseService.storeMask(hash, envelope);
           emailService.sendEmail(hash, maskData.emailTo);
         }
@@ -144,31 +151,49 @@ class Server {
   }
 
   loginRoute(req, res) {
-    const identifier = req.body.email;
-    const password = req.body.password;
-    //TODO check identifier and password
-    if (true) {
-      //Get User ID
-      const userID = "1"
-      const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
-        algorithm: 'RS256',
-        expiresIn: process.env.JWT_DURATION,
-        subject: userID
+    // Checks if the user exists and if the password matches
+    function checkPassword(identifier, plaintextPassword) {
+      return databaseService.getPasswords(identifier).then(passwords => {
+        if (passwords.length == 0) {
+          resolve(false);
+        }
+        resolve(passwords.some(hash => cryptoService.comparePasswords(plaintextPassword, hash)));
       });
-      console.log(jwtBearerToken)
-      //Send JWT back
-      res.status(200).json({
-        idToken: jwtBearerToken,
-        expiresIn: process.env.JWT_DURATION
-      });
-    } else {
-      // send status 401 Unauthorized
-      res.sendStatus(401);
     }
+    const identifier = req.body.identifier;
+    const password = req.body.password;
+    checkPassword(identifier, password).then(
+      isPasswordMatches => {
+        console.log(isPasswordMatches);
+        if (isPasswordMatches) {
+          //Get User ID
+          const userID = "1"
+          const jwtBearerToken = jwt.sign({}, this.auth_key, {
+            algorithm: 'RS256',
+            expiresIn: process.env.JWT_DURATION,
+            subject: userID
+          });
+          console.log(jwtBearerToken)
+          //Send JWT back
+          res.status(200).json({
+            idToken: jwtBearerToken,
+            expiresIn: process.env.JWT_DURATION
+          });
+        } else {
+          // send status 401 Unauthorized
+          res.sendStatus(401);
+        }
+      }
+    );
   }
 
   createUser(req, res) {
-    databaseService.storeUser(req.body);
+    var user = req.body;
+    user.password = cryptoService.hashPassword(user.password);
+    databaseService.checkUser(user)
+      .then(() => databaseService.storeUser(user))
+      .then(() => res.json({ ok: true }))
+      .catch(() => res.json({ message: 'Duplicate' }))
   }
 
   initEndPoints() {
@@ -192,7 +217,7 @@ class Server {
      */
     this.expressApp.route('/token_validate').post(this.validateRecaptcha);
 
-        /**
+    /**
      * Endpoint to create new user.
      */
     this.expressApp.route('/createuser').post(this.createUser);
