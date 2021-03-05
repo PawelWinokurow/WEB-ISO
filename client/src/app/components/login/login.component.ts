@@ -28,8 +28,12 @@ export class LoginComponent implements OnInit {
     .then(result => {
         this.storageService.isLoggedIn = true;
         this.router.navigate(['/preselection']);
+        console.log(result)
       })
-    .catch(err => this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR')));
+    .catch(err => {
+      this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
+      console.log(err)
+    });
   }
 
   register() {

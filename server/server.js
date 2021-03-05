@@ -179,7 +179,7 @@ class Server {
           });
         } else {
           // send status 401 Unauthorized
-          res.sendStatus(401);
+          res.sendStatus(401).send({ error: "No match" });;
         }
       }
     );

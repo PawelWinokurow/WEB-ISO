@@ -17,10 +17,10 @@ export class AuthService {
     .toPromise().then(res => this.setSession(res));
   }
 
-  private setSession(authResult) {
-      if (authResult) {
-        const expiresAt = moment().add(authResult.expiresIn, 'second');
-        localStorage.setItem('id_token', authResult.idToken);
+  private setSession(result) {
+      if (result) {
+        const expiresAt = moment().add(result.expiresIn, 'second');
+        localStorage.setItem('id_token', result.idToken);
         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
         this.storageService.isLoggedIn = true;
         return true;
