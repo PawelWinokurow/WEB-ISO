@@ -32,6 +32,7 @@ export class RegistrationComponent implements OnInit {
     // this.companyCode.valueChanges.subscribe(() => this.storageService.companyCode = this.companyCode.value);
 
     this.registerForm = this.formBuilder.group({
+      //TODO username:only letters and no @
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -53,7 +54,6 @@ export class RegistrationComponent implements OnInit {
       }
       this.authService.createUser(newUser).toPromise()
         .then(msg => {
-          console.log(msg)
           if (msg["message"] === 'Duplicate') {
             this.toastr.error(this.dictionaryService.get('UAE'), this.dictionaryService.get('ERR'));
           } else {

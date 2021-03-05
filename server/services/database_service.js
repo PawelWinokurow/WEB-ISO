@@ -8,7 +8,7 @@ const MASKS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS masks (
 
 const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
   email VARCHAR(255) NOT NULL PRIMARY KEY, 
-  username VARCHAR(255) NOT NULL, 
+  username VARCHAR(255) NOT NULL PRIMARY KEY, 
   password VARCHAR(255) NOT NULL, 
   companycode VARCHAR(255));`;
 
@@ -128,21 +128,18 @@ exports.removeOldMasks = function () {
 }
 
 /**
- * Get user passwords by identifier from the database.
+ * Get users by identifier from the database.
  * @param  {object} identifier email or username 
  * @returns {Array} users
  */
-exports.getPasswords = function (identifier) {
+exports.getUsers = function (identifier) {
   return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT password FROM users WHERE email = ? OR username = ?';
+    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
     //Select values
     connection.query(select_statement, [identifier, identifier],
       function (err, result, fields) {
         if (err) reject(err);
         //If row with the given email exists in the database
-        if (Array.isArray(result) && result.length) {
-          result = result.map(val => val.password)
-        }
         resolve(result);
       });
   });

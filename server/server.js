@@ -153,27 +153,25 @@ class Server {
   loginRoute(req, res) {
     // Checks if the user exists and if the password matches
     function checkPassword(identifier, plaintextPassword) {
-      return databaseService.getPasswords(identifier).then(passwords => {
-        if (passwords.length == 0) {
-          resolve(false);
-        }
-        resolve(passwords.some(hash => cryptoService.comparePasswords(plaintextPassword, hash)));
+      return new Promise((resolve, reject) => {
+        databaseService.getUsers(identifier).then(users => {
+          if (users.length == 0) {
+            resolve(false);
+          }
+          resolve(users.find(user => cryptoService.comparePasswords(plaintextPassword, user.password)));
+        })
       });
     }
     const identifier = req.body.identifier;
     const password = req.body.password;
     checkPassword(identifier, password).then(
-      isPasswordMatches => {
-        console.log(isPasswordMatches);
-        if (isPasswordMatches) {
-          //Get User ID
-          const userID = "1"
-          const jwtBearerToken = jwt.sign({}, this.auth_key, {
+      user => {
+        if (user) {
+          const jwtBearerToken = jwt.sign({username: user.username, email: user.email, companyCode: user.companyCode}, this.auth_key, {
             algorithm: 'RS256',
             expiresIn: process.env.JWT_DURATION,
-            subject: userID
+            //subject: user.email
           });
-          console.log(jwtBearerToken)
           //Send JWT back
           res.status(200).json({
             idToken: jwtBearerToken,

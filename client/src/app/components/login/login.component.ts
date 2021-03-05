@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -16,9 +17,7 @@ export class LoginComponent implements OnInit {
   password = new FormControl('');
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService, 
-    private authService: AuthService) {
-    //this.router.navigate(['/main'])
-  }
+    private toastr: ToastrService, private authService: AuthService) {}
 
 
   ngOnInit(): void {
@@ -27,13 +26,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.identifier.value, this.password.value)
     .then(result => {
-      if (result) {
         this.storageService.isLoggedIn = true;
         this.router.navigate(['/preselection']);
-      } else {
-       //TODO error message 
-      }
-    });
+      })
+    .catch(err => this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR')));
   }
 
   register() {
