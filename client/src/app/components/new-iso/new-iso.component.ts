@@ -12,7 +12,6 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
-import { SharedMask } from 'src/app/interfaces/mask';
 import { SearchService } from 'src/app/services/search.service';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 import { DateService } from 'src/app/services/date.service';

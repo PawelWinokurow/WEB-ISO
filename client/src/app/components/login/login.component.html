@@ -3,18 +3,26 @@
         <mat-card-title style="padding: 10px 0 0 10px;">{{dictionaryService.get('LOG')}}</mat-card-title>
         <mat-card-content align="center" style="width: 350px;">
             <div class="paddinglr10px" style="margin-top:20px;">
-                <mat-form-field appearance="outline">
+                <mat-form-field color="primary" appearance="outline">
                     <mat-label>{{dictionaryService.get('EUN')}}</mat-label>
                     <input matInput [formControl]="identifier" required>
+                    <mat-error *ngFor="let errorType of identifier.errors | keyvalue;">
+                        <mat-icon style="margin-right: 5px;">error</mat-icon>
+                        {{errorMessageService.getError('EUN', errorType.key)}}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="paddinglr10px">
-                <mat-form-field appearance="outline">
+                <mat-form-field color="primary" appearance="outline">
                     <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
                     <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'" required>
                     <button mat-icon-button matSuffix (click)="hide = !hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
+                    <mat-error *ngFor="let errorType of password.errors | keyvalue;">
+                        <mat-icon style="margin-right: 5px;">error</mat-icon>
+                        {{errorMessageService.getError('PSW', errorType.key)}}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="padding10px" style="display: flex;">

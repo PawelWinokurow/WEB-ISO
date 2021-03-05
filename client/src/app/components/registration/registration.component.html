@@ -4,7 +4,7 @@
         <mat-card-content align="center" style="width: 350px; overflow: auto;">
             <form class="form" [formGroup]="registerForm">
                 <div class="paddinglr10px" style="margin-top:20px;">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('USR')}}</mat-label>
                         <input matInput formControlName="username" required>
                         <mat-error *ngFor="let errorType of registerFormControl.username.errors | keyvalue;">
@@ -14,7 +14,7 @@
                     </mat-form-field>
                 </div>
                 <div class="paddinglr10px">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('EMA')}}</mat-label>
                         <input matInput formControlName="email" required>
                         <mat-error *ngFor="let errorType of registerFormControl.email.errors | keyvalue;">
@@ -24,7 +24,7 @@
                     </mat-form-field>
                 </div>
                 <div class="padding10px">
-                    <mat-form-field color="accent" appearance="outline">
+                    <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('CCO')}}</mat-label>
                         <mat-select formControlName="companyCode" required>
                             <mat-option *ngFor="let field of listService.companyCodes" [value]="field">
@@ -38,7 +38,7 @@
                     </mat-form-field>
                 </div>
                 <div class="paddinglr10px">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
                         <input matInput formControlName="password" [type]="hide1 ? 'password' : 'text'" required>
                         <button mat-icon-button matSuffix (click)="hide1 = !hide1;">
@@ -51,7 +51,7 @@
                     </mat-form-field>
                 </div>
                 <div class="paddinglr10px">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('PCO')}}</mat-label>
                         <input matInput formControlName="confirmPassword" [type]="hide2 ? 'password' : 'text'" required>
                         <button mat-icon-button matSuffix (click)="hide2 = !hide2;">
