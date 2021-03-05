@@ -13,7 +13,7 @@ body {
 .inner-component {
   position: relative;
   height: calc(100vh - 64px);  
-  background-color: rgb(229, 229, 229);
+  background-color: rgb(240, 240, 240);
 }
 
 .stepper-container {
@@ -28,27 +28,12 @@ body {
   background-color: rgb(240, 240, 240) !important;
 }
 
-.horizontal-space {
-  flex: 1;
-}
-
-.vertical-space {
+.space {
   flex: 1;
 }
 
 mat-form-field {
   width: 100%;
-}
-
-.vertical-flex{
-  height: calc(100vh - 200px);
-  display: flex;
-  overflow: auto;
-}
-
-.flex-column {
-  display: flex;
-  flex-flow: column;
 }
 
 .stepper-data {
@@ -67,6 +52,18 @@ mat-form-field {
   width: 30%;
 }
 
+.stepper-controls {
+  display: flex !important;
+  justify-content: flex-end !important;
+  min-width: 442px;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.stepper-button {
+  height: 46px;
+  width: 100px;
+}
 
 .padding10px {
   padding: 10px;
@@ -79,14 +76,6 @@ mat-form-field {
 
 .mat-divider-horizontal {
   position: relative;
-}
-
-.stepper-controls {
-  display: flex !important;
-  justify-content: flex-end !important;
-  height: 40px;
-  min-width: 442px;
-  width: 100%;
 }
 
 .backdrop-background {
@@ -105,11 +94,6 @@ mat-form-field {
 
 .mat-form-field-infix {
   width: 100% !important;
-}
-
-.stepper-button {
-  height: 46px;
-  width: 100px;
 }
 
 .card {
@@ -133,6 +117,41 @@ mat-button-toggle {
   width: 50%;
 }
 
-.spacer {
-  flex: 1;
+.vertical-flex{
+  height: calc(100vh - 216px);
+  display: flex;
+  overflow: auto;
+}
+
+.flex-column {
+  display: flex;
+  flex-flow: column;
+}
+
+.form-vertical-flex{
+  height: calc(100vh - 104px);
+  display: flex;
+  flex-flow: column;
+  padding: 20px;
+}
+
+.form-flex-column {
+  display: flex;
+  flex-flow: column;
+}
+
+.form-data {
+  height: calc(100vh - 240px);
+  width: 400px;
+  overflow: auto;
+}
+
+.form-title {
+ width: 400px;
+ padding: 10px;
+}
+
+.form-controls {
+  display: flex; 
+  padding: 10px;
 }

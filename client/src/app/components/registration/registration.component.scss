@@ -1,0 +1,13 @@
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: black!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: black!important;
+}
+
+.mat-input-element {
+    caret-color: black!important;
+}
