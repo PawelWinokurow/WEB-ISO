@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,16 +9,17 @@ import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
   hide1 = true;
   hide2 = true;
-  registerForm: FormGroup;
+  changeForm: FormGroup;
   submitted = false;
+  companyCode: FormControl;
 
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, private storageService: StorageService,
@@ -27,26 +27,27 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
+    this.changeForm = this.formBuilder.group({
       //TODO username:only letters and no @
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      username: new FormControl({value: this.storageService.user.username, disabled: true}, Validators.required),
+      email: new FormControl({value: this.storageService.user.email, disabled: true}, [Validators.required, Validators.email]),
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      companyCode: ['', [Validators.required]],
+      companyCode: [this.storageService.user.companyCode, [Validators.required]],
     },
     { validator: MustMatch('password', 'confirmPassword') }
     );
   }
 
-  register() {
+  change() {
+    /*
     this.submitted = true;
-    if (this.registerForm.valid) {
+    if (this.changeForm.valid) {
       var newUser = {
-        username: this.registerForm.controls['username'].value,
-        password: this.registerForm.controls['password'].value,
-        email: this.registerForm.controls['email'].value,
-        companyCode: this.registerForm.controls['companyCode'].value.code
+        username: this.changeForm.controls['username'].value,
+        password: this.changeForm.controls['password'].value,
+        email: this.changeForm.controls['email'].value,
+        companyCode: this.changeForm.controls['companyCode'].value.code
       }
       this.authService.createUser(newUser).toPromise()
         .then(msg => {
@@ -61,16 +62,13 @@ export class RegistrationComponent implements OnInit {
           this.toastr.error(err, this.dictionaryService.get('ERR'));
         });
     } else {
-      this.registerForm.markAllAsTouched();
+      this.changeForm.markAllAsTouched();
     }
+    */
   }
 
-  get registerFormControl() {
-    return this.registerForm.controls;
-  }
-
-  back() {
-    this.router.navigate(['/login']);
+  get changeFormControl() {
+    return this.changeForm.controls;
   }
 }
 

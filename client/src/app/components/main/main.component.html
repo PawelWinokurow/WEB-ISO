@@ -26,17 +26,19 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="width: 200px;">
     <mat-nav-list>
-      <!--
-      <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
-      (click)="sidenav.toggle()"
-      -->
-      <a mat-list-item>
-        {{ dictionaryService.get('SET') }} &nbsp; 
-        <mat-icon>settings</mat-icon>
+      <a mat-list-item [routerLink]="'/preselection'" (click)="sidenav.toggle()">
+        <mat-icon>add</mat-icon> &nbsp;
+        {{ dictionaryService.get('NCU') }} 
       </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/settings'" (click)="sidenav.toggle()">
+        <mat-icon>settings</mat-icon> &nbsp;
+        {{ dictionaryService.get('SET') }} 
+      </a>
+      <mat-divider></mat-divider>
       <a mat-list-item (click)="logout();sidenav.toggle();">
-        {{ dictionaryService.get('LOT') }} &nbsp; 
-        <mat-icon>logout</mat-icon>
+        <mat-icon>logout</mat-icon> &nbsp; 
+        {{ dictionaryService.get('LOT') }}
       </a>
 
     </mat-nav-list>

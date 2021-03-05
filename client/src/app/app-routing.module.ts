@@ -5,6 +5,7 @@ import { MainComponent } from './components/main/main.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
 import { PreselectionComponent } from './components/preselection/preselection.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   //{ path: '', component: MainComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'iso', component: NewISOComponent },
   { path: 'preselection', component: PreselectionComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 /**

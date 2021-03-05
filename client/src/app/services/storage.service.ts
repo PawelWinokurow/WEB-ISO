@@ -14,6 +14,7 @@ export class StorageService {
   debitCreditType: string = 'debit';
   companyCode: CodeDetails = null;
   isLoggedIn = false
+  user = null;
 
   constructor(private dictionaryService: DictionaryService) { }
 

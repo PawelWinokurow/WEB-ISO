@@ -14,18 +14,20 @@ export class AuthService {
 
   login(identifier: string, password: string) {
     return this.http.post(`${environment.serverURL}/login`, { identifier, password })
-    .toPromise().then(res => this.setSession(res));
+      .toPromise().then(res => this.setSession(res));
   }
 
   private setSession(result) {
-      if (result) {
-        const expiresAt = moment().add(result.expiresIn, 'second');
-        localStorage.setItem('id_token', result.idToken);
-        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-        this.storageService.isLoggedIn = true;
-        return true;
-      }
-      return false;
+    if (result) {
+      console.log(result)
+      const expiresAt = moment().add(result.expiresIn, 'second');
+      localStorage.setItem('id_token', result.idToken);
+      localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+      this.storageService.isLoggedIn = true;
+      this.storageService.user = result.user;
+      return true;
+    }
+    return false;
   }
 
   logout() {

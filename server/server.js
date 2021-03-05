@@ -7,7 +7,8 @@ var httpsProxyAgent = require('https-proxy-agent');
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
-var util = require('util')
+var expressJwt = require('express-jwt');
+
 require('dotenv').config();
 
 
@@ -40,7 +41,9 @@ class Server {
     this.createCustomer = this.createCustomer.bind(this);
     this.loginRoute = this.loginRoute.bind(this);
     this.createUser = this.createUser.bind(this);
-    this.auth_key = fs.readFileSync(process.env.PRIVATE_KEY);
+    this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
+    this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
+    this.checkIfAuthenticated = expressJwt({ secret: this.publicKey }); 
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
@@ -167,7 +170,8 @@ class Server {
     checkPassword(identifier, password).then(
       user => {
         if (user) {
-          const jwtBearerToken = jwt.sign({username: user.username, email: user.email, companyCode: user.companyCode}, this.auth_key, {
+          var user_json = {username: user.username, email: user.email, companyCode: user.companycode}
+          const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
             algorithm: 'RS256',
             expiresIn: process.env.JWT_DURATION,
             //subject: user.email
@@ -175,7 +179,8 @@ class Server {
           //Send JWT back
           res.status(200).json({
             idToken: jwtBearerToken,
-            expiresIn: process.env.JWT_DURATION
+            expiresIn: process.env.JWT_DURATION,
+            user: user_json
           });
         } else {
           // send status 401 Unauthorized
@@ -198,7 +203,7 @@ class Server {
     /**
      * Enpoint to get customer masks from application.
      */
-    this.expressApp.route("/request").post(this.createCustomer);
+    this.expressApp.route(this.checkIfAuthenticated, "/request").post(this.createCustomer);
 
     /**
      * Endpoint to get login data.
@@ -213,7 +218,7 @@ class Server {
     /**
      * Endpoint to get recaptcha token from the client.
      */
-    this.expressApp.route('/token_validate').post(this.validateRecaptcha);
+    this.expressApp.route(this.checkIfAuthenticated, '/token_validate').post(this.validateRecaptcha);
 
     /**
      * Endpoint to create new user.

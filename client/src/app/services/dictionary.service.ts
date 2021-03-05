@@ -31,6 +31,9 @@ export class DictionaryService {
     ['PNS', 'Die Passwörter stimmen nicht überein'],
     ['UAE', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['ICL', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
+    
+    ['NCU', 'Neuer Kunde'],
+    ['CHA', 'Ändern'],
 
     ['YES', 'Ja'],
     ['NOO', 'Nein'],
@@ -126,6 +129,8 @@ export class DictionaryService {
     ['UAE', 'This email address or username is already being used.'],
     ['ICL', 'Your username/email or password are incorrect.'],
 
+    ['NCU', 'New customer'],
+    ['CHA', 'Change'],
 
     ['SET', 'Settings'],
     ['LOT', 'Sign out'],

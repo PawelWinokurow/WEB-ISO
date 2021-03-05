@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSoapModule } from 'ngx-soap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
@@ -25,6 +25,8 @@ import { DateService } from './services/date.service';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthService } from './services/auth.service';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AuthInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AuthService } from './services/auth.service';
     EmailDialogComponent,
     PreselectionComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,11 @@ import { AuthService } from './services/auth.service';
     SearchService,
     DateService,
     AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
