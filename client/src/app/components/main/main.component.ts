@@ -17,14 +17,12 @@ export class MainComponent {
 
   constructor(private router: Router, public dictionaryService: DictionaryService, 
     public storageService: StorageService, private authService: AuthService){
-    this.reset();
   }
 
   /**
    * Click on the reset button triggers this method. The method navigates to the LoginComponent.
    */
   reset() {
-    //this.router.navigate(['/preselection']);
     this.router.navigate(['/login']);
   }
 
@@ -33,7 +31,7 @@ export class MainComponent {
    */
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.reset();
   }
 
 

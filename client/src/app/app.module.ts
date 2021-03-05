@@ -27,6 +27,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AuthService } from './services/auth.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
     SearchService,
     DateService,
     AuthService,
+    AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
