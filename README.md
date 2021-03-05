@@ -16,6 +16,11 @@ WEB-ISO is a Angular application for creating customer instances.
   * Build docker image: ```docker build -t web-iso-server .```
   * Run docker container: ```docker run -d -p port:3000 web-iso-server``` 
 
+* MySql Server:
+  *  Run docker container: ```docker-compose up -d```
+  * ```docker exec -it docker_mysql-development_1 bash```
+  * ```mysql -u root -p```
+
 ## Documentation
 
 * Client uses Compodoc: 
