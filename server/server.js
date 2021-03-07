@@ -171,10 +171,11 @@ class Server {
     function checkPassword(identifier, plaintextPassword) {
       return new Promise((resolve, reject) => {
         databaseService.getUsers(identifier).then(users => {
-          if (users.length == 0) {
-            resolve(false);
+          var user = users.find(user => cryptoService.comparePasswords(plaintextPassword, user.password));
+          if (user !== undefined) {
+            resolve(user)
           }
-          resolve(users.find(user => cryptoService.comparePasswords(plaintextPassword, user.password)));
+          reject(false);
         })
       });
     }
@@ -182,7 +183,6 @@ class Server {
     const password = req.body.password;
     checkPassword(identifier, password).then(
       user => {
-        if (user) {
           var user_json = { username: user.username, email: user.email, companyCode: user.companycode }
           const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
             algorithm: 'RS256',
@@ -194,12 +194,11 @@ class Server {
             expiresIn: process.env.JWT_DURATION,
             user: user_json
           });
-        } else {
-          // send status 401 Unauthorized
-          res.sendStatus(401).send({ error: "No match" });;
-        }
       }
-    );
+    ).catch(err => {
+      // send status 401 Unauthorized
+      res.status(401).send({ error: "No match" });
+    });
   }
 
   createUser(req, res) {
@@ -214,10 +213,9 @@ class Server {
   updateUser(req, res) {
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
-    console.log(user)
     databaseService.updateUser(user)
       .then(() => res.json(user))
-      .catch(err => res.sendStatus(500).send(`Database error: ${err}`))
+      .catch(err => res.status(500).send(`Database error: ${err}`))
   }
 
   deleteUser(req, res) {

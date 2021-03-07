@@ -29,7 +29,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/preselection']);
       })
     .catch(err => {
-      this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
+      console.log(err)
+      if (err.status == "401") {
+        this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
+      } else {
+        this.toastr.error(err.message, this.dictionaryService.get('ERR'))
+      }
     });
   }
 

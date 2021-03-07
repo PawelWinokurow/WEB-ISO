@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
           }
         })
         .catch(err => {
-          this.toastr.error(err, this.dictionaryService.get('ERR'));
+          this.toastr.error(err.message, this.dictionaryService.get('ERR'));
         });
     } else {
       this.registerForm.markAllAsTouched();
