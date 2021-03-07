@@ -1,4 +1,15 @@
-@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/theming';
+
+
+// import our custom theme
+@import 'theme.scss';
+
+@include angular-material-theme($alternate-theme);
+
+
+.buttons-theme{
+  @include angular-material-theme($buttons-theme);
+}
 
 html,
 body {
