@@ -1,6 +1,6 @@
 <mat-toolbar style="background-color: #009650;">
   <mat-toolbar-row>
-    <button mat-icon-button [style.visibility]="this.storageService.isLoggedIn ? 'visible' : 'hidden'" [disabled]="!this.storageService.isLoggedIn">
+    <button mat-icon-button [style.visibility]="authService.isLoggedIn() ? 'visible' : 'hidden'" [disabled]="!authService.isLoggedIn()">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <div style="padding-left:10px;">

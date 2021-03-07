@@ -7,18 +7,14 @@ var httpsProxyAgent = require('https-proxy-agent');
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
-var expressJwt = require('express-jwt');
 
 require('dotenv').config();
-
 
 var databaseService = require('./services/database_service');
 var soapService = require('./services/soap_service');
 var emailService = require('./services/email_service');
 var cryptoService = require('./services/crypto_service');
 var maskService = require('./services/mask_service');
-const { resolve } = require('path');
-
 
 databaseService.connect();
 
@@ -39,11 +35,11 @@ class Server {
     this.confirm = this.confirm.bind(this);
     this.validateRecaptcha = this.validateRecaptcha.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
-    this.loginRoute = this.loginRoute.bind(this);
+    this.login = this.login.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
     this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
     this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
-    this.checkIfAuthenticated = expressJwt({ secret: this.publicKey }); 
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
@@ -153,7 +149,24 @@ class Server {
     );
   }
 
-  loginRoute(req, res) {
+  checkIfAuthenticated(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const token = authHeader.split(' ')[1];
+      jwt.verify(token, this.publicKey, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.sendStatus(403);
+        }
+        req.user = user;
+        next();
+      });
+    } else {
+      res.sendStatus(401);
+    }
+  };
+
+  login(req, res) {
     // Checks if the user exists and if the password matches
     function checkPassword(identifier, plaintextPassword) {
       return new Promise((resolve, reject) => {
@@ -170,11 +183,10 @@ class Server {
     checkPassword(identifier, password).then(
       user => {
         if (user) {
-          var user_json = {username: user.username, email: user.email, companyCode: user.companycode}
+          var user_json = { username: user.username, email: user.email, companyCode: user.companycode }
           const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
             algorithm: 'RS256',
             expiresIn: process.env.JWT_DURATION,
-            //subject: user.email
           });
           //Send JWT back
           res.status(200).json({
@@ -194,21 +206,38 @@ class Server {
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.checkUser(user)
+      .catch(() => res.json({ message: 'Duplicate' }))
       .then(() => databaseService.storeUser(user))
       .then(() => res.json({ ok: true }))
-      .catch(() => res.json({ message: 'Duplicate' }))
+  }
+
+  updateUser(req, res) {
+    var user = req.body;
+    user.password = cryptoService.hashPassword(user.password);
+    console.log(user)
+    databaseService.updateUser(user)
+      .then(() => res.json(user))
+      .catch(err => res.sendStatus(500).send(`Database error: ${err}`))
+  }
+
+  deleteUser(req, res) {
+    var user = req.body;
+    user.password = cryptoService.hashPassword(user.password);
+    databaseService.deleteUser(user)
+      .then(() => res.json({ ok: true }))
+      .catch(err => res.json({ message: err }))
   }
 
   initEndPoints() {
     /**
      * Enpoint to get customer masks from application.
      */
-    this.expressApp.route(this.checkIfAuthenticated, "/request").post(this.createCustomer);
+    this.expressApp.route("/request").post(this.checkIfAuthenticated, this.createCustomer);
 
     /**
      * Endpoint to get login data.
      */
-    this.expressApp.route("/login").post(this.loginRoute);
+    this.expressApp.route("/login").post(this.login);
 
     /**
      * Endpoint to get email confirmations.
@@ -218,12 +247,15 @@ class Server {
     /**
      * Endpoint to get recaptcha token from the client.
      */
-    this.expressApp.route(this.checkIfAuthenticated, '/token_validate').post(this.validateRecaptcha);
+    this.expressApp.route('/recaptcha').post(this.checkIfAuthenticated, this.validateRecaptcha);
 
     /**
-     * Endpoint to create new user.
+     * Endpoint for user CRUD.
      */
-    this.expressApp.route('/createuser').post(this.createUser);
+    this.expressApp.route('/user')
+      .post(this.createUser)
+      .put(this.checkIfAuthenticated, this.updateUser)
+      .delete(this.checkIfAuthenticated, this.deleteUser);
   }
 
   start() {

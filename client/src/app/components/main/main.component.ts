@@ -13,10 +13,13 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
 
   constructor(private router: Router, public dictionaryService: DictionaryService, 
-    public storageService: StorageService, private authService: AuthService){
+    public storageService: StorageService, public authService: AuthService){
+  }
+  ngOnInit(): void {
+    this.storageService.user = JSON.parse(localStorage.getItem("user"));
   }
 
   /**

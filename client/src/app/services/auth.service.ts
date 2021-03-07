@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { mergeMap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { StorageService } from './storage.service';
 
@@ -19,11 +18,10 @@ export class AuthService {
 
   private setSession(result) {
     if (result) {
-      console.log(result)
       const expiresAt = moment().add(result.expiresIn, 'second');
       localStorage.setItem('id_token', result.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-      this.storageService.isLoggedIn = true;
+      localStorage.setItem("user", JSON.stringify(result.user));
       this.storageService.user = result.user;
       return true;
     }
@@ -31,7 +29,6 @@ export class AuthService {
   }
 
   logout() {
-    this.storageService.isLoggedIn = false;
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
   }
@@ -51,6 +48,14 @@ export class AuthService {
   }
 
   createUser(user) {
-    return this.http.post(`${environment.serverURL}/createuser`, user);
+    return this.http.post(`${environment.serverURL}/user`, user);
+  }
+
+  updateUser(user) {
+    return this.http.put(`${environment.serverURL}/user`, user);
+  }
+
+  deleteUser(user) {
+    return this.http.delete(`${environment.serverURL}/user`, user);
   }
 }

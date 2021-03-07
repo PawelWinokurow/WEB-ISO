@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.identifier.value, this.password.value)
     .then(result => {
-        this.storageService.isLoggedIn = true;
         this.router.navigate(['/preselection']);
       })
     .catch(err => {

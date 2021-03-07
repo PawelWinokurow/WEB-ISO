@@ -111,6 +111,9 @@ export class DictionaryService {
     ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
     ['SNT', 'Die Maske wurde gesendet.'],
     ['UWC', 'Der Benutzer wurde angelegt.'],
+    ['UWU', 'Der Benutzer wurde geändert.'],
+    ['UWN', 'Der Benutzer wurde nicht geändert.'],
+
     ['SUC', 'Erfolg!'],
     ['ERR', 'Fehler!'],
   ])
@@ -209,6 +212,9 @@ export class DictionaryService {
     ['DIS', 'Send mask'],
     ['DIQ', 'Do you want to send the mask directly?'],
     ['UWC', 'The user was created.'],
+    ['UWU', 'The user was updated.'],
+    ['UWN', 'The user was not updated.'],
+
     ['SNT', 'The mask was sent.'],
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],

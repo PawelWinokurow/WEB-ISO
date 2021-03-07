@@ -18,53 +18,45 @@ export class SettingsComponent implements OnInit {
   hide1 = true;
   hide2 = true;
   changeForm: FormGroup;
-  submitted = false;
   companyCode: FormControl;
+  selected = this.storageService.user.companyCode;
 
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, private storageService: StorageService,
+  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, public storageService: StorageService,
     public errorMessageService: ErrorMessageService, private authService: AuthService, private toastr: ToastrService, public listService: ListService) {
   }
 
   ngOnInit(): void {
     this.changeForm = this.formBuilder.group({
       //TODO username:only letters and no @
-      username: new FormControl({value: this.storageService.user.username, disabled: true}, Validators.required),
-      email: new FormControl({value: this.storageService.user.email, disabled: true}, [Validators.required, Validators.email]),
+      username: new FormControl({ value: this.storageService.user.username, disabled: true }, Validators.required),
+      email: new FormControl({ value: this.storageService.user.email, disabled: true }, [Validators.required, Validators.email]),
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      companyCode: [this.storageService.user.companyCode, [Validators.required]],
+      companyCode: ['', [Validators.required]],
     },
-    { validator: MustMatch('password', 'confirmPassword') }
+      { validator: MustMatch('password', 'confirmPassword') }
     );
   }
 
   change() {
-    /*
-    this.submitted = true;
     if (this.changeForm.valid) {
-      var newUser = {
-        username: this.changeForm.controls['username'].value,
-        password: this.changeForm.controls['password'].value,
-        email: this.changeForm.controls['email'].value,
-        companyCode: this.changeForm.controls['companyCode'].value.code
-      }
-      this.authService.createUser(newUser).toPromise()
-        .then(msg => {
-          if (msg["message"] === 'Duplicate') {
-            this.toastr.error(this.dictionaryService.get('UAE'), this.dictionaryService.get('ERR'));
-          } else {
-            this.toastr.success(this.dictionaryService.get('UWC'), this.dictionaryService.get('SUC'));
-            this.router.navigate(['/login']);
-          }
+      var user = this.storageService.user;
+      user.password = this.changeForm.controls['password'].value;
+      user.companyCode = this.changeForm.controls['companyCode'].value;
+
+      this.authService.updateUser(user).toPromise()
+        .then(user => {
+          console.log(user)
+          this.storageService.user = user;
+          this.toastr.success(this.dictionaryService.get('UWU'), this.dictionaryService.get('SUC'));
         })
         .catch(err => {
-          this.toastr.error(err, this.dictionaryService.get('ERR'));
+          this.toastr.error(`${this.dictionaryService.get('UWN')}: ${err}`, this.dictionaryService.get('ERR'));
         });
     } else {
       this.changeForm.markAllAsTouched();
     }
-    */
   }
 
   get changeFormControl() {
@@ -75,19 +67,19 @@ export class SettingsComponent implements OnInit {
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
 
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
   }
 }

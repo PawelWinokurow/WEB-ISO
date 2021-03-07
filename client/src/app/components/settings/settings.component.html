@@ -30,8 +30,8 @@
                     <div class="padding10px">
                         <mat-form-field color="primary" appearance="outline">
                             <mat-label>{{dictionaryService.get('CCO')}}</mat-label>
-                            <mat-select formControlName="companyCode" required>
-                                <mat-option *ngFor="let field of listService.companyCodes" [value]="field">
+                            <mat-select formControlName="companyCode" required [(ngModel)]="selected">
+                                <mat-option *ngFor="let field of listService.companyCodes" [value]="field.code">
                                     {{field.details}}
                                 </mat-option>
                             </mat-select>

@@ -8,7 +8,7 @@ const MASKS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS masks (
 
 const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
   email VARCHAR(255) NOT NULL PRIMARY KEY, 
-  username VARCHAR(255) NOT NULL PRIMARY KEY, 
+  username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
   companycode VARCHAR(255));`;
 
@@ -33,10 +33,11 @@ exports.connect = function () {
       //Create table if table not exists
       connection.query(query,
         function (err, results, fields) {
-          if (err) throw err;
-          //console.log(results);
-          //console.log(err);
-          //console.log(fields)
+          if (err) {
+            console.log(err);
+            throw err;
+          } 
+          console.log(results);
         });
     });
     return connection;
@@ -50,7 +51,7 @@ exports.connect = function () {
  */
 exports.storeMask = function (hash, mask) {
   var stringJson = JSON.stringify(mask);
-  const insert_statement = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW())';
+  const insert_statement = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW());';
   values = [hash, stringJson];
   //Insert values
   connection.query(insert_statement, [values], function (err, result) {
@@ -65,12 +66,48 @@ exports.storeMask = function (hash, mask) {
  */
 exports.storeUser = function (user) {
   return new Promise((resolve, reject) => {
-    const insert_statement = 'INSERT INTO users (email, username, password, companycode) VALUES (?)';
+    const insert_statement = 'INSERT INTO users (email, username, password, companycode) VALUES (?);';
     values = [user.email, user.username, user.password, user.companyCode];
     //Insert values
     connection.query(insert_statement, [values], function (err, result) {
       if (err) reject(err);
       console.log("Number of records inserted: " + result.affectedRows);
+      resolve(true);
+    });
+  });
+}
+
+/**
+ * Updates user in the database.
+ * @param  {object} user User object 
+ */
+ exports.updateUser = function (user) {
+  return new Promise((resolve, reject) => {
+    const update_statement = `UPDATE users SET password = '${user.password}', companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
+    //Insert values
+    connection.query(update_statement, function (err, result) {
+      if (err) {
+        console.log(err)
+        reject(err);
+      }
+      console.log("Number of records updated: " + result.affectedRows);
+      resolve(true);
+    });
+  });
+}
+
+/**
+ * Deletes user from the database.
+ * @param  {object} user User object 
+ */
+ exports.deleteUser = function (user) {
+  return new Promise((resolve, reject) => {
+    const delete_statement = 'DELETE FROM users WHERE email = ?';
+    values = [user.email];
+    //Insert values
+    connection.query(delete_statement, [values], function (err, result) {
+      if (err) reject(err);
+      console.log("Number of records removed: " + result.affectedRows);
       resolve(true);
     });
   });
@@ -83,9 +120,9 @@ exports.storeUser = function (user) {
  */
 exports.checkUser = function (user) {
   return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT * FROM users WHERE email = ?';
+    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
     //Select values
-    connection.query(select_statement, [user.email],
+    connection.query(select_statement, [user.email, user.username],
       function (err, result, fields) {
         if (err) reject(err);
         //If row with the given email exists in the database
@@ -98,6 +135,10 @@ exports.checkUser = function (user) {
   });
 }
 
+/**
+ * Checks if customer mask with a given hash is in the database.
+ * @param {string} hash hashstring from the email message
+ */
 exports.checkConfirmation = function (hash) {
   return new Promise((resolve, reject) => {
     const select_statement = 'SELECT mask FROM masks WHERE hash = ?';
@@ -128,7 +169,7 @@ exports.removeOldMasks = function () {
 }
 
 /**
- * Get users by identifier from the database.
+ * Gets users by identifier from the database.
  * @param  {object} identifier email or username 
  * @returns {Array} users
  */

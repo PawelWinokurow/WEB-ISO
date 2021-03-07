@@ -12,8 +12,6 @@ export class StorageService {
 
   customerType: string = 'person';
   debitCreditType: string = 'debit';
-  companyCode: CodeDetails = null;
-  isLoggedIn = false
   user = null;
 
   constructor(private dictionaryService: DictionaryService) { }
@@ -24,7 +22,6 @@ export class StorageService {
   resetValues() {
     this.customerType = 'person';
     this.debitCreditType = 'debit';
-    this.companyCode = null;
   }
 
   /**
@@ -48,7 +45,7 @@ export class StorageService {
    * @returns Company code value.
    */
   getCompanyCodeName(): string {
-    return this.companyCode.details;
+    return this.user.companyCode.details;
   }
 
 }

@@ -33,7 +33,7 @@ export class HttpService {
    * @param token 
    */
   sendToken(token): Observable<any>{
-    return this.http.post(`${environment.serverURL}/token_validate`, {recaptcha: token}, {
+    return this.http.post(`${environment.serverURL}/recaptcha`, {recaptcha: token}, {
       headers: this.headers
     }).pipe(catchError(this.handleError('send token')));
   }

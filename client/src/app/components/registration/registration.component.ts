@@ -19,8 +19,6 @@ export class RegistrationComponent implements OnInit {
   hide1 = true;
   hide2 = true;
   registerForm: FormGroup;
-  submitted = false;
-
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, private storageService: StorageService,
     public errorMessageService: ErrorMessageService, private authService: AuthService, private toastr: ToastrService, public listService: ListService) {
@@ -40,7 +38,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   register() {
-    this.submitted = true;
     if (this.registerForm.valid) {
       var newUser = {
         username: this.registerForm.controls['username'].value,

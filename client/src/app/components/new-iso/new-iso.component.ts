@@ -322,7 +322,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   constructMask(isDirect: boolean) {
     const data = {
       //Preselection
-      companyCode: this.storageService.companyCode?.code ?? '',
+      companyCode: this.storageService.user.companyCode?.code ?? '',
 
       //Shared forms
 
