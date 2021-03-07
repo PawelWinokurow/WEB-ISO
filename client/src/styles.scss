@@ -1,14 +1,16 @@
 @import '~@angular/material/theming';
 
-
 // import our custom theme
 @import 'theme.scss';
 
 @include angular-material-theme($alternate-theme);
 
-
 .buttons-theme{
   @include angular-material-theme($buttons-theme);
+}
+
+.toggle-theme{
+  @include mix-toggle-theme($toggle-theme);
 }
 
 html,

@@ -11,7 +11,7 @@ $mat-baywa-primary: (
 );
 
 $mat-baywa-accent: (
-    50 : #b6b6b6,
+    50 : #cecece,
     100: #f0f0f0,
     200: #000000,
     300: #d3d3d3,
@@ -66,7 +66,7 @@ $alternate-theme: mat-light-theme(
 );
 
 $buttons-primary: mat-palette($mat-baywa-primary, 50, 50);
-$buttons-accent:  mat-palette($mat-baywa-accent, 200);
+$buttons-accent:  mat-palette($mat-baywa-accent, 50);
 $buttons-warn:  mat-palette($mat-baywa-warn, 50);
 
 $buttons-theme: mat-light-theme(
@@ -74,3 +74,22 @@ $buttons-theme: mat-light-theme(
   $buttons-accent,
   $buttons-warn
 );
+
+$toggle-theme: mat-light-theme($buttons-accent, $buttons-primary);
+
+
+@mixin mix-toggle-theme($toggle-theme) {
+  $primary: map-get($toggle-theme, primary);
+  $accent: map-get($toggle-theme, accent);
+
+  .mat-button-toggle {
+    background-color: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+
+  .mat-button-toggle-checked {
+    background-color: mat-color($accent);
+    color: mat-color($accent, default-contrast);
+  }
+}
+

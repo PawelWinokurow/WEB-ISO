@@ -8,6 +8,7 @@ var path = require('path');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
 
+
 require('dotenv').config();
 
 var databaseService = require('./services/database_service');
@@ -152,8 +153,12 @@ class Server {
   checkIfAuthenticated(req, res, next) {
     const authHeader = req.headers.authorization;
     if (authHeader) {
-      const token = authHeader.split(' ')[1];
-      jwt.verify(token, this.publicKey, (err, user) => {
+      console.log('header: ' + authHeader)
+      const jwtBearerToken = authHeader.split(' ')[1];
+      console.log('token: ' + jwtBearerToken)
+      
+      jwt.verify(jwtBearerToken, this.publicKey, { algorithm: ['RS256'] }, (err, user) => {
+        console.log('user: ' + user)
         if (err) {
           console.log(err);
           return res.sendStatus(403);
@@ -188,6 +193,7 @@ class Server {
             algorithm: 'RS256',
             expiresIn: process.env.JWT_DURATION,
           });
+
           //Send JWT back
           res.status(200).json({
             idToken: jwtBearerToken,
@@ -211,6 +217,7 @@ class Server {
   }
 
   updateUser(req, res) {
+    console.log(req)
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.updateUser(user)

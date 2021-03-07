@@ -2,7 +2,7 @@
     <mat-card class="card">
         <mat-card-title class="padding10px">{{dictionaryService.get('PRS')}}</mat-card-title>
         <mat-card-content align="center">
-            <div class="padding10px">
+            <div class="padding10px toggle-theme">
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
                     <mat-button-toggle value="debit">{{ dictionaryService.get('DEB') }}
                     </mat-button-toggle>
@@ -10,7 +10,7 @@
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
-            <div class="padding10px">
+            <div class="padding10px toggle-theme">
                 <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">
                     <mat-button-toggle value="person">{{ dictionaryService.get('PER') }}
                     </mat-button-toggle>
@@ -21,7 +21,7 @@
 
             <div class="paddinglr10px buttons-theme" style="display: flex; padding-bottom: 10px; padding-top: 10px;">
                 <span class="space"></span>
-                <button mat-raised-button (click)="onGenerateMask()" color="primary" style="height: 46px; width: 50%;">
+                <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px; width: 50%;">
                     <mat-icon style="margin-right: 5px;">assignment</mat-icon>
                     <span>{{dictionaryService.get('MGE')}}</span>
                 </button>

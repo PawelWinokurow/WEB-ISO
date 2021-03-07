@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService) {}
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn()){
+      this.router.navigate(['/preselection']);
+    }
   }
 
   login() {
