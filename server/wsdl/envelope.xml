@@ -4,12 +4,12 @@
          <HEADER>
             <OBJECT/>
             <OBJECT_INSTANCE>
-               <BPARTNER>0100001148</BPARTNER>
+               <BPARTNER></BPARTNER>
                <BPARTNERGUID/>
                <IDENTIFICATIONCATEGORY/>
                <IDENTIFICATIONNUMBER/>
             </OBJECT_INSTANCE>
-            <OBJECT_TASK>U</OBJECT_TASK>
+            <OBJECT_TASK>I</OBJECT_TASK>
          </HEADER>
          <CENTRAL_DATA>
             <COMMON>
@@ -54,8 +54,8 @@
                      <NAMCOUNTRYISO/>
                      <SEX/>
                      <BIRTHPLACE/>
-                     <BIRTHDATE>9999-12-31</BIRTHDATE>
-                     <DEATHDATE>9999-12-31</DEATHDATE>
+                     <BIRTHDATE>0000-00-00</BIRTHDATE>
+                     <DEATHDATE>0000-00-00</DEATHDATE>
                      <MARITALSTATUS/>
                      <CORRESPONDLANGUAGE/>
                      <CORRESPONDLANGUAGEISO/>
@@ -75,8 +75,8 @@
                      <NAME4/>
                      <LEGALFORM/>
                      <INDUSTRYSECTOR/>
-                     <FOUNDATIONDATE>9999-12-31</FOUNDATIONDATE>
-                     <LIQUIDATIONDATE>9999-12-31</LIQUIDATIONDATE>
+                     <FOUNDATIONDATE>0000-00-00</FOUNDATIONDATE>
+                     <LIQUIDATIONDATE>0000-00-00</LIQUIDATIONDATE>
                      <LOC_NO_1>0000000</LOC_NO_1>
                      <LOC_NO_2>00000</LOC_NO_2>
                      <CHK_DIGIT>0</CHK_DIGIT>
@@ -191,7 +191,7 @@
                         <IBAN_FROM_DATE>2020-11-24</IBAN_FROM_DATE>
                         <BANKDETAILVALIDFROM>2020-11-24</BANKDETAILVALIDFROM>
                         <BANKDETAILVALIDTO>9999-12-31</BANKDETAILVALIDTO>
-                        <BANKDETAILMOVEDATE>9999-12-31</BANKDETAILMOVEDATE>
+                        <BANKDETAILMOVEDATE>0000-00-00</BANKDETAILMOVEDATE>
                         <BANKDETAILMOVEID/>
                         <BANK_ACCOUNT_TYPE/>
                      </DATA>
@@ -350,7 +350,7 @@
                               <EXTADDRESSNUMBER/>
                               <DONT_USE_P/>
                               <DONT_USE_S/>
-                              <MOVE_DATE>9999-12-31</MOVE_DATE>
+                              <MOVE_DATE>0000-00-00</MOVE_DATE>
                               <MOVE_ADDRESS/>
                               <VALIDFROMDATE>2020-11-24</VALIDFROMDATE>
                               <VALIDTODATE>9999-12-31</VALIDTODATE>
@@ -590,7 +590,7 @@
                   <IS_PROSPECT/>
                   <IS_CONSUMER/>
                   <IS_CUSTOMER/>
-                  <CUSTOMER_SINCE>9999-12-31</CUSTOMER_SINCE>
+                  <CUSTOMER_SINCE>0000-00-00</CUSTOMER_SINCE>
                   <IS_COD_CUSTOMER/>
                   <INDUSTRY/>
                   <IS_RENTED/>
@@ -781,12 +781,12 @@
                      <VBUND/>
                      <COUNTRY_REP/>
                      <COUNTRY_REP_ISO/>
-                     <BANK_DEL_D>9999-12-31</BANK_DEL_D>
+                     <BANK_DEL_D>0000-00-00</BANK_DEL_D>
                      <UNW_CUSTOMER/>
                      <UNW_REASON/>
                      <UNW_REMARK/>
                      <GROUP_FEATURE/>
-                     <LAST_CUST_CONT>9999-12-31</LAST_CUST_CONT>
+                     <LAST_CUST_CONT>0000-00-00</LAST_CUST_CONT>
                   </FSBP_CENTRL>
                   <FSBP_PERSON>
                      <STATE/>
@@ -901,12 +901,12 @@
                <DATA>
                   <REGULARY_DATA>
                      <NONRESIDENT/>
-                     <NONRESIDENT_DATE>9999-12-31</NONRESIDENT_DATE>
+                     <NONRESIDENT_DATE>0000-00-00</NONRESIDENT_DATE>
                      <REPORTING_RELEVANT/>
                      <BORROWER_NR/>
                      <BORROWER_UNIT/>
                      <CREDIT_STANDING_REVIEW>00</CREDIT_STANDING_REVIEW>
-                     <CREDIT_STANDING_REVIEW_DATE>9999-12-31</CREDIT_STANDING_REVIEW_DATE>
+                     <CREDIT_STANDING_REVIEW_DATE>0000-00-00</CREDIT_STANDING_REVIEW_DATE>
                      <CREDIT_NOTIFICATION>00</CREDIT_NOTIFICATION>
                      <COMPANY_RELATIONSHIP/>
                   </REGULARY_DATA>
@@ -928,7 +928,7 @@
                   </INSURANCE_REPORTING_DATA>
                   <BANKING_REPORTING_DATA>
                      <RISK_GROUP/>
-                     <CLASSIFICATION_DATE>9999-12-31</CLASSIFICATION_DATE>
+                     <CLASSIFICATION_DATE>0000-00-00</CLASSIFICATION_DATE>
                      <COMBINE_TIE/>
                      <MFI/>
                      <LEGAL_RELEVANT/>
@@ -1010,13 +1010,13 @@
                   <CREDIT_STANDING/>
                   <CREDIT_STANDING_INFO/>
                   <AFFIDAVIT/>
-                  <DATE_OF_AFFIDAVIT>9999-12-31</DATE_OF_AFFIDAVIT>
+                  <DATE_OF_AFFIDAVIT>0000-00-00</DATE_OF_AFFIDAVIT>
                   <BANKRUPTCY_PROCEEDINGS/>
-                  <DATE_OF_BANKRUPTCY_PROCEEDINGS>9999-12-31</DATE_OF_BANKRUPTCY_PROCEEDINGS>
+                  <DATE_OF_BANKRUPTCY_PROCEEDINGS>0000-00-00</DATE_OF_BANKRUPTCY_PROCEEDINGS>
                   <FORECLOSURE/>
-                  <DATE_OF_FORECLOSURE>9999-12-31</DATE_OF_FORECLOSURE>
+                  <DATE_OF_FORECLOSURE>0000-00-00</DATE_OF_FORECLOSURE>
                   <STATUS_OF_LEGAL_PROCEEDINGS>00</STATUS_OF_LEGAL_PROCEEDINGS>
-                  <DATE_OF_LEGAL_PROCEEDINGS>9999-12-31</DATE_OF_LEGAL_PROCEEDINGS>
+                  <DATE_OF_LEGAL_PROCEEDINGS>0000-00-00</DATE_OF_LEGAL_PROCEEDINGS>
                </DATA>
                <DATAX>
                   <CREDIT_STANDING/>
@@ -1050,13 +1050,13 @@
                   <OWN_RATING/>
                   <CHECK_RULE/>
                   <LIMIT_RULE/>
-                  <RATING_VAL_DATE>9999-12-31</RATING_VAL_DATE>
-                  <RATING_CHG_DATE>9999-12-31</RATING_CHG_DATE>
+                  <RATING_VAL_DATE>0000-00-00</RATING_VAL_DATE>
+                  <RATING_CHG_DATE>0000-00-00</RATING_CHG_DATE>
                   <ALTERNATE_BP/>
                   <OWN_RATING_CALC/>
                   <RISK_CLASS/>
                   <RISK_CLASS_CALC/>
-                  <RISK_CLASS_CHGDT>9999-12-31</RISK_CLASS_CHGDT>
+                  <RISK_CLASS_CHGDT>0000-00-00</RISK_CLASS_CHGDT>
                   <CREDIT_GROUP>0000</CREDIT_GROUP>
                </DATA>
                <DATAX>
@@ -1180,10 +1180,10 @@
                   <RG/>
                   <EXP/>
                   <UF/>
-                  <RGDATE>9999-12-31</RGDATE>
+                  <RGDATE>0000-00-00</RGDATE>
                   <RIC>00000000000</RIC>
                   <RNE/>
-                  <RNEDATE>9999-12-31</RNEDATE>
+                  <RNEDATE>0000-00-00</RNEDATE>
                   <CNAE/>
                   <LEGALNAT>0000</LEGALNAT>
                   <CRTN/>
@@ -1359,8 +1359,8 @@
                <POSTAL>
                   <DATA>
                      <ADDR_VERS/>
-                     <FROM_DATE>9999-12-31</FROM_DATE>
-                     <TO_DATE>9999-12-31</TO_DATE>
+                     <FROM_DATE>0000-00-00</FROM_DATE>
+                     <TO_DATE>0000-00-00</TO_DATE>
                      <TITLE/>
                      <NAME/>
                      <NAME_2/>
@@ -1674,10 +1674,10 @@
                   <SPERQ/>
                   <ADRNR/>
                   <GBORT/>
-                  <GBDAT>9999-12-31</GBDAT>
+                  <GBDAT>0000-00-00</GBDAT>
                   <SEXKZ/>
                   <KRAUS/>
-                  <REVDB>9999-12-31</REVDB>
+                  <REVDB>0000-00-00</REVDB>
                   <QSSYS/>
                   <KTOCK/>
                   <WERKS/>
@@ -1702,7 +1702,7 @@
                   <J_1KFREPRE/>
                   <J_1KFTBUS/>
                   <J_1KFTIND/>
-                  <QSSYSDAT>9999-12-31</QSSYSDAT>
+                  <QSSYSDAT>0000-00-00</QSSYSDAT>
                   <PODKZB/>
                   <FISKU/>
                   <STENR/>
@@ -1711,10 +1711,10 @@
                   <RG/>
                   <EXP/>
                   <UF/>
-                  <RGDATE>9999-12-31</RGDATE>
+                  <RGDATE>0000-00-00</RGDATE>
                   <RIC>00000000000</RIC>
                   <RNE/>
-                  <RNEDATE>9999-12-31</RNEDATE>
+                  <RNEDATE>0000-00-00</RNEDATE>
                   <CNAE/>
                   <LEGALNAT>0000</LEGALNAT>
                   <CRTN/>
@@ -1729,7 +1729,7 @@
                   <CRC_NUM/>
                   <J_SC_CAPITAL>0.0</J_SC_CAPITAL>
                   <J_SC_CURRENCY/>
-                  <BORGR_DATUN>9999-12-31</BORGR_DATUN>
+                  <BORGR_DATUN>0000-00-00</BORGR_DATUN>
                   <BORGR_YEAUN/>
                   <SPERZ/>
                   <CARRIER_CONF/>
@@ -1756,7 +1756,7 @@
                   <J_1IVENCRE/>
                   <J_1ISERN/>
                   <J_1IPANREF/>
-                  <J_1IPANVALDT>9999-12-31</J_1IPANVALDT>
+                  <J_1IPANVALDT>0000-00-00</J_1IPANVALDT>
                   <J_1I_CUSTOMS/>
                   <J_1IDEDREF/>
                   <VEN_CLASS/>
@@ -1883,8 +1883,8 @@
                <POSTAL>
                   <DATA>
                      <ADDR_VERS/>
-                     <FROM_DATE>9999-12-31</FROM_DATE>
-                     <TO_DATE>9999-12-31</TO_DATE>
+                     <FROM_DATE>0000-00-00</FROM_DATE>
+                     <TO_DATE>0000-00-00</TO_DATE>
                      <TITLE/>
                      <NAME/>
                      <NAME_2/>
@@ -2144,7 +2144,7 @@
                <DUNS/>
                <DUNS4/>
                <CAGE/>
-               <RENDATE>9999-12-31</RENDATE>
+               <RENDATE>0000-00-00</RENDATE>
                <REG_IND/>
                <REG_STAT/>
             </DATA>
@@ -2169,6 +2169,7 @@
          <CURRENT_STATE/>
          <MLTAS_DATA/>
       </ADD_MULTIPLE_ASSIGNMENTS>
+
    </IS_EXTERN>
-   
+
 </ENVELOPE>

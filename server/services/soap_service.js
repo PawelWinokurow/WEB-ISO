@@ -5,15 +5,15 @@ var fs = require('fs');
 
 require('dotenv').config();
 
-var WSDL_URL = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
+
 //envelope.xml for test
 var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope2.xml');
-exports.test = function () {
+exports.test = function (wsdlUrl) {
 
     fs.readFile(ENVELOPE_URL, function (err, data) {
         xml2js.parseString(data, function (err, args) {
             //console.log(args.ENVELOPE)
-            soap.createClient(WSDL_URL, function (err, soapClient) {
+            soap.createClient(wsdlUrl, function (err, soapClient) {
                 if (err) {
                     console.log("error", err);
                 }
@@ -35,9 +35,10 @@ exports.test = function () {
 /**
  * Sends mask to the SAP server.
  * @param {object} mask Customer mask
+ * @param {string} wsdlUrl path to wsdl
  */
-exports.sendMask = function (envelope) {
-    soap.createClient(WSDL_URL, function (err, soapClient) {
+exports.sendMask = function (envelope, wsdlUrl) {
+    soap.createClient(wsdlUrl, function (err, soapClient) {
         if (err) {
             console.log("error", err);
         }

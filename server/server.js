@@ -38,9 +38,11 @@ class Server {
     this.createCustomer = this.createCustomer.bind(this);
     this.login = this.login.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.confirm = this.confirm.bind(this);
     this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
     this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
     this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
+    this.wsdlUrl = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
@@ -64,7 +66,7 @@ class Server {
     databaseService.checkConfirmation(req.query.hash)
       .then(result => {
         var mask = JSON.parse(result.mask)
-        soapService.sendMask(mask);
+        soapService.sendMask(mask, this.wsdlUrl);
         res.send('<p>Success! The mask was confirmed.</p>');
       })
       .catch(() => {
@@ -137,7 +139,7 @@ class Server {
       sapMask => {
         var envelope = sapMask.getJSONArgs();
         if (maskData.isDirect) {
-          soapService.sendMask(envelope);
+          soapService.sendMask(envelope, this.wsdlUrl);
         } else {
           const hash = cryptoService.generateHash();
           databaseService.storeMask(hash, envelope);
