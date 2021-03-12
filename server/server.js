@@ -37,6 +37,7 @@ class Server {
     this.validateRecaptcha = this.validateRecaptcha.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
     this.login = this.login.bind(this);
+    this.refreshToken = this.refreshToken.bind(this);
     this.createUser = this.createUser.bind(this);
     this.confirm = this.confirm.bind(this);
     this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
@@ -47,7 +48,7 @@ class Server {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
       this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY); // We need HttpsProxyAgent to use proxy for re-captcha
-    }).catch(() => { }).finally(() => {
+    }).catch(() => {}).finally(() => {
       this.runSchedule();
       this.initEndPoints();
     });
@@ -158,8 +159,10 @@ class Server {
       console.log('header: ' + authHeader)
       const jwtBearerToken = authHeader.split(' ')[1];
       console.log('token: ' + jwtBearerToken)
-      
-      jwt.verify(jwtBearerToken, this.publicKey, { algorithm: ['RS256'] }, (err, user) => {
+
+      jwt.verify(jwtBearerToken, this.publicKey, {
+        algorithm: ['RS256']
+      }, (err, user) => {
         console.log('user: ' + user)
         if (err) {
           console.log(err);
@@ -172,6 +175,35 @@ class Server {
       res.sendStatus(401);
     }
   };
+
+  refreshToken(req, res) {
+    const user = req.body;
+    databaseService.getUser(user).then(
+      user => {
+        var user_json = {
+          username: user.username,
+          email: user.email,
+          companyCode: user.companycode
+        }
+        const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
+          algorithm: 'RS256',
+          expiresIn: process.env.JWT_DURATION,
+        });
+
+        //Send JWT back
+        res.status(200).json({
+          idToken: jwtBearerToken,
+          expiresIn: process.env.JWT_DURATION,
+          user: user_json
+        });
+      }
+    ).catch(err => {
+      // send status 401 Unauthorized
+      res.status(401).send({
+        error: "No match"
+      });
+    });
+  }
 
   login(req, res) {
     // Checks if the user exists and if the password matches
@@ -190,22 +222,28 @@ class Server {
     const password = req.body.password;
     checkPassword(identifier, password).then(
       user => {
-          var user_json = { username: user.username, email: user.email, companyCode: user.companycode }
-          const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
-            algorithm: 'RS256',
-            expiresIn: process.env.JWT_DURATION,
-          });
+        var user_json = {
+          username: user.username,
+          email: user.email,
+          companyCode: user.companycode
+        }
+        const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
+          algorithm: 'RS256',
+          expiresIn: process.env.JWT_DURATION,
+        });
 
-          //Send JWT back
-          res.status(200).json({
-            idToken: jwtBearerToken,
-            expiresIn: process.env.JWT_DURATION,
-            user: user_json
-          });
+        //Send JWT back
+        res.status(200).json({
+          idToken: jwtBearerToken,
+          expiresIn: process.env.JWT_DURATION,
+          user: user_json
+        });
       }
     ).catch(err => {
       // send status 401 Unauthorized
-      res.status(401).send({ error: "No match" });
+      res.status(401).send({
+        error: "No match"
+      });
     });
   }
 
@@ -213,9 +251,13 @@ class Server {
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.checkUser(user)
-      .catch(() => res.json({ message: 'Duplicate' }))
+      .catch(() => res.json({
+        message: 'Duplicate'
+      }))
       .then(() => databaseService.storeUser(user))
-      .then(() => res.json({ ok: true }))
+      .then(() => res.json({
+        ok: true
+      }))
   }
 
   updateUser(req, res) {
@@ -231,8 +273,12 @@ class Server {
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.deleteUser(user)
-      .then(() => res.json({ ok: true }))
-      .catch(err => res.json({ message: err }))
+      .then(() => res.json({
+        ok: true
+      }))
+      .catch(err => res.json({
+        message: err
+      }))
   }
 
   initEndPoints() {
@@ -244,7 +290,9 @@ class Server {
     /**
      * Endpoint to get login data.
      */
-    this.expressApp.route("/login").post(this.login);
+    this.expressApp.route("/login")
+      .post(this.login)
+      .put(this.checkIfAuthenticated, this.refreshToken);
 
     /**
      * Endpoint to get email confirmations.

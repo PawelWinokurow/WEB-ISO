@@ -16,7 +16,7 @@ export class AuthService {
       .toPromise().then(res => this.setSession(res));
   }
 
-  private setSession(result) {
+  public setSession(result) {
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
       localStorage.setItem('id_token', result.idToken);
@@ -45,6 +45,10 @@ export class AuthService {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  prolongToken(user) {
+    return this.http.put(`${environment.serverURL}/login`, user);
   }
 
   createUser(user) {

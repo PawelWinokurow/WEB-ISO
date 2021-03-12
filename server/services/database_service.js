@@ -61,6 +61,26 @@ exports.storeMask = function (hash, mask) {
 }
 
 /**
+ * Retrieves user from the database.
+ * @param  {object} user User object 
+ */
+ exports.getUser = function (user) {
+  return new Promise((resolve, reject) => {
+    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
+    //Select values
+    connection.query(select_statement, [user.email, user.username],
+      function (err, result, fields) {
+        if (err) reject(err);
+        if (Array.isArray(result) && result.length) {
+          resolve(result[0]);
+        } else {
+          reject(false);
+        }
+      });
+  });
+}
+
+/**
  * Stores user in the database.
  * @param  {object} user User object 
  */
