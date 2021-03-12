@@ -38,7 +38,7 @@ exports.connect = function () {
           if (err) {
             console.log(err);
             throw err;
-          } 
+          }
           console.log(results);
         });
     });
@@ -69,7 +69,7 @@ exports.storeMask = function (hash, mask) {
 exports.storeUser = function (user) {
   return new Promise((resolve, reject) => {
     const insert_statement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-    values = [user.email, user.username, user.password, user.companyCode, user.role, false];
+    values = [user.email, user.username, user.password, user.companyCode, 'USER', false];
     //Insert values
     connection.query(insert_statement, [values], function (err, result) {
       if (err) reject(err);
@@ -83,16 +83,17 @@ exports.storeUser = function (user) {
  * Updates user in the database.
  * @param  {object} user User object 
  */
- exports.updateUser = function (user) {
+exports.updateUser = function (user) {
   return new Promise((resolve, reject) => {
+    update_statement = `UPDATE users SET companycode = ? WHERE email = ?;`;
+    values = [user.companyCode, user.email];
     //If we change password
-    if (user.password){
-      update_statement = `UPDATE users SET password = '${user.password}', companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
-    } else {
-      update_statement = `UPDATE users SET companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
+    if (user.password) {
+      update_statement = `UPDATE users SET password = ?, companycode = ? WHERE email = ?;`;
+      values = [user.password, user.companyCode, user.email];
     }
-    //Insert values
-    connection.query(update_statement, function (err, result) {
+    //Update values
+    connection.query(update_statement, values, function (err, result) {
       if (err) {
         console.log("err")
         reject(err);
@@ -107,7 +108,7 @@ exports.storeUser = function (user) {
  * Deletes user from the database.
  * @param  {object} user User object 
  */
- exports.deleteUser = function (user) {
+exports.deleteUser = function (user) {
   return new Promise((resolve, reject) => {
     const delete_statement = 'DELETE FROM users WHERE email = ?';
     values = [user.email];
@@ -179,7 +180,7 @@ exports.removeOldMasks = function () {
  * Retrieves user from the database.
  * @param  {object} user User object 
  */
- exports.getUser = function (user) {
+exports.getUser = function (user) {
   return new Promise((resolve, reject) => {
     const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
     //Select values
@@ -187,11 +188,45 @@ exports.removeOldMasks = function () {
       function (err, result, fields) {
         if (err) reject(err);
         if (Array.isArray(result) && result.length) {
-          resolve(result[0]);
+          resolve(result.map(result => {
+            return {
+              username: result.username,
+              email: result.email,
+              companyCode: result.companycode,
+              role: result.role,
+              password: result.password
+            }
+          })[0]);
         } else {
           reject(false);
         }
       });
+  });
+}
+
+/**
+ * Retrieves all users from the database.
+ */
+exports.getUsers = function (user) {
+  return new Promise((resolve, reject) => {
+    const select_statement = 'SELECT * FROM users;';
+    //Select values
+    connection.query(select_statement, function (err, result, fields) {
+      if (err) reject(err);
+      if (Array.isArray(result) && result.length) {
+        console.log(result)
+        resolve(result.map(result => {
+          return {
+            username: result.username,
+            email: result.email,
+            companyCode: result.companycode,
+            role: result.role
+          }
+        }));
+      } else {
+        reject(false);
+      }
+    });
   });
 }
 

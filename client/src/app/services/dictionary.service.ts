@@ -26,6 +26,11 @@ export class DictionaryService {
     ['SET', 'Einstellungen'],
     ['LOT', 'Abmelden'],
     ['ADA', 'Admin-Bereich'],
+    ['ROL', 'Rolle'],
+
+    ['RES', 'Passwort zurücksetzen'],
+    ['BLU', 'Benutzer blockieren'],
+    ['DEU', 'Benutzer löschen'],
 
     ['NAC', 'Konto erstellen'],
     ['CFM', 'Bestätigen'],
@@ -142,6 +147,11 @@ export class DictionaryService {
     ['LOT', 'Sign out'],
     ['SET', 'Settings'],
     ['ADA', 'Admin area'],
+    ['ROL', 'Role'],
+
+    ['RES', 'Reset password'],
+    ['BLU', 'Block user'],
+    ['DEU', 'Delete user'],
 
     ['YES', 'Yes'],
     ['NOO', 'No'],

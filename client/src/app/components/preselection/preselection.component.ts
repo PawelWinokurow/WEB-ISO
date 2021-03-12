@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
@@ -17,7 +16,8 @@ import { StorageService } from 'src/app/services/storage.service';
 export class PreselectionComponent implements OnInit {
 
 
-  constructor(public storageService: StorageService, private router: Router, public dictionaryService: DictionaryService, public listService: ListService, public errorMessageService: ErrorMessageService) { }
+  constructor(public storageService: StorageService, private router: Router, public dictionaryService: DictionaryService, 
+    public listService: ListService, public errorMessageService: ErrorMessageService) { }
 
   ngOnInit(): void {
   }

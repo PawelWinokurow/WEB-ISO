@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
-import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -20,8 +19,8 @@ export class RegistrationComponent implements OnInit {
   hide2 = true;
   registerForm: FormGroup;
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, private storageService: StorageService,
-    public errorMessageService: ErrorMessageService, private authService: AuthService, private toastr: ToastrService, public listService: ListService) {
+  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, 
+    public errorMessageService: ErrorMessageService, private userService: UserService, private toastr: ToastrService, public listService: ListService) {
   }
 
   ngOnInit(): void {
@@ -46,7 +45,7 @@ export class RegistrationComponent implements OnInit {
         companyCode: this.registerForm.controls['companyCode'].value.code,
         role: 'USER'
       }
-      this.authService.createUser(newUser).toPromise()
+      this.userService.createUser(newUser).toPromise()
         .then(msg => {
           if (msg["message"] === 'Duplicate') {
             this.toastr.error(this.dictionaryService.get('UAE'), this.dictionaryService.get('ERR'));

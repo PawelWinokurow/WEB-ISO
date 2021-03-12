@@ -29,6 +29,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AdminComponent } from './components/admin/admin.component';
     DateService,
     AuthService,
     AuthGuardService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

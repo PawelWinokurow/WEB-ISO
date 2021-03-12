@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
-import { StorageService } from 'src/app/services/storage.service';
 import { TokenProlongationService } from 'src/app/services/token-prolongation.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
   identifier = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private storageService: StorageService,
+  constructor(private router: Router, public dictionaryService: DictionaryService,
     private toastr: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService,
     private tokenProlongationService: TokenProlongationService) { }
 

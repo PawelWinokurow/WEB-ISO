@@ -37,11 +37,13 @@ class Server {
     this.validateRecaptcha = this.validateRecaptcha.bind(this);
     this.createCustomer = this.createCustomer.bind(this);
     this.login = this.login.bind(this);
+    this.getUsers = this.getUsers.bind(this);
     this.refreshToken = this.refreshToken.bind(this);
     this.createUser = this.createUser.bind(this);
     this.confirm = this.confirm.bind(this);
     this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
     this.checkIfUpdatesItself = this.checkIfUpdatesItself.bind(this);
+    this.checkIfFromAdmin = this.checkIfFromAdmin.bind(this);
     this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
     this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
     this.wsdlUrl = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
@@ -175,8 +177,8 @@ class Server {
     }
   };
 
-  //Checks if request updates itself or comes from ADMIN
-  checkIfUpdatesItself(req, res, next){
+  //Checks if request updates itself
+  checkIfUpdatesItself(req, res, next) {
     const authHeader = req.headers.authorization;
     const updated_user = req.body;
     if (authHeader) {
@@ -189,13 +191,38 @@ class Server {
           console.log(err);
           return res.sendStatus(403);
         }
-        if (updated_user.username === user.username && updated_user.email === user.email 
-          || user.role === 'ADMIN' && updated_user.role === 'USER') {
-            req.user = user;
-            next();
-          } else {
-            res.sendStatus(401);
-          }
+        if (updated_user.username === user.username && updated_user.email === user.email ||
+          user.role === 'ADMIN' && updated_user.role === 'USER') {
+          req.user = user;
+          next();
+        } else {
+          res.sendStatus(401);
+        }
+      });
+    } else {
+      res.sendStatus(401);
+    }
+  };
+
+  //Checks if request comes from ADMIN
+  checkIfFromAdmin(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const jwtBearerToken = authHeader.split(' ')[1];
+
+      jwt.verify(jwtBearerToken, this.publicKey, {
+        algorithm: ['RS256']
+      }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.sendStatus(403);
+        }
+        if (user.role === 'ADMIN') {
+          req.user = user;
+          next();
+        } else {
+          res.sendStatus(401);
+        }
       });
     } else {
       res.sendStatus(401);
@@ -206,13 +233,8 @@ class Server {
     const user = req.body;
     databaseService.getUser(user).then(
       user => {
-        var user_json = {
-          username: user.username,
-          email: user.email,
-          companyCode: user.companycode,
-          role: user.role
-        }
-        const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
+        delete user.password;
+        const jwtBearerToken = jwt.sign(user, this.privateKey, {
           algorithm: 'RS256',
           expiresIn: process.env.JWT_DURATION,
         });
@@ -221,7 +243,7 @@ class Server {
         res.status(200).json({
           idToken: jwtBearerToken,
           expiresIn: process.env.JWT_DURATION,
-          user: user_json
+          user: user
         });
       }
     ).catch(err => {
@@ -236,7 +258,10 @@ class Server {
     // Checks if the user exists and if the password matches
     function checkPassword(identifier, plaintextPassword) {
       return new Promise((resolve, reject) => {
-        databaseService.getUser({email: identifier, username: identifier}).then(user => {
+        databaseService.getUser({
+          email: identifier,
+          username: identifier
+        }).then(user => {
           if (cryptoService.comparePasswords(plaintextPassword, user.password)) {
             resolve(user);
           }
@@ -248,13 +273,7 @@ class Server {
     const password = req.body.password;
     checkPassword(identifier, password).then(
       user => {
-        var user_json = {
-          username: user.username,
-          email: user.email,
-          companyCode: user.companycode,
-          role: user.role
-        }
-        const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
+        const jwtBearerToken = jwt.sign(user, this.privateKey, {
           algorithm: 'RS256',
           expiresIn: process.env.JWT_DURATION,
         });
@@ -263,7 +282,7 @@ class Server {
         res.status(200).json({
           idToken: jwtBearerToken,
           expiresIn: process.env.JWT_DURATION,
-          user: user_json
+          user: user
         });
       }
     ).catch(err => {
@@ -278,13 +297,13 @@ class Server {
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.checkUser(user)
-      .catch(() => res.json({
-        message: 'Duplicate'
-      }))
-      .then(() => databaseService.storeUser(user))
-      .then(() => res.json({
-        ok: true
-      }))
+    .then(() => databaseService.storeUser(user))
+    .then(() => res.json({
+      ok: true
+    }))
+    .catch(() => res.json({
+      message: 'Duplicate'
+    }))
   }
 
   updateUser(req, res) {
@@ -306,6 +325,14 @@ class Server {
       .then(() => res.json({
         ok: true
       }))
+      .catch(err => res.json({
+        message: err
+      }))
+  }
+
+  getUsers(req, res) {
+    databaseService.getUsers()
+      .then(users => res.json(users))
       .catch(err => res.json({
         message: err
       }))
@@ -341,6 +368,8 @@ class Server {
       .post(this.createUser)
       .put(this.checkIfUpdatesItself, this.updateUser)
       .delete(this.checkIfUpdatesItself, this.deleteUser);
+
+    this.expressApp.route('/users').get(this.checkIfFromAdmin, this.getUsers);
   }
 
   start() {

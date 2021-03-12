@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from './../../environments/environment';
-import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private storageService: StorageService) { }
+  constructor(private http: HttpClient) { }
 
   login(identifier: string, password: string) {
     return this.http.post(`${environment.serverURL}/login`, { identifier, password })
@@ -61,17 +60,5 @@ export class AuthService {
 
   prolongToken(user) {
     return this.http.put(`${environment.serverURL}/login`, user);
-  }
-
-  createUser(user) {
-    return this.http.post(`${environment.serverURL}/user`, user);
-  }
-
-  updateUser(user) {
-    return this.http.put(`${environment.serverURL}/user`, user);
-  }
-
-  deleteUser(user) {
-    return this.http.delete(`${environment.serverURL}/user`, user);
   }
 }

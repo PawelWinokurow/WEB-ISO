@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   selected = this.authService.getUser().companyCode;
 
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, public storageService: StorageService,
+  constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder, public storageService: StorageService, private userService: UserService,
     public errorMessageService: ErrorMessageService, private authService: AuthService, private toastr: ToastrService, public listService: ListService) {
   }
 
@@ -43,7 +43,7 @@ export class SettingsComponent implements OnInit {
       var user = this.authService.getUser();
       user.password = this.changeForm.controls['password'].value;
       user.companyCode = this.changeForm.controls['companyCode'].value;
-      this.authService.updateUser(user).toPromise()
+      this.userService.updateUser(user).toPromise()
         .then(user => {
           this.authService.setUser(user);
           this.toastr.success(this.dictionaryService.get('UWU'), this.dictionaryService.get('SUC'));
