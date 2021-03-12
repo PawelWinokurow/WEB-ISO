@@ -193,8 +193,9 @@ class Server {
           || user.role === 'ADMIN' && updated_user.role === 'USER') {
             req.user = user;
             next();
+          } else {
+            res.sendStatus(401);
           }
-          res.sendStatus(401);
       });
     } else {
       res.sendStatus(401);
