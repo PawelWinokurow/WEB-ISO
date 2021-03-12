@@ -261,7 +261,11 @@ class Server {
 
   updateUser(req, res) {
     var user = req.body;
-    user.password = cryptoService.hashPassword(user.password);
+    const authHeader = req.headers.authorization;
+    //console.log(authHeader);
+    if (user.password) {
+      user.password = cryptoService.hashPassword(user.password);
+    }
     databaseService.updateUser(user)
       .then(() => res.json(user))
       .catch(err => res.status(500).send(`Database error: ${err}`))

@@ -36,6 +36,11 @@
         {{ dictionaryService.get('SET') }} 
       </a>
       <mat-divider></mat-divider>
+      <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'" (click)="sidenav.toggle()">
+        <mat-icon>build</mat-icon> &nbsp;
+        {{ dictionaryService.get('ADA') }} 
+      </a>
+      <mat-divider></mat-divider>
       <a mat-list-item (click)="logout();sidenav.toggle();">
         <mat-icon>logout</mat-icon> &nbsp; 
         {{ dictionaryService.get('LOT') }}

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CodeDetails } from '../interfaces/lists';
 import { DictionaryService } from './dictionary.service';
 
 /**
@@ -12,7 +11,6 @@ export class StorageService {
 
   customerType: string = 'person';
   debitCreditType: string = 'debit';
-  user = null;
 
   constructor(private dictionaryService: DictionaryService) { }
 
@@ -38,14 +36,6 @@ export class StorageService {
    */
   getDebitCreditTypeName(): string {
     return this.debitCreditType === 'debit' ? this.dictionaryService.get('DEB') : this.dictionaryService.get('CRE');
-  }
-
-  /**
-   * Gets the selected company code.
-   * @returns Company code value.
-   */
-  getCompanyCodeName(): string {
-    return this.user.companyCode.details;
   }
 
 }

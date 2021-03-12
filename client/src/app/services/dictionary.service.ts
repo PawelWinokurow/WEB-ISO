@@ -22,8 +22,10 @@ export class DictionaryService {
     ['PSW', 'Passwort'],
     ['EUN', 'E-Mail oder Benutzername'],
 
+    ['NCU', 'Neuer Kunde'],
     ['SET', 'Einstellungen'],
     ['LOT', 'Abmelden'],
+    ['ADA', 'Admin-Bereich'],
 
     ['NAC', 'Konto erstellen'],
     ['CFM', 'Bestätigen'],
@@ -32,7 +34,6 @@ export class DictionaryService {
     ['UAE', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['ICL', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
     
-    ['NCU', 'Neuer Kunde'],
     ['CHA', 'Ändern'],
 
     ['YES', 'Ja'],
@@ -107,7 +108,9 @@ export class DictionaryService {
     
     ['EEM', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
     ['SUB', 'Einreichen'],
-    ['DIS', 'Maske senden'],
+    ['SMA', 'Maske senden'],
+    ['SDI', 'Direkt senden'],
+    ['SEM', 'Bestätigungs-E-Mail senden'],
     ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
     ['SNT', 'Die Maske wurde gesendet.'],
     ['SNE', 'Die Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.'],
@@ -133,11 +136,12 @@ export class DictionaryService {
     ['UAE', 'This email address or username is already being used.'],
     ['ICL', 'Your username/email or password are incorrect.'],
 
-    ['NCU', 'New customer'],
     ['CHA', 'Change'],
-
-    ['SET', 'Settings'],
+    
+    ['NCU', 'New customer'],
     ['LOT', 'Sign out'],
+    ['SET', 'Settings'],
+    ['ADA', 'Admin area'],
 
     ['YES', 'Yes'],
     ['NOO', 'No'],
@@ -210,7 +214,9 @@ export class DictionaryService {
     
     ['EEM', 'Please enter your email address.'],
     ['SUB', 'Submit'],
-    ['DIS', 'Send mask'],
+    ['SMA', 'Send mask'],
+    ['SDI', 'Send directly'],
+    ['SEM', 'Send confirmation email'],
     ['DIQ', 'Do you want to send the mask directly?'],
     ['UWC', 'The user was created.'],
     ['UWU', 'The user was updated.'],

@@ -28,6 +28,7 @@ import { AuthService } from './services/auth.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     PreselectionComponent,
     LoginComponent,
     RegistrationComponent,
-    SettingsComponent
+    SettingsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

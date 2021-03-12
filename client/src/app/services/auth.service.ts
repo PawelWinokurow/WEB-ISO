@@ -17,21 +17,18 @@ export class AuthService {
   }
 
   public setSession(result) {
-    console.log(result)
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
       localStorage.setItem('id_token', result.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
       localStorage.setItem("user", JSON.stringify(result.user));
-      this.storageService.user = result.user;
       return true;
     }
     return false;
   }
 
   logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
+    localStorage.clear();
   }
 
   public isLoggedIn() {
@@ -40,6 +37,20 @@ export class AuthService {
 
   isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  setUser(user) {
+    user = {
+      username: user.username,
+      email: user.email,
+      companyCode: user.companycode,
+      role: user.role
+    }
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  getUser() {
+    return JSON.parse(localStorage.getItem("user"))
   }
 
   getExpiration() {

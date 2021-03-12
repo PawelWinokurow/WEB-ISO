@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
-import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TokenProlongationService } from 'src/app/services/token-prolongation.service';
 
@@ -20,9 +19,7 @@ export class MainComponent implements OnInit {
     public storageService: StorageService, public authService: AuthService, private tokenProlongationService: TokenProlongationService){
   }
 
-  ngOnInit(): void {
-    this.storageService.user = JSON.parse(localStorage.getItem("user"));
-  }
+  ngOnInit(): void {}
 
   /**
    * Click on the reset button triggers this method. The method navigates to the LoginComponent.

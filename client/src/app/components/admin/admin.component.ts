@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,11 +9,11 @@ import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class AdminComponent implements OnInit {
 
   hide1 = true;
   hide2 = true;
@@ -28,11 +28,12 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeForm = this.formBuilder.group({
-      username: new FormControl({ value: this.authService.getUser().username, disabled: true }),
-      email: new FormControl({ value: this.authService.getUser().email, disabled: true }),
-      password: [''],
-      confirmPassword: [''],
-      companyCode: [''],
+      //TODO username:only letters and no @
+      username: new FormControl({ value: this.authService.getUser().username, disabled: true }, Validators.required),
+      email: new FormControl({ value: this.authService.getUser().email, disabled: true }, [Validators.required, Validators.email]),
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      companyCode: ['', [Validators.required]],
     },
       { validator: MustMatch('password', 'confirmPassword') }
     );
@@ -43,8 +44,10 @@ export class SettingsComponent implements OnInit {
       var user = this.authService.getUser();
       user.password = this.changeForm.controls['password'].value;
       user.companyCode = this.changeForm.controls['companyCode'].value;
+
       this.authService.updateUser(user).toPromise()
         .then(user => {
+          console.log(user)
           this.authService.setUser(user);
           this.toastr.success(this.dictionaryService.get('UWU'), this.dictionaryService.get('SUC'));
         })
@@ -79,4 +82,5 @@ export function MustMatch(controlName: string, matchingControlName: string) {
       matchingControl.setErrors(null);
     }
   }
+
 }

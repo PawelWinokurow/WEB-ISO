@@ -85,11 +85,16 @@ exports.storeUser = function (user) {
  */
  exports.updateUser = function (user) {
   return new Promise((resolve, reject) => {
-    const update_statement = `UPDATE users SET password = '${user.password}', companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
+    //If we change password
+    if (user.password){
+      update_statement = `UPDATE users SET password = '${user.password}', companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
+    } else {
+      update_statement = `UPDATE users SET companycode = '${user.companyCode}' WHERE email = '${user.email}';`;
+    }
     //Insert values
     connection.query(update_statement, function (err, result) {
       if (err) {
-        console.log(err)
+        console.log("err")
         reject(err);
       }
       console.log("Number of records updated: " + result.affectedRows);

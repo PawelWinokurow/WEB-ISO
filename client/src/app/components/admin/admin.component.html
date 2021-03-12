@@ -44,7 +44,7 @@
                     <div class="paddinglr10px">
                         <mat-form-field color="primary" appearance="outline">
                             <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
-                            <input matInput formControlName="password" [type]="hide1 ? 'password' : 'text'">
+                            <input matInput formControlName="password" [type]="hide1 ? 'password' : 'text'" required>
                             <button mat-icon-button matSuffix (click)="hide1 = !hide1;">
                                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
@@ -57,7 +57,8 @@
                     <div class="paddinglr10px">
                         <mat-form-field color="primary" appearance="outline">
                             <mat-label>{{dictionaryService.get('PCO')}}</mat-label>
-                            <input matInput formControlName="confirmPassword" [type]="hide2 ? 'password' : 'text'">
+                            <input matInput formControlName="confirmPassword" [type]="hide2 ? 'password' : 'text'"
+                                required>
                             <button mat-icon-button matSuffix (click)="hide2 = !hide2;">
                                 <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>

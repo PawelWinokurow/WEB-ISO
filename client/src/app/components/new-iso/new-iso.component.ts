@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { EmailDialogComponent } from 'src/app/dialogs/email-dialog/email-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -15,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 import { DateService } from 'src/app/services/date.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 /**
@@ -56,8 +56,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
-    private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService) {
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
+    public storageService: StorageService, private toastr: ToastrService, private dialog: MatDialog, private httpService: HttpService, 
+    public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService,
+    public authService: AuthService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
   }
@@ -263,13 +265,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer mask dialog.
    */
   openSendSOAPDialog() {
-    /*const mask = this.constructMask(true)
+    const mask = this.constructMask(true)
     this.httpService.sendMask(mask).subscribe(res => {
       this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
-    });*/
-
-
-
+    });
+    return
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
@@ -277,12 +277,12 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
     sendMaskDialogRef.afterClosed().subscribe(isDirect => {
       const mask = this.constructMask(isDirect);
-      if (isDirect) {
+      if (isDirect == true) {
         this.httpService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
-      } else {
-        this.httpService.sendMask({ emailTo: this.storageService.user.email, ...mask }).subscribe(res => {
+      } else if (isDirect == false) {
+        this.httpService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNE'), this.dictionaryService.get('SUC'));
         });
       }
@@ -313,7 +313,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   constructMask(isDirect: boolean) {
     const data = {
       //Preselection
-      companyCode: this.storageService.user.companyCode?.code ?? '',
+      companyCode: this.authService.getUser().companyCode?.code ?? '',
 
       //Shared forms
 

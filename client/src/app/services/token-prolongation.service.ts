@@ -15,8 +15,8 @@ export class TokenProlongationService implements OnInit {
   ngOnInit(): void {}
 
   startChecking(){
-    //Call refreshToken every 15 minutes
-    this.timer = setInterval(this.refreshToken.bind(this), 15 * 60 * 1000);
+    //Call refreshToken every 10 minutes
+    this.timer = setInterval(this.refreshToken.bind(this), 10 * 60 * 1000);
   }
 
   stopChecking(){
@@ -26,9 +26,9 @@ export class TokenProlongationService implements OnInit {
   refreshToken(){
     const exp = this.authService.getExpiration();
     const now = moment();
-    //If JWT expries in < 30 minutes => update it
+    //If JWT expires in < 30 minutes => update it
     if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30){
-      this.authService.prolongToken(this.stortageService.user).toPromise().then(res => {
+      this.authService.prolongToken(this.authService.getUser()).toPromise().then(res => {
         this.authService.setSession(res);
       }).catch(err => this.stopChecking());
     }

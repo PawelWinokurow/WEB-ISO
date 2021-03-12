@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
 import { PreselectionComponent } from './components/preselection/preselection.component';
@@ -11,9 +12,10 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'iso', component: NewISOComponent, canActivate: [AuthGuardService] },
-  { path: 'preselection', component: PreselectionComponent, canActivate: [AuthGuardService] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService] },
+  { path: 'iso', component: NewISOComponent, canActivate: [AuthGuardService], data: {roles: ['USER', 'ADMIN']} },
+  { path: 'preselection', component: PreselectionComponent, canActivate: [AuthGuardService], data: {roles: ['USER', 'ADMIN']} },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService], data: {roles: ['USER', 'ADMIN']} },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], data: {roles: ['ADMIN']} },
 ];
 
 /**
