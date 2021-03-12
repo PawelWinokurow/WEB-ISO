@@ -41,6 +41,7 @@ class Server {
     this.createUser = this.createUser.bind(this);
     this.confirm = this.confirm.bind(this);
     this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
+    this.checkIfUpdatesItself = this.checkIfUpdatesItself.bind(this);
     this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
     this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
     this.wsdlUrl = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
@@ -168,6 +169,32 @@ class Server {
         }
         req.user = user;
         next();
+      });
+    } else {
+      res.sendStatus(401);
+    }
+  };
+
+  //Checks if request updates itself or comes from ADMIN
+  checkIfUpdatesItself(req, res, next){
+    const authHeader = req.headers.authorization;
+    const updated_user = req.body;
+    if (authHeader) {
+      const jwtBearerToken = authHeader.split(' ')[1];
+
+      jwt.verify(jwtBearerToken, this.publicKey, {
+        algorithm: ['RS256']
+      }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.sendStatus(403);
+        }
+        if (updated_user.username === user.username && updated_user.email === user.email 
+          || user.role === 'ADMIN' && updated_user.role === 'USER') {
+            req.user = user;
+            next();
+          }
+          res.sendStatus(401);
       });
     } else {
       res.sendStatus(401);
@@ -311,8 +338,8 @@ class Server {
      */
     this.expressApp.route('/user')
       .post(this.createUser)
-      .put(this.checkIfAuthenticated, this.updateUser)
-      .delete(this.checkIfAuthenticated, this.deleteUser);
+      .put(this.checkIfUpdatesItself, this.updateUser)
+      .delete(this.checkIfUpdatesItself, this.deleteUser);
   }
 
   start() {
