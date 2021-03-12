@@ -10,7 +10,9 @@ const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(255) NOT NULL PRIMARY KEY, 
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
-  companycode VARCHAR(255));`;
+  companycode VARCHAR(255),
+  role VARCHAR(255),
+  blocked BOOLEAN);`;
 
 var connection;
 
@@ -61,33 +63,13 @@ exports.storeMask = function (hash, mask) {
 }
 
 /**
- * Retrieves user from the database.
- * @param  {object} user User object 
- */
- exports.getUser = function (user) {
-  return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-    //Select values
-    connection.query(select_statement, [user.email, user.username],
-      function (err, result, fields) {
-        if (err) reject(err);
-        if (Array.isArray(result) && result.length) {
-          resolve(result[0]);
-        } else {
-          reject(false);
-        }
-      });
-  });
-}
-
-/**
  * Stores user in the database.
  * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
   return new Promise((resolve, reject) => {
-    const insert_statement = 'INSERT INTO users (email, username, password, companycode) VALUES (?);';
-    values = [user.email, user.username, user.password, user.companyCode];
+    const insert_statement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
+    values = [user.email, user.username, user.password, user.companyCode, user.role, false];
     //Insert values
     connection.query(insert_statement, [values], function (err, result) {
       if (err) reject(err);
@@ -189,19 +171,21 @@ exports.removeOldMasks = function () {
 }
 
 /**
- * Gets users by identifier from the database.
- * @param  {object} identifier email or username 
- * @returns {Array} users
+ * Retrieves user from the database.
+ * @param  {object} user User object 
  */
-exports.getUsers = function (identifier) {
+ exports.getUser = function (user) {
   return new Promise((resolve, reject) => {
     const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
     //Select values
-    connection.query(select_statement, [identifier, identifier],
+    connection.query(select_statement, [user.email, user.username],
       function (err, result, fields) {
         if (err) reject(err);
-        //If row with the given email exists in the database
-        resolve(result);
+        if (Array.isArray(result) && result.length) {
+          resolve(result[0]);
+        } else {
+          reject(false);
+        }
       });
   });
 }

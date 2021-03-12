@@ -183,7 +183,8 @@ class Server {
         var user_json = {
           username: user.username,
           email: user.email,
-          companyCode: user.companycode
+          companyCode: user.companycode,
+          role: user.role
         }
         const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
           algorithm: 'RS256',
@@ -209,10 +210,9 @@ class Server {
     // Checks if the user exists and if the password matches
     function checkPassword(identifier, plaintextPassword) {
       return new Promise((resolve, reject) => {
-        databaseService.getUsers(identifier).then(users => {
-          var user = users.find(user => cryptoService.comparePasswords(plaintextPassword, user.password));
-          if (user !== undefined) {
-            resolve(user)
+        databaseService.getUser({email: identifier, username: identifier}).then(user => {
+          if (cryptoService.comparePasswords(plaintextPassword, user.password)) {
+            resolve(user);
           }
           reject(false);
         })
@@ -225,7 +225,8 @@ class Server {
         var user_json = {
           username: user.username,
           email: user.email,
-          companyCode: user.companycode
+          companyCode: user.companycode,
+          role: user.role
         }
         const jwtBearerToken = jwt.sign(user_json, this.privateKey, {
           algorithm: 'RS256',
@@ -261,7 +262,6 @@ class Server {
   }
 
   updateUser(req, res) {
-    console.log(req)
     var user = req.body;
     user.password = cryptoService.hashPassword(user.password);
     databaseService.updateUser(user)

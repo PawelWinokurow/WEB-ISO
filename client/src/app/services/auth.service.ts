@@ -17,6 +17,7 @@ export class AuthService {
   }
 
   public setSession(result) {
+    console.log(result)
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
       localStorage.setItem('id_token', result.idToken);

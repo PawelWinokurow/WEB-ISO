@@ -43,7 +43,8 @@ export class RegistrationComponent implements OnInit {
         username: this.registerForm.controls['username'].value,
         password: this.registerForm.controls['password'].value,
         email: this.registerForm.controls['email'].value,
-        companyCode: this.registerForm.controls['companyCode'].value.code
+        companyCode: this.registerForm.controls['companyCode'].value.code,
+        role: 'USER'
       }
       this.authService.createUser(newUser).toPromise()
         .then(msg => {
