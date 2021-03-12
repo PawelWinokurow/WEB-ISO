@@ -110,6 +110,7 @@ export class DictionaryService {
     ['DIS', 'Maske senden'],
     ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
     ['SNT', 'Die Maske wurde gesendet.'],
+    ['SNE', 'Die Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.'],
     ['UWC', 'Der Benutzer wurde angelegt.'],
     ['UWU', 'Der Benutzer wurde geändert.'],
     ['UWN', 'Der Benutzer wurde nicht geändert.'],
@@ -216,6 +217,7 @@ export class DictionaryService {
     ['UWN', 'The user was not updated.'],
 
     ['SNT', 'The mask was sent.'],
+    ['SNE', 'The confirmation email was sent to your email address.'],
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],
   ])

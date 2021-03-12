@@ -139,6 +139,7 @@ class Server {
     composeMask(maskData).then(
       sapMask => {
         var envelope = sapMask.getJSONArgs();
+        //console.log(envelope)
         if (maskData.isDirect) {
           soapService.sendMask(envelope, this.wsdlUrl);
         } else {
@@ -156,14 +157,11 @@ class Server {
   checkIfAuthenticated(req, res, next) {
     const authHeader = req.headers.authorization;
     if (authHeader) {
-      console.log('header: ' + authHeader)
       const jwtBearerToken = authHeader.split(' ')[1];
-      console.log('token: ' + jwtBearerToken)
 
       jwt.verify(jwtBearerToken, this.publicKey, {
         algorithm: ['RS256']
       }, (err, user) => {
-        console.log('user: ' + user)
         if (err) {
           console.log(err);
           return res.sendStatus(403);

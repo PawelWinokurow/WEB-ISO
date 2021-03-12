@@ -18,13 +18,13 @@ exports.test = function (wsdlUrl) {
                     console.log("error", err);
                 }
                 soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
-                //var description = soapClient.describe()
-                //console.log(description)
+                var description = soapClient.describe()
+                console.log(description)
                 soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(args.ENVELOPE, function (err, result, raw, headers) {
                     if (err) {
-                        console.log(err);
+                        //console.log(err);
                     }
-                    console.log(JSON.stringify(result))
+                    //console.log(JSON.stringify(result))
                 })
             });
         });
@@ -45,9 +45,9 @@ exports.sendMask = function (envelope, wsdlUrl) {
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
         soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(envelope, function (err, result, raw, headers) {
             if (err) {
-                console.log(err);
+                //console.log(err);
             }
-            console.log(JSON.stringify(result))
+            //console.log(JSON.stringify(result))
         })
     });
 

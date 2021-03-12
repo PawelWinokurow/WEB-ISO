@@ -263,36 +263,27 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer mask dialog.
    */
   openSendSOAPDialog() {
-    const mask = this.constructMask(true)
+    /*const mask = this.constructMask(true)
     this.httpService.sendMask(mask).subscribe(res => {
       this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
-    });
-    return 
-    
+    });*/
+
+
 
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
     });
 
-    sendMaskDialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const mask = this.constructMask(true)
+    sendMaskDialogRef.afterClosed().subscribe(isDirect => {
+      const mask = this.constructMask(isDirect);
+      if (isDirect) {
         this.httpService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
-      } else if (result === false) {
-        const emailDialogRef = this.dialog.open(EmailDialogComponent, {
-          //disableClose: true,
-          //backdropClass: 'backdrop-background',
-        });
-        emailDialogRef.afterClosed().subscribe(emailTo => {
-          if (emailTo) {
-            var mask = this.constructMask(false)
-            this.httpService.sendMask({ emailTo: emailTo, ...mask }).subscribe(res => {
-              this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
-            });
-          }
+      } else {
+        this.httpService.sendMask({ emailTo: this.storageService.user.email, ...mask }).subscribe(res => {
+          this.toastr.success(this.dictionaryService.get('SNE'), this.dictionaryService.get('SUC'));
         });
       }
     });
@@ -375,7 +366,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
       //Applicant 0
       applicantSalutation0: this.applicant?.get('salutation')?.value?.code ?? '',
-      applicantTitle0: this.applicant?.get('title')?.value?.code  ?? '',
+      applicantTitle0: this.applicant?.get('title')?.value?.code ?? '',
       applicantFirstName0: this.applicant?.get('firstName')?.value ?? '',
       applicantSecondName0: this.applicant?.get('secondName')?.value ?? '',
       applicantBirthDate0: this.applicant?.get('birthDate')?.value == null ? '' :
@@ -386,7 +377,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
       //Applicant 1
       applicantSalutation1: this.applicant?.get('salutation1')?.value?.code ?? '',
-      applicantTitle1: this.applicant?.get('title1')?.value?.code  ?? '',
+      applicantTitle1: this.applicant?.get('title1')?.value?.code ?? '',
       applicantFirstName1: this.applicant?.get('firstName1')?.value ?? '',
       applicantSecondName1: this.applicant?.get('secondName1')?.value ?? '',
       applicantBirthDate1: this.applicant?.get('birthDate1')?.value == null ? '' :
@@ -397,7 +388,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
       //Applicant 2
       applicantSalutation2: this.applicant?.get('salutation2')?.value?.code ?? '',
-      applicantTitle2: this.applicant?.get('title2')?.value?.code  ?? '',
+      applicantTitle2: this.applicant?.get('title2')?.value?.code ?? '',
       applicantFirstName2: this.applicant?.get('firstName2')?.value ?? '',
       applicantSecondName2: this.applicant?.get('secondName2')?.value ?? '',
       applicantBirthDate2: this.applicant?.get('birthDate2')?.value == null ? '' :
@@ -407,8 +398,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
       applicantEmail2: this.applicant?.get('email2')?.value ?? '',
 
     };
-    return { isDirect: isDirect, customerType: this.storageService.customerType,
-      debitCreditType: this.storageService.debitCreditType, data: data }
+    return {
+      isDirect: isDirect, customerType: this.storageService.customerType,
+      debitCreditType: this.storageService.debitCreditType, data: data
+    }
   }
 
   /**

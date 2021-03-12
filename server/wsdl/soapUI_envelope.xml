@@ -1910,8 +1910,7 @@
                 <MLTAS_DATA/>
             </ADD_MULTIPLE_ASSIGNMENTS>
             </IS_EXTERN>
-            <IV_PROCESS>00001
-            </IV_PROCESS>
+            <IV_PROCESS>00001</IV_PROCESS>
       </urn:_-ISO_-MGB_BAPI_MAINTAIN_PARTNER>
    </soapenv:Body>
 </soapenv:Envelope>
