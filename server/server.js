@@ -182,7 +182,6 @@ class Server {
   login(req, res) {
     const identifier = req.body.identifier;
     const passwordToCheck = req.body.password;
-    console.log(req.body)
     databaseService.getUser({
       email: identifier,
       username: identifier
@@ -243,7 +242,7 @@ class Server {
       }))
       .catch(err => res.json({
         message: err
-      }))
+      }));
   }
 
   blockOrResetUser(req, res){
@@ -256,7 +255,7 @@ class Server {
   }
 
   resetPassword(req, res) {
-
+    console.log("reset")
   }
 
   blockUser(req, res) {

@@ -20,7 +20,7 @@
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
-                                        <span style="color: red;"
+                                        <span style="color: rgb(168, 41, 41);"
                                             *ngIf="user.blocked">{{dictionaryService.get('BLO')}}</span>
                                     </div>
                                     <mat-icon>account_circle</mat-icon>
@@ -30,15 +30,15 @@
                             <p>{{dictionaryService.get('CCO')}}: {{companyCodeDetails[user.companyCode]}}</p>
                             <p>{{dictionaryService.get('ROL')}}: {{user.role}}</p>
                             <mat-action-row *ngIf="user.role !== 'ADMIN'">
-                                <button mat-button color="warn" (click)="deleteUser(user)()">
+                                <button mat-stroked-button color="warn" (click)="deleteUser(user)()">
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
                                     {{dictionaryService.get('DEU')}}
                                 </button>
-                                <button mat-button color="primary" (click)="resetPassword(user)">
+                                <button mat-stroked-button color="primary" (click)="resetPassword(user)">
                                     <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
                                     {{dictionaryService.get('RES')}}
                                 </button>
-                                <button mat-button color="primary" (click)="blockUser(user)" style="width: 185px;">
+                                <button mat-stroked-button color="primary" (click)="blockUser(user)" style="width: 185px;">
                                         <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block</mat-icon>
                                         <span *ngIf="!user.blocked">{{dictionaryService.get('BLU')}}</span>
                                         <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done</mat-icon>

@@ -32,6 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user.service';
 import { RecaptchaService } from './services/recaptcha.service';
 import { MaskService } from './services/mask.service';
+import { DeleteUserDialogComponent } from './dialogs/delete-user-dialog/delete-user-dialog.component';
+import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { MaskService } from './services/mask.service';
     LoginComponent,
     RegistrationComponent,
     SettingsComponent,
-    AdminComponent
+    AdminComponent,
+    DeleteUserDialogComponent,
+    ResetPasswordDialogComponent
   ],
   imports: [
     BrowserModule,
