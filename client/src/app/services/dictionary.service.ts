@@ -29,8 +29,12 @@ export class DictionaryService {
     ['ROL', 'Rolle'],
 
     ['RES', 'Passwort zurücksetzen'],
-    ['BLU', 'Benutzer blockieren'],
+    ['BLU', 'Benutzer sperren'],
+    ['ULU', 'Benutzer entsperren'],
     ['DEU', 'Benutzer löschen'],
+    ['BLO', 'Gesperrt'],
+    ['EAL', 'Alle ausklappen'],
+    ['CAL', 'Alle zuklappen'],
 
     ['NAC', 'Konto erstellen'],
     ['CFM', 'Bestätigen'],
@@ -39,7 +43,7 @@ export class DictionaryService {
     ['UAE', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['ICL', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
     ['USB', 'Der Benutzer wurde gesperrt.'],
-    ['USU', 'Der Benutzer wurde freigegeben.'],
+    ['USU', 'Der Benutzer wurde entsperrt.'],
     ['USD', 'Der Benutzer wurde gelöscht.'],
     ['PAR', 'Das Passwort wurde zurückgesetzt.'],
     
@@ -148,7 +152,7 @@ export class DictionaryService {
     ['USU', 'The user was unblocked.'],
     ['USD', 'The user was deleted.'],
     ['PAR', 'The password was reset.'],
-
+    
     ['CHA', 'Change'],
     
     ['NCU', 'New customer'],
@@ -156,10 +160,14 @@ export class DictionaryService {
     ['SET', 'Settings'],
     ['ADA', 'Admin area'],
     ['ROL', 'Role'],
-
+    
     ['RES', 'Reset password'],
     ['BLU', 'Block user'],
+    ['ULU', 'Unblock user'],
     ['DEU', 'Delete user'],
+    ['BLO', 'Blocked'],
+    ['EAL', 'Expand all'],
+    ['CAL', 'Collapse all'],
 
     ['YES', 'Yes'],
     ['NOO', 'No'],

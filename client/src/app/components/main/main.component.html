@@ -3,7 +3,7 @@
     <button mat-icon-button 
     [style.visibility]="authService.isLoggedIn() ? 'visible' : 'hidden'" 
     [disabled]="!authService.isLoggedIn()" 
-    (click)="toggleSidenav()">
+    (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <div style="padding-left:10px;">
@@ -29,22 +29,22 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="width: 200px;">
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/preselection'" (click)="toggleSidenav()">
+      <a mat-list-item [routerLink]="'/preselection'" (click)="sidenav.toggle()">
         <mat-icon>add</mat-icon> &nbsp;
         {{ dictionaryService.get('NCU') }} 
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="'/settings'" (click)="toggleSidenav()">
+      <a mat-list-item [routerLink]="'/settings'" (click)="sidenav.toggle()">
         <mat-icon>settings</mat-icon> &nbsp;
         {{ dictionaryService.get('SET') }} 
       </a>
       <mat-divider></mat-divider>
-      <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'" (click)="toggleSidenav()">
+      <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'" (click)="sidenav.toggle()">
         <mat-icon>build</mat-icon> &nbsp;
         {{ dictionaryService.get('ADA') }} 
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="logout();">
+      <a mat-list-item (click)="logout(); sidenav.toggle()">
         <mat-icon>logout</mat-icon> &nbsp; 
         {{ dictionaryService.get('LOT') }}
       </a>

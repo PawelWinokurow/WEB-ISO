@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { ToastrService } from 'ngx-toastr';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
@@ -15,6 +16,7 @@ export class AdminComponent implements OnInit {
   users;
   companyCodeDetails;
 
+  @ViewChild('accordion') accordion: MatAccordion;
 
   constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService, private userService: UserService, 
     private toastr: ToastrService, public listService: ListService) {
@@ -38,6 +40,7 @@ export class AdminComponent implements OnInit {
   blockUser(user){
     var user = {...user, operation: 'block'};
     user.blocked = !user.blocked;
+    console.log(user.blocked)
     this.userService.blockOrResetUser(user).toPromise()
     .then(userResp => {
         //TODO iterate over array may be to slow
