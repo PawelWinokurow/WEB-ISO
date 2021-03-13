@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -15,6 +15,8 @@ import { TokenProlongationService } from 'src/app/services/token-prolongation.se
 })
 export class MainComponent implements OnInit {
 
+  @ViewChild('sidenav') sidenav; 
+
   constructor(private router: Router, public dictionaryService: DictionaryService, 
     public storageService: StorageService, public authService: AuthService, private tokenProlongationService: TokenProlongationService){
   }
@@ -27,6 +29,13 @@ export class MainComponent implements OnInit {
   reset() {
     this.router.navigate(['/login']);
   }
+  /**
+   * Click on the sidenav button triggers this method. 
+   */
+  toggleSidenav(){
+    console.log("adadsa")
+    this.sidenav.toggle();
+  }
 
   /**
    * Click on the logout button triggers this method. The method navigates to the LoginComponent.
@@ -35,6 +44,7 @@ export class MainComponent implements OnInit {
     this.authService.logout();
     this.tokenProlongationService.stopChecking();
     this.reset();
+    this.toggleSidenav()
   }
 
 
