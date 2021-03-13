@@ -61,7 +61,7 @@ export class AdminComponent implements OnInit {
           .then(res => {
             //TODO iterate over array may be to slow
             this.users = this.users.filter(u => u.email != userToSend.email);
-            this.toastr.success(this.dictionaryService.get('USD'), this.dictionaryService.get('SUC'));
+            this.toastr.success(this.dictionaryService.get('USRISDEL'), this.dictionaryService.get('SUC'));
           })
           .catch(err => {
             this.toastr.error(err.message, this.dictionaryService.get('ERR'));
@@ -82,9 +82,9 @@ export class AdminComponent implements OnInit {
           }
         });
         if (userResp.blocked) {
-          this.toastr.success(this.dictionaryService.get('USB'), this.dictionaryService.get('SUC'));
+          this.toastr.success(this.dictionaryService.get('USRISBL'), this.dictionaryService.get('SUC'));
         } else {
-          this.toastr.success(this.dictionaryService.get('USU'), this.dictionaryService.get('SUC'));
+          this.toastr.success(this.dictionaryService.get('USRISUN'), this.dictionaryService.get('SUC'));
         }
       })
       .catch(err => {
@@ -104,7 +104,7 @@ export class AdminComponent implements OnInit {
         const user = { ...userToSend, operation: 'reset' };
         this.userService.blockOrResetUser(user).toPromise()
           .then(res => {
-            this.toastr.success(this.dictionaryService.get('PAR'), this.dictionaryService.get('SUC'));
+            this.toastr.success(this.dictionaryService.get('PSWDISRES'), this.dictionaryService.get('SUC'));
           })
           .catch(err => {
             this.toastr.error(err.message, this.dictionaryService.get('ERR'));

@@ -49,9 +49,9 @@ export class RegistrationComponent implements OnInit {
       this.userService.createUser(newUser).toPromise()
         .then(msg => {
           if (msg["message"] === 'Duplicate') {
-            this.toastr.error(this.dictionaryService.get('UAE'), this.dictionaryService.get('ERR'));
+            this.toastr.error(this.dictionaryService.get('IDUSED'), this.dictionaryService.get('ERR'));
           } else {
-            this.toastr.success(this.dictionaryService.get('UWC'), this.dictionaryService.get('SUC'));
+            this.toastr.success(this.dictionaryService.get('USRISCR'), this.dictionaryService.get('SUC'));
             this.router.navigate(['/login']);
           }
         })

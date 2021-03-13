@@ -3,21 +3,21 @@
         <div class="form-flex-column">
             <div class="alternate-theme">
                 <div class="form-title" style="padding: 10px 10px 0 10px;">
-                    <h2>{{dictionaryService.get('ADA')}}</h2>
+                    <h2>{{dictionaryService.get('ADMINAREA')}}</h2>
                 </div>
 
                 <div class="search-part">
                     <mat-form-field color="primary" appearance="outline" style="flex: 2;">
-                        <mat-label>{{dictionaryService.get('SEA')}}</mat-label>
+                        <mat-label>{{dictionaryService.get('SEARCH')}}</mat-label>
                         <input matInput [formControl]="filter">
                     </mat-form-field>
 
                     <button mat-stroked-button (click)="accordion.openAll()" style="height: 50px; flex: 1;">
-                        {{dictionaryService.get('EAL')}}
+                        {{dictionaryService.get('EXPAND')}}
                         <mat-icon>unfold_more</mat-icon>
                     </button>
                     <button mat-stroked-button (click)="accordion.closeAll()" style="height: 50px; flex: 1;">
-                        {{dictionaryService.get('CAL')}}
+                        {{dictionaryService.get('COLLAPSE')}}
                         <mat-icon>unfold_less</mat-icon>
                     </button>
                 </div>
@@ -29,37 +29,37 @@
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{dictionaryService.get('USR')}}: &nbsp; <span
+                                    {{dictionaryService.get('USRNAME')}}: &nbsp; <span
                                         style="font-weight: bold;">{{user.username}}</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
                                         <span style="color: rgb(168, 41, 41);"
-                                            *ngIf="user.blocked">{{dictionaryService.get('BLO')}}</span>
+                                            *ngIf="user.blocked">{{dictionaryService.get('BLOCKED')}}</span>
                                     </div>
                                     <mat-icon>account_circle</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <p>{{dictionaryService.get('EMA')}}: {{user.email}}</p>
-                            <p>{{dictionaryService.get('CCO')}}: {{companyCodeDetails[user.companyCode]}}</p>
-                            <p>{{dictionaryService.get('ROL')}}: {{user.role}}</p>
+                            <p>{{dictionaryService.get('EMAIL')}}: {{user.email}}</p>
+                            <p>{{dictionaryService.get('COMCODE')}}: {{companyCodeDetails[user.companyCode]}}</p>
+                            <p>{{dictionaryService.get('ROLE')}}: {{user.role}}</p>
                             <mat-action-row *ngIf="user.role !== 'ADMIN'">
                                 <button mat-stroked-button color="warn" (click)="deleteUser(user)()">
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
-                                    {{dictionaryService.get('DEU')}}
+                                    {{dictionaryService.get('DELUSR')}}
                                 </button>
                                 <button mat-stroked-button color="primary" (click)="resetPassword(user)">
                                     <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
-                                    {{dictionaryService.get('RES')}}
+                                    {{dictionaryService.get('RESETPSWD')}}
                                 </button>
                                 <button mat-stroked-button color="primary" (click)="blockUser(user)"
                                     style="width: 185px;">
                                     <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block
                                     </mat-icon>
-                                    <span *ngIf="!user.blocked">{{dictionaryService.get('BLU')}}</span>
+                                    <span *ngIf="!user.blocked">{{dictionaryService.get('BLOCKUSR')}}</span>
                                     <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done
                                     </mat-icon>
-                                    <span *ngIf="user.blocked">{{dictionaryService.get('ULU')}}</span>
+                                    <span *ngIf="user.blocked">{{dictionaryService.get('UNBLOCKUSR')}}</span>
                                 </button>
                             </mat-action-row>
                         </mat-expansion-panel>

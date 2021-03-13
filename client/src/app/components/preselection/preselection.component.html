@@ -1,6 +1,6 @@
 <div class="inner-component">
     <mat-card class="card">
-        <mat-card-title class="padding10px">{{dictionaryService.get('PRS')}}</mat-card-title>
+        <mat-card-title class="padding10px">{{dictionaryService.get('PRESEL')}}</mat-card-title>
         <mat-card-content align="center">
             <div class="padding10px toggle-theme">
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
@@ -23,7 +23,7 @@
                 <span class="space"></span>
                 <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px; width: 50%;">
                     <mat-icon style="margin-right: 5px;">assignment</mat-icon>
-                    <span>{{dictionaryService.get('MGE')}}</span>
+                    <span>{{dictionaryService.get('GENMSK')}}</span>
                 </button>
                 <span class="space"></span>
             </div>

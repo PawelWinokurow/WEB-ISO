@@ -49,8 +49,8 @@ export class SettingsComponent implements OnInit {
       user.companyCode = this.changeForm.controls['companyCode'].value;
       user.blocked = false;
       this.userService.updateUser(user).toPromise()
-        .then(() => this.toastr.success(this.dictionaryService.get('UWU'), this.dictionaryService.get('SUC')))
-        .catch(err => this.toastr.error(`${this.dictionaryService.get('UWN')}: ${err}`, this.dictionaryService.get('ERR')))
+        .then(() => this.toastr.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC')))
+        .catch(err => this.toastr.error(`${this.dictionaryService.get('USRISNUPD')}: ${err}`, this.dictionaryService.get('ERR')))
         .then(() => this.authService.login(user.email, user.password))
         .catch(err => this.toastr.error(err.message, this.dictionaryService.get('ERR')))
         .then(() => {

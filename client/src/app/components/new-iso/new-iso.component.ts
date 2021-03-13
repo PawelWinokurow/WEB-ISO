@@ -268,7 +268,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   openSendSOAPDialog() {
     /*const mask = this.constructMask(true)
     this.maskService.sendMask(mask).subscribe(res => {
-      this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
+      this.toastr.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
     });
     return*/
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
@@ -280,11 +280,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
       const mask = this.constructMask(isDirect);
       if (isDirect == true) {
         this.maskService.sendMask(mask).subscribe(res => {
-          this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
+          this.toastr.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
         });
       } else if (isDirect == false) {
         this.maskService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
-          this.toastr.success(this.dictionaryService.get('SNE'), this.dictionaryService.get('SUC'));
+          this.toastr.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
         });
       }
     });

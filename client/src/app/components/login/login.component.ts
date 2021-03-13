@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         })
         .catch(err => {
           if (err.status == "401") {
-            this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
+            this.toastr.error(this.dictionaryService.get('IDINC'), this.dictionaryService.get('ERR'))
           } else {
             this.toastr.error(err.message, this.dictionaryService.get('ERR'))
           }
