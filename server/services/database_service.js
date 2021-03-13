@@ -88,7 +88,6 @@ exports.storeUser = function (user) {
 exports.updateUser = function (user) {
   return new Promise((resolve, reject) => {
     update_statement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
-    console.log(user)
     values = [user.companyCode, user.blocked, user.email];
     //If we change password
     if (user.password) {
