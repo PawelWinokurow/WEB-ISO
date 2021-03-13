@@ -10,7 +10,7 @@
                       </div>
                 </div>
                 <div class="form-data paddinglr10px rounded-border"
-                    style="width: 70%; min-width: 600px; background-color: rgb(235, 235, 235);">
+                    style="width: 50%; min-width: 600px; background-color: rgb(235, 235, 235);">
                     <mat-accordion #accordion="matAccordion" multi>
                         <mat-expansion-panel *ngFor="let user of users" style="padding: 5px; margin-top: 10px;"
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -34,15 +34,15 @@
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
                                     {{dictionaryService.get('DEU')}}
                                 </button>
+                                <button mat-button color="primary" (click)="resetPassword(user)">
+                                    <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
+                                    {{dictionaryService.get('RES')}}
+                                </button>
                                 <button mat-button color="primary" (click)="blockUser(user)" style="width: 185px;">
                                         <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block</mat-icon>
                                         <span *ngIf="!user.blocked">{{dictionaryService.get('BLU')}}</span>
                                         <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done</mat-icon>
                                         <span *ngIf="user.blocked">{{dictionaryService.get('ULU')}}</span>
-                                </button>
-                                <button mat-button color="primary" (click)="resetPassword(user)">
-                                    <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
-                                    {{dictionaryService.get('RES')}}
                                 </button>
                             </mat-action-row>
                         </mat-expansion-panel>

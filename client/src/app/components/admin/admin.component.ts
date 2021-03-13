@@ -40,7 +40,6 @@ export class AdminComponent implements OnInit {
   blockUser(user){
     var user = {...user, operation: 'block'};
     user.blocked = !user.blocked;
-    console.log(user.blocked)
     this.userService.blockOrResetUser(user).toPromise()
     .then(userResp => {
         //TODO iterate over array may be to slow

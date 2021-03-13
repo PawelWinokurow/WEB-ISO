@@ -182,6 +182,7 @@ class Server {
   login(req, res) {
     const identifier = req.body.identifier;
     const passwordToCheck = req.body.password;
+    console.log(req.body)
     databaseService.getUser({
       email: identifier,
       username: identifier

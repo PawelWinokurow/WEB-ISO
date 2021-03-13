@@ -87,12 +87,13 @@ exports.storeUser = function (user) {
  */
 exports.updateUser = function (user) {
   return new Promise((resolve, reject) => {
-    update_statement = `UPDATE users SET companycode = ? WHERE email = ?;`;
-    values = [user.companyCode, user.email];
+    update_statement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
+    console.log(user)
+    values = [user.companyCode, user.blocked, user.email];
     //If we change password
     if (user.password) {
-      update_statement = `UPDATE users SET password = ?, companycode = ? WHERE email = ?;`;
-      values = [user.password, user.companyCode, user.email];
+      update_statement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
+      values = [user.password, user.companyCode, user.blocked, user.email];
     }
     //Update values
     connection.query(update_statement, values, function (err, result) {
