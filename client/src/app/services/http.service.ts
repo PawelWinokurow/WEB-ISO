@@ -16,9 +16,8 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   request(func): Observable<any>{
-    return func.pipe(catchError(this.handleError('send token')));
+    return func.pipe(catchError(this.handleError()));
   }
-
 
   /**
    * Error handler.

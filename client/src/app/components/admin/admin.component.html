@@ -4,9 +4,9 @@
             <div class="alternate-theme">
                 <div class="form-title" style="padding: 10px 10px 0 10px;">
                     <h2>{{dictionaryService.get('ADA')}}</h2>
-                    <hr flex />
+                    <!--<hr flex />-->
                 </div>
-                <div class="form-data" style="width: 70%; min-width: 600px;">
+                <div class="form-data paddinglr10px rounded-border" style="width: 70%; min-width: 600px; background-color: rgb(235, 235, 235);">
                     <mat-accordion>
                         <mat-expansion-panel *ngFor="let user of users" style="padding: 5px; margin-top: 10px;"
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -16,6 +16,8 @@
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     {{dictionaryService.get('EMA')}}: {{user.email}}
+
+                                    <p *ngIf=""></p>
                                     <div class="space"></div>
                                     <mat-icon>account_circle</mat-icon>
                                 </mat-panel-description>
