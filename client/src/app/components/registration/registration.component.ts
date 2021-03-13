@@ -20,7 +20,8 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, 
-    public errorMessageService: ErrorMessageService, private userService: UserService, private toastr: ToastrService, public listService: ListService) {
+    public errorMessageService: ErrorMessageService, private userService: UserService, private toastr: ToastrService, 
+    public listService: ListService) {
   }
 
   ngOnInit(): void {

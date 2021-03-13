@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,14 +14,18 @@ import { TokenProlongationService } from 'src/app/services/token-prolongation.se
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  identifier = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required]);
+  loginForm: FormGroup;
 
-  constructor(private router: Router, public dictionaryService: DictionaryService,
+
+  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     private toastr: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService,
     private tokenProlongationService: TokenProlongationService) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      identifier: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
     if (this.authService.isLoggedIn()) {
       this.tokenProlongationService.startChecking();
       this.router.navigate(['/preselection']);
@@ -29,18 +33,24 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.identifier.value, this.password.value)
-      .then(() => {
-        this.tokenProlongationService.startChecking();
-        this.router.navigate(['/preselection']);
-      })
-      .catch(err => {
-        if (err.status == "401") {
-          this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
-        } else {
-          this.toastr.error(err.message, this.dictionaryService.get('ERR'))
-        }
-      });
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.controls['identifier'].value, this.loginForm.controls['password'].value)
+        .then(() => {
+          this.tokenProlongationService.startChecking();
+          this.router.navigate(['/preselection']);
+        })
+        .catch(err => {
+          if (err.status == "401") {
+            this.toastr.error(this.dictionaryService.get('ICL'), this.dictionaryService.get('ERR'))
+          } else {
+            this.toastr.error(err.message, this.dictionaryService.get('ERR'))
+          }
+        });
+    }
+  }
+
+  get loginFormControl() {
+    return this.loginForm.controls;
   }
 
   register() {
