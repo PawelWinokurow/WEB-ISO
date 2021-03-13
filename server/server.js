@@ -145,7 +145,15 @@ class Server {
         } else {
           const hash = cryptoService.generateHash();
           databaseService.storeMask(hash, envelope);
-          emailService.sendEmail(hash, maskData.emailTo);
+
+          const message = {
+            from: "BayWa",
+            to: emailTo,
+            subject: 'Mask confirmation',
+            html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the mask.</p>'
+          };
+
+          emailService.sendEmail(message);
         }
         res.json({
           ok: true
@@ -208,10 +216,10 @@ class Server {
     }).catch(err => {
       // send status 401 Unauthorized
       res.status(401).send({
-      error: "No match"
+        error: "No match"
+      });
+
     });
-  
-  });
   }
 
   createUser(req, res) {
@@ -245,7 +253,7 @@ class Server {
       }));
   }
 
-  blockOrResetUser(req, res){
+  blockOrResetUser(req, res) {
     const user = req.body.user;
     if (user?.operation === 'block') {
       this.blockUser(req, res);
@@ -255,7 +263,28 @@ class Server {
   }
 
   resetPassword(req, res) {
-    console.log("reset")
+    var user = req.body.user;
+    var oldUser = {...user}
+    const newPassword = cryptoService.generateHash().slice(0, 20);
+    user.password = cryptoService.hashPassword(newPassword);
+
+    databaseService.updateUser(user)
+      .then(() => res.json(user))
+      .catch(err => res.status(500).send(`Database error: ${err}`))
+      .then(() => {
+        const message = {
+          from: "WEB-ISO",
+          to: user.email,
+          subject: 'New password WEB-ISO',
+          html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${newPassword}</p>`
+        };
+        emailService.sendEmail(message);
+      })
+      .catch(err => {
+        databaseService.updateUser(oldUser).then();
+        res.status(500).send(`Email send error: ${err}`);
+      });
+      
   }
 
   blockUser(req, res) {
@@ -318,12 +347,19 @@ class Server {
       console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
     })
   }
-
 }
 
 new Server().start()
 
+/*
 setTimeout(function () {
   //soapService.test()
-  //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com')
-}, 1000);
+
+  const message = {
+    from: "BayWa",
+    to: 'pawelwinokurow@gmail.com',
+    subject: 'Mask confirmation',
+    html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + "asdadasdasa" + '">here</a> to confirm the mask.</p>'
+  };
+  //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com', message)
+}, 1000);*/

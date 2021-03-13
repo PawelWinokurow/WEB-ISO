@@ -35,6 +35,7 @@ export class DictionaryService {
     ['BLO', 'Gesperrt'],
     ['EAL', 'Alle ausklappen'],
     ['CAL', 'Alle zuklappen'],
+    ['SEA', 'Suche'],
 
     ['NAC', 'Konto erstellen'],
     ['CFM', 'Bestätigen'],
@@ -124,7 +125,8 @@ export class DictionaryService {
     ['SMA', 'Maske senden'],
     ['SDI', 'Direkt senden'],
     ['SEM', 'Bestätigungs-E-Mail senden'],
-    ['DIQ', 'Wollen Sie die Maske direkt senden?'],    
+    ['DIQ', 'Wollen Sie die Maske direkt senden?'],  
+
     ['DU1', ""],
     ['DU2', " löschen?"],
     ['RP1', "Passwort von "],
@@ -172,6 +174,7 @@ export class DictionaryService {
     ['BLO', 'Blocked'],
     ['EAL', 'Expand all'],
     ['CAL', 'Collapse all'],
+    ['SEA', 'Search'],
 
     ['YES', 'Yes'],
     ['NOO', 'No'],

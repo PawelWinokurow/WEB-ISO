@@ -4,19 +4,34 @@
             <div class="alternate-theme">
                 <div class="form-title" style="padding: 10px 10px 0 10px;">
                     <h2>{{dictionaryService.get('ADA')}}</h2>
-                    <div class="padding10px">
-                        <button mat-button (click)="accordion.openAll()">{{dictionaryService.get('EAL')}}</button>
-                        <button mat-button (click)="accordion.closeAll()">{{dictionaryService.get('CAL')}}</button>
-                      </div>
                 </div>
+
+                <div class="search-part">
+
+                    <mat-form-field color="primary" appearance="outline" style="flex: 2;">
+                        <mat-label>{{dictionaryService.get('SEA')}}</mat-label>
+                        <input matInput [formControl]="filter">
+                    </mat-form-field>
+
+                    <button mat-stroked-button (click)="accordion.openAll()" style="height: 50px; flex: 1;">
+                        {{dictionaryService.get('EAL')}}
+                        <mat-icon>unfold_more</mat-icon>
+                    </button>
+                    <button mat-stroked-button (click)="accordion.closeAll()" style="height: 50px; flex: 1;">
+                        {{dictionaryService.get('CAL')}}
+                        <mat-icon>unfold_less</mat-icon>
+                    </button>
+                </div>
+
                 <div class="form-data paddinglr10px rounded-border"
-                    style="width: 50%; min-width: 600px; background-color: rgb(235, 235, 235);">
+                    style="width: 600px; background-color: rgb(235, 235, 235);">
                     <mat-accordion #accordion="matAccordion" multi>
-                        <mat-expansion-panel *ngFor="let user of users" style="padding: 5px; margin-top: 10px;"
+                        <mat-expansion-panel *ngFor="let user of filteredUsers" style="padding: 5px; margin-top: 10px;"
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{dictionaryService.get('USR')}}: {{user.username}}
+                                    {{dictionaryService.get('USR')}}: &nbsp; <span
+                                        style="font-weight: bold;">{{user.username}}</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
@@ -38,11 +53,14 @@
                                     <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
                                     {{dictionaryService.get('RES')}}
                                 </button>
-                                <button mat-stroked-button color="primary" (click)="blockUser(user)" style="width: 185px;">
-                                        <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block</mat-icon>
-                                        <span *ngIf="!user.blocked">{{dictionaryService.get('BLU')}}</span>
-                                        <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done</mat-icon>
-                                        <span *ngIf="user.blocked">{{dictionaryService.get('ULU')}}</span>
+                                <button mat-stroked-button color="primary" (click)="blockUser(user)"
+                                    style="width: 185px;">
+                                    <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block
+                                    </mat-icon>
+                                    <span *ngIf="!user.blocked">{{dictionaryService.get('BLU')}}</span>
+                                    <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done
+                                    </mat-icon>
+                                    <span *ngIf="user.blocked">{{dictionaryService.get('ULU')}}</span>
                                 </button>
                             </mat-action-row>
                         </mat-expansion-panel>

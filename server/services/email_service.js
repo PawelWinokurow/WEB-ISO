@@ -4,10 +4,9 @@ require('dotenv').config()
 
 /**
  * Sends emails.
- * @param  {string} hash Hash allows to identificate the requestor
- * @param  {string} emailTo Email of the requestor
+ * @param  {object} message message to send
  */
-exports.sendEmail = function (hash, emailTo) {
+exports.sendEmail = function (message) {
     
     emailOptions = {
         host: 'smtp.gmail.com',
@@ -24,13 +23,6 @@ exports.sendEmail = function (hash, emailTo) {
     }
     var transporter = nodemailer.createTransport(emailOptions);
     
-    
-    var message = {
-        from: "BayWa",
-        to: emailTo,
-        subject: 'Mask confirmation',
-        html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the mask.</p>'
-    };
     transporter.sendMail(message, function (error, info) {
         if (error) {
             console.log(error);

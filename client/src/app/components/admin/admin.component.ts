@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { DeleteUserDialogComponent } from 'src/app/dialogs/delete-user-dialog/delete-user-dialog.component';
 import { ResetPasswordDialogComponent } from 'src/app/dialogs/reset-password/reset-password-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -17,7 +19,9 @@ import { UserService } from 'src/app/services/user.service';
 export class AdminComponent implements OnInit {
 
   users;
+  filteredUsers;
   companyCodeDetails;
+  filter: FormControl = new FormControl('');
 
   @ViewChild('accordion') accordion: MatAccordion;
 
@@ -26,7 +30,21 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUsers().toPromise().then(users => this.users = users);
+    this.userService.getUsers().toPromise()
+      .then(users => this.users = users)
+      .then(() => this.filteredUsers = [...this.users])
+      .then(() => {
+        this.filter.valueChanges.subscribe(val => {
+          var val = val.toLowerCase();
+          this.filteredUsers = this.users.filter(user => 
+            user.username.toLowerCase().includes(val) 
+            || user.email.toLowerCase().includes(val) 
+            || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val) 
+            || user.role.toLowerCase().includes(val)
+          );
+        });
+      });
+
     this.companyCodeDetails = this.listService.companyCodes.reduce((acc, x) => ({ ...acc, [x.code]: x.details }), {})
   }
 
