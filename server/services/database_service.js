@@ -1,4 +1,5 @@
-var mysql = require("mysql2");
+const mysql = require("mysql2");
+
 require('dotenv').config()
 
 const MASKS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS masks ( 
@@ -39,7 +40,7 @@ exports.connect = function () {
             console.log(err);
             throw err;
           }
-          console.log(results);
+          //console.log(results);
         });
     });
     return connection;
@@ -69,6 +70,7 @@ exports.storeMask = function (hash, mask) {
 exports.storeUser = function (user) {
   return new Promise((resolve, reject) => {
     const insert_statement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
+    //values = [user.email, user.username, user.password, user.companyCode, 'ADMIN', false];
     values = [user.email, user.username, user.password, user.companyCode, 'USER', false];
     //Insert values
     connection.query(insert_statement, [values], function (err, result) {
@@ -122,11 +124,11 @@ exports.deleteUser = function (user) {
 }
 
 /**
- * Checks if user not is in the database.
+ * Checks if user not exists.
  * @param  {object} user User object 
  * @returns true if user is not in the database
  */
-exports.checkUser = function (user) {
+exports.isUserNotExists = function (user) {
   return new Promise((resolve, reject) => {
     const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
     //Select values
@@ -186,17 +188,9 @@ exports.getUser = function (user) {
     //Select values
     connection.query(select_statement, [user.email, user.username],
       function (err, result, fields) {
-        if (err) reject(err);
+        if (err) reject(err)
         if (Array.isArray(result) && result.length) {
-          resolve(result.map(result => {
-            return {
-              username: result.username,
-              email: result.email,
-              companyCode: result.companycode,
-              role: result.role,
-              password: result.password
-            }
-          })[0]);
+          resolve({...result[0]});
         } else {
           reject(false);
         }
@@ -207,20 +201,20 @@ exports.getUser = function (user) {
 /**
  * Retrieves all users from the database.
  */
-exports.getUsers = function (user) {
+exports.getUsers = function () {
   return new Promise((resolve, reject) => {
     const select_statement = 'SELECT * FROM users;';
     //Select values
     connection.query(select_statement, function (err, result, fields) {
       if (err) reject(err);
       if (Array.isArray(result) && result.length) {
-        console.log(result)
         resolve(result.map(result => {
           return {
             username: result.username,
             email: result.email,
             companyCode: result.companycode,
-            role: result.role
+            role: result.role,
+            blocked: result.blocked
           }
         }));
       } else {

@@ -1,26 +1,27 @@
-var express = require('express');
-var schedule = require('node-schedule');
-var cors = require('cors');
-var logger = require('morgan');
-var fetch = require('node-fetch');
-var httpsProxyAgent = require('https-proxy-agent');
-var path = require('path');
-var jwt = require('jsonwebtoken');
-var fs = require('fs');
+const express = require('express');
+const schedule = require('node-schedule');
+const cors = require('cors');
+const logger = require('morgan');
+const fetch = require('node-fetch');
+const httpsProxyAgent = require('https-proxy-agent');
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 
 require('dotenv').config();
 
-var databaseService = require('./services/database_service');
-var soapService = require('./services/soap_service');
-var emailService = require('./services/email_service');
-var cryptoService = require('./services/crypto_service');
-var maskService = require('./services/mask_service');
+const databaseService = require('./services/database_service');
+const soapService = require('./services/soap_service');
+const emailService = require('./services/email_service');
+const cryptoService = require('./services/crypto_service');
+const maskService = require('./services/mask_service');
+const middlewareService = require('./services/middleware_service');
 
 databaseService.connect();
 
 //envelope.xml for test
-var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
+const ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
 
 /**
  * Class to to manage the server. It contains node js express application
@@ -41,17 +42,14 @@ class Server {
     this.refreshToken = this.refreshToken.bind(this);
     this.createUser = this.createUser.bind(this);
     this.confirm = this.confirm.bind(this);
-    this.checkIfAuthenticated = this.checkIfAuthenticated.bind(this);
-    this.checkIfUpdatesItself = this.checkIfUpdatesItself.bind(this);
-    this.checkIfFromAdmin = this.checkIfFromAdmin.bind(this);
+    this.blockOrResetUser = this.blockOrResetUser.bind(this);
     this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
-    this.publicKey = fs.readFileSync(process.env.PUBLIC_KEY);
     this.wsdlUrl = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
       this.proxyAgent = new httpsProxyAgent(process.env.EMAIL_PROXY); // We need HttpsProxyAgent to use proxy for re-captcha
-    }).catch(() => {}).finally(() => {
+    }).catch(() => { }).finally(() => {
       this.runSchedule();
       this.initEndPoints();
     });
@@ -69,7 +67,7 @@ class Server {
   confirm(req, res) {
     databaseService.checkConfirmation(req.query.hash)
       .then(result => {
-        var mask = JSON.parse(result.mask)
+        const mask = JSON.parse(result.mask)
         soapService.sendMask(mask, this.wsdlUrl);
         res.send('<p>Success! The mask was confirmed.</p>');
       })
@@ -88,7 +86,7 @@ class Server {
       })
       return console.log("token empty");
     }
-    var options = {
+    const options = {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -137,12 +135,11 @@ class Server {
       }
       return maskFactory.build();
     }
-    let maskData = req.body;
+    let maskData = req.body.mask;
 
     composeMask(maskData).then(
       sapMask => {
         var envelope = sapMask.getJSONArgs();
-        //console.log(envelope)
         if (maskData.isDirect) {
           soapService.sendMask(envelope, this.wsdlUrl);
         } else {
@@ -157,83 +154,11 @@ class Server {
     );
   }
 
-  checkIfAuthenticated(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const jwtBearerToken = authHeader.split(' ')[1];
-
-      jwt.verify(jwtBearerToken, this.publicKey, {
-        algorithm: ['RS256']
-      }, (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-      });
-    } else {
-      res.sendStatus(401);
-    }
-  };
-
-  //Checks if request updates itself
-  checkIfUpdatesItself(req, res, next) {
-    const authHeader = req.headers.authorization;
-    const updated_user = req.body;
-    if (authHeader) {
-      const jwtBearerToken = authHeader.split(' ')[1];
-
-      jwt.verify(jwtBearerToken, this.publicKey, {
-        algorithm: ['RS256']
-      }, (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.sendStatus(403);
-        }
-        if (updated_user.username === user.username && updated_user.email === user.email ||
-          user.role === 'ADMIN' && updated_user.role === 'USER') {
-          req.user = user;
-          next();
-        } else {
-          res.sendStatus(401);
-        }
-      });
-    } else {
-      res.sendStatus(401);
-    }
-  };
-
-  //Checks if request comes from ADMIN
-  checkIfFromAdmin(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const jwtBearerToken = authHeader.split(' ')[1];
-
-      jwt.verify(jwtBearerToken, this.publicKey, {
-        algorithm: ['RS256']
-      }, (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.sendStatus(403);
-        }
-        if (user.role === 'ADMIN') {
-          req.user = user;
-          next();
-        } else {
-          res.sendStatus(401);
-        }
-      });
-    } else {
-      res.sendStatus(401);
-    }
-  };
-
   refreshToken(req, res) {
-    const user = req.body;
-    databaseService.getUser(user).then(
+    databaseService.getUser(req.body.decodedUser).then(
       user => {
         delete user.password;
+        delete user.blocked;
         const jwtBearerToken = jwt.sign(user, this.privateKey, {
           algorithm: 'RS256',
           expiresIn: process.env.JWT_DURATION,
@@ -255,61 +180,53 @@ class Server {
   }
 
   login(req, res) {
-    // Checks if the user exists and if the password matches
-    function checkPassword(identifier, plaintextPassword) {
-      return new Promise((resolve, reject) => {
-        databaseService.getUser({
-          email: identifier,
-          username: identifier
-        }).then(user => {
-          if (cryptoService.comparePasswords(plaintextPassword, user.password)) {
-            resolve(user);
-          }
-          reject(false);
-        })
-      });
-    }
     const identifier = req.body.identifier;
-    const password = req.body.password;
-    checkPassword(identifier, password).then(
-      user => {
+    const passwordToCheck = req.body.password;
+    databaseService.getUser({
+      email: identifier,
+      username: identifier
+    }).then(user => {
+      if (!user.blocked && cryptoService.comparePasswords(passwordToCheck, user.password)) {
+        delete user.password;
+        delete user.blocked;
         const jwtBearerToken = jwt.sign(user, this.privateKey, {
           algorithm: 'RS256',
           expiresIn: process.env.JWT_DURATION,
         });
-
         //Send JWT back
         res.status(200).json({
           idToken: jwtBearerToken,
           expiresIn: process.env.JWT_DURATION,
           user: user
         });
+      } else {
+        // send status 401 Unauthorized
+        res.status(401).send({
+          error: "No match"
+        });
       }
-    ).catch(err => {
+    }).catch(err => {
       // send status 401 Unauthorized
       res.status(401).send({
-        error: "No match"
-      });
+      error: "No match"
     });
+  
+  });
   }
 
   createUser(req, res) {
-    var user = req.body;
+    var user = req.body.user;
     user.password = cryptoService.hashPassword(user.password);
-    databaseService.checkUser(user)
-    .then(() => databaseService.storeUser(user))
-    .then(() => res.json({
-      ok: true
-    }))
-    .catch(() => res.json({
-      message: 'Duplicate'
-    }))
+    databaseService.isUserNotExists(user)
+      .then(() => databaseService.storeUser(user))
+      .then(this.login(req, res))
+      .catch(() => res.json({
+        message: 'Duplicate'
+      }))
   }
 
   updateUser(req, res) {
-    var user = req.body;
-    const authHeader = req.headers.authorization;
-    //console.log(authHeader);
+    var user = req.body.user;
     if (user.password) {
       user.password = cryptoService.hashPassword(user.password);
     }
@@ -319,12 +236,31 @@ class Server {
   }
 
   deleteUser(req, res) {
-    var user = req.body;
-    user.password = cryptoService.hashPassword(user.password);
-    databaseService.deleteUser(user)
+    databaseService.deleteUser(req.body.user)
       .then(() => res.json({
         ok: true
       }))
+      .catch(err => res.json({
+        message: err
+      }))
+  }
+
+  blockOrResetUser(req, res){
+    const user = req.body.user;
+    if (user?.operation === 'block') {
+      this.blockUser(req, res);
+    } else if (user?.operation === 'reset') {
+      this.resetPassword(req, res);
+    }
+  }
+
+  resetPassword(req, res) {
+
+  }
+
+  blockUser(req, res) {
+    databaseService.updateUser(req.body.user)
+      .then(() => res.json(req.body.user))
       .catch(err => res.json({
         message: err
       }))
@@ -342,14 +278,14 @@ class Server {
     /**
      * Enpoint to get customer masks from application.
      */
-    this.expressApp.route("/request").post(this.checkIfAuthenticated, this.createCustomer);
+    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, this.createCustomer);
 
     /**
      * Endpoint to get login data.
      */
     this.expressApp.route("/login")
       .post(this.login)
-      .put(this.checkIfAuthenticated, this.refreshToken);
+      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, this.refreshToken);
 
     /**
      * Endpoint to get email confirmations.
@@ -359,17 +295,22 @@ class Server {
     /**
      * Endpoint to get recaptcha token from the client.
      */
-    this.expressApp.route('/recaptcha').post(this.checkIfAuthenticated, this.validateRecaptcha);
+    this.expressApp.route('/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, this.validateRecaptcha);
 
     /**
      * Endpoint for user CRUD.
+     * post: create user
+     * put: update user
+     * patch: block user
+     * delete: delete user
      */
     this.expressApp.route('/user')
       .post(this.createUser)
-      .put(this.checkIfUpdatesItself, this.updateUser)
-      .delete(this.checkIfUpdatesItself, this.deleteUser);
+      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, this.updateUser)
+      .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, this.blockOrResetUser)
+      .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, this.deleteUser);
 
-    this.expressApp.route('/users').get(this.checkIfFromAdmin, this.getUsers);
+    this.expressApp.route('/users').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfUserAvailable, this.getUsers);
   }
 
   start() {

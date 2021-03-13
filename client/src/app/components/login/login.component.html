@@ -5,7 +5,7 @@
             <div class="paddinglr10px" style="margin-top:20px;">
                 <mat-form-field color="primary" appearance="outline">
                     <mat-label>{{dictionaryService.get('EUN')}}</mat-label>
-                    <input matInput [formControl]="identifier" required>
+                    <input matInput [formControl]="identifier" required (keyup.enter)="login()">
                     <mat-error *ngFor="let errorType of identifier.errors | keyvalue;">
                         <mat-icon style="margin-right: 5px;">error</mat-icon>
                         {{errorMessageService.getError('EUN', errorType.key)}}
@@ -15,7 +15,7 @@
             <div class="paddinglr10px">
                 <mat-form-field color="primary" appearance="outline">
                     <mat-label>{{dictionaryService.get('PSW')}}</mat-label>
-                    <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+                    <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'" required (keyup.enter)="login()">
                     <button mat-icon-button matSuffix (click)="hide = !hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>

@@ -1,13 +1,13 @@
-var soap = require('soap');
-var path = require('path');
-var xml2js = require('xml2js');
-var fs = require('fs');
+const soap = require('soap');
+const path = require('path');
+const xml2js = require('xml2js');
+const fs = require('fs');
 
 require('dotenv').config();
 
-
 //envelope.xml for test
-var ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope2.xml');
+const ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope2.xml');
+
 exports.test = function (wsdlUrl) {
 
     fs.readFile(ENVELOPE_URL, function (err, data) {

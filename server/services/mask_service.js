@@ -1,5 +1,5 @@
-var xml2js = require('xml2js');
-var fs = require('fs');
+const xml2js = require('xml2js');
+const fs = require('fs');
 
 class MaskFactory {
     constructor(maskData, ENVELOPE_URL) {

@@ -38,6 +38,10 @@ export class DictionaryService {
     ['PNS', 'Die Passwörter stimmen nicht überein'],
     ['UAE', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['ICL', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
+    ['USB', 'Der Benutzer wurde gesperrt.'],
+    ['USU', 'Der Benutzer wurde freigegeben.'],
+    ['USD', 'Der Benutzer wurde gelöscht.'],
+    ['PAR', 'Das Passwort wurde zurückgesetzt.'],
     
     ['CHA', 'Ändern'],
 
@@ -140,6 +144,10 @@ export class DictionaryService {
     ['PNS', 'The passwords do not match'],
     ['UAE', 'This email address or username is already being used.'],
     ['ICL', 'Your username/email or password are incorrect.'],
+    ['USB', 'The user was blocked.'],
+    ['USU', 'The user was unblocked.'],
+    ['USD', 'The user was deleted.'],
+    ['PAR', 'The password was reset.'],
 
     ['CHA', 'Change'],
     

@@ -30,6 +30,8 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user.service';
+import { RecaptchaService } from './services/recaptcha.service';
+import { MaskService } from './services/mask.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { UserService } from './services/user.service';
     AuthService,
     AuthGuardService,
     UserService,
+    RecaptchaService,
+    MaskService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

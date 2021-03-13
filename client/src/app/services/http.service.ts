@@ -12,31 +12,13 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class HttpService {
-  headers = new HttpHeaders()
-  .set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Sends customer mask to the server as JSON.
-   * @param mask Object { isDirect: boolean, sapMask: SharedMask }
-   * @returns Response observable.
-   */
-  sendMask(mask): Observable<any>{
-    return this.http.post(`${environment.serverURL}/request`, JSON.stringify(mask), {
-      headers: this.headers
-    }).pipe(catchError(this.handleError('send mask')));
+  request(func): Observable<any>{
+    return func.pipe(catchError(this.handleError('send token')));
   }
 
-  /**
-   * Sends captcha token to the server.
-   * @param token 
-   */
-  sendToken(token): Observable<any>{
-    return this.http.post(`${environment.serverURL}/recaptcha`, {recaptcha: token}, {
-      headers: this.headers
-    }).pipe(catchError(this.handleError('send token')));
-  }
 
   /**
    * Error handler.

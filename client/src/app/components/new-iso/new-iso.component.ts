@@ -15,6 +15,7 @@ import { SearchService } from 'src/app/services/search.service';
 import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
 import { DateService } from 'src/app/services/date.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { MaskService } from 'src/app/services/mask.service';
 
 
 /**
@@ -57,7 +58,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
-    public storageService: StorageService, private toastr: ToastrService, private dialog: MatDialog, private httpService: HttpService, 
+    public storageService: StorageService, private toastr: ToastrService, private dialog: MatDialog, private maskService: MaskService, 
     public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService,
     public authService: AuthService) {
     this.titles = this.listService.titles;
@@ -266,7 +267,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   openSendSOAPDialog() {
     const mask = this.constructMask(true)
-    this.httpService.sendMask(mask).subscribe(res => {
+    this.maskService.sendMask(mask).subscribe(res => {
       this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
     });
     return
@@ -278,11 +279,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
     sendMaskDialogRef.afterClosed().subscribe(isDirect => {
       const mask = this.constructMask(isDirect);
       if (isDirect == true) {
-        this.httpService.sendMask(mask).subscribe(res => {
+        this.maskService.sendMask(mask).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNT'), this.dictionaryService.get('SUC'));
         });
       } else if (isDirect == false) {
-        this.httpService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
+        this.maskService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
           this.toastr.success(this.dictionaryService.get('SNE'), this.dictionaryService.get('SUC'));
         });
       }

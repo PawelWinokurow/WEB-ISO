@@ -1,5 +1,5 @@
-var crypto = require('crypto');
-var bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 /**
  * Generates the random hash depending on the current timestamp.

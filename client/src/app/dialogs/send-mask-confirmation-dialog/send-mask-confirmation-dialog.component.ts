@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { HttpService } from 'src/app/services/http.service';
+import { RecaptchaService } from 'src/app/services/recaptcha.service';
 import { environment } from './../../../environments/environment';
 /**
  * The dialog to choose the direct or indirect type of customer mask sending.
@@ -18,7 +19,8 @@ export class SendMaskConfirmationDialogComponent {
 
   captcha: FormControl = new FormControl('', [Validators.required]);
 
-  constructor(public dialogRef: MatDialogRef<SendMaskConfirmationDialogComponent>, public dictionaryService: DictionaryService, private httpService: HttpService) { }
+  constructor(public dialogRef: MatDialogRef<SendMaskConfirmationDialogComponent>, public dictionaryService: DictionaryService, 
+    private recaptchaService: RecaptchaService) { }
 
   /**
    * Resolving captcha triggers this method. The methods sends captcha to the server.
@@ -27,7 +29,7 @@ export class SendMaskConfirmationDialogComponent {
 
   async resolved(captcha) {
     if (captcha != null) {
-      this.httpService.sendToken(captcha).subscribe(res => {
+      this.recaptchaService.sendToken(captcha).subscribe(res => {
       });
     }
   }
