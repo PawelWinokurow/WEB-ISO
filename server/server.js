@@ -238,9 +238,11 @@ class Server {
 
   updateUser(req, res) {
     var user = req.body.user;
+    console.log(user)
     if (user.password) {
       databaseService.getUser(user)
         .then(dbUser => new Promise((resolve, reject) => {
+          console.log(dbUser)
           if (cryptoService.comparePasswords(user.passwordOld, dbUser.password)) {
             user.password = cryptoService.hashPassword(user.password);
             resolve(user);
@@ -248,16 +250,18 @@ class Server {
           reject(false);
         }))
         .catch(err => {
-          console.log(`Old password doesn't match`)
-          res.status(500).send(err)
+          res.json({
+            message: `Old password doesn't match`
+          })
         })
         then(user => databaseService.updateUser(user))
         .then(() => res.json(user))
         .catch(err => res.status(500).send(`Database error: ${err}`))
+      } else {
+        databaseService.updateUser(user)
+        .then(() => res.json(user))
+        .catch(err => res.status(500).send(`Database error: ${err}`))
       }
-      databaseService.updateUser(user)
-      .then(() => res.json(user))
-      .catch(err => res.status(500).send(`Database error: ${err}`))
   }
 
   deleteUser(req, res) {

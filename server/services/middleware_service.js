@@ -28,9 +28,8 @@ exports.checkIfAuthenticated = function (req, res, next) {
 
 exports.checkIfUserAvailable = function (req, res, next) {
     databaseService.getUser(req.body.decodedUser)
-    .then(result => {return {...result[0]}})
-    .then(db_user => {
-        if (db_user.blocked === 0) {
+    .then(user => {
+        if (user.blocked === 0) {
             next();
         } else {
             res.sendStatus(401);

@@ -107,6 +107,7 @@ exports.storeMask = function (hash, mask) {
  * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
+  console.log(user)
   const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
   //const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
   const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];

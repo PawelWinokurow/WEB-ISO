@@ -17,6 +17,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SettingsComponent implements OnInit {
 
+  hide0 = true;
   hide1 = true;
   hide2 = true;
   changeForm: FormGroup;
@@ -58,7 +59,7 @@ export class SettingsComponent implements OnInit {
         .catch(err => this.toastrService.error(err.message, this.dictionaryService.get('ERR')))
         .then(() => {
           this.tokenProlongationService.startChecking();
-          this.router.navigate(['/preselection']);
+          //this.router.navigate(['/preselection']);
         });
     } else {
       this.changeForm.markAllAsTouched();

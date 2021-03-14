@@ -30,7 +30,10 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUsers().toPromise()
-      .then(users => this.users = users)
+      .then(users => {
+        this.users = users;
+        console.log(users)
+      })
       .then(() => this.filteredUsers = [...this.users])
       .then(() => {
         this.filter.valueChanges.subscribe(val => {
