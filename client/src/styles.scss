@@ -20,7 +20,6 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
 }
 
 .inner-component {
@@ -75,7 +74,11 @@ mat-form-field {
 
 .stepper-button {
   height: 46px;
-  width: 100px;
+  width: 120px;
+}
+
+.button {
+  height: 46px;
 }
 
 .padding10px {

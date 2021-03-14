@@ -42,7 +42,7 @@
                         </mat-form-field>
                     </div>
                     <div style="display: flex; align-items: center; padding: 0 10px 20px 10px;">
-                        <button type="button" mat-stroked-button (click)="setPassword()">
+                        <button class="button" type="button" mat-stroked-button (click)="setPassword()">
                             <span style="font-size: 12pt">{{dictionaryService.get('CHNGPSWD')}}</span>
                             <mat-icon style="font-size: 30px; margin-top: -5px;" *ngIf="changePassword">arrow_drop_up
                             </mat-icon>
@@ -107,7 +107,7 @@
         <div class="space"></div>
         <div class="form-controls buttons-theme">
             <span class="space"></span>
-            <button mat-raised-button (click)="change()" color="primary"
+            <button class="button" mat-raised-button (click)="change()" color="primary"
                 style="height: 40px; margin-left: 10px;">{{dictionaryService.get('CHNG')}}</button>
         </div>
     </div>

@@ -5,16 +5,20 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div style="padding-left:10px;">
-      <h1 style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</h1>
+      <span class="mat-h2" style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</span>
     </div>
     <div style="padding-left:10px;">
-      <h3>
+      <span class="mat-h2">
         {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
-      </h3>
+      </span>
     </div>
     <span class="space"></span>
-    <span *ngIf="authService.getUser()">{{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!</span>
-    <button mat-raised-button (click)="reset()" style="margin-left: 20px;"> 
+    <div style="padding-left:10px;">
+      <span class="mat-h2"
+        *ngIf="authService.getUser()">{{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!</span>
+    </div>
+
+    <button mat-raised-button (click)="reset()" style="margin-left: 20px;">
       <mat-icon>replay</mat-icon>
     </button>
     <button mat-raised-button (click)="dictionaryService.switchLanguage()"

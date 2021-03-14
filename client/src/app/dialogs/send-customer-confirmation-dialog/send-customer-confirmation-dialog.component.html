@@ -1,5 +1,5 @@
 <div class="alternate-theme">
-  <h2 mat-dialog-title>{{dictionaryService.get('SNDCUS')}}</h2>
+  <h1 mat-dialog-title>{{dictionaryService.get('SNDCUS')}}</h1>
   <mat-dialog-content style="padding-top: 10px;">
     <div style="text-align: center;">
       <re-captcha style="display: inline-block;" (resolved)="resolved($event)" [formControl]="captcha" siteKey="{{recaptchaSitekey}}">
