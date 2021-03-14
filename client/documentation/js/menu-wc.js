@@ -86,8 +86,8 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">PreselectionComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/SendMaskConfirmationDialogComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">SendMaskConfirmationDialogComponent</a>
+                                                <a href="components/SendCustomerConfirmationDialogComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">SendCustomerConfirmationDialogComponent</a>
                                             </li>
                                         </ul>
                                     </li>

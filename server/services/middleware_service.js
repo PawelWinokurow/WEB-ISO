@@ -6,8 +6,7 @@ const databaseService = require('./database_service');
 
 const PUBLIC_KEY = fs.readFileSync(path.join(__dirname, '..', process.env.PUBLIC_KEY));
 
-
-exports.checkIfAuthenticated = function (req, res, next) {
+function checkIfAuthenticated(req, res, next) {
     const authHeader = req.headers.authorization;
     if (authHeader) {
         const jwtBearerToken = authHeader.split(' ')[1];
@@ -26,20 +25,20 @@ exports.checkIfAuthenticated = function (req, res, next) {
     }
 }
 
-exports.checkIfUserAvailable = function (req, res, next) {
+function checkIfUserAvailable(req, res, next) {
     databaseService.getUser(req.body.decodedUser)
-    .then(user => {
-        if (user.blocked === 0) {
-            next();
-        } else {
-            res.sendStatus(401);
+        .then(user => {
+            if (user.blocked === 0) {
+                next();
+            } else {
+                res.sendStatus(401);
+            }
         }
-    }
-    ).catch(err => res.sendStatus(401));
+        ).catch(err => res.sendStatus(401));
 }
 
 //Checks if request updates itself or ADMIN updates USER
-exports.checkIfUpdatesItself = function (req, res, next) {
+function checkIfUpdatesItself(req, res, next) {
     const user = req.body.decodedUser;
     const updated_user = req.body.user;
     if (updated_user.email === user.email ||
@@ -49,10 +48,12 @@ exports.checkIfUpdatesItself = function (req, res, next) {
 }
 
 //Checks if request comes from ADMIN
-exports.checkIfFromAdmin = function (req, res, next) {
+function checkIfFromAdmin(req, res, next) {
     if (req.body.decodedUser.role === 'ADMIN') {
         next();
     } else {
         res.sendStatus(401);
     }
 }
+
+module.exports = { checkIfFromAdmin, checkIfUpdatesItself, checkIfUserAvailable, checkIfAuthenticated };

@@ -177,7 +177,7 @@
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onGenerateMask">onGenerateMask</a>
+                                <a href="#onNewCustomer">onNewCustomer</a>
                             </li>
                         </ul>
                     </td>
@@ -494,18 +494,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="onGenerateMask"></a>
+                    <a name="onNewCustomer"></a>
                     <span class="name">
                         <b>
-                            onGenerateMask
+                            onNewCustomer
                         </b>
-                        <a href="#onGenerateMask"><span class="icon ion-ios-link"></span></a>
+                        <a href="#onNewCustomer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>onGenerateMask()</code>
+<code>onNewCustomer()</code>
                 </td>
             </tr>
 
@@ -738,7 +738,7 @@ export class PreselectionComponent implements OnInit {
   /**
    * Click on the &quot;generate mask&quot; button triggers this method. The method navigates to the NewISOComponent. 
    */
-  onGenerateMask(){
+  onNewCustomer(){
     this.router.navigate([&#x27;/iso&#x27;]);
   }
 }
@@ -783,7 +783,7 @@ export class PreselectionComponent implements OnInit {
             &lt;/div&gt;
         &lt;/mat-card-content&gt;
         &lt;mat-card-actions align&#x3D;&quot;center&quot; style&#x3D;&quot;margin-bottom: 20px;&quot;&gt;
-            &lt;button mat-stroked-button (click)&#x3D;&quot;onGenerateMask()&quot; style&#x3D;&quot;height: 46px;&quot; [disabled]&#x3D;&quot;!companyCode.valid&quot;&gt;
+            &lt;button mat-stroked-button (click)&#x3D;&quot;onNewCustomer()&quot; style&#x3D;&quot;height: 46px;&quot; [disabled]&#x3D;&quot;!companyCode.valid&quot;&gt;
                 &lt;mat-icon style&#x3D;&quot;margin-right: 5px;&quot;&gt;assignment&lt;/mat-icon&gt;
                 &lt;span&gt;{{dictionaryService.get(&#x27;MGE&#x27;)}}&lt;/span&gt;
             &lt;/button&gt;
@@ -842,8 +842,8 @@ export class PreselectionComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="inner-component">    <mat-card class="card">        <mat-card-content align="center">            <div class="padding10px">                <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">                    <mat-button-toggle value="debit">{{ dictionaryService.get(\'DEB\') }}                    </mat-button-toggle>                    <mat-button-toggle value="credit">{{ dictionaryService.get(\'CRE\') }}                    </mat-button-toggle>                </mat-button-toggle-group>            </div>            <div class="padding10px">                <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">                    <mat-button-toggle value="person">{{ dictionaryService.get(\'PER\') }}                    </mat-button-toggle>                    <mat-button-toggle value="organization">{{ dictionaryService.get(\'ORG\') }}                    </mat-button-toggle>                </mat-button-toggle-group>            </div>            <div class="padding10px">                <mat-form-field color="accent" appearance="outline">                    <mat-label>{{dictionaryService.get(\'CCO\')}}</mat-label>                    <mat-select [formControl]="companyCode" required>                        <mat-option *ngFor="let field of listService.companyCodes" [value]="field">                            {{field.details}}                        </mat-option>                    </mat-select>                    <mat-error *ngFor="let errorType of companyCode.errors | keyvalue;">                        <mat-icon style="margin-right: 5px;">error</mat-icon>                        {{errorMessageService.getError(\'CCO\', errorType.key)}}                    </mat-error>                </mat-form-field>            </div>        </mat-card-content>        <mat-card-actions align="center" style="margin-bottom: 20px;">            <button mat-stroked-button (click)="onGenerateMask()" style="height: 46px;" [disabled]="!companyCode.valid">                <mat-icon style="margin-right: 5px;">assignment</mat-icon>                <span>{{dictionaryService.get(\'MGE\')}}</span>            </button>        </mat-card-actions>    </mat-card></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailDialogComponent', 'selector': 'email-dialog'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'SendMaskConfirmationDialogComponent', 'selector': 'app-send-mask-confirmation-dialog'}];
+        var COMPONENT_TEMPLATE = '<div><div class="inner-component">    <mat-card class="card">        <mat-card-content align="center">            <div class="padding10px">                <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">                    <mat-button-toggle value="debit">{{ dictionaryService.get(\'DEB\') }}                    </mat-button-toggle>                    <mat-button-toggle value="credit">{{ dictionaryService.get(\'CRE\') }}                    </mat-button-toggle>                </mat-button-toggle-group>            </div>            <div class="padding10px">                <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">                    <mat-button-toggle value="person">{{ dictionaryService.get(\'PER\') }}                    </mat-button-toggle>                    <mat-button-toggle value="organization">{{ dictionaryService.get(\'ORG\') }}                    </mat-button-toggle>                </mat-button-toggle-group>            </div>            <div class="padding10px">                <mat-form-field color="accent" appearance="outline">                    <mat-label>{{dictionaryService.get(\'CCO\')}}</mat-label>                    <mat-select [formControl]="companyCode" required>                        <mat-option *ngFor="let field of listService.companyCodes" [value]="field">                            {{field.details}}                        </mat-option>                    </mat-select>                    <mat-error *ngFor="let errorType of companyCode.errors | keyvalue;">                        <mat-icon style="margin-right: 5px;">error</mat-icon>                        {{errorMessageService.getError(\'CCO\', errorType.key)}}                    </mat-error>                </mat-form-field>            </div>        </mat-card-content>        <mat-card-actions align="center" style="margin-bottom: 20px;">            <button mat-stroked-button (click)="onNewCustomer()" style="height: 46px;" [disabled]="!companyCode.valid">                <mat-icon style="margin-right: 5px;">assignment</mat-icon>                <span>{{dictionaryService.get(\'MGE\')}}</span>            </button>        </mat-card-actions>    </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailDialogComponent', 'selector': 'email-dialog'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'SendCustomerConfirmationDialogComponent', 'selector': 'app-send-customer-confirmation-dialog'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PreselectionComponent'};
 </script>

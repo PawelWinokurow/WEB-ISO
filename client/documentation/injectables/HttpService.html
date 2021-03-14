@@ -101,7 +101,7 @@
                                 <a href="#handleError">handleError</a>
                             </li>
                             <li>
-                                <a href="#sendMask">sendMask</a>
+                                <a href="#sendCustomer">sendCustomer</a>
                             </li>
                             <li>
                                 <a href="#sendToken">sendToken</a>
@@ -277,18 +277,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="sendMask"></a>
+                    <a name="sendCustomer"></a>
                     <span class="name">
                         <b>
-                            sendMask
+                            sendCustomer
                         </b>
-                        <a href="#sendMask"><span class="icon ion-ios-link"></span></a>
+                        <a href="#sendCustomer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>sendMask(mask)</code>
+<code>sendCustomer(mask)</code>
                 </td>
             </tr>
 
@@ -478,7 +478,7 @@ export class HttpService {
    * @param mask Object { isDirect: boolean, sapMask: SharedMask }
    * @returns Response observable.
    */
-  sendMask(mask): Observable&lt;any&gt;{
+  sendCustomer(mask): Observable&lt;any&gt;{
     return this.http.post(&#x60;${environment.serverURL}/request&#x60;, JSON.stringify(mask), {
       headers: this.headers
     }).pipe(catchError(this.handleError(&#x27;send mask&#x27;)));

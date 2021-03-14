@@ -7,16 +7,16 @@ import { HttpService } from './http.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MaskService {
+export class CustomerService {
 
   constructor(private httpService: HttpService, private http: HttpClient) { }
 
     /**
-   * Sends customer mask to the server as JSON.
-   * @param mask Object { isDirect: boolean, sapMask: SharedMask }
+   * Sends customer to the server as JSON.
+   * @param customer Object { isDirect: boolean, sapCustomer: SharedCustomer }
    * @returns Response observable.
    */
-     sendMask(mask): Observable<any>{
-      return this.httpService.request(this.http.post(`${environment.serverURL}/request`, {mask: JSON.stringify(mask)}));
+     sendCustomer(customer): Observable<any>{
+      return this.httpService.request(this.http.post(`${environment.serverURL}/request`, {customer: JSON.stringify(customer)}));
     }
 }

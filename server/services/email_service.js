@@ -6,8 +6,8 @@ require('dotenv').config()
  * Sends emails.
  * @param  {object} message message to send
  */
-exports.sendEmail = function (message) {
-    
+function sendEmail(message) {
+
     emailOptions = {
         host: 'smtp.gmail.com',
         port: 465,
@@ -22,7 +22,7 @@ exports.sendEmail = function (message) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
     var transporter = nodemailer.createTransport(emailOptions);
-    
+
     transporter.sendMail(message, function (error, info) {
         if (error) {
             console.log(error);
@@ -32,3 +32,4 @@ exports.sendEmail = function (message) {
     });
 }
 
+module.exports = { sendEmail };

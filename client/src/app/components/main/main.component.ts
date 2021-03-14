@@ -16,7 +16,8 @@ import { TokenProlongationService } from 'src/app/services/token-prolongation.se
 export class MainComponent implements OnInit {
 
   constructor(private router: Router, public dictionaryService: DictionaryService, 
-    public storageService: StorageService, public authService: AuthService, private tokenProlongationService: TokenProlongationService){
+    public storageService: StorageService, public authService: AuthService, 
+    private tokenProlongationService: TokenProlongationService){
   }
 
   ngOnInit(): void {}

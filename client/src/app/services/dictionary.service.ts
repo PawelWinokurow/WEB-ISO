@@ -22,7 +22,8 @@ export class DictionaryService {
     ['PSWD', 'Passwort'],
     ['ID', 'E-Mail oder Benutzername'],
 
-    ['NEWCUSTOMER', 'Neuer Kunde'],
+    ['HELLO', 'Hallo, '],
+    ['NEWCUS', 'Neuer Kunde'],
     ['SETTINGS', 'Einstellungen'],
     ['LOGOUT', 'Abmelden'],
     ['ADMINAREA', 'Admin-Bereich'],
@@ -62,8 +63,6 @@ export class DictionaryService {
     ['NXT', 'Weiter'],
     ['SND', 'Senden'],
     ['ADDFILE', 'Datei hinzufügen'],
-
-    ['GENMSK', 'Maske generieren'],
 
     ['PRESEL', 'Vorauswahl'],
     ['CUSTYPE', 'Kundentyp'],
@@ -125,7 +124,7 @@ export class DictionaryService {
     
     ['ENTEMAIL', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
     ['SUBMIT', 'Einreichen'],
-    ['SNDMSK', 'Maske senden'],
+    ['SNDCUS', 'Kunde senden'],
     ['SNDDIR', 'Direkt senden'],
     ['SNDCONFEMAIL', 'Bestätigungs-E-Mail senden'],
 
@@ -133,7 +132,7 @@ export class DictionaryService {
     ['DELUSR2', " löschen?"],
     ['RESETPSWD1', "Passwort von "],
     ['RESETPSWD2', " zurücksetzen?"],
-    ['MSKISSND', 'Die Maske wurde gesendet.'],
+    ['CUSISSND', 'Der Kunde wurde gesendet.'],
     ['CONFISSND', 'Die Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.'],
     ['USRISCR', 'Der Benutzer wurde angelegt.'],
     ['USRISUPD', 'Der Benutzer wurde geändert.'],
@@ -150,6 +149,8 @@ export class DictionaryService {
     ['PSWD', 'Password'],
     ['ID', 'Email or username'],
     
+
+
     ['NEWACC', 'Create account'],
     ['CONFIRM', 'Confirm'],
     ['PSWDCONF', 'Password confirmation'],
@@ -167,7 +168,8 @@ export class DictionaryService {
     ['CHNG', 'Change'],
     ['CHNGPSWD', 'Change password'],
     
-    ['NEWCUSTOMER', 'New customer'],
+    ['HELLO', 'Hello, '],
+    ['NEWCUS', 'New customer'],
     ['LOGOUT', 'Sign out'],
     ['SETTINGS', 'Settings'],
     ['ADMINAREA', 'Admin area'],
@@ -191,7 +193,6 @@ export class DictionaryService {
     ['SND', 'Send'],
     ['ADDFILE', 'Add file'],
     
-    ['GENMSK', 'Generate mask'],
     ['PRESEL', 'Preselection'],
     ['CUSTYPE', 'Customer type'],
     ['PER', 'Person'],
@@ -252,7 +253,7 @@ export class DictionaryService {
     
     ['ENTEMAIL', 'Please enter your email address.'],
     ['SUBMIT', 'Submit'],
-    ['SNDMSK', 'Send mask'],
+    ['SNDCUS', 'Send customer'],
     ['SNDDIR', 'Send directly'],
     ['SNDCONFEMAIL', 'Send confirmation email'],
     ['DELUSR1', "Delete "],
@@ -263,7 +264,7 @@ export class DictionaryService {
     ['USRISUPD', 'The user was updated.'],
     ['USRISNUPD', 'The user was not updated.'],
 
-    ['MSKISSND', 'The mask was sent.'],
+    ['CUSISSND', 'The customer was sent.'],
     ['CONFISSND', 'The confirmation email was sent to your email address.'],
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],

@@ -47,9 +47,9 @@ export class PreselectionComponent implements OnInit {
   }
 
   /**
-   * Click on the "generate mask" button triggers this method. The method navigates to the NewISOComponent. 
+   * Click on the "New customer" button triggers this method. The method navigates to the NewISOComponent. 
    */
-  onGenerateMask(){
+  onNewCustomer(){
     this.router.navigate(['/iso']);
   }
 }

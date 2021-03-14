@@ -11,7 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
-import { SendMaskConfirmationDialogComponent } from './dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
+import { SendCustomerConfirmationDialogComponent } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation-dialog.component';
 import { ListService } from './services/list.service';
 import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
@@ -31,7 +31,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user.service';
 import { RecaptchaService } from './services/recaptcha.service';
-import { MaskService } from './services/mask.service';
+import { CustomerService } from './services/customer.service';
 import { DeleteUserDialogComponent } from './dialogs/delete-user-dialog/delete-user-dialog.component';
 import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
 
@@ -40,7 +40,7 @@ import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-pas
     AppComponent,
     MainComponent,
     NewISOComponent,
-    SendMaskConfirmationDialogComponent,
+    SendCustomerConfirmationDialogComponent,
     EmailDialogComponent,
     PreselectionComponent,
     LoginComponent,
@@ -79,7 +79,7 @@ import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-pas
     AuthGuardService,
     UserService,
     RecaptchaService,
-    MaskService,
+    CustomerService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -3,12 +3,10 @@ const path = require('path');
 const xml2js = require('xml2js');
 const fs = require('fs');
 
-require('dotenv').config();
-
 //envelope.xml for test
 const ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope2.xml');
 
-exports.test = function (wsdlUrl) {
+function test(wsdlUrl) {
 
     fs.readFile(ENVELOPE_URL, function (err, data) {
         xml2js.parseString(data, function (err, args) {
@@ -29,15 +27,14 @@ exports.test = function (wsdlUrl) {
             });
         });
     });
-
 }
 
 /**
- * Sends mask to the SAP server.
- * @param {object} mask Customer mask
+ * Sends customer to the PI/PO.
+ * @param {object} customer  
  * @param {string} wsdlUrl path to wsdl
  */
-exports.sendMask = function (envelope, wsdlUrl) {
+function sendCustomer(envelope, wsdlUrl) {
     soap.createClient(wsdlUrl, function (err, soapClient) {
         if (err) {
             console.log("error", err);
@@ -50,5 +47,6 @@ exports.sendMask = function (envelope, wsdlUrl) {
             //console.log(JSON.stringify(result))
         })
     });
-
 }
+
+module.exports = { sendCustomer, test };

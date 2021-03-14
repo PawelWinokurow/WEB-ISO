@@ -1,10 +1,8 @@
 const mysql = require("mysql2");
 
-require('dotenv').config()
-
-const MASKS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS masks ( 
+const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers ( 
   hash VARCHAR(255) NOT NULL PRIMARY KEY, 
-  mask TEXT NOT NULL, 
+  customer TEXT NOT NULL, 
   datetime DATETIME NOT NULL);`;
 
 const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
@@ -20,7 +18,7 @@ var connection;
 /**
  * Establishes a connection to the database server.
  */
-exports.connect = function () {
+function connect() {
   //Create DB connection
   connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -32,7 +30,7 @@ exports.connect = function () {
   //Connect to database
   connection.connect(function (err) {
     if (err) throw err;
-    [MASKS_TABLE_CREATION, USERS_TABLE_CREATION].forEach(query => {
+    [CUSTOMERS_TABLE_CREATION, USERS_TABLE_CREATION].forEach(query => {
       //Create table if table not exists
       connection.query(query,
         function (err, results, fields) {
@@ -88,13 +86,13 @@ function selectQueryPromise(selectStatement, values) {
 }
 
 /**
- * Stores customer mask in the database.
+ * Stores customer in the database.
  * @param  {string} hash Hash string
- * @param  {object} mask Mask object 
+ * @param  {object} customer Customer object 
  */
-exports.storeMask = function (hash, mask) {
-  const insertStatement = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW());';
-  values = [[hash, mask]];
+function storeCustomer(hash, customer) {
+  const insertStatement = 'INSERT INTO customers (hash, customer, datetime) VALUES (?, NOW());';
+  values = [[hash, customer]];
   //Insert values
   connection.query(insertStatement, values, function (err, result) {
     if (err) throw err;
@@ -106,7 +104,7 @@ exports.storeMask = function (hash, mask) {
  * Stores user in the database.
  * @param  {object} user User object 
  */
-exports.storeUser = function (user) {
+function storeUser(user) {
   const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
   const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
   //const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
@@ -117,7 +115,7 @@ exports.storeUser = function (user) {
  * Updates user in the database.
  * @param  {object} user User object 
  */
-exports.updateUser = function (user) {
+function updateUser(user) {
   //If we change password
   if (user.password) {
     var updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
@@ -133,7 +131,7 @@ exports.updateUser = function (user) {
  * Deletes user from the database.
  * @param  {object} user User object 
  */
-exports.deleteUser = function (user) {
+function deleteUser(user) {
   const deleteStatement = 'DELETE FROM users WHERE email = ?';
   const values = [user.email];
   return deleteQueryPromise(deleteStatement, values);
@@ -144,7 +142,7 @@ exports.deleteUser = function (user) {
  * @param  {object} user User object 
  * @returns true if user is not in the database
  */
-exports.isUserNotExists = function (user) {
+function isUserNotExists(user) {
   const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
   const values = [user.email, user.username];
   return selectQueryPromise(selectStatement, values)
@@ -158,22 +156,22 @@ exports.isUserNotExists = function (user) {
 }
 
 /**
- * Checks if customer mask with a given hash is in the database.
+ * Checks if customer with a given hash is in the database.
  * @param {string} hash hashstring from the email message
  */
-exports.checkConfirmation = function (hash) {
-  const selectStatement = 'SELECT mask FROM masks WHERE hash = ?';
+function checkConfirmation(hash) {
+  const selectStatement = 'SELECT customer FROM customers WHERE hash = ?';
   const values = [hash];
   return selectQueryPromise(selectStatement, values);
 }
 
 /**
- * Removes old customer masks.
+ * Removes old unconfirmed customers.
  */
-exports.removeOldMasks = function () {
-  const remove_statement = "DELETE FROM masks WHERE datetime < NOW() - INTERVAL ? DAY";
+function removeOldCustomers() {
+  const remove_statement = "DELETE FROM customers WHERE datetime < NOW() - INTERVAL ? DAY";
   const values = [process.env.DB_STORAGE_DURATION];
-  //Remove all customer masks, which are older than process.env.DB_STORAGE_DURATION
+  //Remove all customers, which are older than process.env.DB_STORAGE_DURATION
   return deleteQueryPromise(deleteStatement, values);
 }
 
@@ -181,7 +179,7 @@ exports.removeOldMasks = function () {
  * Retrieves user from the database.
  * @param  {object} user User object 
  */
-exports.getUser = function (user) {
+function getUser(user) {
   const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
   const values = [user.email, user.username];
   return selectQueryPromise(selectStatement, values)
@@ -205,7 +203,7 @@ exports.getUser = function (user) {
 /**
  * Retrieves all users from the database.
  */
-exports.getUsers = function () {
+function getUsers() {
   const selectStatement = 'SELECT * FROM users;';
   const values = [];
   return selectQueryPromise(selectStatement, values)
@@ -223,6 +221,9 @@ exports.getUsers = function () {
 /**
  * Closes connection to the database server.
  */
-exports.close = function () {
+function close() {
   connection.end();
 }
+
+module.exports = { close, getUsers, getUser, removeOldCustomers, checkConfirmation, 
+  isUserNotExists, deleteUser, updateUser, storeUser, storeCustomer, connect};

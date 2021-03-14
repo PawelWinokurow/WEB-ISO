@@ -12,10 +12,10 @@ import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
-import { SendMaskConfirmationDialogComponent } from 'src/app/dialogs/send-mask-confirmation-dialog/send-mask-confirmation-dialog.component';
+import { SendCustomerConfirmationDialogComponent } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation-dialog.component';
 import { DateService } from 'src/app/services/date.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { MaskService } from 'src/app/services/mask.service';
+import { CustomerService } from 'src/app/services/customer.service';
 
 
 /**
@@ -58,7 +58,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
-    public storageService: StorageService, private toastrService: ToastrService, private dialog: MatDialog, private maskService: MaskService, 
+    public storageService: StorageService, private toastrService: ToastrService, private dialog: MatDialog, private customerService: CustomerService, 
     public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService,
     public authService: AuthService) {
     this.titles = this.listService.titles;
@@ -263,27 +263,27 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens send customer mask dialog.
+   * Opens send customer dialog.
    */
   openSendSOAPDialog() {
-    /*const mask = this.constructMask(true)
-    this.maskService.sendMask(mask).subscribe(res => {
-      this.toastrService.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
+    /*const customer = this.constructCustomer(true)
+    this.customerService.sendCustomer(customer).subscribe(res => {
+      this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
     });
     return*/
-    const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
+    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialogComponent, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
     });
 
-    sendMaskDialogRef.afterClosed().subscribe(isDirect => {
-      const mask = this.constructMask(isDirect);
+    sendCustomerDialogRef.afterClosed().subscribe(isDirect => {
+      const customer = this.constructCustomer(isDirect);
       if (isDirect == true) {
-        this.maskService.sendMask(mask).subscribe(res => {
-          this.toastrService.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
+        this.customerService.sendCustomer(customer).subscribe(res => {
+          this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
         });
       } else if (isDirect == false) {
-        this.maskService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
+        this.customerService.sendCustomer({ emailTo: this.authService.getUser().email, ...customer }).subscribe(res => {
           this.toastrService.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
         });
       }
@@ -307,11 +307,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Constructs customer mask from ControlForms.
-   * @param isDirect Send customer mask directly to SAP or with confirmation email.
-   * @returns Customer mask object to send.
+   * Constructs customer from ControlForms.
+   * @param isDirect Send customer directly to SAP or with confirmation email.
+   * @returns Customer object to send.
    */
-  constructMask(isDirect: boolean) {
+  constructCustomer(isDirect: boolean) {
     const data = {
       //Preselection
       companyCode: this.authService.getUser().companyCode?.code ?? '',
