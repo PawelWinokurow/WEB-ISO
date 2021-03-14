@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { DeleteUserDialogComponent } from 'src/app/dialogs/delete-user-dialog/delete-user-dialog.component';
 import { ResetPasswordDialogComponent } from 'src/app/dialogs/reset-password/reset-password-dialog.component';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -26,7 +25,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('accordion') accordion: MatAccordion;
 
   constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService, private userService: UserService,
-    private toastr: ToastrService, public listService: ListService, private dialog: MatDialog,) {
+    private toastrService: ToastrService, public listService: ListService, private dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
@@ -61,10 +60,10 @@ export class AdminComponent implements OnInit {
           .then(res => {
             //TODO iterate over array may be to slow
             this.users = this.users.filter(u => u.email != userToSend.email);
-            this.toastr.success(this.dictionaryService.get('USRISDEL'), this.dictionaryService.get('SUC'));
+            this.toastrService.success(this.dictionaryService.get('USRISDEL'), this.dictionaryService.get('SUC'));
           })
           .catch(err => {
-            this.toastr.error(err.message, this.dictionaryService.get('ERR'));
+            this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
           });
       }
     });
@@ -82,13 +81,13 @@ export class AdminComponent implements OnInit {
           }
         });
         if (userResp.blocked) {
-          this.toastr.success(this.dictionaryService.get('USRISBL'), this.dictionaryService.get('SUC'));
+          this.toastrService.success(this.dictionaryService.get('USRISBL'), this.dictionaryService.get('SUC'));
         } else {
-          this.toastr.success(this.dictionaryService.get('USRISUN'), this.dictionaryService.get('SUC'));
+          this.toastrService.success(this.dictionaryService.get('USRISUN'), this.dictionaryService.get('SUC'));
         }
       })
       .catch(err => {
-        this.toastr.error(err.message, this.dictionaryService.get('ERR'));
+        this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
       });
   }
 
@@ -104,10 +103,10 @@ export class AdminComponent implements OnInit {
         const user = { ...userToSend, operation: 'reset' };
         this.userService.blockOrResetUser(user).toPromise()
           .then(res => {
-            this.toastr.success(this.dictionaryService.get('PSWDISRES'), this.dictionaryService.get('SUC'));
+            this.toastrService.success(this.dictionaryService.get('PSWDISRES'), this.dictionaryService.get('SUC'));
           })
           .catch(err => {
-            this.toastr.error(err.message, this.dictionaryService.get('ERR'));
+            this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
           });
       }
     });

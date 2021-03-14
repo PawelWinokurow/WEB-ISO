@@ -67,7 +67,7 @@ class Server {
   confirm(req, res) {
     databaseService.checkConfirmation(req.query.hash)
       .then(result => {
-        const mask = JSON.parse(result.mask)
+        const mask = JSON.parse(result[0].mask)
         soapService.sendMask(mask, this.wsdlUrl);
         res.send('<p>Success! The mask was confirmed.</p>');
       })
@@ -140,11 +140,13 @@ class Server {
     composeMask(maskData).then(
       sapMask => {
         var envelope = sapMask.getJSONArgs();
+        var envelope = JSON.stringify(sapMask.getJSONArgs());
         if (maskData.isDirect) {
           soapService.sendMask(envelope, this.wsdlUrl);
         } else {
           const hash = cryptoService.generateHash();
-          databaseService.storeMask(hash, envelope);
+          //TODO Promise resolution
+          databaseService.storeMask(hash, envelope).then();
 
           const message = {
             from: "BayWa",
@@ -163,7 +165,8 @@ class Server {
   }
 
   refreshToken(req, res) {
-    databaseService.getUser(req.body.decodedUser).then(
+    databaseService.getUser(req.body.decodedUser)
+    .then(
       user => {
         delete user.password;
         delete user.blocked;
@@ -188,12 +191,9 @@ class Server {
   }
 
   login(req, res) {
-    const identifier = req.body.identifier;
-    const passwordToCheck = req.body.password;
-    databaseService.getUser({
-      email: identifier,
-      username: identifier
-    }).then(user => {
+    const passwordToCheck = req.body.user.password;
+    databaseService.getUser(req.body.user)
+    .then(user => {
       if (!user.blocked && cryptoService.comparePasswords(passwordToCheck, user.password)) {
         delete user.password;
         delete user.blocked;
@@ -214,6 +214,8 @@ class Server {
         });
       }
     }).catch(err => {
+      console.log('catch')
+
       // send status 401 Unauthorized
       res.status(401).send({
         error: "No match"
@@ -224,10 +226,11 @@ class Server {
 
   createUser(req, res) {
     var user = req.body.user;
-    user.password = cryptoService.hashPassword(user.password);
+    var userToStore = {...user};
+    userToStore.password = cryptoService.hashPassword(user.password);
     databaseService.isUserNotExists(user)
-      .then(() => databaseService.storeUser(user))
-      .then(this.login(req, res))
+      .then(() => databaseService.storeUser(userToStore))
+      .then(() => this.login(req, res))
       .catch(() => res.json({
         message: 'Duplicate'
       }))
@@ -236,9 +239,23 @@ class Server {
   updateUser(req, res) {
     var user = req.body.user;
     if (user.password) {
-      user.password = cryptoService.hashPassword(user.password);
-    }
-    databaseService.updateUser(user)
+      databaseService.getUser(user)
+        .then(dbUser => new Promise((resolve, reject) => {
+          if (cryptoService.comparePasswords(user.passwordOld, dbUser.password)) {
+            user.password = cryptoService.hashPassword(user.password);
+            resolve(user);
+          }
+          reject(false);
+        }))
+        .catch(err => {
+          console.log(`Old password doesn't match`)
+          res.status(500).send(err)
+        })
+        then(user => databaseService.updateUser(user))
+        .then(() => res.json(user))
+        .catch(err => res.status(500).send(`Database error: ${err}`))
+      }
+      databaseService.updateUser(user)
       .then(() => res.json(user))
       .catch(err => res.status(500).send(`Database error: ${err}`))
   }
@@ -264,7 +281,7 @@ class Server {
 
   resetPassword(req, res) {
     var user = req.body.user;
-    var oldUser = {...user}
+    var oldUser = { ...user }
     const newPassword = cryptoService.generateHash().slice(0, 20);
     user.password = cryptoService.hashPassword(newPassword);
 
@@ -284,7 +301,7 @@ class Server {
         databaseService.updateUser(oldUser).then();
         res.status(500).send(`Email send error: ${err}`);
       });
-      
+
   }
 
   blockUser(req, res) {

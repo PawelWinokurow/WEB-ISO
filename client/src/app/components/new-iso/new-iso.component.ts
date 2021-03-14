@@ -58,7 +58,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
-    public storageService: StorageService, private toastr: ToastrService, private dialog: MatDialog, private maskService: MaskService, 
+    public storageService: StorageService, private toastrService: ToastrService, private dialog: MatDialog, private maskService: MaskService, 
     public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService,
     public authService: AuthService) {
     this.titles = this.listService.titles;
@@ -268,7 +268,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   openSendSOAPDialog() {
     /*const mask = this.constructMask(true)
     this.maskService.sendMask(mask).subscribe(res => {
-      this.toastr.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
+      this.toastrService.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
     });
     return*/
     const sendMaskDialogRef = this.dialog.open(SendMaskConfirmationDialogComponent, {
@@ -280,11 +280,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
       const mask = this.constructMask(isDirect);
       if (isDirect == true) {
         this.maskService.sendMask(mask).subscribe(res => {
-          this.toastr.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
+          this.toastrService.success(this.dictionaryService.get('MSKISSND'), this.dictionaryService.get('SUC'));
         });
       } else if (isDirect == false) {
         this.maskService.sendMask({ emailTo: this.authService.getUser().email, ...mask }).subscribe(res => {
-          this.toastr.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
+          this.toastrService.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
         });
       }
     });

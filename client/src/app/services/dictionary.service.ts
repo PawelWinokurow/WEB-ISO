@@ -40,6 +40,7 @@ export class DictionaryService {
     ['NEWACC', 'Konto erstellen'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
+    ['PSWDOLD', 'Altes Passwort'],
     ['PSWDNMATCH', 'Die Passwörter stimmen nicht überein'],
     ['IDUSED', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['IDINC', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
@@ -48,7 +49,10 @@ export class DictionaryService {
     ['USRISDEL', 'Der Benutzer wurde gelöscht.'],
     ['PSWDISRES', 'Das Passwort wurde zurückgesetzt.'],
     
-    ['CHANGE', 'Ändern'],
+    ['NOTALLOWED', 'Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.'],
+
+    ['CHNG', 'Ändern'],
+    ['CHNGPSWD', 'Passwort ändern'],
 
     ['YES', 'Ja'],
     ['NO', 'Nein'],
@@ -149,6 +153,7 @@ export class DictionaryService {
     ['NEWACC', 'Create account'],
     ['CONFIRM', 'Confirm'],
     ['PSWDCONF', 'Password confirmation'],
+    ['PSWDOLD', 'Old password'],
     ['PSWDNMATCH', 'The passwords do not match'],
     ['IDUSED', 'This email address or username is already being used.'],
     ['IDINC', 'Your username/email or password are incorrect.'],
@@ -157,7 +162,10 @@ export class DictionaryService {
     ['USRISDEL', 'The user was deleted.'],
     ['PSWDISRES', 'The password was reset.'],
     
-    ['CHANGE', 'Change'],
+    ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
+    
+    ['CHNG', 'Change'],
+    ['CHNGPSWD', 'Change password'],
     
     ['NEWCUSTOMER', 'New customer'],
     ['LOGOUT', 'Sign out'],

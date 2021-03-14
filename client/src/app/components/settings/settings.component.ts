@@ -22,11 +22,12 @@ export class SettingsComponent implements OnInit {
   changeForm: FormGroup;
   companyCode: FormControl;
   selected = this.authService.getUser().companycode;
+  changePassword = false;
 
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public storageService: StorageService, private userService: UserService, private tokenProlongationService: TokenProlongationService,
-    public errorMessageService: ErrorMessageService, private authService: AuthService, private toastr: ToastrService,
+    public errorMessageService: ErrorMessageService, private authService: AuthService, private toastrService: ToastrService,
     public listService: ListService, private router: Router) {
   }
 
@@ -34,8 +35,9 @@ export class SettingsComponent implements OnInit {
     this.changeForm = this.formBuilder.group({
       username: new FormControl({ value: this.authService.getUser().username, disabled: true }),
       email: new FormControl({ value: this.authService.getUser().email, disabled: true }),
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+      passwordOld: [''],
+      password: [''],
+      confirmPassword: [''],
       companyCode: ['', [Validators.required]],
     },
       { validator: MustMatch('password', 'confirmPassword') }
@@ -46,13 +48,14 @@ export class SettingsComponent implements OnInit {
     if (this.changeForm.valid) {
       var user = this.authService.getUser();
       user.password = this.changeForm.controls['password'].value;
+      user.passwordOld = this.changeForm.controls['passwordOld'].value;
       user.companyCode = this.changeForm.controls['companyCode'].value;
       user.blocked = false;
       this.userService.updateUser(user).toPromise()
-        .then(() => this.toastr.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC')))
-        .catch(err => this.toastr.error(`${this.dictionaryService.get('USRISNUPD')}: ${err}`, this.dictionaryService.get('ERR')))
+        .then(() => this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC')))
+        .catch(err => this.toastrService.error(`${this.dictionaryService.get('USRISNUPD')}: ${err}`, this.dictionaryService.get('ERR')))
         .then(() => this.authService.login(user.email, user.password))
-        .catch(err => this.toastr.error(err.message, this.dictionaryService.get('ERR')))
+        .catch(err => this.toastrService.error(err.message, this.dictionaryService.get('ERR')))
         .then(() => {
           this.tokenProlongationService.startChecking();
           this.router.navigate(['/preselection']);

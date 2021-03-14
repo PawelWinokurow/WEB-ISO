@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { DictionaryService } from './dictionary.service';
 
 
 /**
@@ -13,7 +16,7 @@ import { environment } from './../../environments/environment';
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private router: Router, private dictionaryService: DictionaryService) {}
 
   request(func): Observable<any>{
     return func.pipe(catchError(this.handleError()));
@@ -29,6 +32,10 @@ export class HttpService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      if (error.status == 401) {
+        alert(this.dictionaryService.get('NOTALLOWED'));
+        //this.router.navigate(['/login']);
+      }
       return of(result as T);
     };
   }

@@ -44,7 +44,7 @@
                             <p>{{dictionaryService.get('COMCODE')}}: {{companyCodeDetails[user.companyCode]}}</p>
                             <p>{{dictionaryService.get('ROLE')}}: {{user.role}}</p>
                             <mat-action-row *ngIf="user.role !== 'ADMIN'">
-                                <button mat-stroked-button color="warn" (click)="deleteUser(user)()">
+                                <button mat-stroked-button color="warn" (click)="deleteUser(user)">
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
                                     {{dictionaryService.get('DELUSR')}}
                                 </button>

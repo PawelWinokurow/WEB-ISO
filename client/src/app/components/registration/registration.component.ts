@@ -20,8 +20,8 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, 
-    public errorMessageService: ErrorMessageService, private userService: UserService, private toastr: ToastrService, 
-    public listService: ListService) {
+    public errorMessageService: ErrorMessageService, private userService: UserService, private toastrService: ToastrService, 
+    public listService: ListService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -47,16 +47,17 @@ export class RegistrationComponent implements OnInit {
         role: 'USER'
       }
       this.userService.createUser(newUser).toPromise()
-        .then(msg => {
-          if (msg["message"] === 'Duplicate') {
-            this.toastr.error(this.dictionaryService.get('IDUSED'), this.dictionaryService.get('ERR'));
-          } else {
-            this.toastr.success(this.dictionaryService.get('USRISCR'), this.dictionaryService.get('SUC'));
+        .then(result => {
+          if (result && result["message"] === 'Duplicate') {
+            this.toastrService.error(this.dictionaryService.get('IDUSED'), this.dictionaryService.get('ERR'));
+          } else if (result) {
+            this.authService.setSession(result);
+            this.toastrService.success(this.dictionaryService.get('USRISCR'), this.dictionaryService.get('SUC'));
             this.router.navigate(['/login']);
           }
         })
         .catch(err => {
-          this.toastr.error(err.message, this.dictionaryService.get('ERR'));
+          this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
         });
     } else {
       this.registerForm.markAllAsTouched();

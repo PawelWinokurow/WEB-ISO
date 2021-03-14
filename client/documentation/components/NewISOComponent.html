@@ -2076,7 +2076,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   @ViewChild(&#x27;fileInput&#x27;) fileInput: ElementRef;
 
-  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastr: ToastrService,
+  constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, public storageService: StorageService, private toastrService: ToastrService,
     private dialog: MatDialog, private httpService: HttpService, public errorMessageService: ErrorMessageService, private searchService: SearchService) {
     this.titles &#x3D; this.listService.titles;
     this.countries &#x3D; this.listService.countries;
@@ -2293,7 +2293,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       if (result) {
         const mask &#x3D; this.constructMask(true)
         this.httpService.sendMask(mask).subscribe(res &#x3D;&gt; {
-          this.toastr.success(this.dictionaryService.get(&#x27;SNT&#x27;), this.dictionaryService.get(&#x27;SUC&#x27;));
+          this.toastrService.success(this.dictionaryService.get(&#x27;SNT&#x27;), this.dictionaryService.get(&#x27;SUC&#x27;));
         });
       } else if (result &#x3D;&#x3D;&#x3D; false){
         const emailDialogRef &#x3D; this.dialog.open(EmailDialogComponent, {
@@ -2304,7 +2304,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
           if (emailTo) {
             var mask &#x3D; this.constructMask(false)
             this.httpService.sendMask({ emailTo: emailTo, ...mask }).subscribe(res &#x3D;&gt; {
-              this.toastr.success(this.dictionaryService.get(&#x27;SNT&#x27;), this.dictionaryService.get(&#x27;SUC&#x27;));
+              this.toastrService.success(this.dictionaryService.get(&#x27;SNT&#x27;), this.dictionaryService.get(&#x27;SUC&#x27;));
             });
           }
         });

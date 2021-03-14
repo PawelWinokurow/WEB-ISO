@@ -7,7 +7,7 @@
                 <div class="paddinglr10px" style="margin-top:20px;">
                     <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('ID')}}</mat-label>
-                        <input matInput formControlName="identifier" required (keyup.enter)="login()">
+                        <input type="text" matInput formControlName="identifier" required>
                         <mat-error *ngFor="let errorType of loginFormControl.identifier.errors | keyvalue;">
                             <mat-icon style="margin-right: 5px;">error</mat-icon>
                             {{errorMessageService.getError('ID', errorType.key)}}
@@ -17,9 +17,8 @@
                 <div class="paddinglr10px">
                     <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('PSWD')}}</mat-label>
-                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required
-                            (keyup.enter)="login()">
-                        <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <input type="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                         <mat-error *ngFor="let errorType of loginFormControl.password.errors | keyvalue;">
@@ -29,7 +28,7 @@
                     </mat-form-field>
                 </div>
                 <div class="padding10px buttons-theme" style="display: flex;">
-                    <button mat-stroked-button style="height: 40px;"
+                    <button type="button" mat-stroked-button style="height: 40px;"
                         (click)="register()">{{dictionaryService.get('NEWACC')}}</button>
                     <span class="space"></span>
                     <button mat-raised-button (click)="login()" color="primary"

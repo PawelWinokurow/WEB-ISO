@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    private toastr: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService,
+    private toastrService: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService,
     private tokenProlongationService: TokenProlongationService) { }
 
   ngOnInit(): void {
@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
         })
         .catch(err => {
           if (err.status == "401") {
-            this.toastr.error(this.dictionaryService.get('IDINC'), this.dictionaryService.get('ERR'))
+            this.toastrService.error(this.dictionaryService.get('IDINC'), this.dictionaryService.get('ERR'))
           } else {
-            this.toastr.error(err.message, this.dictionaryService.get('ERR'))
+            this.toastrService.error(err.message, this.dictionaryService.get('ERR'))
           }
         });
     }

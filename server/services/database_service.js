@@ -47,17 +47,56 @@ exports.connect = function () {
   });
 }
 
+function insertQueryPromise(insertStatement, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(insertStatement, values, function (err, result) {
+      if (err) reject(err);
+      console.log("Number of records inserted: " + result.affectedRows);
+      resolve(true);
+    })
+  });
+}
+
+function updateQueryPromise(updateStatement, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(updateStatement, values, function (err, result) {
+      if (err) reject(err);
+      console.log("Number of records updated: " + result.affectedRows);
+      resolve(true);
+    })
+  });
+}
+
+function deleteQueryPromise(deleteStatement, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(deleteStatement, values, function (err, result) {
+      if (err) reject(err);
+      console.log("Number of records removed: " + result.affectedRows);
+      resolve(true);
+    });
+  });
+}
+
+function selectQueryPromise(selectStatement, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(selectStatement, values,
+      function (err, result, fields) {
+        if (err) reject(err);
+        resolve(result);
+      });
+  });
+}
+
 /**
  * Stores customer mask in the database.
  * @param  {string} hash Hash string
  * @param  {object} mask Mask object 
  */
 exports.storeMask = function (hash, mask) {
-  var stringJson = JSON.stringify(mask);
-  const insert_statement = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW());';
-  values = [hash, stringJson];
+  const insertStatement = 'INSERT INTO masks (hash, mask, datetime) VALUES (?, NOW());';
+  values = [[hash, mask]];
   //Insert values
-  connection.query(insert_statement, [values], function (err, result) {
+  connection.query(insertStatement, values, function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
   });
@@ -68,17 +107,10 @@ exports.storeMask = function (hash, mask) {
  * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
-  return new Promise((resolve, reject) => {
-    const insert_statement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-    //values = [user.email, user.username, user.password, user.companyCode, 'ADMIN', false];
-    values = [user.email, user.username, user.password, user.companyCode, 'USER', false];
-    //Insert values
-    connection.query(insert_statement, [values], function (err, result) {
-      if (err) reject(err);
-      console.log("Number of records inserted: " + result.affectedRows);
-      resolve(true);
-    });
-  });
+  const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
+  //const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
+  const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
+  return insertQueryPromise(insertStatement, values);
 }
 
 /**
@@ -86,24 +118,15 @@ exports.storeUser = function (user) {
  * @param  {object} user User object 
  */
 exports.updateUser = function (user) {
-  return new Promise((resolve, reject) => {
-    update_statement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
-    values = [user.companyCode, user.blocked, user.email];
-    //If we change password
-    if (user.password) {
-      update_statement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
-      values = [user.password, user.companyCode, user.blocked, user.email];
-    }
-    //Update values
-    connection.query(update_statement, values, function (err, result) {
-      if (err) {
-        console.log("err")
-        reject(err);
-      }
-      console.log("Number of records updated: " + result.affectedRows);
-      resolve(true);
-    });
-  });
+  //If we change password
+  if (user.password) {
+    var updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
+    var values = [user.password, user.companyCode, user.blocked, user.email];
+  } else {
+    var updateStatement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
+    var values = [user.companyCode, user.blocked, user.email];
+  }
+  return updateQueryPromise(updateStatement, values);
 }
 
 /**
@@ -111,16 +134,9 @@ exports.updateUser = function (user) {
  * @param  {object} user User object 
  */
 exports.deleteUser = function (user) {
-  return new Promise((resolve, reject) => {
-    const delete_statement = 'DELETE FROM users WHERE email = ?';
-    values = [user.email];
-    //Insert values
-    connection.query(delete_statement, [values], function (err, result) {
-      if (err) reject(err);
-      console.log("Number of records removed: " + result.affectedRows);
-      resolve(true);
-    });
-  });
+  const deleteStatement = 'DELETE FROM users WHERE email = ?';
+  const values = [user.email];
+  return deleteQueryPromise(deleteStatement, values);
 }
 
 /**
@@ -129,20 +145,16 @@ exports.deleteUser = function (user) {
  * @returns true if user is not in the database
  */
 exports.isUserNotExists = function (user) {
-  return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-    //Select values
-    connection.query(select_statement, [user.email, user.username],
-      function (err, result, fields) {
-        if (err) reject(err);
-        //If row with the given email exists in the database
-        if (Array.isArray(result) && result.length) {
-          reject(false);
-        } else {
-          resolve(true);
-        }
-      });
-  });
+  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
+  const values = [user.email, user.username];
+  return selectQueryPromise(selectStatement, values)
+    .then(result => new Promise((resolve, reject) => {
+      if (Array.isArray(result) && result.length) {
+        reject();
+      } else {
+        resolve();
+      }
+    }));
 }
 
 /**
@@ -150,20 +162,9 @@ exports.isUserNotExists = function (user) {
  * @param {string} hash hashstring from the email message
  */
 exports.checkConfirmation = function (hash) {
-  return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT mask FROM masks WHERE hash = ?';
-    //Select values
-    connection.query(select_statement, [hash],
-      function (err, result, fields) {
-        if (err) reject(err);
-        //If row with the given hash exists in the database
-        if (Array.isArray(result) && result.length) {
-          resolve(result[0]);
-        } else {
-          reject(result);
-        }
-      });
-  });
+  const selectStatement = 'SELECT mask FROM masks WHERE hash = ?';
+  const values = [hash];
+  return selectQueryPromise(selectStatement, values);
 }
 
 /**
@@ -171,11 +172,9 @@ exports.checkConfirmation = function (hash) {
  */
 exports.removeOldMasks = function () {
   const remove_statement = "DELETE FROM masks WHERE datetime < NOW() - INTERVAL ? DAY";
+  const values = [process.env.DB_STORAGE_DURATION];
   //Remove all customer masks, which are older than process.env.DB_STORAGE_DURATION
-  connection.query(remove_statement, [process.env.DB_STORAGE_DURATION], function (err, result) {
-    if (err) throw err;
-    console.log("Number of records deleted: " + result.affectedRows);
-  });
+  return deleteQueryPromise(deleteStatement, values);
 }
 
 /**
@@ -183,45 +182,28 @@ exports.removeOldMasks = function () {
  * @param  {object} user User object 
  */
 exports.getUser = function (user) {
-  return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-    //Select values
-    connection.query(select_statement, [user.email, user.username],
-      function (err, result, fields) {
-        if (err) reject(err)
-        if (Array.isArray(result) && result.length) {
-          resolve({...result[0]});
-        } else {
-          reject(false);
-        }
-      });
-  });
+  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
+  const values = [user.email, user.username];
+  return selectQueryPromise(selectStatement, values)
+  .then(result => {return {...result[0]}});
 }
 
 /**
  * Retrieves all users from the database.
  */
 exports.getUsers = function () {
-  return new Promise((resolve, reject) => {
-    const select_statement = 'SELECT * FROM users;';
-    //Select values
-    connection.query(select_statement, function (err, result, fields) {
-      if (err) reject(err);
-      if (Array.isArray(result) && result.length) {
-        resolve(result.map(result => {
-          return {
-            username: result.username,
-            email: result.email,
-            companyCode: result.companycode,
-            role: result.role,
-            blocked: result.blocked
-          }
-        }));
-      } else {
-        reject(false);
+  const selectStatement = 'SELECT * FROM users;';
+  const values = [];
+  return selectQueryPromise(selectStatement, values)
+    .then(result => result.map(result => {
+      return {
+        username: result.username,
+        email: result.email,
+        companyCode: result.companycode,
+        role: result.role,
+        blocked: result.blocked
       }
-    });
-  });
+    }));
 }
 
 /**
