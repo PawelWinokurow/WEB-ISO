@@ -42,7 +42,7 @@ export class AuthService {
     user = {
       username: user.username,
       email: user.email,
-      companyCode: user.companycode,
+      companyCode: user.companyCode,
       role: user.role
     }
     localStorage.setItem("user", JSON.stringify(user));

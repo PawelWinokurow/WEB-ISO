@@ -166,67 +166,66 @@ class Server {
 
   refreshToken(req, res) {
     databaseService.getUser(req.body.decodedUser)
-    .then(
-      user => {
-        delete user.password;
-        delete user.blocked;
-        const jwtBearerToken = jwt.sign(user, this.privateKey, {
-          algorithm: 'RS256',
-          expiresIn: process.env.JWT_DURATION,
-        });
+      .then(
+        user => {
+          delete user.password;
+          delete user.blocked;
+          const jwtBearerToken = jwt.sign(user, this.privateKey, {
+            algorithm: 'RS256',
+            expiresIn: process.env.JWT_DURATION,
+          });
 
-        //Send JWT back
-        res.status(200).json({
-          idToken: jwtBearerToken,
-          expiresIn: process.env.JWT_DURATION,
-          user: user
+          //Send JWT back
+          res.status(200).json({
+            idToken: jwtBearerToken,
+            expiresIn: process.env.JWT_DURATION,
+            user: user
+          });
+        }
+      ).catch(err => {
+        // send status 401 Unauthorized
+        res.status(401).send({
+          error: "No match"
         });
-      }
-    ).catch(err => {
-      // send status 401 Unauthorized
-      res.status(401).send({
-        error: "No match"
       });
-    });
   }
 
   login(req, res) {
     const passwordToCheck = req.body.user.password;
     databaseService.getUser(req.body.user)
-    .then(user => {
-      if (!user.blocked && cryptoService.comparePasswords(passwordToCheck, user.password)) {
-        delete user.password;
-        delete user.blocked;
-        const jwtBearerToken = jwt.sign(user, this.privateKey, {
-          algorithm: 'RS256',
-          expiresIn: process.env.JWT_DURATION,
-        });
-        //Send JWT back
-        res.status(200).json({
-          idToken: jwtBearerToken,
-          expiresIn: process.env.JWT_DURATION,
-          user: user
-        });
-      } else {
+      .then(user => {
+        if (!user.blocked && cryptoService.comparePasswords(passwordToCheck, user.password)) {
+          delete user.password;
+          delete user.blocked;
+          const jwtBearerToken = jwt.sign(user, this.privateKey, {
+            algorithm: 'RS256',
+            expiresIn: process.env.JWT_DURATION,
+          });
+          //Send JWT back
+          res.status(200).json({
+            idToken: jwtBearerToken,
+            expiresIn: process.env.JWT_DURATION,
+            user: user
+          });
+        } else {
+          // send status 401 Unauthorized
+          res.status(401).send({
+            error: "No match"
+          });
+        }
+      }).catch(err => {
+        console.log('catch')
+
         // send status 401 Unauthorized
         res.status(401).send({
           error: "No match"
         });
-      }
-    }).catch(err => {
-      console.log('catch')
-
-      // send status 401 Unauthorized
-      res.status(401).send({
-        error: "No match"
       });
-
-    });
   }
 
   createUser(req, res) {
     var user = req.body.user;
-    var userToStore = {...user};
+    var userToStore = { ...user };
     userToStore.password = cryptoService.hashPassword(user.password);
     databaseService.isUserNotExists(user)
       .then(() => databaseService.storeUser(userToStore))
@@ -238,11 +237,11 @@ class Server {
 
   updateUser(req, res) {
     var user = req.body.user;
+    console.log(1)
     console.log(user)
     if (user.password) {
       databaseService.getUser(user)
         .then(dbUser => new Promise((resolve, reject) => {
-          console.log(dbUser)
           if (cryptoService.comparePasswords(user.passwordOld, dbUser.password)) {
             user.password = cryptoService.hashPassword(user.password);
             resolve(user);
@@ -251,17 +250,17 @@ class Server {
         }))
         .catch(err => {
           res.json({
-            message: `Old password doesn't match`
+            message: `Old password doesn't match.`
           })
         })
-        then(user => databaseService.updateUser(user))
+        .then(user => databaseService.updateUser(user))
         .then(() => res.json(user))
         .catch(err => res.status(500).send(`Database error: ${err}`))
-      } else {
-        databaseService.updateUser(user)
+    } else {
+      databaseService.updateUser(user)
         .then(() => res.json(user))
         .catch(err => res.status(500).send(`Database error: ${err}`))
-      }
+    }
   }
 
   deleteUser(req, res) {

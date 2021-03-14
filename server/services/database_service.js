@@ -107,10 +107,9 @@ exports.storeMask = function (hash, mask) {
  * @param  {object} user User object 
  */
 exports.storeUser = function (user) {
-  console.log(user)
   const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-  //const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
-  const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
+  const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
+  //const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
   return insertQueryPromise(insertStatement, values);
 }
 
@@ -186,7 +185,21 @@ exports.getUser = function (user) {
   const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
   const values = [user.email, user.username];
   return selectQueryPromise(selectStatement, values)
-  .then(result => {return {...result[0]}});
+  .then(result => {
+    if (Array.isArray(result) && result.length){
+      return result.map(val => {
+        return {
+          username: val.username,
+          email: val.email,
+          companyCode: val.companycode,
+          role: val.role,
+          blocked: val.blocked,
+          password: val.password
+        }
+      })[0]
+    }
+    return {...result[0]}
+  });
 }
 
 /**
@@ -196,13 +209,13 @@ exports.getUsers = function () {
   const selectStatement = 'SELECT * FROM users;';
   const values = [];
   return selectQueryPromise(selectStatement, values)
-    .then(result => result.map(result => {
+    .then(result => result.map(val => {
       return {
-        username: result.username,
-        email: result.email,
-        companyCode: result.companycode,
-        role: result.role,
-        blocked: result.blocked
+        username: val.username,
+        email: val.email,
+        companyCode: val.companycode,
+        role: val.role,
+        blocked: val.blocked
       }
     }));
 }

@@ -42,7 +42,7 @@
                         </mat-form-field>
                     </div>
                     <div style="display: flex; align-items: center; padding: 0 10px 20px 10px;">
-                        <button type="button" mat-stroked-button (click)="changePassword = !changePassword">
+                        <button type="button" mat-stroked-button (click)="setPassword()">
                             <span style="font-size: 12pt">{{dictionaryService.get('CHNGPSWD')}}</span>
                             <mat-icon style="font-size: 30px; margin-top: -5px;" *ngIf="changePassword">arrow_drop_up
                             </mat-icon>

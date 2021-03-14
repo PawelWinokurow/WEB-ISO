@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   hide2 = true;
   changeForm: FormGroup;
   companyCode: FormControl;
-  selected = this.authService.getUser().companycode;
+  selected = this.authService.getUser().companyCode;
   changePassword = false;
 
 
@@ -36,31 +36,43 @@ export class SettingsComponent implements OnInit {
     this.changeForm = this.formBuilder.group({
       username: new FormControl({ value: this.authService.getUser().username, disabled: true }),
       email: new FormControl({ value: this.authService.getUser().email, disabled: true }),
-      passwordOld: [''],
-      password: [''],
-      confirmPassword: [''],
       companyCode: ['', [Validators.required]],
-    },
-      { validator: MustMatch('password', 'confirmPassword') }
-    );
+    });
+  }
+
+  setPassword() {
+    this.changePassword = !this.changePassword;
+    if (this.changePassword) {
+      this.changeForm.addControl('passwordOld', new FormControl('', Validators.required));
+      this.changeForm.addControl('password', new FormControl('', Validators.required));
+      this.changeForm.addControl('confirmPassword', new FormControl('', Validators.required));
+      this.changeForm.setValidators([MustMatch('password', 'confirmPassword')]);
+    } else {
+      this.changeForm.setValidators(null);
+      this.changeForm.removeControl('passwordOld');
+      this.changeForm.removeControl('password');
+      this.changeForm.removeControl('confirmPassword');
+    }
   }
 
   change() {
     if (this.changeForm.valid) {
       var user = this.authService.getUser();
-      user.password = this.changeForm.controls['password'].value;
-      user.passwordOld = this.changeForm.controls['passwordOld'].value;
+      if (this.changePassword) {
+        user.password = this.changeForm.controls['password'].value;
+        user.passwordOld = this.changeForm.controls['passwordOld'].value;
+        this.changeForm.controls['passwordOld'].setValue('');
+        this.changeForm.controls['password'].setValue('');
+        this.changeForm.controls['confirmPassword'].setValue('');
+      }
       user.companyCode = this.changeForm.controls['companyCode'].value;
       user.blocked = false;
       this.userService.updateUser(user).toPromise()
-        .then(() => this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC')))
-        .catch(err => this.toastrService.error(`${this.dictionaryService.get('USRISNUPD')}: ${err}`, this.dictionaryService.get('ERR')))
-        .then(() => this.authService.login(user.email, user.password))
-        .catch(err => this.toastrService.error(err.message, this.dictionaryService.get('ERR')))
-        .then(() => {
-          this.tokenProlongationService.startChecking();
-          //this.router.navigate(['/preselection']);
-        });
+        .then(user => {
+          this.authService.setUser(user);
+          this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC'));
+        })
+        .catch(err => this.toastrService.error(`${this.dictionaryService.get('USRISNUPD')}: ${err.message}`, this.dictionaryService.get('ERR')))
     } else {
       this.changeForm.markAllAsTouched();
     }
@@ -72,8 +84,8 @@ export class SettingsComponent implements OnInit {
 }
 
 // custom validator to check that two fields match
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
+export function MustMatch(controlName: string, matchingControlName: string): ValidatorFn {
+  return (formGroup: FormGroup): ValidationErrors => {
     const control = formGroup.controls[controlName];
     const matchingControl = formGroup.controls[matchingControlName];
 
