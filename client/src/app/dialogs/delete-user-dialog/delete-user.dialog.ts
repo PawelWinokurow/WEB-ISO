@@ -3,13 +3,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 
 @Component({
-  selector: 'app-delete-user-dialog',
-  templateUrl: './delete-user-dialog.component.html',
-  styleUrls: ['./delete-user-dialog.component.scss']
+  selector: 'app-delete-user',
+  templateUrl: './delete-user.dialog.html',
+  styleUrls: ['./delete-user.dialog.scss']
 })
-export class DeleteUserDialogComponent implements OnInit {
+export class DeleteUserDialog implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<DeleteUserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, 
+  constructor(private dialogRef: MatDialogRef<DeleteUserDialog>, @Inject(MAT_DIALOG_DATA) public data, 
   public dictionaryService: DictionaryService) { }
 
   ngOnInit(): void {

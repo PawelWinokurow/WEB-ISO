@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
-import { HttpService } from 'src/app/services/http.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +11,7 @@ import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
-import { SendCustomerConfirmationDialogComponent } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation-dialog.component';
+import { SendCustomerConfirmationDialog } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 import { DateService } from 'src/app/services/date.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -271,7 +270,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
     });
     return*/
-    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialogComponent, {
+    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
     });

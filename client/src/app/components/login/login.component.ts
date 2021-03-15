@@ -53,6 +53,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  forgotPassword(){
+
+  }
+  
   register() {
     this.router.navigate(['/registration']);
   }

@@ -9,17 +9,17 @@ import { environment } from '../../../environments/environment';
  * The dialog to choose the direct or indirect type of customer sending.
  */
 @Component({
-  selector: 'app-send-customer-confirmation-dialog',
-  templateUrl: './send-customer-confirmation-dialog.component.html',
-  styleUrls: ['./send-customer-confirmation-dialog.component.scss']
+  selector: 'app-send-customer-confirmation',
+  templateUrl: './send-customer-confirmation.dialog.html',
+  styleUrls: ['./send-customer-confirmation.dialog.scss']
 })
-export class SendCustomerConfirmationDialogComponent {
+export class SendCustomerConfirmationDialog {
 
   recaptchaSitekey = environment.recaptchaSitekey;
 
   captcha: FormControl = new FormControl('', [Validators.required]);
 
-  constructor(public dialogRef: MatDialogRef<SendCustomerConfirmationDialogComponent>, public dictionaryService: DictionaryService, 
+  constructor(public dialogRef: MatDialogRef<SendCustomerConfirmationDialog>, public dictionaryService: DictionaryService, 
     private recaptchaService: RecaptchaService) { }
 
   /**

@@ -18,16 +18,18 @@ export class DictionaryService {
 
   dictionaryDE = new Map([
     ['LOGIN', 'Anmeldung'],
-    ['USRNAME', 'Benutzername'],
-    ['PSWD', 'Passwort'],
-    ['ID', 'E-Mail oder Benutzername'],
-
     ['HELLO', 'Hallo, '],
+    ['ID', 'E-Mail oder Benutzername'],
+    ['PSWDFOG', 'Passwort vergessen?'],
+    
     ['NEWCUS', 'Neuer Kunde'],
     ['SETTINGS', 'Einstellungen'],
     ['LOGOUT', 'Abmelden'],
     ['ADMINAREA', 'Admin-Bereich'],
-    ['ROLE', 'Rolle'],
+    
+    ['USRNAME', 'Benutzername'],
+    ['PSWD', 'Passwort'],
+    ['CREATE', 'Anlegen'],
 
     ['RESETPSWD', 'Passwort zurücksetzen'],
     ['BLOCKUSR', 'Sperren'],
@@ -37,13 +39,14 @@ export class DictionaryService {
     ['EXPAND', 'Alle ausklappen'],
     ['COLLAPSE', 'Alle zuklappen'],
     ['SEARCH', 'Suche'],
+    ['ROLE', 'Rolle'],
 
     ['NEWACC', 'Konto erstellen'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
     ['PSWDOLD', 'Altes Passwort'],
-    ['PSWDNMATCH', 'Die Passwörter stimmen nicht überein.'],
     ['PSWDOLDNMATCH', 'Das alte Passwort ist falsch.'],
+    ['PSWDNMATCH', 'Die Passwörter stimmen nicht überein.'],
     ['IDUSED', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['IDINC', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
     ['USRISBL', 'Der Benutzer wurde gesperrt.'],
@@ -149,17 +152,20 @@ export class DictionaryService {
     ['USRNAME', 'Username'],
     ['PSWD', 'Password'],
     ['ID', 'Email or username'],
-    
-    ['NEWACC', 'Create account'],
-    ['CONFIRM', 'Confirm'],
-    ['PSWDCONF', 'Password confirmation'],
-    ['PSWDOLD', 'Old password'],
+    ['PSWDFOG', 'Forgot password?'],
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     
     ['CHNG', 'Change'],
     ['CHNGPSWD', 'Change password'],
+    ['NEWACC', 'Create account'],
+    ['CONFIRM', 'Confirm'],
+    ['PSWDCONF', 'Password confirmation'],
+    ['PSWDOLD', 'Old password'],
     
+    ['CREATE', 'Create'],
+
+
     ['HELLO', 'Hello, '],
     ['NEWCUS', 'New customer'],
     ['LOGOUT', 'Sign out'],
@@ -255,10 +261,8 @@ export class DictionaryService {
 
     ['USRISNUPD', 'The user was not updated.'],
 
-
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],
-
 
     //Messages
     ['USRISCR', 'The user was created.'],

@@ -38,7 +38,6 @@ export class MainComponent implements OnInit {
     this.reset();
   }
 
-
   /**
    * Click on the switch language button triggers this method. The method changes the current language from EN to DE and from DE to EN.
    */

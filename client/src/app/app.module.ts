@@ -11,9 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { DictionaryService } from './services/dictionary.service';
 import { HttpService } from './services/http.service';
-import { SendCustomerConfirmationDialogComponent } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation-dialog.component';
 import { ListService } from './services/list.service';
-import { EmailDialogComponent } from './dialogs/email-dialog/email-dialog.component';
 import { NewISOComponent } from './components/new-iso/new-iso.component';
 import { ErrorMessageService } from './services/error-message.service';
 import { StorageService } from './services/storage.service';
@@ -32,23 +30,27 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user.service';
 import { RecaptchaService } from './services/recaptcha.service';
 import { CustomerService } from './services/customer.service';
-import { DeleteUserDialogComponent } from './dialogs/delete-user-dialog/delete-user-dialog.component';
-import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
+import { ResetPasswordDialog } from './dialogs/reset-password/reset-password.dialog';
+import { DeleteUserDialog } from './dialogs/delete-user-dialog/delete-user.dialog';
+import { EmailDialog } from './dialogs/email-dialog/email.dialog';
+import { NewUserDialog } from './dialogs/new-user-dialog/new-user.dialog';
+import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     NewISOComponent,
-    SendCustomerConfirmationDialogComponent,
-    EmailDialogComponent,
+    SendCustomerConfirmationDialog,
+    EmailDialog,
     PreselectionComponent,
     LoginComponent,
     RegistrationComponent,
     SettingsComponent,
     AdminComponent,
-    DeleteUserDialogComponent,
-    ResetPasswordDialogComponent
+    DeleteUserDialog,
+    ResetPasswordDialog,
+    NewUserDialog,
   ],
   imports: [
     BrowserModule,
