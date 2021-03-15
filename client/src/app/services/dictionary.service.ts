@@ -150,20 +150,10 @@ export class DictionaryService {
     ['PSWD', 'Password'],
     ['ID', 'Email or username'],
     
-
-
     ['NEWACC', 'Create account'],
     ['CONFIRM', 'Confirm'],
     ['PSWDCONF', 'Password confirmation'],
     ['PSWDOLD', 'Old password'],
-    ['PSWDNMATCH', 'The passwords do not match.'],
-    ['PSWDOLDNMATCH', 'The old password does not match.'],
-    ['IDUSED', 'This email address or username is already being used.'],
-    ['IDINC', 'Your username/email or password are incorrect.'],
-    ['USRISBL', 'The user was blocked.'],
-    ['USRISUN', 'The user was unblocked.'],
-    ['USRISDEL', 'The user was deleted.'],
-    ['PSWDISRES', 'The password was reset.'],
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     
@@ -262,14 +252,30 @@ export class DictionaryService {
     ['DELUSR2', "?"],
     ['RESETPSWD1', "Reset password for "],
     ['RESETPSWD2', "?"],
-    ['USRISCR', 'The user was created.'],
-    ['USRISUPD', 'The user was updated.'],
+
     ['USRISNUPD', 'The user was not updated.'],
 
-    ['CUSISSND', 'The customer was sent.'],
-    ['CONFISSND', 'The confirmation email was sent to your email address.'],
+
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],
+
+
+    //Messages
+    ['USRISCR', 'The user was created.'],
+    ['USRISUPD', 'The user was updated.'],
+    ['CUSISSND', 'The customer was sent.'],
+    ['CONFISSND', 'The confirmation email was sent to your email address.'],
+    ['USRISBL', 'The user was blocked.'],
+    ['USRISUN', 'The user was unblocked.'],
+    ['USRISDEL', 'The user was deleted.'],
+    ['PSWDISRES', 'The password was reset.'],
+
+    //Errors
+    ['PSWDNMATCH', 'The passwords do not match.'],
+    ['PSWDOLDNMATCH', 'The old password does not match.'],
+    ['IDUSED', 'This email address or username is already being used.'],
+    ['IDINC', 'Your username/email or password are incorrect.'],
+
   ])
 
   dictionary = new Map([

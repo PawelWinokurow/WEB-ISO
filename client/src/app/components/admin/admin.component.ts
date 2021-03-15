@@ -37,80 +37,64 @@ export class AdminComponent implements OnInit {
       .then(() => {
         this.filter.valueChanges.subscribe(val => {
           var val = val.toLowerCase();
-          this.filteredUsers = this.users.filter(user => 
-            user.username.toLowerCase().includes(val) 
-            || user.email.toLowerCase().includes(val) 
-            || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val) 
+          this.filteredUsers = this.users.filter(user =>
+            user.username.toLowerCase().includes(val)
+            || user.email.toLowerCase().includes(val)
+            || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val)
             || user.role.toLowerCase().includes(val)
           );
         });
       });
-
     this.companyCodeDetails = this.listService.companyCodes.reduce((acc, x) => ({ ...acc, [x.code]: x.details }), {})
   }
 
-  deleteUser(user) {
-    const userToSend = user;
+  async deleteUser(userToSend) {
     const deleteUserDialog = this.dialog.open(DeleteUserDialogComponent, {
       data: {
         username: userToSend.username
       }
     });
-    deleteUserDialog.afterClosed().subscribe(result => {
-      if (result) {
-        this.userService.deleteUser(userToSend).toPromise()
-          .then(res => {
-            //TODO iterate over array may be to slow
-            this.users = this.users.filter(u => u.email != userToSend.email);
-            this.toastrService.success(this.dictionaryService.get('USRISDEL'), this.dictionaryService.get('SUC'));
-          })
-          .catch(err => {
-            this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
-          });
-      }
-    });
-  }
-
-  blockUser(user) {
-    var user = { ...user, operation: 'block' };
-    user.blocked = !user.blocked;
-    this.userService.blockOrResetUser(user).toPromise()
-      .then(userResp => {
+    const result = await deleteUserDialog.afterClosed().toPromise();
+    if (result) {
+      try {
+        await this.userService.deleteUser(userToSend).toPromise();
         //TODO iterate over array may be to slow
-        this.users.forEach(u => {
-          if (u.email === userResp.email) {
-            u.blocked = userResp.blocked;
-          }
-        });
-        if (userResp.blocked) {
-          this.toastrService.success(this.dictionaryService.get('USRISBL'), this.dictionaryService.get('SUC'));
-        } else {
-          this.toastrService.success(this.dictionaryService.get('USRISUN'), this.dictionaryService.get('SUC'));
-        }
-      })
-      .catch(err => {
-        this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
-      });
+        this.users = this.users.filter(u => u.email != userToSend.email);
+        this.filteredUsers = this.filteredUsers.filter(u => u.email != userToSend.email);
+      } catch (e) { }
+    }
   }
 
-  resetPassword(user) {
-    const userToSend = user;
+  async blockUser(userToBlock) {
+    try {
+      var user = { ...userToBlock, operation: 'block' };
+      user.blocked = !user.blocked;
+      const res = await this.userService.blockOrResetUser(user).toPromise();
+      
+      //TODO iterate over array may be to slow
+      this.users.forEach(u => {
+        if (u.email === res.user.email) {
+          u.blocked = res.user.blocked;
+        }
+      });
+      this.filteredUsers.forEach(u => {
+        if (u.email === res.user.email) {
+          u.blocked = res.user.blocked;
+        }
+      });
+    } catch(e) {}
+  }
+
+  async resetPassword(userToReset) {
     const resetPasswordDialog = this.dialog.open(ResetPasswordDialogComponent, {
       data: {
-        username: userToSend.username
+        username: userToReset.username
       }
     });
-    resetPasswordDialog.afterClosed().subscribe(result => {
-      if (result) {
-        const user = { ...userToSend, operation: 'reset' };
-        this.userService.blockOrResetUser(user).toPromise()
-          .then(res => {
-            this.toastrService.success(this.dictionaryService.get('PSWDISRES'), this.dictionaryService.get('SUC'));
-          })
-          .catch(err => {
-            this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
-          });
-      }
-    });
+    const result = await resetPasswordDialog.afterClosed().toPromise();
+    if (result) {
+      const user = { ...userToReset, operation: 'reset' };
+      await this.userService.blockOrResetUser(user).toPromise();
+    }
   }
 }

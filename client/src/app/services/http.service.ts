@@ -11,13 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HttpService {
 
-  constructor(private router: Router, private dictionaryService: DictionaryService, private toastrService: ToastrService) {}
-
-  request(func): Observable<any>{
-    return func.pipe(map(this.handleResponseMessages), catchError(this.handleError()));
+  constructor(private router: Router, private dictionaryService: DictionaryService, private toastrService: ToastrService) {
   }
 
-  handleResponseMessages(response){
+  handleResponseMessages = (response) => {
     if ('message' in response){
       const messageAbbreviation = response.message;
       this.toastrService.success(this.dictionaryService.get(messageAbbreviation), this.dictionaryService.get('SUC'));
@@ -25,10 +22,18 @@ export class HttpService {
     }
     if ('error' in response){
       const errorAbbreviation = response.error;
-      this.toastrService.error(this.dictionaryService.get(errorAbbreviation), this.dictionaryService.get('ERR'))
+      if (typeof this.dictionaryService.get(errorAbbreviation) === 'undefined') {
+        this.toastrService.error(errorAbbreviation, this.dictionaryService.get('ERR'))
+      } else {
+        this.toastrService.error(this.dictionaryService.get(errorAbbreviation), this.dictionaryService.get('ERR'))
+      }
       delete response.error;
     }
     return response
+  }
+
+  request(func): Observable<any>{
+    return func.pipe(map(this.handleResponseMessages), catchError(this.handleError()));
   }
 
   /**

@@ -9,21 +9,21 @@ async function createUser(req, res) {
             ...requestUser
         };
         userToStore.password = cryptoService.hashPassword(requestUser.password);
-
+        
         let isUserNotExists = await databaseService.isUserNotExists(requestUser);
-
         if (isUserNotExists) {
             await databaseService.storeUser(userToStore);
-            console.log(requestUser)
-            //await authService.login(req, res);
+            res.json({
+                message: 'USRISCR'
+            });
         } else {
             res.json({
-                message: 'Duplicate'
+                error: 'IDUSED'
             });
         }
     } catch (e) {
         res.status(500).send({
-            message: e
+            error: e
         });
     }
 }
@@ -31,24 +31,31 @@ async function createUser(req, res) {
 async function updateUser(req, res) {
     try {
         const requestUser = req.body.user;
+        console.log('in')
         if (requestUser.password) {
             const dbUser = await databaseService.getUser(requestUser);
             if (cryptoService.comparePasswords(requestUser.passwordOld, dbUser.password)) {
                 requestUser.password = cryptoService.hashPassword(requestUser.password);
                 await databaseService.updateUser(requestUser);
-                res.json(requestUser);
+                res.json({
+                    message: 'USRISUPD',
+                    user: requestUser
+                });
             } else {
                 res.json({
-                    message: `Not match`
+                    error: `PSWDOLDNMATCH`
                 })
             }
         } else {
             await databaseService.updateUser(requestUser);
-            res.json(requestUser);
+                res.json({
+                    message: 'USRISUPD',
+                    user: requestUser
+                });
         }
     } catch (e) {
         res.status(500).send({
-            message: e
+            error: e
         });
     }
 }
@@ -58,12 +65,12 @@ async function deleteUser(req, res) {
         const requestUser = req.body.user;
         await databaseService.deleteUser(requestUser);
         res.json({
-            ok: true
-        });
+            message: 'USRISDEL'
+        })
     } catch (e) {
         res.status(500).send({
-            message: e
-        })
+            error: e
+        });
     }
 }
 
@@ -73,9 +80,8 @@ async function getUsers(req, res) {
         res.json(users)
     } catch (e) {
         res.status(500).send({
-            message: e
-        })
-
+            error: e
+        });
     }
 }
 
@@ -106,25 +112,29 @@ async function resetPassword(req, res) {
             html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${newPassword}</p>`
         };
         emailService.sendEmail(message);
-        res.json(requestUser)
+        res.json({
+            message: 'PSWDISRES',
+        })
 
     } catch (e) {
         res.status(500).send({
-            message: e
+            error: e
         });
     }
-
 }
 
 async function blockUser(req, res) {
     try {
         const requestUser = req.body.user;
         await databaseService.updateUser(requestUser);
-        res.json(requestUser)
+        res.json({
+            message: requestUser.blocked ? 'USRISBL': 'USRISUN',
+            user: requestUser
+        })
     } catch (e) {
         res.status(500).send({
-            message: e
-        })
+            error: e
+        });
     }
 }
 

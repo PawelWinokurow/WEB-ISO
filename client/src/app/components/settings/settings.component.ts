@@ -55,26 +55,20 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  change() {
+  async change() {
     if (this.changeForm.valid) {
-      var user = this.authService.getUser();
+      var userToChange = this.authService.getUser();
       if (this.changePassword) {
-        user.password = this.changeForm.controls['password'].value;
-        user.passwordOld = this.changeForm.controls['passwordOld'].value;
+        userToChange.password = this.changeForm.controls['password'].value;
+        userToChange.passwordOld = this.changeForm.controls['passwordOld'].value;
       }
-      user.companyCode = this.changeForm.controls['companyCode'].value;
-      user.blocked = false;
-      this.userService.updateUser(user).toPromise()
-        .then(user => {
-          if (user.message && user.message === "Not match") {
-            this.toastrService.error(this.dictionaryService.get('PSWDOLDNMATCH'), this.dictionaryService.get('ERR'))
-          } else {
-            this.authService.setUser(user);
-            this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC'));
-            this.setPassword();
-          }
-        })
-        .catch(err => this.toastrService.error(`${this.dictionaryService.get('USRISNUPD')}: ${err.message}`, this.dictionaryService.get('ERR')))
+      userToChange.companyCode = this.changeForm.controls['companyCode'].value;
+      userToChange.blocked = false;
+      let userResponse = await this.userService.updateUser(userToChange).toPromise()
+      if ('user' in userResponse) {
+        this.authService.setUser(userResponse.user);
+        if (this.changePassword) this.setPassword();
+      }
     } else {
       this.changeForm.markAllAsTouched();
     }

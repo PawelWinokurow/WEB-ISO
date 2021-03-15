@@ -108,10 +108,11 @@ function storeCustomer(hash, customer) {
  */
 function storeUser(user) {
   const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-  const values = [
+  /*const values = [
     [user.email, user.username, user.password, user.companyCode, 'ADMIN', false]
   ];
-  //const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
+  */
+  const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
   return insertQueryPromise(insertStatement, values);
 }
 
@@ -151,7 +152,7 @@ function isUserNotExists(user) {
   return selectQueryPromise(selectStatement, values)
     .then(result => new Promise((resolve, reject) => {
       if (Array.isArray(result) && result.length) {
-        reject(false);
+        resolve(false);
       } else {
         resolve(true);
       }

@@ -19,8 +19,8 @@ export class RegistrationComponent implements OnInit {
   hide2 = true;
   registerForm: FormGroup;
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder, 
-    public errorMessageService: ErrorMessageService, private userService: UserService, private toastrService: ToastrService, 
+  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
+    public errorMessageService: ErrorMessageService, private userService: UserService, private toastrService: ToastrService,
     public listService: ListService, private authService: AuthService) {
   }
 
@@ -33,11 +33,11 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
       companyCode: ['', [Validators.required]],
     },
-    { validator: MustMatch('password', 'confirmPassword') }
+      { validator: MustMatch('password', 'confirmPassword') }
     );
   }
 
-  register() {
+  async register() {
     if (this.registerForm.valid) {
       var newUser = {
         username: this.registerForm.controls['username'].value,
@@ -46,19 +46,8 @@ export class RegistrationComponent implements OnInit {
         companyCode: this.registerForm.controls['companyCode'].value.code,
         role: 'USER'
       }
-      this.userService.createUser(newUser).toPromise()
-        .then(result => {
-          if (result?.message && result.message === 'Duplicate') {
-            this.toastrService.error(this.dictionaryService.get('IDUSED'), this.dictionaryService.get('ERR'));
-          } else if (result) {
-            this.authService.setSession(result);
-            this.toastrService.success(this.dictionaryService.get('USRISCR'), this.dictionaryService.get('SUC'));
-            this.router.navigate(['/login']);
-          }
-        })
-        .catch(err => {
-          this.toastrService.error(err.message, this.dictionaryService.get('ERR'));
-        });
+      await this.userService.createUser(newUser).toPromise();
+      this.router.navigate(['/login']);
     } else {
       this.registerForm.markAllAsTouched();
     }
@@ -76,19 +65,19 @@ export class RegistrationComponent implements OnInit {
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
 
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
   }
 }
