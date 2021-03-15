@@ -27,8 +27,8 @@ function checkIfAuthenticated(req, res, next) {
 
 function checkIfUserAvailable(req, res, next) {
     databaseService.getUser(req.body.decodedUser)
-        .then(user => {
-            if (user.blocked === 0) {
+        .then(dbUser => {
+            if (dbUser.blocked === 0) {
                 next();
             } else {
                 res.sendStatus(401);
@@ -40,9 +40,9 @@ function checkIfUserAvailable(req, res, next) {
 //Checks if request updates itself or ADMIN updates USER
 function checkIfUpdatesItself(req, res, next) {
     const user = req.body.decodedUser;
-    const updated_user = req.body.user;
-    if (updated_user.email === user.email ||
-        user.role === 'ADMIN' && updated_user.role === 'USER') {
+    const updatedUser = req.body.user;
+    if (updatedUser.email === user.email ||
+        user.role === 'ADMIN' && updatedUser.role === 'USER') {
         next();
     }
 }

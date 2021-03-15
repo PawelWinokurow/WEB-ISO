@@ -26,11 +26,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>var soap = require('soap');
-var path = require('path');
+            <pre class="prettyprint source linenums"><code>let soap = require('soap');
+let path = require('path');
 require('dotenv').config();
 
-var url = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
+let url = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
 
 exports.test = function () {
     args = {}
@@ -40,7 +40,7 @@ exports.test = function () {
         }
         //console.log(args)
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
-        var description = soapClient.describe()
+        let description = soapClient.describe()
         //console.log(description)
         //soapClient.SI_Ping_Outbound(args, function (err, result, raw, headers) {
         //soapClient.SI_ISO_MGB_BAPI_PARTNER_CREATE_outbound(args, function (err, result, raw, headers) {
@@ -63,7 +63,7 @@ exports.sendMask = function (mask) {
             console.log("error", err);
         }
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD));
-        var description = soapClient.describe()
+        let description = soapClient.describe()
         soapClient.SI_ISO_MGB_BAPI_PARTNER_CREATE_outbound(mask, function (err, result, raw, headers) {
             if (err) {
                 console.log(err);

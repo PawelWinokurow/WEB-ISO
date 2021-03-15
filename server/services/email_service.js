@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
 
-require('dotenv').config()
-
 /**
  * Sends emails.
  * @param  {object} message message to send
@@ -21,7 +19,7 @@ function sendEmail(message) {
     if (process.env.HTTP_PROXY != undefined) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
-    var transporter = nodemailer.createTransport(emailOptions);
+    let transporter = nodemailer.createTransport(emailOptions);
 
     transporter.sendMail(message, function (error, info) {
         if (error) {

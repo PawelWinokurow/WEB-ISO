@@ -13,7 +13,7 @@ const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users (
   role VARCHAR(255),
   blocked BOOLEAN);`;
 
-var connection;
+let connection;
 
 /**
  * Establishes a connection to the database server.
@@ -92,7 +92,9 @@ function selectQueryPromise(selectStatement, values) {
  */
 function storeCustomer(hash, customer) {
   const insertStatement = 'INSERT INTO customers (hash, customer, datetime) VALUES (?, NOW());';
-  values = [[hash, customer]];
+  values = [
+    [hash, customer]
+  ];
   //Insert values
   connection.query(insertStatement, values, function (err, result) {
     if (err) throw err;
@@ -106,7 +108,9 @@ function storeCustomer(hash, customer) {
  */
 function storeUser(user) {
   const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-  const values = [[user.email, user.username, user.password, user.companyCode, 'ADMIN', false]];
+  const values = [
+    [user.email, user.username, user.password, user.companyCode, 'ADMIN', false]
+  ];
   //const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
   return insertQueryPromise(insertStatement, values);
 }
@@ -116,13 +120,12 @@ function storeUser(user) {
  * @param  {object} user User object 
  */
 function updateUser(user) {
+  let updateStatement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
+  let values = [user.companyCode, user.blocked, user.email];
   //If we change password
   if (user.password) {
-    var updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
-    var values = [user.password, user.companyCode, user.blocked, user.email];
-  } else {
-    var updateStatement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
-    var values = [user.companyCode, user.blocked, user.email];
+    updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
+    values = [user.password, user.companyCode, user.blocked, user.email];
   }
   return updateQueryPromise(updateStatement, values);
 }
@@ -162,7 +165,14 @@ function isUserNotExists(user) {
 function checkConfirmation(hash) {
   const selectStatement = 'SELECT customer FROM customers WHERE hash = ?';
   const values = [hash];
-  return selectQueryPromise(selectStatement, values);
+  return selectQueryPromise(selectStatement, values)
+    .then(result => new Promise((resolve, reject) => {
+      if (Array.isArray(result) && result.length) {
+        resolve();
+      } else {
+        reject();
+      }
+    }));
 }
 
 /**
@@ -183,21 +193,23 @@ function getUser(user) {
   const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
   const values = [user.email, user.username];
   return selectQueryPromise(selectStatement, values)
-  .then(result => {
-    if (Array.isArray(result) && result.length){
-      return result.map(val => {
-        return {
-          username: val.username,
-          email: val.email,
-          companyCode: val.companycode,
-          role: val.role,
-          blocked: val.blocked,
-          password: val.password
-        }
-      })[0]
-    }
-    return {...result[0]}
-  });
+    .then(result => {
+      if (Array.isArray(result) && result.length) {
+        return result.map(val => {
+          return {
+            username: val.username,
+            email: val.email,
+            companyCode: val.companycode,
+            role: val.role,
+            blocked: val.blocked,
+            password: val.password
+          }
+        })[0]
+      }
+      return {
+        ...result[0]
+      }
+    });
 }
 
 /**
@@ -225,5 +237,16 @@ function close() {
   connection.end();
 }
 
-module.exports = { close, getUsers, getUser, removeOldCustomers, checkConfirmation, 
-  isUserNotExists, deleteUser, updateUser, storeUser, storeCustomer, connect};
+module.exports = {
+  close,
+  getUsers,
+  getUser,
+  removeOldCustomers,
+  checkConfirmation,
+  isUserNotExists,
+  deleteUser,
+  updateUser,
+  storeUser,
+  storeCustomer,
+  connect
+};

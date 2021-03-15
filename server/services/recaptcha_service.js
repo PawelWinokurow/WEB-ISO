@@ -1,11 +1,10 @@
-
-var PROXY_AGENT = null
+let PROXY_AGENT = null
 
 function setProxyAgent(agent) {
-    PROXY_AGENT = agent; 
+    PROXY_AGENT = agent;
 }
 
-function validateRecaptcha(req, res) {
+async function validateRecaptcha(req, res) {
     let token = req.body.recaptcha;
 
     if (token === null || token === undefined) {
@@ -15,6 +14,7 @@ function validateRecaptcha(req, res) {
         })
         return console.log("token empty");
     }
+
     const options = {
         method: "post",
         headers: {
@@ -23,27 +23,32 @@ function validateRecaptcha(req, res) {
         },
         body: `secret=${process.env.RECAPTCHA_KEY}&response=${token}&remoteip=${req.socket.remoteAddress}`
     }
+
     if (PROXY_AGENT) {
         options.agent = PROXY_AGENT;
     }
-    fetch(process.env.RECAPTCHA_HOST, options)
-        .then(res => res.json()).catch(err => {
+
+    try {
+        let response = await fetch(process.env.RECAPTCHA_HOST, options);
+        let json = await response.json();
+        if (json.success !== undefined && !json.success) {
             res.send({
                 success: false
             });
-            return console.log(`Error: ${err}`);
-        })
-        .then(json => {
-            if (json.success !== undefined && !json.success) {
-                res.send({
-                    success: false
-                });
-            }
+        } else {
             //if passed response success message to client.
             res.send({
                 success: true
             });
-        })
+        }
+    } catch (e) {
+        res.send({
+            success: false
+        });
+    }
 }
 
-module.exports = { validateRecaptcha, setProxyAgent };
+module.exports = {
+    validateRecaptcha,
+    setProxyAgent
+};

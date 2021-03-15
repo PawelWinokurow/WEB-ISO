@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { DictionaryService } from './dictionary.service';
 
 
@@ -31,7 +28,7 @@ export class HttpService {
       console.error(error);
       if (error.status == 401) {
         alert(this.dictionaryService.get('NOTALLOWED'));
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
       }
       return of(result as T);
     };

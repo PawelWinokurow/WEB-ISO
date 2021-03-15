@@ -3,8 +3,10 @@ const databaseService = require('./database_service');
 
 
 function createUser(req, res) {
-    var user = req.body.user;
-    var userToStore = { ...user };
+    let user = req.body.user;
+    let userToStore = {
+        ...user
+    };
     userToStore.password = cryptoService.hashPassword(user.password);
     databaseService.isUserNotExists(user)
         .then(() => databaseService.storeUser(userToStore))
@@ -14,29 +16,27 @@ function createUser(req, res) {
         }));
 }
 
-function updateUser(req, res) {
-    var user = req.body.user;
-    if (user.password) {
-        databaseService.getUser(user)
-            .then(dbUser => new Promise((resolve, reject) => {
-                if (cryptoService.comparePasswords(user.passwordOld, dbUser.password)) {
-                    user.password = cryptoService.hashPassword(user.password);
-                    resolve(user);
-                }
-                reject(false);
-            }))
-            .catch(err => {
+async function updateUser(req, res) {
+    console.log("update")
+    try {
+        const requestUser = req.body.user;
+        if (requestUser.password) {
+            const dbUser = await databaseService.getUser(requestUser);
+            if (cryptoService.comparePasswords(requestUser.passwordOld, dbUser.password)) {
+                requestUser.password = cryptoService.hashPassword(requestUser.password);
+                await databaseService.updateUser(requestUser);
+                res.json(requestUser);
+            } else {
                 res.json({
-                    message: `Old password doesn't match.`
+                    message: `not match`
                 })
-            })
-            .then(user => databaseService.updateUser(user))
-            .then(() => res.json(user))
-            .catch(err => res.status(500).send(`Database error: ${err}`))
-    } else {
-        databaseService.updateUser(user)
-            .then(() => res.json(user))
-            .catch(err => res.status(500).send(`Database error: ${err}`))
+            }
+        } else {
+            await databaseService.updateUser(requestUser);
+            res.json(requestUser);
+        }
+    } catch (e) {
+        res.status(500).send("Database error: " + err);
     }
 }
 
@@ -68,8 +68,10 @@ function blockOrResetUser(req, res) {
 }
 
 function resetPassword(req, res) {
-    var user = req.body.user;
-    var oldUser = { ...user }
+    let user = req.body.user;
+    let oldUser = {
+        ...user
+    }
     const newPassword = cryptoService.generateHash().slice(0, 20);
     user.password = cryptoService.hashPassword(newPassword);
 
@@ -99,4 +101,10 @@ function blockUser(req, res) {
         }))
 }
 
-module.exports = { createUser, updateUser, deleteUser, getUsers, blockOrResetUser };
+module.exports = {
+    createUser,
+    updateUser,
+    deleteUser,
+    getUsers,
+    blockOrResetUser
+};

@@ -61,16 +61,18 @@ export class SettingsComponent implements OnInit {
       if (this.changePassword) {
         user.password = this.changeForm.controls['password'].value;
         user.passwordOld = this.changeForm.controls['passwordOld'].value;
-        this.changeForm.controls['passwordOld'].setValue('');
-        this.changeForm.controls['password'].setValue('');
-        this.changeForm.controls['confirmPassword'].setValue('');
       }
       user.companyCode = this.changeForm.controls['companyCode'].value;
       user.blocked = false;
       this.userService.updateUser(user).toPromise()
         .then(user => {
-          this.authService.setUser(user);
-          this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC'));
+          if (user.message && user.message === "not match") {
+            this.toastrService.error(this.dictionaryService.get('PSWDOLDNMATCH'), this.dictionaryService.get('ERR'))
+          } else {
+            this.authService.setUser(user);
+            this.toastrService.success(this.dictionaryService.get('USRISUPD'), this.dictionaryService.get('SUC'));
+            this.setPassword();
+          }
         })
         .catch(err => this.toastrService.error(`${this.dictionaryService.get('USRISNUPD')}: ${err.message}`, this.dictionaryService.get('ERR')))
     } else {
