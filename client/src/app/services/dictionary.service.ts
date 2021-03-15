@@ -29,6 +29,8 @@ export class DictionaryService {
     
     ['USRNAME', 'Benutzername'],
     ['PSWD', 'Passwort'],
+    ['USR', 'Benutzer'],
+    ['ADM', 'Administrator'],
     ['CREATE', 'Anlegen'],
 
     ['RESETPSWD', 'Passwort zurücksetzen'],
@@ -164,7 +166,8 @@ export class DictionaryService {
     ['PSWDOLD', 'Old password'],
     
     ['CREATE', 'Create'],
-
+    ['USR', 'User'],
+    ['ADM', 'Administrator'],
 
     ['HELLO', 'Hello, '],
     ['NEWCUS', 'New customer'],

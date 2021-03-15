@@ -6,16 +6,29 @@
     <div style="padding-left:10px;">
       <span class="mat-h2" style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</span>
     </div>
-    <div *ngIf="authService.isLoggedIn();" style="padding-left:10px;">
+    <div *ngIf="authService.isLoggedIn()" style="padding-left:10px;">
       <span class="mat-h2">
         {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
       </span>
     </div>
     <span class="space"></span>
-    <div style="padding-left:10px;">
-      <span class="mat-h2"
-        *ngIf="authService.getUser()">{{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!</span>
-    </div>
+
+    <div class="btn-group" dropdown>
+      <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
+              aria-controls="dropdown-animated" style="background: transparent;">
+              <span class="mat-h3">
+                {{dictionaryService.get('HELLO')}}{{authService.getUser().username}}! 
+              </span>
+      </button>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" style="visibility: hidden;"
+          role="menu" aria-labelledby="button-animated">
+        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
+        </li>
+        <li role="menuitem"><a class="dropdown-item" href="#">Something else
+          here</a></li>
+      </ul>
+    </div>   
 
     <button mat-raised-button (click)="reset()" style="margin-left: 20px;">
       <mat-icon>replay</mat-icon>

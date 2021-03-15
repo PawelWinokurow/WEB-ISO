@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
-import { ToastrService } from 'ngx-toastr';
 import { DeleteUserDialog } from 'src/app/dialogs/delete-user-dialog/delete-user.dialog';
 import { NewUserDialog } from 'src/app/dialogs/new-user-dialog/new-user.dialog';
 import { ResetPasswordDialog } from 'src/app/dialogs/reset-password/reset-password.dialog';
@@ -25,34 +24,53 @@ export class AdminComponent implements OnInit {
 
   @ViewChild('accordion') accordion: MatAccordion;
 
-  constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService, private userService: UserService,
-    private toastrService: ToastrService, public listService: ListService, private dialog: MatDialog,) {
+  constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService,
+    private userService: UserService, public listService: ListService, private dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
-    this.userService.getUsers().toPromise()
-      .then(users => {
-        this.users = users;
-      })
-      .then(() => this.filteredUsers = [...this.users])
-      .then(() => {
-        this.filter.valueChanges.subscribe(val => {
-          var val = val.toLowerCase();
-          this.filteredUsers = this.users.filter(user =>
-            user.username.toLowerCase().includes(val)
-            || user.email.toLowerCase().includes(val)
-            || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val)
-            || user.role.toLowerCase().includes(val)
-          );
-        });
-      });
+    this.fetchUsers();
+    this.initUserSearch();
     this.companyCodeDetails = this.listService.companyCodes.reduce((acc, x) => ({ ...acc, [x.code]: x.details }), {})
   }
 
-  async newUser(){
-    const newUserDialog = this.dialog.open(NewUserDialog, {disableClose: true});
-    const result = await newUserDialog.afterClosed().toPromise();
-    
+  async fetchUsers(){
+    this.users = await this.userService.getUsers().toPromise();
+    this.sortByUsername(this.users);
+    this.filteredUsers = [...this.users];
+  }
+
+  async initUserSearch() {
+    this.filter.valueChanges.subscribe(val => {
+      this.filterQuery(val);
+    });
+  }
+
+  filterQuery(val){
+    var val = val.toLowerCase();
+    this.filteredUsers = this.users.filter(user =>
+      user.username.toLowerCase().includes(val)
+      || user.email.toLowerCase().includes(val)
+      || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val)
+      || user.role.toLowerCase().includes(val)
+    );
+  }
+
+  sortByUsername(array){
+    array.sort(function(a, b) {
+      var nameA = a.username.toLowerCase();
+      var nameB = b.username.toLowerCase();
+      return nameA > nameB ? 1 : nameB > nameA ? -1 : 0;
+    });
+  }
+
+  async newUser() {
+    const newUserDialog = this.dialog.open(NewUserDialog, { disableClose: true });
+    const newUser = await newUserDialog.afterClosed().toPromise();
+    await this.userService.createUser(newUser).toPromise();
+    this.users.push(newUser);
+    this.sortByUsername(this.users);
+    this.filterQuery(this.filter.value);
   }
 
   async deleteUser(userToSend) {
@@ -77,7 +95,7 @@ export class AdminComponent implements OnInit {
       var user = { ...userToBlock, operation: 'block' };
       user.blocked = !user.blocked;
       const res = await this.userService.blockOrResetUser(user).toPromise();
-      
+
       //TODO iterate over array may be to slow
       this.users.forEach(u => {
         if (u.email === res.user.email) {
@@ -89,7 +107,7 @@ export class AdminComponent implements OnInit {
           u.blocked = res.user.blocked;
         }
       });
-    } catch(e) {}
+    } catch (e) { }
   }
 
   async resetPassword(userToReset) {

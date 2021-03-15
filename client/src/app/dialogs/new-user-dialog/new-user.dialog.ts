@@ -19,6 +19,7 @@ export class NewUserDialog implements OnInit {
   hide1 = true;
   hide2 = true;
   registerForm: FormGroup;
+  userType = 'USER';
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public errorMessageService: ErrorMessageService, private userService: UserService,
@@ -49,10 +50,9 @@ export class NewUserDialog implements OnInit {
         password: this.registerForm.controls['password'].value,
         email: this.registerForm.controls['email'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
-        role: 'USER'
+        role: this.userType
       }
-      await this.userService.createUser(newUser).toPromise();
-      this.router.navigate(['/login']);
+      this.dialogRef.close(newUser);
     } else {
       this.registerForm.markAllAsTouched();
     }
@@ -61,6 +61,18 @@ export class NewUserDialog implements OnInit {
   get registerFormControl() {
     return this.registerForm.controls;
   }
+
+    /**
+   * Change of admin/user type triggers this method.
+   * @param event Change event
+   */
+     changeUserType(event: any) {
+      if (event.value === 'USER') {
+        this.userType = 'USER';
+      } else {
+        this.userType = 'ADMIN';
+      }
+    }
 
 }
 

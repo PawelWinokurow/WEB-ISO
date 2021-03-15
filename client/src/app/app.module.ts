@@ -35,6 +35,7 @@ import { DeleteUserDialog } from './dialogs/delete-user-dialog/delete-user.dialo
 import { EmailDialog } from './dialogs/email-dialog/email.dialog';
 import { NewUserDialog } from './dialogs/new-user-dialog/new-user.dialog';
 import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirma
     AdminComponent,
     DeleteUserDialog,
     ResetPasswordDialog,
-    NewUserDialog,
+    NewUserDialog, 
   ],
   imports: [
     BrowserModule,
@@ -68,6 +69,7 @@ import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirma
     ToastrModule.forRoot(), 
     RecaptchaModule,
     RecaptchaFormsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     DictionaryService,
