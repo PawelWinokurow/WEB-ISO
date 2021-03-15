@@ -22,8 +22,8 @@ export class ErrorMessageService {
   ])
 
   errors = new Map([
-    ['DE', this.errorsDE],
-    ['EN', this.errorsEN]
+    ['Deutsch', this.errorsDE],
+    ['English', this.errorsEN]
   ])
 
   /**

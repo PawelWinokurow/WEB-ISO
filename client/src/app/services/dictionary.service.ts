@@ -9,11 +9,11 @@ import { Injectable } from '@angular/core';
 })
 export class DictionaryService {
 
-  currentLanguage: string = 'DE';
+  currentLanguage: string = 'Deutsch';
 
   languages = new Map([
-    ['DE', 'Deutsch'],
-    ['EN', 'English'],
+    ['Deutsch', 'Deutsch'],
+    ['English', 'English'],
   ]);
 
   dictionaryDE = new Map([
@@ -286,8 +286,8 @@ export class DictionaryService {
   ])
 
   dictionary = new Map([
-    ['DE', this.dictionaryDE],
-    ['EN', this.dictionaryEN]
+    ['Deutsch', this.dictionaryDE],
+    ['English', this.dictionaryEN]
   ])
 
   constructor() { }
@@ -296,7 +296,7 @@ export class DictionaryService {
    * Switches language between English and German.
    */
   switchLanguage() {
-    this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
+    this.currentLanguage = (this.currentLanguage == 'Deutsch' ? 'English' : 'Deutsch')
   }
 
   /**
