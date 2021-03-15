@@ -14,7 +14,8 @@ async function createUser(req, res) {
 
         if (isUserNotExists) {
             await databaseService.storeUser(userToStore);
-            await authService.login(req, res);
+            console.log(requestUser)
+            //await authService.login(req, res);
         } else {
             res.json({
                 message: 'Duplicate'

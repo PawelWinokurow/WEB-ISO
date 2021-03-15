@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { DictionaryService } from './dictionary.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -10,10 +11,24 @@ import { DictionaryService } from './dictionary.service';
 })
 export class HttpService {
 
-  constructor(private router: Router, private dictionaryService: DictionaryService) {}
+  constructor(private router: Router, private dictionaryService: DictionaryService, private toastrService: ToastrService) {}
 
   request(func): Observable<any>{
-    return func.pipe(catchError(this.handleError()));
+    return func.pipe(map(this.handleResponseMessages), catchError(this.handleError()));
+  }
+
+  handleResponseMessages(response){
+    if ('message' in response){
+      const messageAbbreviation = response.message;
+      this.toastrService.success(this.dictionaryService.get(messageAbbreviation), this.dictionaryService.get('SUC'));
+      delete response.message;
+    }
+    if ('error' in response){
+      const errorAbbreviation = response.error;
+      this.toastrService.error(this.dictionaryService.get(errorAbbreviation), this.dictionaryService.get('ERR'))
+      delete response.error;
+    }
+    return response
   }
 
   /**
@@ -23,7 +38,7 @@ export class HttpService {
    * @param [result] 
    * @returns Error response observable.
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       if (error.status == 401) {
