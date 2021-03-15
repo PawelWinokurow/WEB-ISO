@@ -2,22 +2,32 @@ const cryptoService = require('./crypto_service');
 const databaseService = require('./database_service');
 
 
-function createUser(req, res) {
-    let user = req.body.user;
-    let userToStore = {
-        ...user
-    };
-    userToStore.password = cryptoService.hashPassword(user.password);
-    databaseService.isUserNotExists(user)
-        .then(() => databaseService.storeUser(userToStore))
-        .then(() => authService.login(req, res))
-        .catch(() => res.json({
-            message: 'Duplicate'
-        }));
+async function createUser(req, res) {
+    try {
+        const requestUser = req.body.user;
+        let userToStore = {
+            ...requestUser
+        };
+        userToStore.password = cryptoService.hashPassword(requestUser.password);
+
+        let isUserNotExists = await databaseService.isUserNotExists(requestUser);
+
+        if (isUserNotExists) {
+            await databaseService.storeUser(userToStore);
+            await authService.login(req, res);
+        } else {
+            res.json({
+                message: 'Duplicate'
+            });
+        }
+    } catch (e) {
+        res.status(500).send({
+            message: e
+        });
+    }
 }
 
 async function updateUser(req, res) {
-    console.log("update")
     try {
         const requestUser = req.body.user;
         if (requestUser.password) {
@@ -28,7 +38,7 @@ async function updateUser(req, res) {
                 res.json(requestUser);
             } else {
                 res.json({
-                    message: `not match`
+                    message: `Not match`
                 })
             }
         } else {
@@ -36,69 +46,85 @@ async function updateUser(req, res) {
             res.json(requestUser);
         }
     } catch (e) {
-        res.status(500).send("Database error: " + err);
+        res.status(500).send({
+            message: e
+        });
     }
 }
 
-function deleteUser(req, res) {
-    databaseService.deleteUser(req.body.user)
-        .then(() => res.json({
+async function deleteUser(req, res) {
+    try {
+        const requestUser = req.body.user;
+        await databaseService.deleteUser(requestUser);
+        res.json({
             ok: true
-        }))
-        .catch(err => res.json({
-            message: err
-        }));
+        });
+    } catch (e) {
+        res.status(500).send({
+            message: e
+        })
+    }
 }
 
-function getUsers(req, res) {
-    databaseService.getUsers()
-        .then(users => res.json(users))
-        .catch(err => res.json({
-            message: err
-        }));
+async function getUsers(req, res) {
+    try {
+        const users = await databaseService.getUsers();
+        res.json(users)
+    } catch (e) {
+        res.status(500).send({
+            message: e
+        })
+
+    }
 }
 
 function blockOrResetUser(req, res) {
-    const user = req.body.user;
-    if (user?.operation === 'block') {
+    const requestUser = req.body.user;
+    if (requestUser?.operation === 'block') {
         blockUser(req, res);
-    } else if (user?.operation === 'reset') {
+    } else if (requestUser?.operation === 'reset') {
         resetPassword(req, res);
     }
 }
 
-function resetPassword(req, res) {
-    let user = req.body.user;
-    let oldUser = {
-        ...user
-    }
-    const newPassword = cryptoService.generateHash().slice(0, 20);
-    user.password = cryptoService.hashPassword(newPassword);
+async function resetPassword(req, res) {
+    try {
+        const requestUser = req.body.user;
+        let oldUser = {
+            ...requestUser
+        }
+        const newPassword = cryptoService.generateHash().slice(0, 20);
+        requestUser.password = cryptoService.hashPassword(newPassword);
 
-    databaseService.updateUser(user)
-        .then(() => res.json(user))
-        .catch(err => res.status(500).send(`Database error: ${err}`))
-        .then(() => {
-            const message = {
-                from: "WEB-ISO",
-                to: user.email,
-                subject: 'New password WEB-ISO',
-                html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${newPassword}</p>`
-            };
-            emailService.sendEmail(message);
-        })
-        .catch(err => {
-            databaseService.updateUser(oldUser).then();
-            res.status(500).send(`Email send error: ${err}`);
+        await databaseService.updateUser(requestUser);
+
+        const message = {
+            from: "WEB-ISO",
+            to: requestUser.email,
+            subject: 'New password WEB-ISO',
+            html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${newPassword}</p>`
+        };
+        emailService.sendEmail(message);
+        res.json(requestUser)
+
+    } catch (e) {
+        res.status(500).send({
+            message: e
         });
+    }
+
 }
 
-function blockUser(req, res) {
-    databaseService.updateUser(req.body.user)
-        .then(() => res.json(req.body.user))
-        .catch(err => res.json({
-            message: err
-        }))
+async function blockUser(req, res) {
+    try {
+        const requestUser = req.body.user;
+        await databaseService.updateUser(requestUser);
+        res.json(requestUser)
+    } catch (e) {
+        res.status(500).send({
+            message: e
+        })
+    }
 }
 
 module.exports = {

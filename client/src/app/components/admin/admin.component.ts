@@ -32,7 +32,6 @@ export class AdminComponent implements OnInit {
     this.userService.getUsers().toPromise()
       .then(users => {
         this.users = users;
-        console.log(users)
       })
       .then(() => this.filteredUsers = [...this.users])
       .then(() => {

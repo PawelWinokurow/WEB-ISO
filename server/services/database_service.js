@@ -151,9 +151,9 @@ function isUserNotExists(user) {
   return selectQueryPromise(selectStatement, values)
     .then(result => new Promise((resolve, reject) => {
       if (Array.isArray(result) && result.length) {
-        reject();
+        reject(false);
       } else {
-        resolve();
+        resolve(true);
       }
     }));
 }

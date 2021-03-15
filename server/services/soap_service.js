@@ -17,7 +17,6 @@ function test(wsdlUrl) {
                 }
                 soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
                 let description = soapClient.describe()
-                console.log(description)
                 soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(args.ENVELOPE, function (err, result, raw, headers) {
                     if (err) {
                         //console.log(err);

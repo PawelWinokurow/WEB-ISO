@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit {
       user.blocked = false;
       this.userService.updateUser(user).toPromise()
         .then(user => {
-          if (user.message && user.message === "not match") {
+          if (user.message && user.message === "Not match") {
             this.toastrService.error(this.dictionaryService.get('PSWDOLDNMATCH'), this.dictionaryService.get('ERR'))
           } else {
             this.authService.setUser(user);
