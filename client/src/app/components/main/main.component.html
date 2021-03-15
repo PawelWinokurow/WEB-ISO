@@ -1,13 +1,12 @@
 <mat-toolbar style="background-color: #009650;">
   <mat-toolbar-row>
-    <button mat-icon-button [style.visibility]="authService.isLoggedIn() ? 'visible' : 'hidden'"
-      [disabled]="!authService.isLoggedIn()" (click)="sidenav.toggle()">
+    <button mat-icon-button *ngIf="authService.isLoggedIn()" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <div style="padding-left:10px;">
       <span class="mat-h2" style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</span>
     </div>
-    <div style="padding-left:10px;">
+    <div *ngIf="authService.isLoggedIn();" style="padding-left:10px;">
       <span class="mat-h2">
         {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
       </span>

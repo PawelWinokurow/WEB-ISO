@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       }
       this.userService.createUser(newUser).toPromise()
         .then(result => {
-          if (result.message && result.message === 'Duplicate') {
+          if (result?.message && result.message === 'Duplicate') {
             this.toastrService.error(this.dictionaryService.get('IDUSED'), this.dictionaryService.get('ERR'));
           } else if (result) {
             this.authService.setSession(result);
