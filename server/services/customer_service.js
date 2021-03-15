@@ -1,5 +1,9 @@
 const xml2js = require('xml2js');
 const fs = require('fs');
+const path = require('path');
+
+
+WSDL_URL = path.join(__dirname, '..', process.env.WSDL_FILENAME);
 
 class CustomerFactory {
     constructor(customerData, ENVELOPE_URL) {
@@ -97,6 +101,65 @@ class OrganizationCreditFactory extends CustomerFactory {
     }
 }
 
+function confirmCustomer(req, res) {
+    databaseService.checkConfirmation(req.query.hash)
+      .then(result => {
+        const customer = JSON.parse(result[0].customer)
+        soapService.sendCustomer(customer, WSDL_URL);
+        res.send('<p>Success! The customer was confirmed.</p>');
+      })
+      .catch(() => {
+        res.send('<p>Error! The customer was not confirmed.</p>');
+      });
+  }
+
+function createCustomer(req, res) {
+    function composeCustomer(customerData) {
+      var customerFactory = null
+      if (customerData.customerType === 'person') {
+        if (customerData.debitCreditType === 'debit') {
+          customerFactory = new customerService.PersonDebitFactory(customerData, ENVELOPE_URL);
+        } else if (customerData.debitCreditType === 'credit') {
+          customerFactory = new customerService.PersonCreditFactory(customerData, ENVELOPE_URL);
+        }
+      } else if (customerData.customerType === 'organization') {
+        if (customerData.debitCreditType === 'debit') {
+          customerFactory = new customerService.OrganizationDebitFactory(customerData, ENVELOPE_URL);
+        } else if (customerData.debitCreditType === 'credit') {
+          customerFactory = new customerService.OrganizationCreditFactory(customerData, ENVELOPE_URL);
+        }
+      }
+      return customerFactory.build();
+    }
+    let customerData = req.body.customer;
+
+    composeCustomer(customerData).then(
+      sapCustomer => {
+        var envelope = sapCustomer.getJSONArgs();
+        var envelope = JSON.stringify(sapCustomer.getJSONArgs());
+        if (customerData.isDirect) {
+          soapService.sendCustomer(envelope, WSDL_URL);
+        } else {
+          const hash = cryptoService.generateHash();
+          //TODO Promise resolution
+          databaseService.storeCustomer(hash, envelope).then();
+
+          const message = {
+            from: "BayWa",
+            to: emailTo,
+            subject: 'Customer confirmation',
+            html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the customer.</p>'
+          };
+
+          emailService.sendEmail(message);
+        }
+        res.json({
+          ok: true
+        });
+      }
+    );
+  }
+
 function formatDate(date) {
     var month = '' + (date.getMonth() + 1)
     var day = '' + date.getDate()
@@ -114,5 +177,6 @@ module.exports = {
     PersonDebitFactory: PersonDebitFactory,
     PersonCreditFactory: PersonCreditFactory,
     OrganizationDebitFactory: OrganizationDebitFactory,
-    OrganizationCreditFactory: OrganizationCreditFactory
+    OrganizationCreditFactory: OrganizationCreditFactory,
+    confirmCustomer, createCustomer
 }

@@ -11,7 +11,6 @@ require('dotenv').config();
 const databaseService = require('./services/database_service');
 const soapService = require('./services/soap_service');
 const emailService = require('./services/email_service');
-const cryptoService = require('./services/crypto_service');
 const customerService = require('./services/customer_service');
 const middlewareService = require('./services/middleware_service');
 const authService = require('./services/auth_service');
@@ -33,9 +32,6 @@ class Server {
     this.expressApp.use(logger('dev'));
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
-    this.createCustomer = this.createCustomer.bind(this);
-    this.confirmCustomer = this.confirmCustomer.bind(this);
-    this.wsdlUrl = path.join(__dirname, "wsdl", process.env.WSDL_FILENAME);
     fetch(process.env.PROXY).then(() => {
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
@@ -56,70 +52,11 @@ class Server {
     });
   }
 
-  confirmCustomer(req, res) {
-    databaseService.checkConfirmation(req.query.hash)
-      .then(result => {
-        const customer = JSON.parse(result[0].customer)
-        soapService.sendCustomer(customer, this.wsdlUrl);
-        res.send('<p>Success! The customer was confirmed.</p>');
-      })
-      .catch(() => {
-        res.send('<p>Error! The customer was not confirmed.</p>');
-      });
-  }
-
-  createCustomer(req, res) {
-    function composeCustomer(customerData) {
-      var customerFactory = null
-      if (customerData.customerType === 'person') {
-        if (customerData.debitCreditType === 'debit') {
-          customerFactory = new customerService.PersonDebitFactory(customerData, ENVELOPE_URL);
-        } else if (customerData.debitCreditType === 'credit') {
-          customerFactory = new customerService.PersonCreditFactory(customerData, ENVELOPE_URL);
-        }
-      } else if (customerData.customerType === 'organization') {
-        if (customerData.debitCreditType === 'debit') {
-          customerFactory = new customerService.OrganizationDebitFactory(customerData, ENVELOPE_URL);
-        } else if (customerData.debitCreditType === 'credit') {
-          customerFactory = new customerService.OrganizationCreditFactory(customerData, ENVELOPE_URL);
-        }
-      }
-      return customerFactory.build();
-    }
-    let customerData = req.body.customer;
-
-    composeCustomer(customerData).then(
-      sapCustomer => {
-        var envelope = sapCustomer.getJSONArgs();
-        var envelope = JSON.stringify(sapCustomer.getJSONArgs());
-        if (customerData.isDirect) {
-          soapService.sendCustomer(envelope, this.wsdlUrl);
-        } else {
-          const hash = cryptoService.generateHash();
-          //TODO Promise resolution
-          databaseService.storeCustomer(hash, envelope).then();
-
-          const message = {
-            from: "BayWa",
-            to: emailTo,
-            subject: 'Customer confirmation',
-            html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the customer.</p>'
-          };
-
-          emailService.sendEmail(message);
-        }
-        res.json({
-          ok: true
-        });
-      }
-    );
-  }
-
   configureEndPoints() {
     /**
      * Enpoint to get new customers from application.
      */
-    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, this.createCustomer);
+    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, customerService.createCustomer);
 
     /**
      * Endpoint to get login data.
@@ -131,7 +68,7 @@ class Server {
     /**
      * Endpoint to get email confirmations.
      */
-    this.expressApp.route("/confirm").get(this.confirmCustomer);
+    this.expressApp.route("/confirm").get(customerService.confirmCustomer);
 
     /**
      * Endpoint to get recaptcha token from the client.
