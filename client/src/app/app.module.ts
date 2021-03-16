@@ -31,7 +31,6 @@ import { RecaptchaService } from './services/recaptcha.service';
 import { CustomerService } from './services/customer.service';
 import { ResetPasswordDialog } from './dialogs/reset-password/reset-password.dialog';
 import { DeleteAccountDialog } from './dialogs/delete-account-dialog/delete-account.dialog';
-import { EmailDialog } from './dialogs/email-dialog/email.dialog';
 import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialog';
@@ -42,7 +41,6 @@ import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialo
     MainComponent,
     NewISOComponent,
     SendCustomerConfirmationDialog,
-    EmailDialog,
     PreselectionComponent,
     LoginComponent,
     SettingsComponent,

@@ -1,6 +1,8 @@
 <div class="inner-component">
     <mat-card class="card">
-        <mat-card-title class="padding10px"><span class="headline">{{dictionaryService.get('CUSTYPE')}}</span></mat-card-title>
+        <mat-card-title class="padding10px">
+            <h1>{{dictionaryService.get('CUSTYPE')}}</h1>
+            </mat-card-title>
         <mat-card-content align="center">
             <div class="padding10px toggle-theme">
                 <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">

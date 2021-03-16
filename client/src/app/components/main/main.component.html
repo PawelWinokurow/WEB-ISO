@@ -14,16 +14,16 @@
     <span class="space"></span>
 
     <div class="btn-group" dropdown style="margin-right: 20px;" *ngIf="authService.isLoggedIn()" 
-    triggers="hover" #dp="bs-dropdown" [insideClick]="true">
+    triggers="hover" #dp="bs-dropdown" [insideClick]="true" (mouseleave)="dp.hide()">
       <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
-        aria-controls="dropdown-animated" style="background: transparent">
+        aria-controls="dropdown-animated" style="background: transparent" >
         <span class="mat-h3">
           {{dictionaryService.get('HELLO')}}{{authService.getAccount().username}}!
         </span>
         <span class="caret"></span>
       </button>
       <div id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" 
-      aria-labelledby="button-animated" (mouseleave)="dp.hide()">
+      aria-labelledby="button-animated">
         <mat-nav-list>
 
           <a mat-list-item (click)="changeLanguage()"><mat-icon>language</mat-icon> &nbsp;
