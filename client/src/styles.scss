@@ -23,6 +23,7 @@ body {
 }
 
 .inner-component {
+  padding: 10px 0 0 10px;
   position: relative;
   height: calc(100vh - 64px);  
   background-color: rgb(240, 240, 240);
@@ -134,7 +135,7 @@ mat-button-toggle {
 }
 
 .vertical-flex{
-  height: calc(100vh - 216px);
+  height: calc(100vh - 226px);
   display: flex;
   overflow: auto;
 }
@@ -148,7 +149,6 @@ mat-button-toggle {
   height: calc(100vh - 104px);
   display: flex;
   flex-flow: column;
-  padding: 20px;
 }
 
 .flex-column {
