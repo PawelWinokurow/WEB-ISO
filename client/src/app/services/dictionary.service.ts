@@ -47,7 +47,7 @@ export class DictionaryService {
     ['ACCSET', 'Kontoeinstellungen'],
     ['SECSET', 'Sicherheitseinstellungen'],
 
-    ['NEWACC', 'Konto erstellen'],
+    ['NEWACC', 'Konto anlegen'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
     ['PSWDOLD', 'Altes Passwort'],
@@ -86,7 +86,7 @@ export class DictionaryService {
 
     ['CONTACT', 'Kontaktdaten'],
     ['GENINF', 'Allgemeine Informationen'],
-    ['ADDRINF', 'Adressinformationen'],
+    ['CONTINF', 'Kontaktinformationen'],
     ['PAYINF', 'Zahlungsinformationen'],
     ['ATTACH', 'Datei anhängen'],
 
@@ -120,7 +120,7 @@ export class DictionaryService {
     ['CRELMT', 'Kreditlimit'],
     ['REMARKS', 'Bemerkungsfeld'],
 
-    ['APP', 'Antragsteller'],
+    ['APP', 'Antragstellerinformationen'],
     ['APP1', '1. Antragsteller'],
     ['APP2', '2. Antragsteller'],
    
@@ -213,7 +213,7 @@ export class DictionaryService {
     
     ['CONTACT', 'Contact'],
     ['GENINF', 'General information'],
-    ['ADDRINF', 'Address information'],
+    ['CONTINF', 'Contact information'],
     ['PAYINF', 'Payment information'],
     ['ATTACH', 'Attach file'],
 
@@ -248,7 +248,7 @@ export class DictionaryService {
     ['PAYTERMS', 'Terms of payment'],
     ['REMARKS', 'Remarks field'],
 
-    ['APP', 'Applicant'],
+    ['APP', 'Applicant information'],
     ['APP1', 'Applicant 1'],
     ['APP2', 'Applicant 2'],
 

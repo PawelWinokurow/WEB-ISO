@@ -23,7 +23,7 @@ export class CustomerService {
     return await this.httpService.request(this.http.post(`${environment.serverURL}/request`, { customer: customer })).toPromise()
   }
 
-  constructObject(generalInformation, addressInformation, payment, applicant, upload) {
+  constructObject(generalInformation, contactInformation, payment, applicant, upload) {
     const data = {
       companyCode: this.authService.getAccount().companyCode?.code ?? '',
 
@@ -36,17 +36,17 @@ export class CustomerService {
       additionalName: generalInformation?.get("additionalName")?.value ?? '',
       
       //Address information
-      street: addressInformation?.get("street")?.value ?? '',
-      houseNumber: addressInformation?.get("houseNumber")?.value ?? '',
-      mailbox: addressInformation?.get("mailbox")?.value ?? '',
-      zipMailbox: addressInformation?.get("zipMailbox")?.value ?? '',
-      zip: addressInformation?.get("zip")?.value ?? '',
-      city: addressInformation?.get("city")?.value ?? '',
-      country: addressInformation?.get("country")?.value?.code ?? '',
-      phone: addressInformation?.get("phone")?.value ?? '',
-      fax: addressInformation?.get("fax")?.value ?? '',
-      mobile: addressInformation?.get("mobile")?.value ?? '',
-      email: addressInformation?.get("email")?.value ?? '',
+      street: contactInformation?.get("street")?.value ?? '',
+      houseNumber: contactInformation?.get("houseNumber")?.value ?? '',
+      mailbox: contactInformation?.get("mailbox")?.value ?? '',
+      zipMailbox: contactInformation?.get("zipMailbox")?.value ?? '',
+      zip: contactInformation?.get("zip")?.value ?? '',
+      city: contactInformation?.get("city")?.value ?? '',
+      country: contactInformation?.get("country")?.value?.code ?? '',
+      phone: contactInformation?.get("phone")?.value ?? '',
+      fax: contactInformation?.get("fax")?.value ?? '',
+      mobile: contactInformation?.get("mobile")?.value ?? '',
+      email: contactInformation?.get("email")?.value ?? '',
 
       //Payment
       taxId: payment?.get("taxId")?.value ?? '',

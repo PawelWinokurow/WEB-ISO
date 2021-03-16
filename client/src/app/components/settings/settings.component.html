@@ -2,16 +2,16 @@
     <div class="form-vertical-flex">
         <div class="flex-column">
             <div class="form-title">
-                <span class="mat-h2">{{dictionaryService.get('ACC')}}</span>
+                <span class="mat-h2" style="padding-left: 10px;">{{dictionaryService.get('ACC')}}</span>
             </div>
             <div class="flex-row bottom-border top-border">
-                <div class="flex-column right-border" style="width: 240px;">
+                <div class="flex-column right-border" style="width: 260px;">
                     <div class="flex-row settings-button bottom-border" matRipple (click)="setting = 1">
                         <div class="mat-h3 button-text">{{dictionaryService.get('ACCSET')}} </div>
                         <div class="space"></div>
                         <mat-icon>keyboard_arrow_right</mat-icon>
                     </div>
-                    <div class="flex-row settings-button" matRipple (click)="setting = 2">
+                    <div class="flex-row settings-button bottom-border" matRipple (click)="setting = 2">
                         <div class="mat-h3 button-text">{{dictionaryService.get('SECSET')}} </div>
                         <div class="space"></div>
                         <mat-icon>keyboard_arrow_right</mat-icon>

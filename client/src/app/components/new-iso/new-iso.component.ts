@@ -36,7 +36,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('UploadFileInput') uploadFileInput: ElementRef;
 
   generalInformation: FormGroup;
-  addressInformation: FormGroup;
+  contactInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
   upload: FormGroup;
@@ -163,7 +163,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       zipMailbox: [''],
     });
 
-    this.addressInformation = this.formBuilder.group({
+    this.contactInformation = this.formBuilder.group({
       street: ['', Validators.required],
       houseNumber: ['', Validators.required],
       mailbox: [''],
@@ -326,7 +326,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   constructCustomer(isDirect: boolean) {
 
-    const customerObject = this.customerService.constructObject(this.generalInformation, this.addressInformation, this.payment, this.applicant, this.upload);
+    const customerObject = this.customerService.constructObject(this.generalInformation, this.contactInformation, this.payment, this.applicant, this.upload);
     
     return {
       isDirect: isDirect, customerType: this.storageService.customerType,
