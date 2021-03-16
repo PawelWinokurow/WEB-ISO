@@ -282,7 +282,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
           this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
         });
       } else if (isDirect == false) {
-        this.customerService.sendCustomer({ emailTo: this.authService.getUser().email, ...customer }).subscribe(res => {
+        this.customerService.sendCustomer({ emailTo: this.authService.getAccount().email, ...customer }).subscribe(res => {
           this.toastrService.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
         });
       }
@@ -313,7 +313,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   constructCustomer(isDirect: boolean) {
     const data = {
       //Preselection
-      companyCode: this.authService.getUser().companyCode?.code ?? '',
+      companyCode: this.authService.getAccount().companyCode?.code ?? '',
 
       //Shared forms
 

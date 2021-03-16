@@ -134,7 +134,7 @@ async function createCustomer(req, res) {
 
   try {
     const requestCustomer = req.body.customer;
-    const emailTo = req.body.decodedUser.email;
+    const emailTo = req.body.decodedAccount.email;
     console.log(emailTo);
     let sapCustomer = await composeCustomer(requestCustomer);
     let envelope = JSON.stringify(sapCustomer.getJSONArgs());

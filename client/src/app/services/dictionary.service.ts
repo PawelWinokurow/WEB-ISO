@@ -169,7 +169,7 @@ export class DictionaryService {
     ['PSWDOLD', 'Old password'],
     
     ['CREATE', 'Create'],
-    ['USR', 'User'],
+    ['USR', 'Account'],
     ['ADM', 'Administrator'],
 
     ['HELLO', 'Hello, '],
@@ -268,19 +268,19 @@ export class DictionaryService {
     ['RESETPSWD1', "Reset password for "],
     ['RESETPSWD2', "?"],
 
-    ['USRISNUPD', 'The user was not updated.'],
+    ['USRISNUPD', 'The account was not updated.'],
 
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],
 
     //Messages
-    ['USRISCR', 'The user was created.'],
-    ['USRISUPD', 'The user was updated.'],
+    ['USRISCR', 'The account was created.'],
+    ['USRISUPD', 'The account was updated.'],
     ['CUSISSND', 'The customer was sent.'],
     ['CONFISSND', 'The confirmation email was sent to your email address.'],
-    ['USRISBL', 'The user was blocked.'],
-    ['USRISUN', 'The user was unblocked.'],
-    ['USRISDEL', 'The user was deleted.'],
+    ['USRISBL', 'The account was blocked.'],
+    ['USRISUN', 'The account was unblocked.'],
+    ['USRISDEL', 'The account was deleted.'],
     ['PSWDISRES', 'The password was reset.'],
 
     //Errors

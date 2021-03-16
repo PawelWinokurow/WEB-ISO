@@ -11,7 +11,7 @@
                         <input matInput [formControl]="filter">
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
-                    <button mat-stroked-button (click)="newUser()" style="height: 60px; top: -5px; flex: 1;">
+                    <button mat-stroked-button (click)="newAccount()" style="height: 60px; top: -5px; flex: 1;">
                         {{dictionaryService.get('NEWACC')}}
                         <mat-icon>add</mat-icon>
                     </button>
@@ -28,44 +28,44 @@
                 <div class="form-data paddinglr10px rounded-border"
                     style="width: 800px; background-color: rgb(235, 235, 235);">
                     <mat-accordion #accordion="matAccordion" multi>
-                        <mat-expansion-panel *ngFor="let user of filteredUsers" style="padding: 5px; margin-top: 10px;"
+                        <mat-expansion-panel *ngFor="let account of filteredAccounts" style="padding: 5px; margin-top: 10px;"
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <span>{{dictionaryService.get('USRNAME')}}:</span> &nbsp;
-                                    <span>{{user.username}}</span>
+                                    <span>{{account.username}}</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
                                         <span style="color: rgb(179, 9, 9);"
-                                            *ngIf="user.blocked">{{dictionaryService.get('BLOCKED')}}</span>
+                                            *ngIf="account.blocked">{{dictionaryService.get('BLOCKED')}}</span>
                                     </div>
                                     <mat-icon>account_circle</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
                             <div style="padding-left: 20px;">
-                                <p><span class="body-1">{{dictionaryService.get('EMAIL')}}: {{user.email}}</span></p>
+                                <p><span class="body-1">{{dictionaryService.get('EMAIL')}}: {{account.email}}</span></p>
                                 <p><span class="body-1">{{dictionaryService.get('COMCODE')}}:
-                                        {{companyCodeDetails[user.companyCode]}}</span></p>
-                                <p><span class="body-1">{{dictionaryService.get('ROLE')}}: {{user.role}}</span></p>
+                                        {{companyCodeDetails[account.companyCode]}}</span></p>
+                                <p><span class="body-1">{{dictionaryService.get('ROLE')}}: {{account.role}}</span></p>
                             </div>
 
-                            <mat-action-row *ngIf="user.role !== 'ADMIN'">
-                                <button mat-stroked-button style="color: rgb(179, 9, 9);" (click)="deleteUser(user)">
+                            <mat-action-row *ngIf="account.role !== 'ADMIN'">
+                                <button mat-stroked-button style="color: rgb(179, 9, 9);" (click)="deleteAccount(account)">
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
                                     {{dictionaryService.get('DELUSR')}}
                                 </button>
-                                <button mat-stroked-button color="primary" (click)="blockUser(user)"
+                                <button mat-stroked-button color="primary" (click)="blockAccount(account)"
                                     style="width: 185px;">
-                                    <mat-icon *ngIf="!user.blocked" inline=true style="margin-right: 5px;">block
+                                    <mat-icon *ngIf="!account.blocked" inline=true style="margin-right: 5px;">block
                                     </mat-icon>
-                                    <span *ngIf="!user.blocked">{{dictionaryService.get('BLOCKUSR')}}</span>
-                                    <mat-icon *ngIf="user.blocked" inline=true style="margin-right: 5px;">done
+                                    <span *ngIf="!account.blocked">{{dictionaryService.get('BLOCKUSR')}}</span>
+                                    <mat-icon *ngIf="account.blocked" inline=true style="margin-right: 5px;">done
                                     </mat-icon>
-                                    <span *ngIf="user.blocked">{{dictionaryService.get('UNBLOCKUSR')}}</span>
+                                    <span *ngIf="account.blocked">{{dictionaryService.get('UNBLOCKUSR')}}</span>
                                 </button>
-                                <button mat-stroked-button color="primary" (click)="resetPassword(user)">
+                                <button mat-stroked-button color="primary" (click)="resetPassword(account)">
                                     <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>
                                     {{dictionaryService.get('RESETPSWD')}}
                                 </button>

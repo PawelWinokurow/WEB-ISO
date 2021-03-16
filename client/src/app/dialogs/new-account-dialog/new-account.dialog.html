@@ -38,7 +38,7 @@
                 </mat-form-field>
             </div>
             <div class="toggle-theme" style="padding: 0 10px 30px 10px">
-                <mat-button-toggle-group value="USER" (change)="changeUserType($event)">
+                <mat-button-toggle-group value="USER" (change)="changeAccountType($event)">
                     <mat-button-toggle value="USER">{{ dictionaryService.get('USR') }}
                     </mat-button-toggle>
                     <mat-button-toggle value="ADMIN">{{ dictionaryService.get('ADM') }}

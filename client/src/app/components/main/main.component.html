@@ -19,7 +19,7 @@
       <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
         aria-controls="dropdown-animated" style="background: transparent">
         <span class="mat-h3">
-          {{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!
+          {{dictionaryService.get('HELLO')}}{{authService.getAccount().username}}!
         </span>
         <span class="caret"></span>
       </button>
@@ -53,7 +53,7 @@
         {{ dictionaryService.get('NEWCUS') }}
       </a>
       <mat-divider></mat-divider>
-      <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
+      <a *ngIf="authService.getAccount()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
         (click)="sidenav.close();">
         <mat-icon>supervisor_account</mat-icon> &nbsp;
         {{ dictionaryService.get('ADMINAREA') }}

@@ -9,13 +9,13 @@ export class AuthGuardService implements CanActivate {
     constructor(private router: Router, private authService: AuthService, private dictionaryService: DictionaryService) {}
  
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
-        return this.checkUserLogin(route, state.url);
+        return this.checkAccountLogin(route, state.url);
     }
 
-    checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+    checkAccountLogin(route: ActivatedRouteSnapshot, url: any): boolean {
         if (this.authService.isLoggedIn()) {
-          const userRole = this.authService.getUser().role;
-          if (route.data.roles && route.data.roles.indexOf(userRole) === -1) {
+          const accountRole = this.authService.getAccount().role;
+          if (route.data.roles && route.data.roles.indexOf(accountRole) === -1) {
             alert(this.dictionaryService.get('NOTALLOWED'));
             this.router.navigate(['/login']);
             return false;

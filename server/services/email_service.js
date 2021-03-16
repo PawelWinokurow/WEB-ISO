@@ -10,7 +10,7 @@ function sendEmail(message) {
         port: 465,
         secure: true, // use SSL
         auth: {
-            user: 'paulweinmacher@googlemail.com',
+            account: 'paulweinmacher@googlemail.com',
             pass: 'Tromboman8919'
         }
     }
@@ -28,16 +28,16 @@ function sendEmail(message) {
     });
 }
 
-function sendNewUser(user) {
+function sendNewAccount(account) {
     const message = {
         from: "WEB-ISO",
-        to: user.email,
+        to: account.email,
         subject: 'WEB-ISO account',
         html: `
         <p>Your WEB-ISO account was created: </p>
-        <p>Username: ${user.username}</p>
-        <p>Email: ${user.email}</p>
-        <p>Password: ${user.password}</p>        
+        <p>Username: ${account.username}</p>
+        <p>Email: ${account.email}</p>
+        <p>Password: ${account.password}</p>        
         `
     };
     sendEmail(message);
@@ -63,4 +63,4 @@ function sendCustomerConfirmation(emailTo, hash) {
     sendEmail(message);
 }
 
-module.exports = { sendCustomerConfirmation, resetPassword, sendNewUser };
+module.exports = { sendCustomerConfirmation, resetPassword, sendNewAccount };

@@ -1,17 +1,16 @@
 import { Component,  OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.dialog.html',
-  styleUrls: ['./new-user.dialog.scss']
+  selector: 'app-new-account',
+  templateUrl: './new-account.dialog.html',
+  styleUrls: ['./new-account.dialog.scss']
 })
-export class NewUserDialog implements OnInit {
+export class NewAccountDialog implements OnInit {
 
   hide1 = true;
   hide2 = true;
@@ -19,7 +18,7 @@ export class NewUserDialog implements OnInit {
   userType = 'USER';
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewUserDialog>) {
+    public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewAccountDialog>) {
   }
 
   ngOnInit(): void {
@@ -37,14 +36,14 @@ export class NewUserDialog implements OnInit {
 
   async register() {
     if (this.registerForm.valid) {
-      var newUser = {
+      var newAccount = {
         username: this.registerForm.controls['username'].value,
         email: this.registerForm.controls['email'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
         role: this.userType,
         blocked: false
       }
-      this.dialogRef.close(newUser);
+      this.dialogRef.close(newAccount);
     } else {
       this.registerForm.markAllAsTouched();
     }
@@ -58,7 +57,7 @@ export class NewUserDialog implements OnInit {
    * Change of admin/user type triggers this method.
    * @param event Change event
    */
-     changeUserType(event: any) {
+     changeAccountType(event: any) {
       if (event.value === 'USER') {
         this.userType = 'USER';
       } else {

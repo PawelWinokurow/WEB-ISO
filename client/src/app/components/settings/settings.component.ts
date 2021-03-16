@@ -8,7 +8,7 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TokenProlongationService } from 'src/app/services/token-prolongation.service';
-import { UserService } from 'src/app/services/user.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-settings',
@@ -23,20 +23,20 @@ export class SettingsComponent implements OnInit {
   accountForm: FormGroup;
   passwordForm: FormGroup;
   companyCode: FormControl;
-  selected = this.authService.getUser().companyCode;
+  selected = this.authService.getAccount().companyCode;
 
   setting = 1;
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    public storageService: StorageService, private userService: UserService,
+    public storageService: StorageService, private accountService: AccountService,
     public errorMessageService: ErrorMessageService, private authService: AuthService,
     public listService: ListService) {
   }
 
   ngOnInit(): void {
     this.accountForm = this.formBuilder.group({
-      username: new FormControl({ value: this.authService.getUser().username, disabled: true }),
-      email: new FormControl({ value: this.authService.getUser().email, disabled: true }),
+      username: new FormControl({ value: this.authService.getAccount().username, disabled: true }),
+      email: new FormControl({ value: this.authService.getAccount().email, disabled: true }),
       companyCode: ['', [Validators.required]]
     });
 
@@ -50,7 +50,7 @@ export class SettingsComponent implements OnInit {
   change() {
     //If account form valid
     if (this.accountForm.valid) {
-      var accountToChange = this.authService.getUser();
+      var accountToChange = this.authService.getAccount();
       //If password doesn't update account without password
       if (this.passwordForm.controls['passwordOld'].value +
         this.passwordForm.controls['password'].value +
@@ -83,11 +83,11 @@ export class SettingsComponent implements OnInit {
     this.passwordForm.controls['confirmPassword'].markAsUntouched();
   }
 
-  async updateAccount(userToChange) {
-    userToChange.blocked = false;
-    let userResponse = await this.userService.updateUser(userToChange).toPromise();
-    if ('user' in userResponse) {
-      this.authService.setUser(userResponse.user);
+  async updateAccount(accountToChange) {
+    accountToChange.blocked = false;
+    let accountResponse = await this.accountService.updateAccount(accountToChange).toPromise();
+    if ('account' in accountResponse) {
+      this.authService.setAccount(accountResponse.account);
     }
     this.resetPasswordForm();
   }

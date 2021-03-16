@@ -1,4 +1,4 @@
-interface User {
+interface Account {
     email: string,
     username: string,
     companyCode: string,

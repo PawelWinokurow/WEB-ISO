@@ -26,15 +26,15 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
-import { UserService } from './services/user.service';
+import { AccountService } from './services/account.service';
 import { RecaptchaService } from './services/recaptcha.service';
 import { CustomerService } from './services/customer.service';
 import { ResetPasswordDialog } from './dialogs/reset-password/reset-password.dialog';
-import { DeleteUserDialog } from './dialogs/delete-user-dialog/delete-user.dialog';
+import { DeleteAccountDialog } from './dialogs/delete-account-dialog/delete-account.dialog';
 import { EmailDialog } from './dialogs/email-dialog/email.dialog';
-import { NewUserDialog } from './dialogs/new-user-dialog/new-user.dialog';
 import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialog';
 
 @NgModule({
   declarations: [
@@ -47,9 +47,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     LoginComponent,
     SettingsComponent,
     AdminComponent,
-    DeleteUserDialog,
+    DeleteAccountDialog,
     ResetPasswordDialog,
-    NewUserDialog, 
+    NewAccountDialog, 
   ],
   imports: [
     BrowserModule,
@@ -79,7 +79,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DateService,
     AuthService,
     AuthGuardService,
-    UserService,
+    AccountService,
     RecaptchaService,
     CustomerService,
     {

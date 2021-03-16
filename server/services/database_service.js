@@ -103,48 +103,48 @@ function storeCustomer(hash, customer) {
 }
 
 /**
- * Stores user in the database.
- * @param  {object} user User object 
+ * Stores account in the database.
+ * @param  {object} account Account object 
  */
-function storeUser(user) {
-  const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-  const values = [[user.email, user.username, user.password, user.companyCode, user.role, false]];
+function storeAccount(account) {
+  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked) VALUES (?);';
+  const values = [[account.email, account.username, account.password, account.companyCode, account.role, false]];
   return insertQueryPromise(insertStatement, values);
 }
 
 /**
- * Updates user in the database.
- * @param  {object} user User object 
+ * Updates account in the database.
+ * @param  {object} account Account object 
  */
-function updateUser(user) {
-  let updateStatement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
-  let values = [user.companyCode, user.blocked, user.email];
+function updateAccount(account) {
+  let updateStatement = `UPDATE accounts SET companycode = ?, blocked = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.blocked, account.email];
   //If we change password
-  if (user.password) {
-    updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
-    values = [user.password, user.companyCode, user.blocked, user.email];
+  if (account.password) {
+    updateStatement = `UPDATE accounts SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
+    values = [account.password, account.companyCode, account.blocked, account.email];
   }
   return updateQueryPromise(updateStatement, values);
 }
 
 /**
- * Deletes user from the database.
- * @param  {object} user User object 
+ * Deletes account from the database.
+ * @param  {object} account Account object 
  */
-function deleteUser(user) {
-  const deleteStatement = 'DELETE FROM users WHERE email = ?';
-  const values = [user.email];
+function deleteAccount(account) {
+  const deleteStatement = 'DELETE FROM accounts WHERE email = ?';
+  const values = [account.email];
   return deleteQueryPromise(deleteStatement, values);
 }
 
 /**
- * Checks if user not exists.
- * @param  {object} user User object 
- * @returns true if user is not in the database
+ * Checks if account not exists.
+ * @param  {object} account Account object 
+ * @returns true if account is not in the database
  */
-function isUserNotExists(user) {
-  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-  const values = [user.email, user.username];
+function isAccountNotExists(account) {
+  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+  const values = [account.email, account.username];
   return selectQueryPromise(selectStatement, values)
     .then(result => new Promise((resolve, reject) => {
       if (Array.isArray(result) && result.length) {
@@ -183,12 +183,12 @@ function removeOldCustomers() {
 }
 
 /**
- * Retrieves user from the database.
- * @param  {object} user User object 
+ * Retrieves account from the database.
+ * @param  {object} account Account object 
  */
-function getUser(user) {
-  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-  const values = [user.email, user.username];
+function getAccount(account) {
+  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+  const values = [account.email, account.username];
   return selectQueryPromise(selectStatement, values)
     .then(result => {
       if (Array.isArray(result) && result.length) {
@@ -210,10 +210,10 @@ function getUser(user) {
 }
 
 /**
- * Retrieves all users from the database.
+ * Retrieves all accounts from the database.
  */
-function getUsers() {
-  const selectStatement = 'SELECT * FROM users;';
+function getAccounts() {
+  const selectStatement = 'SELECT * FROM accounts;';
   const values = [];
   return selectQueryPromise(selectStatement, values)
     .then(result => result.map(val => {
@@ -236,14 +236,14 @@ function close() {
 
 module.exports = {
   close,
-  getUsers,
-  getUser,
+  getAccounts,
+  getAccount,
   removeOldCustomers,
   checkConfirmation,
-  isUserNotExists,
-  deleteUser,
-  updateUser,
-  storeUser,
+  isAccountNotExists,
+  deleteAccount,
+  updateAccount,
+  storeAccount,
   storeCustomer,
   connect
 };
