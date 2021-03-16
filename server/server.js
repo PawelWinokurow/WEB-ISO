@@ -17,8 +17,6 @@ const recaptchaService = require('./services/recaptcha_service');
 
 databaseService.connect();
 
-//envelope.xml for testing
-const ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
 
 /**
  * Class to to manage the server. It contains node js express application.
@@ -97,16 +95,3 @@ class Server {
 }
 
 new Server().start()
-
-/*
-setTimeout(function () {
-  //soapService.test()
-
-  const message = {
-    from: "BayWa",
-    to: 'pawelwinokurow@gmail.com',
-    subject: 'Customer confirmation',
-    html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + "asdadasdasa" + '">here</a> to confirm the customer.</p>'
-  };
-  //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com', message)
-}, 1000);*/

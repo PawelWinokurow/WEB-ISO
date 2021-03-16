@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 let PROXY_AGENT = null
 
 function setProxyAgent(agent) {

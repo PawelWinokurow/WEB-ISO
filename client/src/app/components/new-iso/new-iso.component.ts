@@ -15,6 +15,7 @@ import { SendCustomerConfirmationDialog } from 'src/app/dialogs/send-customer-co
 import { DateService } from 'src/app/services/date.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { Router } from '@angular/router';
 
 
 /**
@@ -58,7 +59,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
     public storageService: StorageService, private toastrService: ToastrService, private dialog: MatDialog, private customerService: CustomerService, 
-    public errorMessageService: ErrorMessageService, private searchService: SearchService, private dateService: DateService,
+    public errorMessageService: ErrorMessageService, private searchService: SearchService, private router: Router,
     public authService: AuthService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
@@ -264,7 +265,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   /**
    * Opens send customer dialog.
    */
-  openSendSOAPDialog() {
+   openSendSOAPDialog() {
     /*const customer = this.constructCustomer(true)
     this.customerService.sendCustomer(customer).subscribe(res => {
       this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
@@ -275,17 +276,14 @@ export class NewISOComponent implements OnInit, OnDestroy {
       //backdropClass: 'backdrop-background',
     });
 
-    sendCustomerDialogRef.afterClosed().subscribe(isDirect => {
+    sendCustomerDialogRef.afterClosed().subscribe(async isDirect => {
       const customer = this.constructCustomer(isDirect);
-      if (isDirect == true) {
-        this.customerService.sendCustomer(customer).subscribe(res => {
-          this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
-        });
-      } else if (isDirect == false) {
-        this.customerService.sendCustomer({ emailTo: this.authService.getAccount().email, ...customer }).subscribe(res => {
-          this.toastrService.success(this.dictionaryService.get('CONFISSND'), this.dictionaryService.get('SUC'));
-        });
+      if (isDirect) {
+        await this.customerService.sendCustomer(customer);
+      } else {
+        await this.customerService.sendCustomer({ emailTo: this.authService.getAccount().email, ...customer });
       }
+      //this.router.navigate(['/preselection']);
     });
   }
 
@@ -311,96 +309,12 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * @returns Customer object to send.
    */
   constructCustomer(isDirect: boolean) {
-    const data = {
-      //Preselection
-      companyCode: this.authService.getAccount().companyCode?.code ?? '',
 
-      //Shared forms
-
-      //Contact information
-      legalForm: this.contactInformation?.get('legalForm')?.value?.code ?? '',
-      interfaceNumber: this.contactInformation?.get('interfaceNumber')?.value ?? '',
-      salutation: this.contactInformation?.get('salutation')?.value?.code ?? '',
-      additionalName: this.contactInformation?.get("additionalName")?.value ?? '',
-      city: this.contactInformation?.get("city")?.value ?? '',
-      zip: this.contactInformation?.get("zip")?.value ?? '',
-      zipMailbox: this.contactInformation?.get("zipMailbox")?.value ?? '',
-      mailbox: this.contactInformation?.get("mailbox")?.value ?? '',
-      street: this.contactInformation?.get("street")?.value ?? '',
-      houseNumber: this.contactInformation?.get("houseNumber")?.value ?? '',
-      country: this.contactInformation?.get("country")?.value?.code ?? '',
-      phone: this.contactInformation?.get("phone")?.value ?? '',
-      fax: this.contactInformation?.get("fax")?.value ?? '',
-      mobile: this.contactInformation?.get("mobile")?.value ?? '',
-      email: this.contactInformation?.get("email")?.value ?? '',
-
-      //Payment
-      taxId: this.payment?.get("taxId")?.value ?? '',
-      vatId: this.payment?.get("vatId")?.value ?? '',
-      industryFieldCode: this.payment?.get("industryFieldCode")?.value?.code ?? '',
-      industryField: this.payment?.get("industryField")?.value?.code ?? '',
-      iban: this.payment?.get("iban")?.value ?? '',
-      bic: this.payment?.get("bic")?.value ?? '',
-      bank: this.payment?.get("bank")?.value ?? '',
-      paymentTerm: this.payment?.get("paymentTerm")?.value?.code ?? '',
-      notes: this.payment?.get("notes")?.value ?? '',
-      sepa: this.payment?.get("sepa")?.value ?? '',
-      //Uploaded files
-      files: this.upload?.get("files")?.value ?? '',
-
-      //Person forms
-      title: this.contactInformation?.get('title')?.value?.code ?? '',
-      firstName: this.contactInformation?.get('firstName')?.value ?? '',
-      secondName: this.contactInformation?.get('secondName')?.value ?? '',
-      birthDate: this.contactInformation?.get("birthDate")?.value == null ? '' :
-        this.dateService.formatDate(new Date(this.contactInformation?.get("birthDate").value)),
-
-      //Person debit forms
-      agb: this.payment?.get('agb')?.value ?? '',
-      creditLimit: this.payment?.get('creditLimit')?.value ?? '',
-
-      //Organization forms
-      orgaPersons: this.contactInformation?.get('orgaPersons')?.value ?? '',
-
-      //Organization debit forms
-
-      //Applicant 0
-      applicantSalutation0: this.applicant?.get('salutation')?.value?.code ?? '',
-      applicantTitle0: this.applicant?.get('title')?.value?.code ?? '',
-      applicantFirstName0: this.applicant?.get('firstName')?.value ?? '',
-      applicantSecondName0: this.applicant?.get('secondName')?.value ?? '',
-      applicantBirthDate0: this.applicant?.get('birthDate')?.value == null ? '' :
-        this.dateService.formatDate(new Date(this.applicant?.get("birthDate").value)),
-      applicantPhone0: this.applicant?.get('phone')?.value ?? '',
-      applicantMobile0: this.applicant?.get('mobile')?.value ?? '',
-      applicantEmail0: this.applicant?.get('email')?.value ?? '',
-
-      //Applicant 1
-      applicantSalutation1: this.applicant?.get('salutation1')?.value?.code ?? '',
-      applicantTitle1: this.applicant?.get('title1')?.value?.code ?? '',
-      applicantFirstName1: this.applicant?.get('firstName1')?.value ?? '',
-      applicantSecondName1: this.applicant?.get('secondName1')?.value ?? '',
-      applicantBirthDate1: this.applicant?.get('birthDate1')?.value == null ? '' :
-        this.dateService.formatDate(new Date(this.applicant?.get("birthDate1").value)),
-      applicantPhone1: this.applicant?.get('phone1')?.value ?? '',
-      applicantMobile1: this.applicant?.get('mobile1')?.value ?? '',
-      applicantEmail1: this.applicant?.get('email1')?.value ?? '',
-
-      //Applicant 2
-      applicantSalutation2: this.applicant?.get('salutation2')?.value?.code ?? '',
-      applicantTitle2: this.applicant?.get('title2')?.value?.code ?? '',
-      applicantFirstName2: this.applicant?.get('firstName2')?.value ?? '',
-      applicantSecondName2: this.applicant?.get('secondName2')?.value ?? '',
-      applicantBirthDate2: this.applicant?.get('birthDate2')?.value == null ? '' :
-        this.dateService.formatDate(new Date(this.applicant?.get("birthDate2").value)),
-      applicantPhone2: this.applicant?.get('phone2')?.value ?? '',
-      applicantMobile2: this.applicant?.get('mobile2')?.value ?? '',
-      applicantEmail2: this.applicant?.get('email2')?.value ?? '',
-
-    };
+    const customerObject = this.customerService.constructObject(this.contactInformation, this.payment, this.applicant, this.upload);
+    
     return {
       isDirect: isDirect, customerType: this.storageService.customerType,
-      debitCreditType: this.storageService.debitCreditType, data: data
+      debitCreditType: this.storageService.debitCreditType, data: customerObject
     }
   }
 
