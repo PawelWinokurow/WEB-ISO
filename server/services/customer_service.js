@@ -133,6 +133,8 @@ async function createCustomer(req, res) {
 
   try {
     const requestCustomer = req.body.customer;
+    const emailTo = req.body.decodedUser.email;
+    console.log(emailTo);
     let sapCustomer = await composeCustomer(requestCustomer);
     let envelope = JSON.stringify(sapCustomer.getJSONArgs());
     if (requestCustomer.isDirect) {
@@ -141,14 +143,7 @@ async function createCustomer(req, res) {
       const hash = cryptoService.generateHash();
       //TODO catch error
       await databaseService.storeCustomer(hash, envelope);
-
-      const message = {
-        from: "BayWa",
-        to: emailTo,
-        subject: 'Customer confirmation',
-        html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the customer.</p>'
-      };
-      emailService.sendEmail(message);
+      emailService.sendCustomerConfirmation(emailTo, hash);
     }
     res.json({
       ok: true

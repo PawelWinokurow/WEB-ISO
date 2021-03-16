@@ -1,5 +1,18 @@
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const paswdgen = require('generate-password');
+
+/**
+ * Generates random password.
+ */
+ function generatePassword() {
+    let password = paswdgen.generate({
+        length: 20,
+        numbers: true,
+        symbols: true
+    });
+    return password;
+}
 
 /**
  * Generates the random hash depending on the current timestamp.
@@ -31,4 +44,4 @@ function comparePasswords(plaintextPassword, hashPassword) {
     return bcrypt.compareSync(plaintextPassword, hashPassword);
 }
 
-module.exports = { comparePasswords, hashPassword, generateHash };
+module.exports = { comparePasswords, hashPassword, generateHash, generatePassword };

@@ -1,5 +1,6 @@
 const cryptoService = require('./crypto_service');
 const databaseService = require('./database_service');
+const emailService = require('./email_service');
 
 
 async function createUser(req, res) {
@@ -8,11 +9,19 @@ async function createUser(req, res) {
         let userToStore = {
             ...requestUser
         };
-        userToStore.password = cryptoService.hashPassword(requestUser.password);
+        let userToSend = {
+            ...requestUser
+        };
+
+        const firstPassword = cryptoService.generatePassword();
+        
+        userToStore.password = cryptoService.hashPassword(firstPassword);
+        userToSend.password = firstPassword;
         
         let isUserNotExists = await databaseService.isUserNotExists(requestUser);
         if (isUserNotExists) {
             await databaseService.storeUser(userToStore);
+            emailService.sendNewUser(userToSend);
             res.json({
                 message: 'USRISCR'
             });
@@ -100,18 +109,12 @@ async function resetPassword(req, res) {
         let oldUser = {
             ...requestUser
         }
-        const newPassword = cryptoService.generateHash().slice(0, 20);
+        const newPassword = cryptoService.generatePassword();
         requestUser.password = cryptoService.hashPassword(newPassword);
 
         await databaseService.updateUser(requestUser);
+        emailService.resetPassword(requestUser.email, newPassword);
 
-        const message = {
-            from: "WEB-ISO",
-            to: requestUser.email,
-            subject: 'New password WEB-ISO',
-            html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${newPassword}</p>`
-        };
-        emailService.sendEmail(message);
         res.json({
             message: 'PSWDISRES',
         })

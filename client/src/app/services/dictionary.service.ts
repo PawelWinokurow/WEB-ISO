@@ -23,7 +23,8 @@ export class DictionaryService {
     ['PSWDFOG', 'Passwort vergessen?'],
     
     ['NEWCUS', 'Neuer Kunde'],
-    ['SETTINGS', 'Einstellungen'],
+    ['ACC', 'Konto'],
+    ['LANG', 'Sprache'],
     ['LOGOUT', 'Abmelden'],
     ['ADMINAREA', 'Admin-Bereich'],
     
@@ -70,7 +71,6 @@ export class DictionaryService {
     ['SND', 'Senden'],
     ['ADDFILE', 'Datei hinzufügen'],
 
-    ['PRESEL', 'Vorauswahl'],
     ['CUSTYPE', 'Kundentyp'],
     ['PER', 'Person'],
     ['ORG', 'Organisation'],
@@ -172,7 +172,8 @@ export class DictionaryService {
     ['HELLO', 'Hello, '],
     ['NEWCUS', 'New customer'],
     ['LOGOUT', 'Sign out'],
-    ['SETTINGS', 'Settings'],
+    ['ACC', 'Account'],
+    ['LANG', 'Language'],
     ['ADMINAREA', 'Admin area'],
     ['ROLE', 'Role'],
     
@@ -194,7 +195,6 @@ export class DictionaryService {
     ['SND', 'Send'],
     ['ADDFILE', 'Add file'],
     
-    ['PRESEL', 'Preselection'],
     ['CUSTYPE', 'Customer type'],
     ['PER', 'Person'],
     ['DEB', 'Debitor'],

@@ -22,8 +22,7 @@ export class NewUserDialog implements OnInit {
   userType = 'USER';
 
   constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    public errorMessageService: ErrorMessageService, private userService: UserService,
-    public listService: ListService, private authService: AuthService, private dialogRef: MatDialogRef<NewUserDialog>) {
+    public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewUserDialog>) {
   }
 
   ngOnInit(): void {
@@ -31,12 +30,8 @@ export class NewUserDialog implements OnInit {
       //TODO username:only letters and no @
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
       companyCode: ['', [Validators.required]],
-    },
-      { validator: MustMatch('password', 'confirmPassword') }
-    );
+    });
   }
 
   close(){
@@ -46,8 +41,6 @@ export class NewUserDialog implements OnInit {
   async register() {
     if (this.registerForm.valid) {
       var newUser = {
-        username: this.registerForm.controls['username'].value,
-        password: this.registerForm.controls['password'].value,
         email: this.registerForm.controls['email'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
         role: this.userType
@@ -73,7 +66,6 @@ export class NewUserDialog implements OnInit {
         this.userType = 'ADMIN';
       }
     }
-
 }
 
 // custom validator to check that two fields match

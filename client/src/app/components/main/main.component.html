@@ -14,26 +14,28 @@
     <span class="space"></span>
 
 
-    <div class="btn-group" dropdown style="margin-right: 40px;">
-      <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-        aria-controls="dropdown-animated" style="background: transparent;">
+    <div class="btn-group" dropdown style="margin-right: 40px;" *ngIf="authService.isLoggedIn()" 
+    triggers="hover" #dp="bs-dropdown" [insideClick]="true">
+      <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
+        aria-controls="dropdown-animated" style="background: transparent">
         <span class="mat-h3">
           {{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!
         </span>
         <span class="caret"></span>
       </button>
-      <div id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+      <div id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" 
+      aria-labelledby="button-animated" (mouseleave)="dp.hide()">
         <mat-nav-list>
           <a mat-list-item (click)="dictionaryService.switchLanguage()">
             <mat-icon>language</mat-icon> &nbsp;
-            {{ dictionaryService.currentLanguage }}
+            {{ dictionaryService.get('LANG') }}
           </a>
-          <a mat-list-item [routerLink]="'/settings'">
+          <a mat-list-item [routerLink]="'/settings'" (click)="dp.hide()">
             <mat-icon>settings</mat-icon> &nbsp;
-            {{ dictionaryService.get('SETTINGS') }}
+            {{ dictionaryService.get('ACC') }}
           </a>
           <mat-divider></mat-divider>
-          <a mat-list-item (click)="logout()">
+          <a mat-list-item (click)="logout()" (click)="dp.hide()">
             <mat-icon>logout</mat-icon> &nbsp;
             {{ dictionaryService.get('LOGOUT') }}
           </a>
@@ -56,7 +58,7 @@
       <mat-divider></mat-divider>
       <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
         (click)="sidenav.toggle()">
-        <mat-icon>build</mat-icon> &nbsp;
+        <mat-icon>supervisor_account</mat-icon> &nbsp;
         {{ dictionaryService.get('ADMINAREA') }}
       </a>
 

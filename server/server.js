@@ -92,8 +92,8 @@ class Server {
   }
 
   start() {
-    this.expressApp.listen(process.env.WEB_PORT, () => {
-      console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
+    this.expressApp.listen(process.env.PORT, () => {
+      console.log(`WEB-ISO server is listening at ${process.env.HOST}`)
     })
   }
 }

@@ -30,4 +30,39 @@ function sendEmail(message) {
     });
 }
 
-module.exports = { sendEmail };
+function sendNewUser(user) {
+    const message = {
+        from: "WEB-ISO",
+        to: emailTo,
+        subject: 'WEB-ISO account',
+        html: `
+        <p>Your WEB-ISO account was created: </p>
+        <p>Username: ${user.username}</p>
+        <p>Email: ${user.email}</p>
+        <p>Password: ${user.password}</p>        
+        `
+    };
+    emailService.sendEmail(message);
+}
+
+function resetPassword(emailTo, password) {
+    const message = {
+        from: "WEB-ISO",
+        to: emailTo,
+        subject: 'New password WEB-ISO',
+        html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${password}</p>`
+    };
+    emailService.sendEmail(message);
+}
+
+function sendCustomerConfirmation(emailTo, hash) {
+    const message = {
+        from: "BayWa",
+        to: emailTo,
+        subject: 'Customer confirmation',
+        html: `<p>Click <a href="${process.env.HOST}/confirm?hash=${hash}">here</a> to confirm the customer.</p>`
+    };
+    emailService.sendEmail(message);
+}
+
+module.exports = { sendCustomerConfirmation, resetPassword, sendNewUser };

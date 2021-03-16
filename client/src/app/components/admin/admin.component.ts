@@ -65,12 +65,15 @@ export class AdminComponent implements OnInit {
   }
 
   async newUser() {
-    const newUserDialog = this.dialog.open(NewUserDialog, { disableClose: true });
-    const newUser = await newUserDialog.afterClosed().toPromise();
-    await this.userService.createUser(newUser).toPromise();
-    this.users.push(newUser);
-    this.sortByUsername(this.users);
-    this.filterQuery(this.filter.value);
+    const newUserDialog = this.dialog.open(NewUserDialog);
+    const result = await newUserDialog.afterClosed().toPromise();
+    if (result) {
+      const newUser = await newUserDialog.afterClosed().toPromise();
+      await this.userService.createUser(newUser).toPromise();
+      this.users.push(newUser);
+      this.sortByUsername(this.users);
+      this.filterQuery(this.filter.value);
+    }
   }
 
   async deleteUser(userToSend) {
