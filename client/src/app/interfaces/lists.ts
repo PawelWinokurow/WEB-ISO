@@ -1,4 +1,3 @@
-
 /**
  * Code details fileds:
  * code: unique identifier also used in SAP system

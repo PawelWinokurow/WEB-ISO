@@ -48,7 +48,7 @@ export class HttpService {
       console.error(error);
       if (error.status == 401) {
         alert(this.dictionaryService.get('NOTALLOWED'));
-        //this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
       return of(result as T);
     };

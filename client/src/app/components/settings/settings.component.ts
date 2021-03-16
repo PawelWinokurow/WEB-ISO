@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { TokenProlongationService } from 'src/app/services/token-prolongation.service';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -35,7 +32,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountForm = this.formBuilder.group({
-      accountuntname: new FormControl({ value: this.authService.getAccountaccountccountname, disabled: true }),
+      username: new FormControl({ value: this.authService.getAccount().username, disabled: true }),
       email: new FormControl({ value: this.authService.getAccount().email, disabled: true }),
       companyCode: ['', [Validators.required]]
     });
