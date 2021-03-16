@@ -23,7 +23,7 @@ body {
 }
 
 .inner-component {
-  padding: 10px 0 0 10px;
+  padding: 10px 0 0 0;
   position: relative;
   height: calc(100vh - 64px);  
   background-color: rgb(240, 240, 240);
@@ -59,8 +59,7 @@ mat-form-field {
 }
 
 .stepper-title {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 20px 0 0 30px;
   min-width: 530px;
   width: 30%;
 }
@@ -135,7 +134,7 @@ mat-button-toggle {
 }
 
 .vertical-flex{
-  height: calc(100vh - 226px);
+  height: calc(100vh - 212px);
   display: flex;
   overflow: auto;
 }
@@ -192,6 +191,14 @@ mat-button-toggle {
   border-right: 1px solid; border-color: rgba(201, 201, 201, 0.534);
 }
 
+.left-border {
+  border-left: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+.top-border {
+  border-top: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
 .bottom-border {
   border-bottom: 1px solid; border-color: rgba(201, 201, 201, 0.534);
 }
@@ -199,4 +206,8 @@ mat-button-toggle {
 button:focus, button:active:focus, button.active:focus {
   outline: none !important;
   outline-style: none !important;
+  }
+
+  .mat-horizontal-content-container{
+    padding: 0 !important;
   }
