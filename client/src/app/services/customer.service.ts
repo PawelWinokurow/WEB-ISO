@@ -23,28 +23,30 @@ export class CustomerService {
     return await this.httpService.request(this.http.post(`${environment.serverURL}/request`, { customer: customer })).toPromise()
   }
 
-  constructObject(contactInformation, payment, applicant, upload) {
+  constructObject(generalInformation, addressInformation, payment, applicant, upload) {
     const data = {
       companyCode: this.authService.getAccount().companyCode?.code ?? '',
 
       //Shared forms
 
-      //Contact information
-      legalForm: contactInformation?.get('legalForm')?.value?.code ?? '',
-      interfaceNumber: contactInformation?.get('interfaceNumber')?.value ?? '',
-      salutation: contactInformation?.get('salutation')?.value?.code ?? '',
-      additionalName: contactInformation?.get("additionalName")?.value ?? '',
-      city: contactInformation?.get("city")?.value ?? '',
-      zip: contactInformation?.get("zip")?.value ?? '',
-      zipMailbox: contactInformation?.get("zipMailbox")?.value ?? '',
-      mailbox: contactInformation?.get("mailbox")?.value ?? '',
-      street: contactInformation?.get("street")?.value ?? '',
-      houseNumber: contactInformation?.get("houseNumber")?.value ?? '',
-      country: contactInformation?.get("country")?.value?.code ?? '',
-      phone: contactInformation?.get("phone")?.value ?? '',
-      fax: contactInformation?.get("fax")?.value ?? '',
-      mobile: contactInformation?.get("mobile")?.value ?? '',
-      email: contactInformation?.get("email")?.value ?? '',
+      //General information
+      legalForm: generalInformation?.get('legalForm')?.value?.code ?? '',
+      interfaceNumber: generalInformation?.get('interfaceNumber')?.value ?? '',
+      salutation: generalInformation?.get('salutation')?.value?.code ?? '',
+      additionalName: generalInformation?.get("additionalName")?.value ?? '',
+      
+      //Address information
+      street: addressInformation?.get("street")?.value ?? '',
+      houseNumber: addressInformation?.get("houseNumber")?.value ?? '',
+      mailbox: addressInformation?.get("mailbox")?.value ?? '',
+      zipMailbox: addressInformation?.get("zipMailbox")?.value ?? '',
+      zip: addressInformation?.get("zip")?.value ?? '',
+      city: addressInformation?.get("city")?.value ?? '',
+      country: addressInformation?.get("country")?.value?.code ?? '',
+      phone: addressInformation?.get("phone")?.value ?? '',
+      fax: addressInformation?.get("fax")?.value ?? '',
+      mobile: addressInformation?.get("mobile")?.value ?? '',
+      email: addressInformation?.get("email")?.value ?? '',
 
       //Payment
       taxId: payment?.get("taxId")?.value ?? '',
@@ -61,18 +63,18 @@ export class CustomerService {
       files: upload?.get("files")?.value ?? '',
 
       //Person forms
-      title: contactInformation?.get('title')?.value?.code ?? '',
-      firstName: contactInformation?.get('firstName')?.value ?? '',
-      secondName: contactInformation?.get('secondName')?.value ?? '',
-      birthDate: contactInformation?.get("birthDate")?.value == null ? '' :
-        this.dateService.formatDate(new Date(contactInformation?.get("birthDate").value)),
+      title: generalInformation?.get('title')?.value?.code ?? '',
+      firstName: generalInformation?.get('firstName')?.value ?? '',
+      secondName: generalInformation?.get('secondName')?.value ?? '',
+      birthDate: generalInformation?.get("birthDate")?.value == null ? '' :
+        this.dateService.formatDate(new Date(generalInformation?.get("birthDate").value)),
 
       //Person debit forms
       agb: payment?.get('agb')?.value ?? '',
       creditLimit: payment?.get('creditLimit')?.value ?? '',
 
       //Organization forms
-      orgaPersons: contactInformation?.get('orgaPersons')?.value ?? '',
+      orgaPersons: generalInformation?.get('orgaPersons')?.value ?? '',
 
       //Organization debit forms
 

@@ -2,10 +2,10 @@
     <div class="stepper-container">
         <mat-horizontal-stepper class="alternate-theme" linear="false" #stepper>
 
-            <!--contact information mat-step for person-->
-            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="contactInformation">
-                <form [formGroup]="contactInformation">
-                    <ng-template matStepLabel>{{dictionaryService.get('CONTACT')}}</ng-template>
+            <!--general information mat-step for person-->
+            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="generalInformation">
+                <form [formGroup]="generalInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('GENINF')}}</ng-template>
                     <div class="vertical-flex">
                         <div class="flex-column">
                             <div class="stepper-title">
@@ -24,7 +24,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LEGFRM', errorType.key)}}
                                             </mat-error>
@@ -48,7 +48,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
@@ -72,7 +72,7 @@
                                             <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('firstName').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LNAME', errorType.key)}}
                                             </mat-error>
@@ -83,7 +83,7 @@
                                             <mat-label>{{dictionaryService.get('SNAME')}}</mat-label>
                                             <input matInput formControlName="secondName" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('secondName').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('secondName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SNAME', errorType.key)}}
                                             </mat-error>
@@ -106,7 +106,7 @@
                                             <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
                                             <mat-datepicker #birthDate></mat-datepicker>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('birthDate').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('birthDate').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('BRTH', errorType.key)}}
                                             </mat-error>
@@ -114,9 +114,24 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
 
+                    <div class="space"></div>
+                    <div class="stepper-controls buttons-theme">
+                        <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--address information mat-step for person-->
+            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="addressInformation">
+                <form [formGroup]="addressInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('ADDRINF')}}</ng-template>
+                    <div class="vertical-flex">
                         <div class="flex-column">
                             <div class="stepper-title">
                                 <h2 style="margin:0">{{dictionaryService.get('ADDRINF')}}</h2>
@@ -129,7 +144,7 @@
                                             <mat-label>{{dictionaryService.get('STR')}}</mat-label>
                                             <input matInput formControlName="street" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('street').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('street').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('STR', errorType.key)}}
                                             </mat-error>
@@ -140,7 +155,7 @@
                                             <mat-label>{{dictionaryService.get('HNO')}}</mat-label>
                                             <input matInput formControlName="houseNumber" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('houseNumber').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('houseNumber').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('HNO', errorType.key)}}
                                             </mat-error>
@@ -169,7 +184,7 @@
                                             <mat-label>{{dictionaryService.get('ZIP')}}</mat-label>
                                             <input matInput formControlName="zip" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('zip').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('zip').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('ZIP', errorType.key)}}
                                             </mat-error>
@@ -180,7 +195,7 @@
                                             <mat-label>{{dictionaryService.get('CITY')}}</mat-label>
                                             <input matInput formControlName="city" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('city').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('city').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('CITY', errorType.key)}}
                                             </mat-error>
@@ -202,7 +217,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('country').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('COU', errorType.key)}}
                                             </mat-error>
@@ -236,7 +251,7 @@
                                             <mat-label>{{dictionaryService.get('EMAIL')}}</mat-label>
                                             <input matInput formControlName="email">
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('email').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('email').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('EMAIL', errorType.key)}}
                                             </mat-error>
@@ -504,10 +519,10 @@
             </mat-step>
 
 
-            <!--contact information mat-step for organization-->
-            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="contactInformation">
-                <form [formGroup]="contactInformation">
-                    <ng-template matStepLabel>{{dictionaryService.get('CONTACT')}}</ng-template>
+            <!--general information mat-step for organization-->
+            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="generalInformation">
+                <form [formGroup]="generalInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('GENINF')}}</ng-template>
                     <div class="vertical-flex">
                         <div class="flex-column">
                             <div class="stepper-title">
@@ -527,7 +542,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LEGFRM', errorType.key)}}
                                             </mat-error>
@@ -551,7 +566,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
@@ -562,7 +577,7 @@
                                             <mat-label>{{dictionaryService.get('COMPERS')}}</mat-label>
                                             <input matInput formControlName="orgaPersons" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('orgaPersons').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('orgaPersons').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('COMPERS', errorType.key)}}
                                             </mat-error>
@@ -582,6 +597,23 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="space"></div>
+                    <div class="stepper-controls buttons-theme">
+                        <button mat-stroked-button class="stepper-button" matStepperNext #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--address information mat-step for organization-->
+            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="addressInformation">
+                <form [formGroup]="addressInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('ADDRINF')}}</ng-template>
+                    <div class="vertical-flex">
                         <div class="flex-column">
                             <div class="stepper-title">
                                 <h2 style="margin:0">{{dictionaryService.get('ADDRINF')}}</h2>
@@ -596,7 +628,7 @@
                                             <mat-label>{{dictionaryService.get('STR')}}</mat-label>
                                             <input matInput formControlName="street" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('street').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('street').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('STR', errorType.key)}}
                                             </mat-error>
@@ -607,7 +639,7 @@
                                             <mat-label>{{dictionaryService.get('HNO')}}</mat-label>
                                             <input matInput formControlName="houseNumber" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('houseNumber').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('houseNumber').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('HNO', errorType.key)}}
                                             </mat-error>
@@ -636,7 +668,7 @@
                                             <mat-label>{{dictionaryService.get('ZIP')}}</mat-label>
                                             <input matInput formControlName="zip" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('zip').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('zip').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('ZIP', errorType.key)}}
                                             </mat-error>
@@ -647,7 +679,7 @@
                                             <mat-label>{{dictionaryService.get('CITY')}}</mat-label>
                                             <input matInput formControlName="city" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('city').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('city').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('CITY', errorType.key)}}
                                             </mat-error>
@@ -669,7 +701,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('country').errors | keyvalue;">
+                                                *ngFor="let errorType of addressInformation.get('country').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('COU', errorType.key)}}
                                             </mat-error>
@@ -726,7 +758,7 @@
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
                     <div class="vertical-flex">
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details !== 'Privat'">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details !== 'Privat'">
                             <div class="stepper-title">
                                 <h2 style="margin:0">{{dictionaryService.get('APP')}}</h2>
                                 <hr flex />
@@ -811,7 +843,7 @@
                         </div>
 
                         <!--1. Col-->
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details === 'Privat'">
                             <div class="stepper-title">
                                 <h2 style="margin:0">{{dictionaryService.get('APP1')}}</h2>
                                 <hr flex />
@@ -916,7 +948,7 @@
                         </div>
 
                         <!--2. Col-->
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details === 'Privat'">
                             <div class="stepper-title">
                                 <h2 style="margin:0">{{dictionaryService.get('APP2')}}</h2>
                                 <hr flex />

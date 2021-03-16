@@ -35,7 +35,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   @ViewChild('UploadFileInput') uploadFileInput: ElementRef;
 
-  contactInformation: FormGroup;
+  generalInformation: FormGroup;
+  addressInformation: FormGroup;
   applicant: FormGroup;
   payment: FormGroup;
   upload: FormGroup;
@@ -58,7 +59,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, public dictionaryService: DictionaryService, public listService: ListService, 
-    public storageService: StorageService, private toastrService: ToastrService, private dialog: MatDialog, private customerService: CustomerService, 
+    public storageService: StorageService, private dialog: MatDialog, private customerService: CustomerService, 
     public errorMessageService: ErrorMessageService, private searchService: SearchService, private router: Router,
     public authService: AuthService) {
     this.titles = this.listService.titles;
@@ -144,7 +145,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Initializes forms shared by all stepper settings.
    */
   initSharedForms() {
-    this.contactInformation = this.formBuilder.group({
+    this.generalInformation = this.formBuilder.group({
       legalForm: ['', Validators.required],
       interfaceNumber: [''],
       salutation: ['', Validators.required],
@@ -161,6 +162,21 @@ export class NewISOComponent implements OnInit, OnDestroy {
       mailbox: [''],
       zipMailbox: [''],
     });
+
+    this.addressInformation = this.formBuilder.group({
+      street: ['', Validators.required],
+      houseNumber: ['', Validators.required],
+      mailbox: [''],
+      zipMailbox: [''],
+      zip: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      phone: [''],
+      fax: [''],
+      mobile: [''],
+      email: ['', [Validators.email]],
+    });
+
     this.payment = this.formBuilder.group({
       taxId: [''],
       vatId: [''],
@@ -183,10 +199,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Initializes FormControls for person type.
    */
   initPersonForms() {
-    this.contactInformation.addControl('title', new FormControl(''));
-    this.contactInformation.addControl('firstName', new FormControl('', Validators.required));
-    this.contactInformation.addControl('secondName', new FormControl('', Validators.required));
-    this.contactInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debit' ? Validators.required : []));
+    this.generalInformation.addControl('title', new FormControl(''));
+    this.generalInformation.addControl('firstName', new FormControl('', Validators.required));
+    this.generalInformation.addControl('secondName', new FormControl('', Validators.required));
+    this.generalInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debit' ? Validators.required : []));
   }
 
   /**
@@ -212,7 +228,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Initializes FormControls for organization type.
    */
   initOrganizationForms() {
-    this.contactInformation.addControl('orgaPersons', new FormControl('', Validators.required));
+    this.generalInformation.addControl('orgaPersons', new FormControl('', Validators.required));
   }
 
   /**
@@ -310,7 +326,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   constructCustomer(isDirect: boolean) {
 
-    const customerObject = this.customerService.constructObject(this.contactInformation, this.payment, this.applicant, this.upload);
+    const customerObject = this.customerService.constructObject(this.generalInformation, this.addressInformation, this.payment, this.applicant, this.upload);
     
     return {
       isDirect: isDirect, customerType: this.storageService.customerType,

@@ -6,33 +6,35 @@
     <div style="padding-left:10px;">
       <span class="mat-h2" style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</span>
     </div>
-    <div *ngIf="authService.isLoggedIn()" style="padding-left:10px;">
+    <div *ngIf="authService.isLoggedIn() && router.url === '/iso' || router.url === '/preselection'"
+      style="padding-left:10px;">
       <span class="mat-h2">
         {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
       </span>
     </div>
     <span class="space"></span>
 
-    <div class="btn-group" dropdown style="margin-right: 20px;" *ngIf="authService.isLoggedIn()" 
-    triggers="hover" #dp="bs-dropdown" [insideClick]="true" (mouseleave)="dp.hide()">
+    <div class="btn-group" dropdown style="margin-right: 20px;" *ngIf="authService.isLoggedIn()"
+      triggers="mouseenter:mouseleave" #dp="bs-dropdown" [insideClick]="true">
       <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
-        aria-controls="dropdown-animated" style="background: transparent" >
+        aria-controls="dropdown-animated" style="background: transparent">
         <span class="mat-h3">
           {{dictionaryService.get('HELLO')}}{{authService.getAccount().username}}!
         </span>
         <span class="caret"></span>
       </button>
-      <div id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" 
-      aria-labelledby="button-animated">
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
+        (mouseleave)="dp.hide()">
         <mat-nav-list>
 
-          <a mat-list-item (click)="changeLanguage()"><mat-icon>language</mat-icon> &nbsp;
+          <a mat-list-item (click)="changeLanguage()">
+            <mat-icon>language</mat-icon> &nbsp;
             {{ dictionaryService.get('LANG') }}
           </a>
-          
+
           <div mat-list-item class="flex-column" style="margin: 10px">
-            <mat-button-toggle-group [value]="selectedLanguage" mat-list-item value="EN" class="toggle-theme" 
-            (change)="dictionaryService.switchLanguage()">
+            <mat-button-toggle-group [value]="selectedLanguage" mat-list-item value="EN" class="toggle-theme"
+              (change)="dictionaryService.switchLanguage()">
               <mat-button-toggle value="EN">EN</mat-button-toggle>
               <mat-button-toggle value="DE">DE</mat-button-toggle>
             </mat-button-toggle-group>
@@ -47,7 +49,7 @@
             {{ dictionaryService.get('LOGOUT') }}
           </a>
         </mat-nav-list>
-      </div>
+      </ul>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

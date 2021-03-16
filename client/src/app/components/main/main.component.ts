@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
 
   selectedLanguage = 'DE';
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, 
+  constructor(public router: Router, public dictionaryService: DictionaryService, 
     public storageService: StorageService, public authService: AuthService, 
     private tokenProlongationService: TokenProlongationService){
   }
