@@ -17,7 +17,7 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class AdminComponent implements OnInit {
 
-  users;
+  accounts;
   filteredAccounts;
   companyCodeDetails;
   filter: FormControl = new FormControl('');
@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('accordion') accordion: MatAccordion;
 
   constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService,
-    private userService: AccountService, public listService: ListService, private dialog: MatDialog,) {
+    private accountService: AccountService, public listService: ListService, private dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
@@ -35,9 +35,9 @@ export class AdminComponent implements OnInit {
   }
 
   async fetchAccounts(){
-    this.users = await this.userService.getAccounts().toPromise();
-    this.sortByUsername(this.users);
-    this.filteredAccounts = [...this.users];
+    this.accounts = await this.accountService.getAccounts().toPromise();
+    this.sortByUsername(this.accounts);
+    this.filteredAccounts = [...this.accounts];
   }
 
   async initAccountSearch() {
@@ -48,11 +48,11 @@ export class AdminComponent implements OnInit {
 
   filterQuery(val){
     var val = val.toLowerCase();
-    this.filteredAccounts = this.users.filter(user =>
-      user.username.toLowerCase().includes(val)
-      || user.email.toLowerCase().includes(val)
-      || this.companyCodeDetails[user.companyCode].toLowerCase().includes(val)
-      || user.role.toLowerCase().includes(val)
+    this.filteredAccounts = this.accounts.filter(account =>
+      account.username.toLowerCase().includes(val)
+      || account.email.toLowerCase().includes(val)
+      || this.companyCodeDetails[account.companyCode].toLowerCase().includes(val)
+      || account.role.toLowerCase().includes(val)
     );
   }
 
@@ -68,60 +68,60 @@ export class AdminComponent implements OnInit {
     const newAccountDialog = this.dialog.open(NewAccountDialog);
     const result = await newAccountDialog.afterClosed().toPromise();
     if (result) {
-      await this.userService.createAccount(result).toPromise();
-      this.users.push(result);
-      this.sortByUsername(this.users);
+      await this.accountService.createAccount(result).toPromise();
+      this.accounts.push(result);
+      this.sortByUsername(this.accounts);
       this.filterQuery(this.filter.value);
     }
   }
 
-  async deleteAccount(userToSend) {
+  async deleteAccount(accountToSend) {
     const deleteAccountDialog = this.dialog.open(DeleteAccountDialog, {
       data: {
-        username: userToSend.username
+        username: accountToSend.username
       }
     });
     const result = await deleteAccountDialog.afterClosed().toPromise();
     if (result) {
       try {
-        await this.userService.deleteAccount(userToSend).toPromise();
+        await this.accountService.deleteAccount(accountToSend).toPromise();
         //TODO iterate over array may be to slow
-        this.users = this.users.filter(u => u.email != userToSend.email);
-        this.filteredAccounts = this.filteredAccounts.filter(u => u.email != userToSend.email);
+        this.accounts = this.accounts.filter(u => u.email != accountToSend.email);
+        this.filteredAccounts = this.filteredAccounts.filter(u => u.email != accountToSend.email);
       } catch (e) { }
     }
   }
 
-  async blockAccount(userToBlock) {
+  async blockAccount(accountToBlock) {
     try {
-      var user = { ...userToBlock, operation: 'block' };
-      user.blocked = !user.blocked;
-      const res = await this.userService.blockOrResetAccount(user).toPromise();
+      var account = { ...accountToBlock, operation: 'block' };
+      account.blocked = !account.blocked;
+      const res = await this.accountService.blockOrResetAccount(account).toPromise();
 
       //TODO iterate over array may be to slow
-      this.users.forEach(u => {
-        if (u.email === res.user.email) {
-          u.blocked = res.user.blocked;
+      this.accounts.forEach(u => {
+        if (u.email === res.account.email) {
+          u.blocked = res.account.blocked;
         }
       });
       this.filteredAccounts.forEach(u => {
-        if (u.email === res.user.email) {
-          u.blocked = res.user.blocked;
+        if (u.email === res.account.email) {
+          u.blocked = res.account.blocked;
         }
       });
     } catch (e) { }
   }
 
-  async resetPassword(userToReset) {
+  async resetPassword(accountToReset) {
     const resetPasswordDialog = this.dialog.open(ResetPasswordDialog, {
       data: {
-        username: userToReset.username
+        username: accountToReset.username
       }
     });
     const result = await resetPasswordDialog.afterClosed().toPromise();
     if (result) {
-      const user = { ...userToReset, operation: 'reset' };
-      await this.userService.blockOrResetAccount(user).toPromise();
+      const account = { ...accountToReset, operation: 'reset' };
+      await this.accountService.blockOrResetAccount(account).toPromise();
     }
   }
 }

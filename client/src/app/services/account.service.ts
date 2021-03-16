@@ -11,26 +11,26 @@ export class AccountService {
 
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
-  createAccount(user) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/user`, { user }));
+  createAccount(account) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/account`, { account }));
   }
 
-  updateAccount(user) {
-    return this.httpService.request(this.http.put(`${environment.serverURL}/user`, { user }));
+  updateAccount(account) {
+    return this.httpService.request(this.http.put(`${environment.serverURL}/account`, { account }));
   }
 
-  deleteAccount(user) {
+  deleteAccount(account) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {user: user}
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {account: account}
     };
-    return this.httpService.request(this.http.delete(`${environment.serverURL}/user`, httpOptions));
+    return this.httpService.request(this.http.delete(`${environment.serverURL}/account`, httpOptions));
   }
 
-  blockOrResetAccount(user) {
-    return this.httpService.request(this.http.patch(`${environment.serverURL}/user`, { user }));
+  blockOrResetAccount(account) {
+    return this.httpService.request(this.http.patch(`${environment.serverURL}/account`, { account }));
   }
 
   getAccounts(): Observable<any> {
-    return this.httpService.request(this.http.get(`${environment.serverURL}/users`));
+    return this.httpService.request(this.http.get(`${environment.serverURL}/accounts`));
   }
 }

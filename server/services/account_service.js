@@ -87,6 +87,7 @@ async function deleteAccount(req, res) {
 
 async function getAccounts(req, res) {
     try {
+        console.log("adas")
         const accounts = await databaseService.getAccounts();
         res.json(accounts)
     } catch (e) {

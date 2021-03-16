@@ -5,7 +5,7 @@ const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers (
   customer TEXT NOT NULL, 
   datetime DATETIME NOT NULL);`;
 
-const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
+const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts ( 
   email VARCHAR(255) NOT NULL PRIMARY KEY, 
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
@@ -109,6 +109,8 @@ function storeCustomer(hash, customer) {
 function storeAccount(account) {
   const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked) VALUES (?);';
   const values = [[account.email, account.username, account.password, account.companyCode, account.role, false]];
+  console.log(insertStatement)
+  console.log(values)
   return insertQueryPromise(insertStatement, values);
 }
 
@@ -213,10 +215,13 @@ function getAccount(account) {
  * Retrieves all accounts from the database.
  */
 function getAccounts() {
+  
   const selectStatement = 'SELECT * FROM accounts;';
+  console.log(selectStatement)
   const values = [];
   return selectQueryPromise(selectStatement, values)
     .then(result => result.map(val => {
+
       return {
         username: val.username,
         email: val.email,

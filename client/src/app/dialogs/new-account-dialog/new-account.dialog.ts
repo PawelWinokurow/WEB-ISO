@@ -15,7 +15,7 @@ export class NewAccountDialog implements OnInit {
   hide1 = true;
   hide2 = true;
   registerForm: FormGroup;
-  userType = 'USER';
+  accountType = 'USER';
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewAccountDialog>) {
@@ -40,7 +40,7 @@ export class NewAccountDialog implements OnInit {
         username: this.registerForm.controls['username'].value,
         email: this.registerForm.controls['email'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
-        role: this.userType,
+        role: this.accountType,
         blocked: false
       }
       this.dialogRef.close(newAccount);
@@ -54,14 +54,14 @@ export class NewAccountDialog implements OnInit {
   }
 
     /**
-   * Change of admin/user type triggers this method.
+   * Change of admin/account type triggers this method.
    * @param event Change event
    */
      changeAccountType(event: any) {
       if (event.value === 'USER') {
-        this.userType = 'USER';
+        this.accountType = 'USER';
       } else {
-        this.userType = 'ADMIN';
+        this.accountType = 'ADMIN';
       }
     }
 }

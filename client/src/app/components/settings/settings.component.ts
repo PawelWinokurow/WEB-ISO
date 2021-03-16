@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountForm = this.formBuilder.group({
-      username: new FormControl({ value: this.authService.getAccount().username, disabled: true }),
+      accountuntname: new FormControl({ value: this.authService.getAccountaccountccountname, disabled: true }),
       email: new FormControl({ value: this.authService.getAccount().email, disabled: true }),
       companyCode: ['', [Validators.required]]
     });
