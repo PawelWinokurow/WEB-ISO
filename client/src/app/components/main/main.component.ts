@@ -15,6 +15,8 @@ import { TokenProlongationService } from 'src/app/services/token-prolongation.se
 })
 export class MainComponent implements OnInit {
 
+  selectedLanguage = 'DE';
+
   constructor(private router: Router, public dictionaryService: DictionaryService, 
     public storageService: StorageService, public authService: AuthService, 
     private tokenProlongationService: TokenProlongationService){
@@ -42,6 +44,7 @@ export class MainComponent implements OnInit {
    * Click on the switch language button triggers this method. The method changes the current language from EN to DE and from DE to EN.
    */
   changeLanguage(){
+    this.selectedLanguage = this.selectedLanguage === 'EN' ? 'DE' : 'EN';
     this.dictionaryService.switchLanguage();
   }
 
