@@ -188,40 +188,38 @@ function removeOldCustomers() {
  * Retrieves account from the database.
  * @param  {object} account Account object 
  */
-function getAccount(account) {
-  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
-  const values = [account.email, account.username];
-  return selectQueryPromise(selectStatement, values)
-    .then(result => {
-      if (Array.isArray(result) && result.length) {
-        return result.map(val => {
-          return {
-            username: val.username,
-            email: val.email,
-            companyCode: val.companycode,
-            role: val.role,
-            blocked: val.blocked,
-            password: val.password
-          }
-        })[0]
+async function getAccount(account) {
+  try {
+    const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+    const values = [account.email, account.username];
+    let result = (await selectQueryPromise(selectStatement, values))[0];
+    if (result) {
+      const account = {
+        username: result.username,
+        email: result.email,
+        companyCode: result.companycode,
+        role: result.role,
+        blocked: result.blocked,
+        password: result.password
       }
-      return {
-        ...result[0]
-      }
-    });
+      return account;
+    }
+    return result;
+  } catch (e) {
+    console.log(e.stack);
+  }
 }
+
 
 /**
  * Retrieves all accounts from the database.
  */
-function getAccounts() {
-  
-  const selectStatement = 'SELECT * FROM accounts;';
-  console.log(selectStatement)
-  const values = [];
-  return selectQueryPromise(selectStatement, values)
-    .then(result => result.map(val => {
-
+async function getAccounts() {
+  try {
+    const selectStatement = 'SELECT * FROM accounts;';
+    const values = [];
+    let accounts = await selectQueryPromise(selectStatement, values);
+    accounts = accounts.map(val => {
       return {
         username: val.username,
         email: val.email,
@@ -229,7 +227,11 @@ function getAccounts() {
         role: val.role,
         blocked: val.blocked
       }
-    }));
+    });
+    return accounts;
+  } catch (e) {
+    console.log(e.stack);
+  }
 }
 
 /**

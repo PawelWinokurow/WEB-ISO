@@ -20,7 +20,7 @@ async function createAccount(req, res) {
         let isAccountNotExists = await databaseService.isAccountNotExists(requestAccount);
         if (isAccountNotExists) {
             await databaseService.storeAccount(accountToStore);
-            emailService.sendNewAccount(accountToSend);
+           // emailService.sendNewAccount(accountToSend);
             res.json({
                 message: 'USRISCR'
             });
@@ -30,7 +30,7 @@ async function createAccount(req, res) {
             });
         }
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });
@@ -40,10 +40,9 @@ async function createAccount(req, res) {
 async function updateAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        console.log('in')
-        if (requestAccount.password) {
+        if (requestAccount?.password) {
             const dbAccount = await databaseService.getAccount(requestAccount);
-            if (cryptoService.comparePasswords(requestAccount.passwordOld, dbAccount.password)) {
+            if (dbAccount && cryptoService.comparePasswords(requestAccount.passwordOld, dbAccount.password)) {
                 requestAccount.password = cryptoService.hashPassword(requestAccount.password);
                 await databaseService.updateAccount(requestAccount);
                 res.json({
@@ -63,7 +62,7 @@ async function updateAccount(req, res) {
             });
         }
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });
@@ -78,7 +77,7 @@ async function deleteAccount(req, res) {
             message: 'USRISDEL'
         })
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });
@@ -87,11 +86,10 @@ async function deleteAccount(req, res) {
 
 async function getAccounts(req, res) {
     try {
-        console.log("adas")
         const accounts = await databaseService.getAccounts();
         res.json(accounts)
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });
@@ -124,7 +122,7 @@ async function resetPassword(req, res) {
         })
 
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });
@@ -140,7 +138,7 @@ async function blockAccount(req, res) {
             account: requestAccount
         })
     } catch (e) {
-        console.log(e.stack)
+        console.log(e.stack);
         res.status(500).send({
             error: e
         });

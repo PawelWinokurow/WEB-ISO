@@ -28,7 +28,7 @@ function checkIfAuthenticated(req, res, next) {
 function checkIfAccountAvailable(req, res, next) {
     databaseService.getAccount(req.body.decodedAccount)
         .then(dbAccount => {
-            if (dbAccount.blocked === 0) {
+            if (dbAccount && dbAccount.blocked === 0) {
                 next();
             } else {
                 res.sendStatus(401);

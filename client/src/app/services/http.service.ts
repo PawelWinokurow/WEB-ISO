@@ -28,8 +28,9 @@ export class HttpService {
         this.toastrService.error(this.dictionaryService.get(errorAbbreviation), this.dictionaryService.get('ERR'))
       }
       delete response.error;
+      return false;
     }
-    return response
+    return response;
   }
 
   request(func): Observable<any>{

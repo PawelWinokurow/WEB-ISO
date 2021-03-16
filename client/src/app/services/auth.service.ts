@@ -2,17 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from './../../environments/environment';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpService: HttpService) { }
 
-  login(identifier: string, password: string) {
-    return this.http.post(`${environment.serverURL}/login`, {account: { email: identifier, username: identifier, password: password }})
-      .toPromise().then(res => this.setSession(res));
+  async login(identifier: string, password: string) {
+    let result = await this.httpService.request(this.http.post(`${environment.serverURL}/login`, 
+    {account: { email: identifier, username: identifier, password: password }})).toPromise();
+    if (result){
+      this.setSession(result)
+    }
+    return result;
   }
 
   public setSession(result) {

@@ -195,3 +195,8 @@ mat-button-toggle {
 .bottom-border {
   border-bottom: 1px solid; border-color: rgba(201, 201, 201, 0.534);
 }
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }

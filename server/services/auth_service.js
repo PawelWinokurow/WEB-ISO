@@ -26,10 +26,9 @@ async function refreshToken(req, res) {
             account: dbAccount
         });
     } catch (e) {
-        console.log( e.stack )
-        // send status 401 Unauthorized
+        console.log( e.stack );
         res.status(401).send({
-            error: "No match"
+            error: e
         });
     }
 }
@@ -37,9 +36,8 @@ async function refreshToken(req, res) {
 async function login(req, res) {
     try {
         const requestAccount = req.body.account;
-
         let dbAccount = await databaseService.getAccount(requestAccount);
-        if (!dbAccount.blocked && cryptoService.comparePasswords(requestAccount.password, dbAccount.password)) {
+        if (dbAccount && !dbAccount.blocked && cryptoService.comparePasswords(requestAccount.password, dbAccount.password)) {
             delete dbAccount.password;
             delete dbAccount.blocked;
             const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
@@ -53,16 +51,14 @@ async function login(req, res) {
                 account: dbAccount
             });
         } else {
-            // send status 401 Unauthorized
-            res.status(401).send({
-                error: "No match"
-            });
+            res.json({
+                error: `IDINC`
+            })
         }
     } catch (e) {
-        console.log( e.stack )
-        // send status 401 Unauthorized
+        console.log( e.stack );
         res.status(401).send({
-            error: "No match"
+            error: e
         });
     }
 }

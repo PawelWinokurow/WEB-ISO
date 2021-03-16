@@ -32,20 +32,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.controls['identifier'].value, this.loginForm.controls['password'].value)
-        .then(() => {
-          this.tokenProlongationService.startChecking();
-          this.router.navigate(['/preselection']);
-        })
-        .catch(err => {
-          if (err.status == "401") {
-            this.toastrService.error(this.dictionaryService.get('IDINC'), this.dictionaryService.get('ERR'))
-          } else {
-            this.toastrService.error(err.message, this.dictionaryService.get('ERR'))
-          }
-        });
+  async login() {
+    if (this.loginForm.valid) {    
+      let isSuccessful = await this.authService.login(this.loginForm.controls['identifier'].value, this.loginForm.controls['password'].value);
+      if (isSuccessful) {
+        this.tokenProlongationService.startChecking();
+        this.router.navigate(['/preselection']);
+      }
     }
   }
 
