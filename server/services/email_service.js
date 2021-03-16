@@ -5,7 +5,6 @@ const nodemailer = require('nodemailer');
  * @param  {object} message message to send
  */
 function sendEmail(message) {
-
     emailOptions = {
         host: 'smtp.gmail.com',
         port: 465,
@@ -15,12 +14,11 @@ function sendEmail(message) {
             pass: 'Tromboman8919'
         }
     }
-    console.log(process.env.IN_PROXY)
+
     if (process.env.HTTP_PROXY != undefined) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
     let transporter = nodemailer.createTransport(emailOptions);
-
     transporter.sendMail(message, function (error, info) {
         if (error) {
             console.log(error);
@@ -33,7 +31,7 @@ function sendEmail(message) {
 function sendNewUser(user) {
     const message = {
         from: "WEB-ISO",
-        to: emailTo,
+        to: user.email,
         subject: 'WEB-ISO account',
         html: `
         <p>Your WEB-ISO account was created: </p>
@@ -42,7 +40,7 @@ function sendNewUser(user) {
         <p>Password: ${user.password}</p>        
         `
     };
-    emailService.sendEmail(message);
+    sendEmail(message);
 }
 
 function resetPassword(emailTo, password) {
@@ -52,7 +50,7 @@ function resetPassword(emailTo, password) {
         subject: 'New password WEB-ISO',
         html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${password}</p>`
     };
-    emailService.sendEmail(message);
+    sendEmail(message);
 }
 
 function sendCustomerConfirmation(emailTo, hash) {
@@ -62,7 +60,7 @@ function sendCustomerConfirmation(emailTo, hash) {
         subject: 'Customer confirmation',
         html: `<p>Click <a href="${process.env.HOST}/confirm?hash=${hash}">here</a> to confirm the customer.</p>`
     };
-    emailService.sendEmail(message);
+    sendEmail(message);
 }
 
 module.exports = { sendCustomerConfirmation, resetPassword, sendNewUser };

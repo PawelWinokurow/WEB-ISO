@@ -26,6 +26,7 @@ async function refreshToken(req, res) {
             user: dbUser
         });
     } catch (e) {
+        console.log( e.stack )
         // send status 401 Unauthorized
         res.status(401).send({
             error: "No match"
@@ -58,6 +59,7 @@ async function login(req, res) {
             });
         }
     } catch (e) {
+        console.log( e.stack )
         // send status 401 Unauthorized
         res.status(401).send({
             error: "No match"

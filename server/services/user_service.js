@@ -14,10 +14,9 @@ async function createUser(req, res) {
         };
 
         const firstPassword = cryptoService.generatePassword();
-        
         userToStore.password = cryptoService.hashPassword(firstPassword);
         userToSend.password = firstPassword;
-        
+
         let isUserNotExists = await databaseService.isUserNotExists(requestUser);
         if (isUserNotExists) {
             await databaseService.storeUser(userToStore);
@@ -31,6 +30,7 @@ async function createUser(req, res) {
             });
         }
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });
@@ -57,12 +57,13 @@ async function updateUser(req, res) {
             }
         } else {
             await databaseService.updateUser(requestUser);
-                res.json({
-                    message: 'USRISUPD',
-                    user: requestUser
-                });
+            res.json({
+                message: 'USRISUPD',
+                user: requestUser
+            });
         }
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });
@@ -77,6 +78,7 @@ async function deleteUser(req, res) {
             message: 'USRISDEL'
         })
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });
@@ -88,6 +90,7 @@ async function getUsers(req, res) {
         const users = await databaseService.getUsers();
         res.json(users)
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });
@@ -120,6 +123,7 @@ async function resetPassword(req, res) {
         })
 
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });
@@ -131,10 +135,11 @@ async function blockUser(req, res) {
         const requestUser = req.body.user;
         await databaseService.updateUser(requestUser);
         res.json({
-            message: requestUser.blocked ? 'USRISBL': 'USRISUN',
+            message: requestUser.blocked ? 'USRISBL' : 'USRISUN',
             user: requestUser
         })
     } catch (e) {
+        console.log(e.stack)
         res.status(500).send({
             error: e
         });

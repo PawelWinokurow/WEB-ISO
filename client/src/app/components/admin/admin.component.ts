@@ -68,9 +68,8 @@ export class AdminComponent implements OnInit {
     const newUserDialog = this.dialog.open(NewUserDialog);
     const result = await newUserDialog.afterClosed().toPromise();
     if (result) {
-      const newUser = await newUserDialog.afterClosed().toPromise();
-      await this.userService.createUser(newUser).toPromise();
-      this.users.push(newUser);
+      await this.userService.createUser(result).toPromise();
+      this.users.push(result);
       this.sortByUsername(this.users);
       this.filterQuery(this.filter.value);
     }

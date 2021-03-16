@@ -21,7 +21,6 @@ import { SearchService } from './services/search.service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { DateService } from './services/date.service';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthService } from './services/auth.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
@@ -46,7 +45,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     EmailDialog,
     PreselectionComponent,
     LoginComponent,
-    RegistrationComponent,
     SettingsComponent,
     AdminComponent,
     DeleteUserDialog,

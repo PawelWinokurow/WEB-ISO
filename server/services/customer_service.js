@@ -108,6 +108,7 @@ async function confirmCustomer(req, res) {
     soapService.sendCustomer(customer, WSDL_URL);
     res.send('<p>Success! The customer was confirmed.</p>');
   } catch (e) {
+    console.log( e.stack )
     res.send('<p>Error! The customer was not confirmed.</p>');
   }
 }
@@ -149,6 +150,7 @@ async function createCustomer(req, res) {
       ok: true
     });
   } catch (e) {
+    console.log( e.stack )
     //TODO handle error
   }
 }

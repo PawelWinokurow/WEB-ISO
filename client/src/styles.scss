@@ -151,13 +151,18 @@ mat-button-toggle {
   padding: 20px;
 }
 
-.form-flex-column {
+.flex-column {
   display: flex;
   flex-flow: column;
 }
 
+.flex-row {
+  display: flex;
+  flex-flow: row;
+}
+
 .form-data {
-  height: calc(100vh - 240px);
+  height: calc(100vh - 230px);
   width: 400px;
   overflow: auto;
 }
@@ -176,4 +181,17 @@ mat-button-toggle {
   border-radius: 5px;
   //border: 2px solid #009650;
   border: 2px solid rgba(87, 87, 87, 0.479);
+}
+
+.button-text{
+  display: inline-block;
+  margin: 0 !important;
+}
+
+.right-border {
+  border-right: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+.bottom-border {
+  border-bottom: 1px solid; border-color: rgba(201, 201, 201, 0.534);
 }

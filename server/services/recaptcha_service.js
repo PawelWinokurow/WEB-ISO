@@ -42,6 +42,7 @@ async function validateRecaptcha(req, res) {
             });
         }
     } catch (e) {
+        console.log( e.stack )
         res.send({
             success: false
         });

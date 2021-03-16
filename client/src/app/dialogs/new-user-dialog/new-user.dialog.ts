@@ -1,13 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-new-user',
@@ -21,7 +18,7 @@ export class NewUserDialog implements OnInit {
   registerForm: FormGroup;
   userType = 'USER';
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
+  constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewUserDialog>) {
   }
 
@@ -41,9 +38,11 @@ export class NewUserDialog implements OnInit {
   async register() {
     if (this.registerForm.valid) {
       var newUser = {
+        username: this.registerForm.controls['username'].value,
         email: this.registerForm.controls['email'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
-        role: this.userType
+        role: this.userType,
+        blocked: false
       }
       this.dialogRef.close(newUser);
     } else {
@@ -66,24 +65,4 @@ export class NewUserDialog implements OnInit {
         this.userType = 'ADMIN';
       }
     }
-}
-
-// custom validator to check that two fields match
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
-
-    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-      // return if another validator has already found an error on the matchingControl
-      return;
-    }
-
-    // set error on matchingControl if validation fails
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
-  }
 }

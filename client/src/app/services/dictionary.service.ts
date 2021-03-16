@@ -44,6 +44,9 @@ export class DictionaryService {
     ['SEARCH', 'Suche'],
     ['ROLE', 'Rolle'],
 
+    ['ACCSET', 'Kontoeinstellungen'],
+    ['SECSET', 'Sicherheitseinstellungen'],
+
     ['NEWACC', 'Konto erstellen'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
@@ -59,7 +62,7 @@ export class DictionaryService {
     
     ['NOTALLOWED', 'Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.'],
 
-    ['CHNG', 'Ändern'],
+    ['APPLY', 'Übernehmen'],
     ['CHNGPSWD', 'Passwort ändern'],
 
     ['YES', 'Ja'],
@@ -158,7 +161,7 @@ export class DictionaryService {
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     
-    ['CHNG', 'Change'],
+    ['APPLY', 'Apply'],
     ['CHNGPSWD', 'Change password'],
     ['NEWACC', 'Create account'],
     ['CONFIRM', 'Confirm'],
@@ -176,6 +179,9 @@ export class DictionaryService {
     ['LANG', 'Language'],
     ['ADMINAREA', 'Admin area'],
     ['ROLE', 'Role'],
+
+    ['ACCSET', 'Account settings'],
+    ['SECSET', 'Security settings'],
     
     ['RESETPSWD', 'Reset password'],
     ['BLOCKUSR', 'Block'],

@@ -9,8 +9,6 @@ const httpsProxyAgent = require('https-proxy-agent');
 require('dotenv').config();
 
 const databaseService = require('./services/database_service');
-const soapService = require('./services/soap_service');
-const emailService = require('./services/email_service');
 const customerService = require('./services/customer_service');
 const middlewareService = require('./services/middleware_service');
 const authService = require('./services/auth_service');

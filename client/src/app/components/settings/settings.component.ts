@@ -20,62 +20,84 @@ export class SettingsComponent implements OnInit {
   hide0 = true;
   hide1 = true;
   hide2 = true;
-  changeForm: FormGroup;
+  accountForm: FormGroup;
+  passwordForm: FormGroup;
   companyCode: FormControl;
   selected = this.authService.getUser().companyCode;
-  changePassword = false;
 
+  setting = 1;
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    public storageService: StorageService, private userService: UserService, private tokenProlongationService: TokenProlongationService,
-    public errorMessageService: ErrorMessageService, private authService: AuthService, private toastrService: ToastrService,
-    public listService: ListService, private router: Router) {
+    public storageService: StorageService, private userService: UserService,
+    public errorMessageService: ErrorMessageService, private authService: AuthService,
+    public listService: ListService) {
   }
 
   ngOnInit(): void {
-    this.changeForm = this.formBuilder.group({
+    this.accountForm = this.formBuilder.group({
       username: new FormControl({ value: this.authService.getUser().username, disabled: true }),
       email: new FormControl({ value: this.authService.getUser().email, disabled: true }),
-      companyCode: ['', [Validators.required]],
+      companyCode: ['', [Validators.required]]
     });
+
+    this.passwordForm = this.formBuilder.group({
+      passwordOld: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    }, { validators: MustMatch('password', 'confirmPassword') });
   }
 
-  setPassword() {
-    this.changePassword = !this.changePassword;
-    if (this.changePassword) {
-      this.changeForm.addControl('passwordOld', new FormControl('', Validators.required));
-      this.changeForm.addControl('password', new FormControl('', Validators.required));
-      this.changeForm.addControl('confirmPassword', new FormControl('', Validators.required));
-      this.changeForm.setValidators([MustMatch('password', 'confirmPassword')]);
+  change() {
+    //If account form valid
+    if (this.accountForm.valid) {
+      var accountToChange = this.authService.getUser();
+      //If password doesn't update account without password
+      if (this.passwordForm.controls['passwordOld'].value +
+        this.passwordForm.controls['password'].value +
+        this.passwordForm.controls['confirmPassword'].value === '') {
+        accountToChange.companyCode = this.accountForm.controls['companyCode'].value;
+        this.updateAccount(accountToChange)
+      }
+      //If password is changing and password form is valid update with password
+      else if (this.passwordForm.valid) {
+        accountToChange.password = this.passwordForm.controls['password'].value;
+        accountToChange.passwordOld = this.passwordForm.controls['passwordOld'].value;
+        accountToChange.companyCode = this.accountForm.controls['companyCode'].value;
+        this.updateAccount(accountToChange)
+      } else {
+        //Trigger password form validation
+        this.passwordForm.markAllAsTouched();
+      }
     } else {
-      this.changeForm.setValidators(null);
-      this.changeForm.removeControl('passwordOld');
-      this.changeForm.removeControl('password');
-      this.changeForm.removeControl('confirmPassword');
+      //Trigger account form validation
+      this.accountForm.markAllAsTouched();
     }
   }
 
-  async change() {
-    if (this.changeForm.valid) {
-      var userToChange = this.authService.getUser();
-      if (this.changePassword) {
-        userToChange.password = this.changeForm.controls['password'].value;
-        userToChange.passwordOld = this.changeForm.controls['passwordOld'].value;
-      }
-      userToChange.companyCode = this.changeForm.controls['companyCode'].value;
-      userToChange.blocked = false;
-      let userResponse = await this.userService.updateUser(userToChange).toPromise()
-      if ('user' in userResponse) {
-        this.authService.setUser(userResponse.user);
-        if (this.changePassword) this.setPassword();
-      }
-    } else {
-      this.changeForm.markAllAsTouched();
-    }
+  resetPasswordForm() {
+    this.passwordForm.controls['passwordOld'].setValue('');
+    this.passwordForm.controls['passwordOld'].markAsUntouched();
+    this.passwordForm.controls['password'].setValue('');
+    this.passwordForm.controls['password'].markAsUntouched();
+    this.passwordForm.controls['confirmPassword'].setValue('');
+    this.passwordForm.controls['confirmPassword'].markAsUntouched();
   }
 
-  get changeFormControl() {
-    return this.changeForm.controls;
+  async updateAccount(userToChange) {
+    userToChange.blocked = false;
+    let userResponse = await this.userService.updateUser(userToChange).toPromise();
+    if ('user' in userResponse) {
+      this.authService.setUser(userResponse.user);
+    }
+    this.resetPasswordForm();
+  }
+
+  get accountFormControl() {
+    return this.accountForm.controls;
+  }
+
+  get passwordFormControl() {
+    return this.passwordForm.controls;
   }
 }
 
