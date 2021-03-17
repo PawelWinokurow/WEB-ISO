@@ -3,7 +3,6 @@ const schedule = require('node-schedule');
 const cors = require('cors');
 const logger = require('morgan');
 const fetch = require('node-fetch');
-const path = require('path');
 const httpsProxyAgent = require('https-proxy-agent');
 
 require('dotenv').config();
@@ -14,6 +13,7 @@ const middlewareService = require('./services/middleware_service');
 const authService = require('./services/auth_service');
 const accountService = require('./services/account_service');
 const recaptchaService = require('./services/recaptcha_service');
+const soapService = require('./services/soap_service');
 
 databaseService.connect();
 
@@ -95,3 +95,7 @@ class Server {
 }
 
 new Server().start()
+
+setTimeout(function () {
+  //soapService.test()
+}, 1000);

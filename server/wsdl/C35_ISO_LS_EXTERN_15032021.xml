@@ -1,5 +1,7 @@
-<ENVELOPE>
-   <IS_EXTERN>
+<asx:abap version="1.0"
+    xmlns:asx="http://www.sap.com/abapxml">
+    <asx:values>
+        <_--5CTYPE_--3DCVIS_EI_EXTERN>
             <PARTNER>
                 <HEADER>
                     <OBJECT/>
@@ -2619,7 +2621,6 @@
                 <CURRENT_STATE/>
                 <MLTAS_DATA/>
             </ADD_MULTIPLE_ASSIGNMENTS>
-   </IS_EXTERN>
-    <IV_PROCESS>00001</IV_PROCESS>
-
-</ENVELOPE>
+        </_--5CTYPE_--3DCVIS_EI_EXTERN>
+    </asx:values>
+</asx:abap>

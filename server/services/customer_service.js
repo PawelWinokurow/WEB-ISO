@@ -53,34 +53,17 @@ class OrganizationDebitFactory extends CustomerFactory {
   getJSONArgs() {
     let dateToday = formatDate(new Date());
     
-    //console.log(this.customerData)
-    console.log(this.envelope)
-/*
+    //console.log(this.customerData.data)
+
     //General
 
-    //LegalForm
-    //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
+    //LegalForm?
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
     //Add. name
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].C_O_NAME = [this.customerData.data.additionalName]
     
-    //Bank detail
-    //IBAN
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].IBAN = [this.customerData.data.iban]
-    //IBAN_FROM_DATE
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].IBAN_FROM_DATE = [dateToday]
-    //BANKDETAILVALIDFROM
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].BANKDETAILVALIDFROM = [dateToday]
-  
-    //Branche
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
-    //console.log(this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0])
+    //Contact
 
-    //Branchencode
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].IND_SECTOR = [this.customerData.data.industryField]
-    //TAX number
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].BUS_EI_BUPA_TAXNUMBER[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.taxId]
-
-    //Address
     //Street
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].STREET = [this.customerData.data.street]
     //House no.
@@ -99,17 +82,38 @@ class OrganizationDebitFactory extends CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].COUNTRYISO = [this.customerData.data.country]
     //VALIDFROMDATE
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [dateToday]
+    //Phone
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].BUS_EI_BUPA_TELEPHONE[0].CONTACT[0].DATA[0].TEL_NO = [this.customerData.data.phone]
+    //Mobile ?
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].BUS_EI_BUPA_TELEPHONE[1].CONTACT[0].DATA[0].TEL_NO = [this.customerData.data.mobile]
+    //Fax
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].BUS_EI_BUPA_FAX[0].CONTACT[0].DATA[0].FAX_NO = [this.customerData.data.fax]
+    //Email
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].BUS_EI_BUPA_SMTP[0].CONTACT[0].DATA[0].E_MAIL = [this.customerData.data.email]
     
 
-
-
+    //Payment
+    //IBAN
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].IBAN = [this.customerData.data.iban]
+    //IBAN_FROM_DATE
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].IBAN_FROM_DATE = [dateToday]
+    //BANKDETAILVALIDFROM
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].BANKDETAILVALIDFROM = [dateToday]
+    
+    //Branche
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
+    //Branchencode
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].IND_SECTOR = [this.customerData.data.industryField]
+    //TAX number
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].BUS_EI_BUPA_TAXNUMBER[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.taxId]
+    
     //let before = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE
     //console.log(`before: ${before}`)
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [dateToday]
 
     //let after = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE
     //console.log(`after: ${after}`)
-    */
+    
     return this.envelope;
   }
 }
@@ -159,7 +163,7 @@ async function createCustomer(req, res) {
     const requestCustomer = req.body.customer;
     const emailTo = req.body.decodedAccount.email;
     let sapCustomer = await composeCustomer(requestCustomer);
-    let envelope = JSON.stringify(sapCustomer.getJSONArgs());
+    let envelope =sapCustomer.getJSONArgs();
     if (requestCustomer.isDirect) {
       soapService.sendCustomer(envelope, WSDL_URL);
       res.json({
