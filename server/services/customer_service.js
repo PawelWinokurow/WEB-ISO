@@ -53,8 +53,9 @@ class OrganizationDebitFactory extends CustomerFactory {
   getJSONArgs() {
     let dateToday = formatDate(new Date());
     
-    console.log(this.customerData)
-
+    //console.log(this.customerData)
+    console.log(this.envelope)
+/*
     //General
 
     //LegalForm
@@ -72,6 +73,8 @@ class OrganizationDebitFactory extends CustomerFactory {
   
     //Branche
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
+    //console.log(this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0])
+
     //Branchencode
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].IND_SECTOR = [this.customerData.data.industryField]
     //TAX number
@@ -106,8 +109,8 @@ class OrganizationDebitFactory extends CustomerFactory {
 
     //let after = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE
     //console.log(`after: ${after}`)
-
-    return this.envelope
+    */
+    return this.envelope;
   }
 }
 
@@ -157,7 +160,6 @@ async function createCustomer(req, res) {
     const emailTo = req.body.decodedAccount.email;
     let sapCustomer = await composeCustomer(requestCustomer);
     let envelope = JSON.stringify(sapCustomer.getJSONArgs());
-    console.log(envelope)
     if (requestCustomer.isDirect) {
       soapService.sendCustomer(envelope, WSDL_URL);
       res.json({

@@ -281,12 +281,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
   /**
    * Opens send customer dialog.
    */
-   openSendSOAPDialog() {
-    /*const customer = this.constructCustomer(true)
-    this.customerService.sendCustomer(customer).subscribe(res => {
-      this.toastrService.success(this.dictionaryService.get('CUSISSND'), this.dictionaryService.get('SUC'));
-    });
-    return*/
+   async openSendSOAPDialog() {
+    const customer = this.constructCustomer(true)
+    await this.customerService.sendCustomer(customer);
+    return
     const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog, {
       //disableClose: true,
       //backdropClass: 'backdrop-background',
@@ -297,7 +295,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
       if (isDirect) {
         await this.customerService.sendCustomer(customer);
       } else {
-        await this.customerService.sendCustomer({ emailTo: this.authService.getAccount().email, ...customer });
+        await this.customerService.sendCustomer(
+          { emailTo: this.authService.getAccount().email, ...customer });
       }
       //this.router.navigate(['/preselection']);
     });
@@ -325,9 +324,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * @returns Customer object to send.
    */
   constructCustomer(isDirect: boolean) {
-
-    const customerObject = this.customerService.constructObject(this.generalInformation, this.contactInformation, this.payment, this.applicant, this.upload);
-    
+    const customerObject = this.customerService.constructObject(this.generalInformation, 
+      this.contactInformation, this.payment, this.applicant, this.upload);
     return {
       isDirect: isDirect, customerType: this.storageService.customerType,
       debitCreditType: this.storageService.debitCreditType, data: customerObject

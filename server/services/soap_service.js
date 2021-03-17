@@ -6,8 +6,8 @@ const soap = require('soap');
  * @param {string} wsdlUrl path to wsdl
  */
 function sendCustomer(customer, wsdlUrl) {
-    console.log(customer)
-    soap.createClient(wsdlUrl, function (err, soapClient) {
+        soap.createClient(wsdlUrl, function (err, soapClient) {
+
         if (err) {
             console.log("error", err);
         }
@@ -16,7 +16,7 @@ function sendCustomer(customer, wsdlUrl) {
             if (err) {
                 //console.log(err);
             }
-            //console.log(JSON.stringify(result))
+            console.log(JSON.stringify(result))
         })
     });
 }
