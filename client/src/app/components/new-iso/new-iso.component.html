@@ -1,6 +1,6 @@
 <div class="inner-component">
     <div class="stepper-container">
-        <mat-horizontal-stepper class="alternate-theme" linear="false" #stepper>
+        <mat-horizontal-stepper color="primary" linear="true" #stepper>
 
             <!--general information mat-step for person-->
             <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="generalInformation">
@@ -118,7 +118,7 @@
                     <div class="space"></div>
                     <div class="form-controls buttons-theme">
                         <span class="space"></span>
-                        <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
+                        <button mat-stroked-button matStepperNext class="stepper-button">
                             <span>{{dictionaryService.get('NXT')}}</span>
                             <mat-icon style="margin-left: 5px;">forward</mat-icon>
                         </button>
