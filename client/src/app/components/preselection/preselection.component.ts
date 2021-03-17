@@ -20,6 +20,7 @@ export class PreselectionComponent implements OnInit {
     public listService: ListService, public errorMessageService: ErrorMessageService) { }
 
   ngOnInit(): void {
+    this.storageService.resetValues();
   }
 
   /**

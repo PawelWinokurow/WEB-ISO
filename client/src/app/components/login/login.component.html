@@ -17,7 +17,8 @@
                 <div class="paddinglr10px">
                     <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('PSWD')}}</mat-label>
-                        <input type="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+                        <input type="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'"
+                            required>
                         <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
@@ -29,7 +30,7 @@
                 </div>
                 <div class="padding10px buttons-theme" style="display: flex;">
                     <button type="button" mat-stroked-button style="height: 40px;"
-                        (click)="register()">{{dictionaryService.get('NEWACC')}}</button>
+                        (click)="forgotPassword()">{{dictionaryService.get('PSWDFOG')}}</button>
                     <span class="space"></span>
                     <button mat-raised-button (click)="login()" color="primary"
                         style="height: 40px;">{{dictionaryService.get('NXT')}}</button>

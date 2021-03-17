@@ -28,7 +28,7 @@ export class TokenProlongationService implements OnInit {
     const now = moment();
     //If JWT expires in < 30 minutes => update it
     if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30){
-      this.authService.prolongToken(this.authService.getUser()).toPromise().then(res => {
+      this.authService.prolongToken(this.authService.getAccount()).toPromise().then(res => {
         this.authService.setSession(res);
       }).catch(err => this.stopChecking());
     }

@@ -5,7 +5,7 @@ const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers (
   customer TEXT NOT NULL, 
   datetime DATETIME NOT NULL);`;
 
-const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS users ( 
+const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts ( 
   email VARCHAR(255) NOT NULL PRIMARY KEY, 
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
@@ -103,55 +103,54 @@ function storeCustomer(hash, customer) {
 }
 
 /**
- * Stores user in the database.
- * @param  {object} user User object 
+ * Stores account in the database.
+ * @param  {object} account Account object 
  */
-function storeUser(user) {
-  const insertStatement = 'INSERT INTO users (email, username, password, companycode, role, blocked) VALUES (?);';
-  const values = [
-    [user.email, user.username, user.password, user.companyCode, 'ADMIN', false]
-  ];
-  //const values = [[user.email, user.username, user.password, user.companyCode, 'USER', false]];
+function storeAccount(account) {
+  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked) VALUES (?);';
+  const values = [[account.email, account.username, account.password, account.companyCode, account.role, false]];
+  console.log(insertStatement)
+  console.log(values)
   return insertQueryPromise(insertStatement, values);
 }
 
 /**
- * Updates user in the database.
- * @param  {object} user User object 
+ * Updates account in the database.
+ * @param  {object} account Account object 
  */
-function updateUser(user) {
-  let updateStatement = `UPDATE users SET companycode = ?, blocked = ? WHERE email = ?;`;
-  let values = [user.companyCode, user.blocked, user.email];
+function updateAccount(account) {
+  let updateStatement = `UPDATE accounts SET companycode = ?, blocked = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.blocked, account.email];
   //If we change password
-  if (user.password) {
-    updateStatement = `UPDATE users SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
-    values = [user.password, user.companyCode, user.blocked, user.email];
+  if (account.password) {
+    updateStatement = `UPDATE accounts SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
+    values = [account.password, account.companyCode, account.blocked, account.email];
   }
   return updateQueryPromise(updateStatement, values);
 }
 
 /**
- * Deletes user from the database.
- * @param  {object} user User object 
+ * Deletes account from the database.
+ * @param  {object} account Account object 
  */
-function deleteUser(user) {
-  const deleteStatement = 'DELETE FROM users WHERE email = ?';
-  const values = [user.email];
+function deleteAccount(account) {
+  const deleteStatement = 'DELETE FROM accounts WHERE email = ?';
+  const values = [account.email];
   return deleteQueryPromise(deleteStatement, values);
 }
 
 /**
- * Checks if user not exists.
- * @param  {object} user User object 
- * @returns true if user is not in the database
+ * Checks if account not exists.
+ * @param  {object} account Account object 
+ * @returns true if account is not in the database
  */
-function isUserNotExists(user) {
-  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-  const values = [user.email, user.username];
+function isAccountNotExists(account) {
+  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+  const values = [account.email, account.username];
   return selectQueryPromise(selectStatement, values)
     .then(result => new Promise((resolve, reject) => {
       if (Array.isArray(result) && result.length) {
-        reject(false);
+        resolve(false);
       } else {
         resolve(true);
       }
@@ -186,40 +185,41 @@ function removeOldCustomers() {
 }
 
 /**
- * Retrieves user from the database.
- * @param  {object} user User object 
+ * Retrieves account from the database.
+ * @param  {object} account Account object 
  */
-function getUser(user) {
-  const selectStatement = 'SELECT * FROM users WHERE email = ? OR username = ?';
-  const values = [user.email, user.username];
-  return selectQueryPromise(selectStatement, values)
-    .then(result => {
-      if (Array.isArray(result) && result.length) {
-        return result.map(val => {
-          return {
-            username: val.username,
-            email: val.email,
-            companyCode: val.companycode,
-            role: val.role,
-            blocked: val.blocked,
-            password: val.password
-          }
-        })[0]
+async function getAccount(account) {
+  try {
+    const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+    const values = [account.email, account.username];
+    let result = (await selectQueryPromise(selectStatement, values))[0];
+    if (result) {
+      const account = {
+        username: result.username,
+        email: result.email,
+        companyCode: result.companycode,
+        role: result.role,
+        blocked: result.blocked,
+        password: result.password
       }
-      return {
-        ...result[0]
-      }
-    });
+      return account;
+    }
+    return result;
+  } catch (e) {
+    console.log(e.stack);
+  }
 }
 
+
 /**
- * Retrieves all users from the database.
+ * Retrieves all accounts from the database.
  */
-function getUsers() {
-  const selectStatement = 'SELECT * FROM users;';
-  const values = [];
-  return selectQueryPromise(selectStatement, values)
-    .then(result => result.map(val => {
+async function getAccounts() {
+  try {
+    const selectStatement = 'SELECT * FROM accounts;';
+    const values = [];
+    let accounts = await selectQueryPromise(selectStatement, values);
+    accounts = accounts.map(val => {
       return {
         username: val.username,
         email: val.email,
@@ -227,7 +227,11 @@ function getUsers() {
         role: val.role,
         blocked: val.blocked
       }
-    }));
+    });
+    return accounts;
+  } catch (e) {
+    console.log(e.stack);
+  }
 }
 
 /**
@@ -239,14 +243,14 @@ function close() {
 
 module.exports = {
   close,
-  getUsers,
-  getUser,
+  getAccounts,
+  getAccount,
   removeOldCustomers,
   checkConfirmation,
-  isUserNotExists,
-  deleteUser,
-  updateUser,
-  storeUser,
+  isAccountNotExists,
+  deleteAccount,
+  updateAccount,
+  storeAccount,
   storeCustomer,
   connect
 };

@@ -2,8 +2,10 @@ const xml2js = require('xml2js');
 const fs = require('fs');
 const path = require('path');
 
+const soapService = require('./soap_service');
 
-WSDL_URL = path.join(__dirname, '..', process.env.WSDL_FILENAME);
+const ENVELOPE_URL = path.join(__dirname, '..', "wsdl", process.env.ENVELOPE_FILENAME);
+const WSDL_URL = path.join(__dirname, '..', "wsdl", process.env.WSDL_FILENAME);
 
 class CustomerFactory {
   constructor(customerData, ENVELOPE_URL) {
@@ -108,6 +110,7 @@ async function confirmCustomer(req, res) {
     soapService.sendCustomer(customer, WSDL_URL);
     res.send('<p>Success! The customer was confirmed.</p>');
   } catch (e) {
+    console.log( e.stack );
     res.send('<p>Error! The customer was not confirmed.</p>');
   }
 }
@@ -117,15 +120,15 @@ async function createCustomer(req, res) {
     let customerFactory = null
     if (customerData.customerType === 'person') {
       if (customerData.debitCreditType === 'debit') {
-        customerFactory = new customerService.PersonDebitFactory(customerData, ENVELOPE_URL);
+        customerFactory = new PersonDebitFactory(customerData, ENVELOPE_URL);
       } else if (customerData.debitCreditType === 'credit') {
-        customerFactory = new customerService.PersonCreditFactory(customerData, ENVELOPE_URL);
+        customerFactory = new PersonCreditFactory(customerData, ENVELOPE_URL);
       }
     } else if (customerData.customerType === 'organization') {
       if (customerData.debitCreditType === 'debit') {
-        customerFactory = new customerService.OrganizationDebitFactory(customerData, ENVELOPE_URL);
+        customerFactory = new OrganizationDebitFactory(customerData, ENVELOPE_URL);
       } else if (customerData.debitCreditType === 'credit') {
-        customerFactory = new customerService.OrganizationCreditFactory(customerData, ENVELOPE_URL);
+        customerFactory = new OrganizationCreditFactory(customerData, ENVELOPE_URL);
       }
     }
     return customerFactory.build();
@@ -133,28 +136,29 @@ async function createCustomer(req, res) {
 
   try {
     const requestCustomer = req.body.customer;
+    const emailTo = req.body.decodedAccount.email;
     let sapCustomer = await composeCustomer(requestCustomer);
     let envelope = JSON.stringify(sapCustomer.getJSONArgs());
+    console.log(envelope)
     if (requestCustomer.isDirect) {
       soapService.sendCustomer(envelope, WSDL_URL);
+      res.json({
+        message: 'CUSISSND',
+    });
     } else {
       const hash = cryptoService.generateHash();
-      //TODO catch error
       await databaseService.storeCustomer(hash, envelope);
-
-      const message = {
-        from: "BayWa",
-        to: emailTo,
-        subject: 'Customer confirmation',
-        html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + hash + '">here</a> to confirm the customer.</p>'
-      };
-      emailService.sendEmail(message);
-    }
-    res.json({
-      ok: true
+      emailService.sendCustomerConfirmation(emailTo, hash);
+      res.json({
+        message: 'CONFISSND',
     });
+    }
+
   } catch (e) {
-    //TODO handle error
+    console.log( e.stack );
+    res.status(500).send({
+      error: e
+  });
   }
 }
 

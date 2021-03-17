@@ -2,17 +2,15 @@
     <div class="stepper-container">
         <mat-horizontal-stepper class="alternate-theme" linear="false" #stepper>
 
-            <!--contact information mat-step for person-->
-            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="contactInformation">
-                <form [formGroup]="contactInformation">
-                    <ng-template matStepLabel>{{dictionaryService.get('CONTACT')}}</ng-template>
-                    <div class="vertical-flex">
+            <!--general information mat-step for person-->
+            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="generalInformation">
+                <form [formGroup]="generalInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('GENINF')}}</ng-template>
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('GENINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('GENINF')}}</h2>
                             </div>
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -24,7 +22,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LEGFRM', errorType.key)}}
                                             </mat-error>
@@ -48,7 +46,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
@@ -72,7 +70,7 @@
                                             <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('firstName').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LNAME', errorType.key)}}
                                             </mat-error>
@@ -83,7 +81,7 @@
                                             <mat-label>{{dictionaryService.get('SNAME')}}</mat-label>
                                             <input matInput formControlName="secondName" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('secondName').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('secondName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SNAME', errorType.key)}}
                                             </mat-error>
@@ -106,7 +104,7 @@
                                             <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
                                             <mat-datepicker #birthDate></mat-datepicker>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('birthDate').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('birthDate').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('BRTH', errorType.key)}}
                                             </mat-error>
@@ -114,13 +112,28 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
 
+                    <div class="space"></div>
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
+                        <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--address information mat-step for person-->
+            <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="contactInformation">
+                <form [formGroup]="contactInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('CONTINF')}}</ng-template>
+                    <div class="vertical-flex bottom-border top-border bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('ADDRINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('CONTINF')}}</h2>
                             </div>
                             <div class="stepper-data">
                                 <div style="display: flex;">
@@ -248,8 +261,14 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
-                        <button mat-stroked-button matStepperNext class="stepper-button" #StepperControlButton>
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                            #StepperControlButton>
                             <span>{{dictionaryService.get('NXT')}}</span>
                             <mat-icon style="margin-left: 5px;">forward</mat-icon>
                         </button>
@@ -261,13 +280,11 @@
             <mat-step [stepControl]="payment" *ngIf="storageService.customerType === 'person'">
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAYINF')}}</ng-template>
-                    <div class="vertical-flex">
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('PAYINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('PAYINF')}}</h2>
                             </div>
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -433,7 +450,8 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
                         <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
                             <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                             <span>{{dictionaryService.get('BCK')}}</span>
@@ -452,13 +470,11 @@
             <mat-step [stepControl]="upload" *ngIf="storageService.customerType === 'person'">
                 <form [formGroup]="upload">
                     <ng-template matStepLabel>{{dictionaryService.get('ATTACH')}}</ng-template>
-                    <div class="vertical-flex">
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('ATTACH')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('ATTACH')}}</h2>
                             </div>
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px buttons-theme" style="width: 50%;">
@@ -489,7 +505,8 @@
 
                     </div>
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
                         <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
                             <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                             <span>{{dictionaryService.get('BCK')}}</span>
@@ -504,18 +521,15 @@
             </mat-step>
 
 
-            <!--contact information mat-step for organization-->
-            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="contactInformation">
-                <form [formGroup]="contactInformation">
-                    <ng-template matStepLabel>{{dictionaryService.get('CONTACT')}}</ng-template>
-                    <div class="vertical-flex">
+            <!--general information mat-step for organization-->
+            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="generalInformation">
+                <form [formGroup]="generalInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('GENINF')}}</ng-template>
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('GENINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('GENINF')}}</h2>
                             </div>
-
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -527,7 +541,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('legalForm').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('legalForm').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('LEGFRM', errorType.key)}}
                                             </mat-error>
@@ -551,7 +565,7 @@
                                                 </mat-option>
                                             </mat-select>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('salutation').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('salutation').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
@@ -562,7 +576,7 @@
                                             <mat-label>{{dictionaryService.get('COMPERS')}}</mat-label>
                                             <input matInput formControlName="orgaPersons" required>
                                             <mat-error
-                                                *ngFor="let errorType of contactInformation.get('orgaPersons').errors | keyvalue;">
+                                                *ngFor="let errorType of generalInformation.get('orgaPersons').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('COMPERS', errorType.key)}}
                                             </mat-error>
@@ -582,14 +596,29 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="space"></div>
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
+                        <button mat-stroked-button class="stepper-button" matStepperNext #StepperControlButton>
+                            <span>{{dictionaryService.get('NXT')}}</span>
+                            <mat-icon style="margin-left: 5px;">forward</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--address information mat-step for organization-->
+            <mat-step *ngIf="storageService.customerType === 'organization'" [stepControl]="contactInformation">
+                <form [formGroup]="contactInformation">
+                    <ng-template matStepLabel>{{dictionaryService.get('CONTINF')}}</ng-template>
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('ADDRINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('CONTINF')}}</h2>
                             </div>
-
                             <div class="stepper-data">
-
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 65%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -711,8 +740,14 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
-                        <button mat-stroked-button class="stepper-button" matStepperNext #StepperControlButton>
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
+                        <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
+                            <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
+                            <span>{{dictionaryService.get('BCK')}}</span>
+                        </button>
+                        <button mat-stroked-button class="stepper-button" style="margin-left: 10px;" matStepperNext
+                            #StepperControlButton>
                             <span>{{dictionaryService.get('NXT')}}</span>
                             <mat-icon style="margin-left: 5px;">forward</mat-icon>
                         </button>
@@ -725,13 +760,11 @@
                 *ngIf="storageService.customerType === 'organization' && storageService.debitCreditType === 'debit'">
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
-                    <div class="vertical-flex">
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details !== 'Privat'">
+                    <div class="vertical-flex bottom-border top-border">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details !== 'Privat'">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('APP')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('APP')}}</h2>
                             </div>
-
                             <!--1. Col-->
                             <div class="stepper-data">
                                 <div style="display: flex;">
@@ -811,13 +844,10 @@
                         </div>
 
                         <!--1. Col-->
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details === 'Privat'">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('APP1')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('APP1')}}</h2>
                             </div>
-
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -916,12 +946,10 @@
                         </div>
 
                         <!--2. Col-->
-                        <div class="flex-column" *ngIf="contactInformation.get('legalForm').value.details === 'Privat'">
+                        <div class="flex-column" *ngIf="generalInformation.get('legalForm').value.details === 'Privat'">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('APP2')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('APP2')}}</h2>
                             </div>
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
@@ -1021,7 +1049,8 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
                         <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
                             <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                             <span>{{dictionaryService.get('BCK')}}</span>
@@ -1039,15 +1068,12 @@
             <mat-step [stepControl]="payment" *ngIf="storageService.customerType === 'organization'">
                 <form [formGroup]="payment">
                     <ng-template matStepLabel>{{dictionaryService.get('PAYINF')}}</ng-template>
-                    <div class="vertical-flex">
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('PAYINF')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('PAYINF')}}</h2>
                             </div>
-
                             <div class="stepper-data">
-
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -1207,7 +1233,8 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
                         <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
                             <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                             <span>{{dictionaryService.get('BCK')}}</span>
@@ -1225,13 +1252,11 @@
             <mat-step [stepControl]="upload" *ngIf="storageService.customerType === 'organization'">
                 <form [formGroup]="upload">
                     <ng-template matStepLabel>{{dictionaryService.get('ATTACH')}}</ng-template>
-                    <div class="vertical-flex">
+                    <div class="vertical-flex bottom-border top-border">
                         <div class="flex-column">
                             <div class="stepper-title">
-                                <h2 style="margin:0">{{dictionaryService.get('ATTACH')}}</h2>
-                                <hr flex />
+                                <h2>{{dictionaryService.get('ATTACH')}}</h2>
                             </div>
-
                             <div class="stepper-data">
                                 <div style="display: flex;">
                                     <div class="paddinglr10px buttons-theme" style="width: 50%;">
@@ -1262,7 +1287,8 @@
                     </div>
 
                     <div class="space"></div>
-                    <div class="stepper-controls buttons-theme">
+                    <div class="form-controls buttons-theme">
+                        <span class="space"></span>
                         <button mat-stroked-button class="stepper-button" matStepperPrevious #StepperControlButton>
                             <mat-icon style="margin-right: 5px; transform: rotate(180deg);">forward</mat-icon>
                             <span>{{dictionaryService.get('BCK')}}</span>
@@ -1275,7 +1301,6 @@
                     </div>
                 </form>
             </mat-step>
-
         </mat-horizontal-stepper>
     </div>
 </div>

@@ -6,50 +6,66 @@
     <div style="padding-left:10px;">
       <span class="mat-h2" style="color:white; cursor: pointer;" (click)="reset()">WEB-ISO</span>
     </div>
-    <div *ngIf="authService.isLoggedIn();" style="padding-left:10px;">
+    <div *ngIf="authService.isLoggedIn() && router.url === '/iso' || router.url === '/preselection'"
+      style="padding-left:10px;">
       <span class="mat-h2">
         {{storageService.getCustomerTypeName()}} - {{storageService.getDebitCreditTypeName()}}
       </span>
     </div>
     <span class="space"></span>
-    <div style="padding-left:10px;">
-      <span class="mat-h2"
-        *ngIf="authService.getUser()">{{dictionaryService.get('HELLO')}}{{authService.getUser().username}}!</span>
+
+    <div class="btn-group" dropdown style="margin-right: 20px;" *ngIf="authService.isLoggedIn()"
+      triggers="mouseenter:mouseleave" #dp="bs-dropdown" [insideClick]="true">
+      <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
+        aria-controls="dropdown-animated" style="background: transparent">
+        <span class="mat-h3">
+          {{dictionaryService.get('HELLO')}}{{authService.getAccount().username}}!
+        </span>
+        <span class="caret"></span>
+      </button>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
+        (mouseleave)="dp.hide()">
+        <mat-nav-list>
+
+          <a mat-list-item (click)="changeLanguage()">
+            <mat-icon>language</mat-icon> &nbsp;
+            {{ dictionaryService.get('LANG') }}
+          </a>
+
+          <div mat-list-item class="flex-column" style="margin: 10px">
+            <mat-button-toggle-group [value]="selectedLanguage" mat-list-item value="EN" class="toggle-theme"
+              (change)="dictionaryService.switchLanguage()">
+              <mat-button-toggle value="EN">EN</mat-button-toggle>
+              <mat-button-toggle value="DE">DE</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <a mat-list-item [routerLink]="'/settings'" (click)="dp.hide(); sidenav.close();">
+            <mat-icon>settings</mat-icon> &nbsp;
+            {{ dictionaryService.get('ACC') }}
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item (click)="logout()" (click)="dp.hide(); sidenav.close();">
+            <mat-icon>logout</mat-icon> &nbsp;
+            {{ dictionaryService.get('LOGOUT') }}
+          </a>
+        </mat-nav-list>
+      </ul>
     </div>
-
-    <button mat-raised-button (click)="reset()" style="margin-left: 20px;">
-      <mat-icon>replay</mat-icon>
-    </button>
-    <button mat-raised-button (click)="dictionaryService.switchLanguage()"
-      style="margin-left: 10px;">{{dictionaryService.currentLanguage}}</button>
-
-
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="width: 200px;">
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/preselection'" (click)="sidenav.toggle()">
+      <a mat-list-item [routerLink]="'/preselection'" (click)="sidenav.close();">
         <mat-icon>add</mat-icon> &nbsp;
         {{ dictionaryService.get('NEWCUS') }}
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="'/settings'" (click)="sidenav.toggle()">
-        <mat-icon>settings</mat-icon> &nbsp;
-        {{ dictionaryService.get('SETTINGS') }}
-      </a>
-      <mat-divider></mat-divider>
-      <a *ngIf="authService.getUser()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
-        (click)="sidenav.toggle()">
-        <mat-icon>build</mat-icon> &nbsp;
+      <a *ngIf="authService.getAccount()?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
+        (click)="sidenav.close();">
+        <mat-icon>supervisor_account</mat-icon> &nbsp;
         {{ dictionaryService.get('ADMINAREA') }}
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item (click)="logout(); sidenav.toggle()">
-        <mat-icon>logout</mat-icon> &nbsp;
-        {{ dictionaryService.get('LOGOUT') }}
       </a>
 
     </mat-nav-list>

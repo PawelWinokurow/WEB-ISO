@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 let PROXY_AGENT = null
 
 function setProxyAgent(agent) {
@@ -42,6 +44,7 @@ async function validateRecaptcha(req, res) {
             });
         }
     } catch (e) {
+        console.log( e.stack );
         res.send({
             success: false
         });

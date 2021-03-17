@@ -9,25 +9,30 @@ import { Injectable } from '@angular/core';
 })
 export class DictionaryService {
 
-  currentLanguage: string = 'DE';
+  currentLanguage: string = 'Deutsch';
 
   languages = new Map([
-    ['DE', 'Deutsch'],
-    ['EN', 'English'],
+    ['Deutsch', 'Deutsch'],
+    ['English', 'English'],
   ]);
 
   dictionaryDE = new Map([
     ['LOGIN', 'Anmeldung'],
-    ['USRNAME', 'Benutzername'],
-    ['PSWD', 'Passwort'],
-    ['ID', 'E-Mail oder Benutzername'],
-
     ['HELLO', 'Hallo, '],
+    ['ID', 'E-Mail oder Benutzername'],
+    ['PSWDFOG', 'Passwort vergessen?'],
+    
     ['NEWCUS', 'Neuer Kunde'],
-    ['SETTINGS', 'Einstellungen'],
+    ['ACC', 'Konto'],
+    ['LANG', 'Sprache'],
     ['LOGOUT', 'Abmelden'],
     ['ADMINAREA', 'Admin-Bereich'],
-    ['ROLE', 'Rolle'],
+    
+    ['USRNAME', 'Benutzername'],
+    ['PSWD', 'Passwort'],
+    ['USR', 'Benutzer'],
+    ['ADM', 'Administrator'],
+    ['CREATE', 'Anlegen'],
 
     ['RESETPSWD', 'Passwort zurücksetzen'],
     ['BLOCKUSR', 'Sperren'],
@@ -37,13 +42,17 @@ export class DictionaryService {
     ['EXPAND', 'Alle ausklappen'],
     ['COLLAPSE', 'Alle zuklappen'],
     ['SEARCH', 'Suche'],
+    ['ROLE', 'Rolle'],
 
-    ['NEWACC', 'Konto erstellen'],
+    ['ACCSET', 'Kontoeinstellungen'],
+    ['SECSET', 'Sicherheitseinstellungen'],
+
+    ['NEWACC', 'Konto anlegen'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
     ['PSWDOLD', 'Altes Passwort'],
-    ['PSWDNMATCH', 'Die Passwörter stimmen nicht überein.'],
     ['PSWDOLDNMATCH', 'Das alte Passwort ist falsch.'],
+    ['PSWDNMATCH', 'Die Passwörter stimmen nicht überein.'],
     ['IDUSED', 'Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.'],
     ['IDINC', 'Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.'],
     ['USRISBL', 'Der Benutzer wurde gesperrt.'],
@@ -53,7 +62,7 @@ export class DictionaryService {
     
     ['NOTALLOWED', 'Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.'],
 
-    ['CHNG', 'Ändern'],
+    ['APPLY', 'Übernehmen'],
     ['CHNGPSWD', 'Passwort ändern'],
 
     ['YES', 'Ja'],
@@ -65,7 +74,6 @@ export class DictionaryService {
     ['SND', 'Senden'],
     ['ADDFILE', 'Datei hinzufügen'],
 
-    ['PRESEL', 'Vorauswahl'],
     ['CUSTYPE', 'Kundentyp'],
     ['PER', 'Person'],
     ['ORG', 'Organisation'],
@@ -78,7 +86,7 @@ export class DictionaryService {
 
     ['CONTACT', 'Kontaktdaten'],
     ['GENINF', 'Allgemeine Informationen'],
-    ['ADDRINF', 'Adressinformationen'],
+    ['CONTINF', 'Kontaktinformationen'],
     ['PAYINF', 'Zahlungsinformationen'],
     ['ATTACH', 'Datei anhängen'],
 
@@ -112,7 +120,7 @@ export class DictionaryService {
     ['CRELMT', 'Kreditlimit'],
     ['REMARKS', 'Bemerkungsfeld'],
 
-    ['APP', 'Antragsteller'],
+    ['APP', 'Antragstellerinformationen'],
     ['APP1', '1. Antragsteller'],
     ['APP2', '2. Antragsteller'],
    
@@ -149,33 +157,31 @@ export class DictionaryService {
     ['USRNAME', 'Username'],
     ['PSWD', 'Password'],
     ['ID', 'Email or username'],
+    ['PSWDFOG', 'Forgot password?'],
     
-
-
+    ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
+    
+    ['APPLY', 'Apply'],
+    ['CHNGPSWD', 'Change password'],
     ['NEWACC', 'Create account'],
     ['CONFIRM', 'Confirm'],
     ['PSWDCONF', 'Password confirmation'],
     ['PSWDOLD', 'Old password'],
-    ['PSWDNMATCH', 'The passwords do not match.'],
-    ['PSWDOLDNMATCH', 'The old password does not match.'],
-    ['IDUSED', 'This email address or username is already being used.'],
-    ['IDINC', 'Your username/email or password are incorrect.'],
-    ['USRISBL', 'The user was blocked.'],
-    ['USRISUN', 'The user was unblocked.'],
-    ['USRISDEL', 'The user was deleted.'],
-    ['PSWDISRES', 'The password was reset.'],
     
-    ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
-    
-    ['CHNG', 'Change'],
-    ['CHNGPSWD', 'Change password'],
-    
+    ['CREATE', 'Create'],
+    ['USR', 'Account'],
+    ['ADM', 'Administrator'],
+
     ['HELLO', 'Hello, '],
     ['NEWCUS', 'New customer'],
     ['LOGOUT', 'Sign out'],
-    ['SETTINGS', 'Settings'],
+    ['ACC', 'Account'],
+    ['LANG', 'Language'],
     ['ADMINAREA', 'Admin area'],
     ['ROLE', 'Role'],
+
+    ['ACCSET', 'Account settings'],
+    ['SECSET', 'Security settings'],
     
     ['RESETPSWD', 'Reset password'],
     ['BLOCKUSR', 'Block'],
@@ -195,7 +201,6 @@ export class DictionaryService {
     ['SND', 'Send'],
     ['ADDFILE', 'Add file'],
     
-    ['PRESEL', 'Preselection'],
     ['CUSTYPE', 'Customer type'],
     ['PER', 'Person'],
     ['DEB', 'Debitor'],
@@ -208,7 +213,7 @@ export class DictionaryService {
     
     ['CONTACT', 'Contact'],
     ['GENINF', 'General information'],
-    ['ADDRINF', 'Address information'],
+    ['CONTINF', 'Contact information'],
     ['PAYINF', 'Payment information'],
     ['ATTACH', 'Attach file'],
 
@@ -243,7 +248,7 @@ export class DictionaryService {
     ['PAYTERMS', 'Terms of payment'],
     ['REMARKS', 'Remarks field'],
 
-    ['APP', 'Applicant'],
+    ['APP', 'Applicant information'],
     ['APP1', 'Applicant 1'],
     ['APP2', 'Applicant 2'],
 
@@ -262,19 +267,33 @@ export class DictionaryService {
     ['DELUSR2', "?"],
     ['RESETPSWD1', "Reset password for "],
     ['RESETPSWD2', "?"],
-    ['USRISCR', 'The user was created.'],
-    ['USRISUPD', 'The user was updated.'],
-    ['USRISNUPD', 'The user was not updated.'],
 
-    ['CUSISSND', 'The customer was sent.'],
-    ['CONFISSND', 'The confirmation email was sent to your email address.'],
+    ['USRISNUPD', 'The account was not updated.'],
+
     ['SUC', 'Success!'],
     ['ERR', 'Error!'],
+
+    //Messages
+    ['USRISCR', 'The account was created.'],
+    ['USRISUPD', 'The account was updated.'],
+    ['CUSISSND', 'The customer was sent.'],
+    ['CONFISSND', 'The confirmation email was sent to your email address.'],
+    ['USRISBL', 'The account was blocked.'],
+    ['USRISUN', 'The account was unblocked.'],
+    ['USRISDEL', 'The account was deleted.'],
+    ['PSWDISRES', 'The password was reset.'],
+
+    //Errors
+    ['PSWDNMATCH', 'The passwords do not match.'],
+    ['PSWDOLDNMATCH', 'The old password does not match.'],
+    ['IDUSED', 'This email address or username is already being used.'],
+    ['IDINC', 'Your username/email or password are incorrect.'],
+
   ])
 
   dictionary = new Map([
-    ['DE', this.dictionaryDE],
-    ['EN', this.dictionaryEN]
+    ['Deutsch', this.dictionaryDE],
+    ['English', this.dictionaryEN]
   ])
 
   constructor() { }
@@ -283,7 +302,7 @@ export class DictionaryService {
    * Switches language between English and German.
    */
   switchLanguage() {
-    this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
+    this.currentLanguage = (this.currentLanguage == 'Deutsch' ? 'English' : 'Deutsch')
   }
 
   /**

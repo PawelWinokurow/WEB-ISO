@@ -9,18 +9,14 @@ const httpsProxyAgent = require('https-proxy-agent');
 require('dotenv').config();
 
 const databaseService = require('./services/database_service');
-const soapService = require('./services/soap_service');
-const emailService = require('./services/email_service');
 const customerService = require('./services/customer_service');
 const middlewareService = require('./services/middleware_service');
 const authService = require('./services/auth_service');
-const userService = require('./services/user_service');
+const accountService = require('./services/account_service');
 const recaptchaService = require('./services/recaptcha_service');
 
 databaseService.connect();
 
-//envelope.xml for testing
-const ENVELOPE_URL = path.join(__dirname, "wsdl", 'envelope.xml');
 
 /**
  * Class to to manage the server. It contains node js express application.
@@ -56,14 +52,14 @@ class Server {
     /**
      * Enpoint to get new customers from application.
      */
-    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, customerService.createCustomer);
+    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomer);
 
     /**
      * Endpoint to get login data.
      */
     this.expressApp.route("/login")
       .post(authService.login)
-      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, authService.refreshToken);
+      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
 
     /**
      * Endpoint to get email confirmations.
@@ -73,42 +69,29 @@ class Server {
     /**
      * Endpoint to get recaptcha token from the client.
      */
-    this.expressApp.route('/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfUserAvailable, recaptchaService.validateRecaptcha);
+    this.expressApp.route('/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
 
     /**
-     * Endpoint for user CRUD.
-     * post: create user
-     * put: update user
-     * patch: block user
-     * delete: delete user
+     * Endpoint for account CRUD.
+     * post: create account
+     * put: update account
+     * patch: block account
+     * delete: delete account
      */
-    this.expressApp.route('/user')
-      .post(userService.createUser)
-      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, userService.updateUser)
-      .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, userService.blockOrResetUser)
-      .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfUserAvailable, userService.deleteUser);
+    this.expressApp.route('/account')
+      .post(accountService.createAccount)
+      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
+      .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockOrResetAccount)
+      .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
 
-    this.expressApp.route('/users').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfUserAvailable, userService.getUsers);
+    this.expressApp.route('/accounts').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);
   }
 
   start() {
-    this.expressApp.listen(process.env.WEB_PORT, () => {
-      console.log(`WEB-ISO server is listening at http://localhost:${process.env.WEB_PORT}`)
+    this.expressApp.listen(process.env.PORT, () => {
+      console.log(`WEB-ISO server is listening at ${process.env.HOST}`)
     })
   }
 }
 
 new Server().start()
-
-/*
-setTimeout(function () {
-  //soapService.test()
-
-  const message = {
-    from: "BayWa",
-    to: 'pawelwinokurow@gmail.com',
-    subject: 'Customer confirmation',
-    html: '<p>Click <a href="http://localhost:3000/confirm?hash=' + "asdadasdasa" + '">here</a> to confirm the customer.</p>'
-  };
-  //emailService.sendEmail('asdasdas', 'pawelwinokurow@gmail.com', message)
-}, 1000);*/

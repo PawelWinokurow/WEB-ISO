@@ -12,12 +12,12 @@ function checkIfAuthenticated(req, res, next) {
         const jwtBearerToken = authHeader.split(' ')[1];
         jwt.verify(jwtBearerToken, PUBLIC_KEY, {
             algorithm: ['RS256']
-        }, (err, user) => {
+        }, (err, account) => {
             if (err) {
                 console.log(err);
                 return res.sendStatus(403);
             }
-            req.body.decodedUser = user;
+            req.body.decodedAccount = account;
             next();
         });
     } else {
@@ -25,10 +25,10 @@ function checkIfAuthenticated(req, res, next) {
     }
 }
 
-function checkIfUserAvailable(req, res, next) {
-    databaseService.getUser(req.body.decodedUser)
-        .then(dbUser => {
-            if (dbUser.blocked === 0) {
+function checkIfAccountAvailable(req, res, next) {
+    databaseService.getAccount(req.body.decodedAccount)
+        .then(dbAccount => {
+            if (dbAccount && dbAccount.blocked === 0) {
                 next();
             } else {
                 res.sendStatus(401);
@@ -39,21 +39,21 @@ function checkIfUserAvailable(req, res, next) {
 
 //Checks if request updates itself or ADMIN updates USER
 function checkIfUpdatesItself(req, res, next) {
-    const user = req.body.decodedUser;
-    const updatedUser = req.body.user;
-    if (updatedUser.email === user.email ||
-        user.role === 'ADMIN' && updatedUser.role === 'USER') {
+    const account = req.body.decodedAccount;
+    const updatedAccount = req.body.account;
+    if (updatedAccount.email === account.email ||
+        account.role === 'ADMIN' && updatedAccount.role === 'USER') {
         next();
     }
 }
 
 //Checks if request comes from ADMIN
 function checkIfFromAdmin(req, res, next) {
-    if (req.body.decodedUser.role === 'ADMIN') {
+    if (req.body.decodedAccount.role === 'ADMIN') {
         next();
     } else {
         res.sendStatus(401);
     }
 }
 
-module.exports = { checkIfFromAdmin, checkIfUpdatesItself, checkIfUserAvailable, checkIfAuthenticated };
+module.exports = { checkIfFromAdmin, checkIfUpdatesItself, checkIfAccountAvailable, checkIfAuthenticated };

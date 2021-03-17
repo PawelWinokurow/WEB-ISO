@@ -9,13 +9,13 @@ const PRIVATE_KEY = fs.readFileSync(path.join(__dirname, '..', process.env.PRIVA
 
 async function refreshToken(req, res) {
     try {
-        const jwtUser = req.body.decodedUser;
+        const jwtAccount = req.body.decodedAccount;
 
-        let dbUser = await databaseService.getUser(jwtUser);
+        let dbAccount = await databaseService.getAccount(jwtAccount);
 
-        delete dbUser.password;
-        delete dbUser.blocked;
-        const jwtBearerToken = jwt.sign(dbUser, PRIVATE_KEY, {
+        delete dbAccount.password;
+        delete dbAccount.blocked;
+        const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
             algorithm: 'RS256',
             expiresIn: process.env.JWT_DURATION,
         });
@@ -23,25 +23,24 @@ async function refreshToken(req, res) {
         res.status(200).json({
             idToken: jwtBearerToken,
             expiresIn: process.env.JWT_DURATION,
-            user: dbUser
+            account: dbAccount
         });
     } catch (e) {
-        // send status 401 Unauthorized
+        console.log( e.stack );
         res.status(401).send({
-            error: "No match"
+            error: e
         });
     }
 }
 
 async function login(req, res) {
     try {
-        const requestUser = req.body.user;
-
-        let dbUser = await databaseService.getUser(requestUser);
-        if (!dbUser.blocked && cryptoService.comparePasswords(requestUser.password, dbUser.password)) {
-            delete dbUser.password;
-            delete dbUser.blocked;
-            const jwtBearerToken = jwt.sign(dbUser, PRIVATE_KEY, {
+        const requestAccount = req.body.account;
+        let dbAccount = await databaseService.getAccount(requestAccount);
+        if (dbAccount && !dbAccount.blocked && cryptoService.comparePasswords(requestAccount.password, dbAccount.password)) {
+            delete dbAccount.password;
+            delete dbAccount.blocked;
+            const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
                 algorithm: 'RS256',
                 expiresIn: process.env.JWT_DURATION,
             });
@@ -49,18 +48,17 @@ async function login(req, res) {
             res.status(200).json({
                 idToken: jwtBearerToken,
                 expiresIn: process.env.JWT_DURATION,
-                user: dbUser
+                account: dbAccount
             });
         } else {
-            // send status 401 Unauthorized
-            res.status(401).send({
-                error: "No match"
-            });
+            res.json({
+                error: `IDINC`
+            })
         }
     } catch (e) {
-        // send status 401 Unauthorized
+        console.log( e.stack );
         res.status(401).send({
-            error: "No match"
+            error: e
         });
     }
 }

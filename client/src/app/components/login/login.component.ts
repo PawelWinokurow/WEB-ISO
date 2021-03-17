@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
 
-  constructor(private router: Router, public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
-    private toastrService: ToastrService, private authService: AuthService, public errorMessageService: ErrorMessageService,
+  constructor(private router: Router, public dictionaryService: DictionaryService, 
+    private formBuilder: FormBuilder, private authService: AuthService, 
+    public errorMessageService: ErrorMessageService,
     private tokenProlongationService: TokenProlongationService) { }
 
   ngOnInit(): void {
@@ -32,20 +33,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.controls['identifier'].value, this.loginForm.controls['password'].value)
-        .then(() => {
-          this.tokenProlongationService.startChecking();
-          this.router.navigate(['/preselection']);
-        })
-        .catch(err => {
-          if (err.status == "401") {
-            this.toastrService.error(this.dictionaryService.get('IDINC'), this.dictionaryService.get('ERR'))
-          } else {
-            this.toastrService.error(err.message, this.dictionaryService.get('ERR'))
-          }
-        });
+  async login() {
+    if (this.loginForm.valid) {    
+      let isSuccessful = await this.authService.login(this.loginForm.controls['identifier'].value, this.loginForm.controls['password'].value);
+      if (isSuccessful) {
+        this.tokenProlongationService.startChecking();
+        this.router.navigate(['/preselection']);
+      }
     }
   }
 
@@ -53,6 +47,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  forgotPassword(){
+
+  }
+  
   register() {
     this.router.navigate(['/registration']);
   }

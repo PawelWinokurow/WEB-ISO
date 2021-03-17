@@ -2,17 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from './../../environments/environment';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpService: HttpService) { }
 
-  login(identifier: string, password: string) {
-    return this.http.post(`${environment.serverURL}/login`, {user: { email: identifier, username: identifier, password: password }})
-      .toPromise().then(res => this.setSession(res));
+  async login(identifier: string, password: string) {
+    let result = await this.httpService.request(this.http.post(`${environment.serverURL}/login`, 
+    {account: { email: identifier, username: identifier, password: password }})).toPromise();
+    if (result){
+      this.setSession(result)
+    }
+    return result;
   }
 
   public setSession(result) {
@@ -20,7 +25,7 @@ export class AuthService {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
       localStorage.setItem('id_token', result.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-      localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("account", JSON.stringify(result.account));
       return true;
     }
     return false;
@@ -38,18 +43,18 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
-  setUser(user) {
-    user = {
-      username: user.username,
-      email: user.email,
-      companyCode: user.companyCode,
-      role: user.role
+  setAccount(account) {
+    account = {
+      username: account.username,
+      email: account.email,
+      companyCode: account.companyCode,
+      role: account.role
     }
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("account", JSON.stringify(account));
   }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem("user"))
+  getAccount() {
+    return JSON.parse(localStorage.getItem("account"))
   }
 
   getExpiration() {
@@ -58,7 +63,7 @@ export class AuthService {
     return moment(expiresAt);
   }
 
-  prolongToken(user) {
-    return this.http.put(`${environment.serverURL}/login`, user);
+  prolongToken(account) {
+    return this.http.put(`${environment.serverURL}/login`, account);
   }
 }

@@ -10,3 +10,8 @@ mat-toolbar-row {
 mat-sidenav {
     width: 250px !important;
 }
+
+.dropdown-menu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }

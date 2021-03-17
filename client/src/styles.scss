@@ -23,6 +23,7 @@ body {
 }
 
 .inner-component {
+  padding: 10px 0 0 0;
   position: relative;
   height: calc(100vh - 64px);  
   background-color: rgb(240, 240, 240);
@@ -49,17 +50,16 @@ mat-form-field {
 }
 
 .stepper-data {
-  padding-left: 30px;
+  padding-left: 20px;
   padding-right: 30px;
   height: 100%;
-  min-width: 530px;
+  min-width: 550px;
   width: 30%;
   overflow: auto;
 }
 
 .stepper-title {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 20px 0 0 30px;
   min-width: 530px;
   width: 30%;
 }
@@ -113,7 +113,7 @@ mat-form-field {
 }
 
 .card {
-  max-width: 350px;
+  max-width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -134,7 +134,7 @@ mat-button-toggle {
 }
 
 .vertical-flex{
-  height: calc(100vh - 216px);
+  height: calc(100vh - 212px);
   display: flex;
   overflow: auto;
 }
@@ -148,16 +148,20 @@ mat-button-toggle {
   height: calc(100vh - 104px);
   display: flex;
   flex-flow: column;
-  padding: 20px;
 }
 
-.form-flex-column {
+.flex-column {
   display: flex;
   flex-flow: column;
 }
 
+.flex-row {
+  display: flex;
+  flex-flow: row;
+}
+
 .form-data {
-  height: calc(100vh - 240px);
+  height: calc(100vh - 230px);
   width: 400px;
   overflow: auto;
 }
@@ -177,3 +181,34 @@ mat-button-toggle {
   //border: 2px solid #009650;
   border: 2px solid rgba(87, 87, 87, 0.479);
 }
+
+.button-text{
+  display: inline-block;
+  margin: 0 !important;
+  padding-left: 10px;
+}
+
+.right-border {
+  border-right: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+.left-border {
+  border-left: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+.top-border {
+  border-top: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+.bottom-border {
+  border-bottom: 1px solid; border-color: rgba(201, 201, 201, 0.534);
+}
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
+
+  .mat-horizontal-content-container{
+    padding: 0 !important;
+  }
