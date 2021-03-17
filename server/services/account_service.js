@@ -20,7 +20,7 @@ async function createAccount(req, res) {
         let isAccountNotExists = await databaseService.isAccountNotExists(requestAccount);
         if (isAccountNotExists) {
             await databaseService.storeAccount(accountToStore);
-           // emailService.sendNewAccount(accountToSend);
+            // emailService.sendNewAccount(accountToSend);
             res.json({
                 message: 'USRISCR'
             });
@@ -107,6 +107,49 @@ function blockOrResetAccount(req, res) {
 
 async function resetPassword(req, res) {
     try {
+        const email = req.body.account.email;
+        const hash = cryptoService.generateHash();
+        await databaseService.storeResetAccount(hash, email);
+        emailService.sendAccountResetConfirmation(emailTo, hash);
+        res.json({
+            message: 'PSWDISRES',
+        });
+    } catch (e) {
+        console.log(e.stack);
+        res.status(500).send({
+            error: e
+        });
+    }
+}
+
+async function confirmPasswordReset(req, res) {
+    try {
+        //TODO use join
+        //TODO return link to app
+        const email = await databaseService.checkPasswordResetConfirmation(req.query.hash);
+        let dbAccount = await databaseService.getAccount({ email: email });
+        delete dbAccount.password;
+        delete dbAccount.blocked;
+        const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
+            algorithm: 'RS256',
+            expiresIn: process.env.JWT_DURATION,
+        });
+        //Send JWT back
+        res.status(200).json({
+            idToken: jwtBearerToken,
+            expiresIn: process.env.JWT_DURATION,
+            account: dbAccount
+        });
+
+    } catch (e) {
+        console.log(e.stack);
+        res.send('<p>Error! The password was not reset.</p>');
+    }
+}
+
+/*
+async function resetPassword(req, res) {
+    try {
         const requestAccount = req.body.account;
         let oldAccount = {
             ...requestAccount
@@ -127,7 +170,7 @@ async function resetPassword(req, res) {
             error: e
         });
     }
-}
+}*/
 
 async function blockAccount(req, res) {
     try {
@@ -149,6 +192,8 @@ module.exports = {
     createAccount,
     updateAccount,
     deleteAccount,
+    resetPassword,
     getAccounts,
-    blockOrResetAccount
+    blockOrResetAccount,
+    confirmPasswordReset
 };

@@ -63,4 +63,14 @@ function sendCustomerConfirmation(emailTo, hash) {
     sendEmail(message);
 }
 
-module.exports = { sendCustomerConfirmation, resetPassword, sendNewAccount };
+function sendAccountResetConfirmation(emailTo, hash) {
+    const message = {
+        from: "BayWa",
+        to: emailTo,
+        subject: 'Pasword reset confirmation',
+        html: `<p>Click <a href="${process.env.HOST}/account?hash=${hash}">here</a> to reset your password.</p>`
+    };
+    sendEmail(message);
+}
+
+module.exports = { sendCustomerConfirmation, resetPassword, sendNewAccount, sendAccountResetConfirmation };

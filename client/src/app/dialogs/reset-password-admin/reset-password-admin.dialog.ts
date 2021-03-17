@@ -3,13 +3,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.dialog.html',
-  styleUrls: ['./reset-password.dialog.scss']
+  selector: 'app-reset-password-admin',
+  templateUrl: './reset-password-admin.dialog.html',
+  styleUrls: ['./reset-password-admin.dialog.scss']
 })
-export class ResetPasswordDialog implements OnInit {
+export class ResetPasswordAdminDialog implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ResetPasswordDialog>, @Inject(MAT_DIALOG_DATA) public data, 
+  constructor(private dialogRef: MatDialogRef<ResetPasswordAdminDialog>, @Inject(MAT_DIALOG_DATA) public data, 
   public dictionaryService: DictionaryService) { }
   ngOnInit(): void {
   }

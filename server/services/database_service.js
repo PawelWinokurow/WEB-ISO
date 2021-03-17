@@ -13,6 +13,11 @@ const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts (
   role VARCHAR(255),
   blocked BOOLEAN);`;
 
+const RESETS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS resets (
+    hash VARCHAR(255) NOT NULL PRIMARY KEY,
+    datetime DATETIME NOT NULL,
+    email VARCHAR(255) NOT NULL FOREIGN KEY REFERENCES accounts(email));`;
+
 let connection;
 
 /**
@@ -30,7 +35,7 @@ function connect() {
   //Connect to database
   connection.connect(function (err) {
     if (err) throw err;
-    [CUSTOMERS_TABLE_CREATION, USERS_TABLE_CREATION].forEach(query => {
+    [CUSTOMERS_TABLE_CREATION, USERS_TABLE_CREATION, RESETS_TABLE_CREATION].forEach(query => {
       //Create table if table not exists
       connection.query(query,
         function (err, results, fields) {
@@ -113,6 +118,17 @@ function storeAccount(account) {
 }
 
 /**
+ * Stores reset account in the database.
+ * @param  {string} hash
+ * @param  {string} email  
+ */
+ function storeResetAccount(hash, email) {
+  const insertStatement = 'INSERT INTO resets (hash, email, datetime) VALUES (?, NOW());';
+  const values = [[hash, email]];
+  return insertQueryPromise(insertStatement, values);
+}
+
+/**
  * Updates account in the database.
  * @param  {object} account Account object 
  */
@@ -159,15 +175,32 @@ function isAccountNotExists(account) {
  * Checks if customer with a given hash is in the database.
  * @param {string} hash hashstring from the email message
  */
-function checkConfirmation(hash) {
-  const selectStatement = 'SELECT customer FROM customers WHERE hash = ?';
+function checkCustomerConfirmation(hash) {
+  const selectStatement = 'SELECT * FROM customers WHERE hash = ?';
   const values = [hash];
   return selectQueryPromise(selectStatement, values)
     .then(result => new Promise((resolve, reject) => {
       if (Array.isArray(result) && result.length) {
-        resolve();
+        resolve(true);
       } else {
-        reject();
+        reject(false);
+      }
+    }));
+}
+
+/**
+ * Checks if password reset with a given hash is in the database.
+ * @param {string} hash hash string from the email message
+ */
+ function checkPasswordResetConfirmation(hash) {
+  const selectStatement = 'SELECT * FROM resets WHERE hash = ?';
+  const values = [hash];
+  return selectQueryPromise(selectStatement, values)
+    .then(result => new Promise((resolve, reject) => {
+      if (Array.isArray(result) && result.length) {
+        resolve(result[0].email);
+      } else {
+        reject(false);
       }
     }));
 }
@@ -244,11 +277,13 @@ module.exports = {
   getAccounts,
   getAccount,
   removeOldCustomers,
-  checkConfirmation,
+  checkCustomerConfirmation,
+  checkPasswordResetConfirmation,
   isAccountNotExists,
   deleteAccount,
   updateAccount,
   storeAccount,
   storeCustomer,
+  storeResetAccount,
   connect
 };

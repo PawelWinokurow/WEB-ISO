@@ -79,6 +79,7 @@ class Server {
      * delete: delete account
      */
     this.expressApp.route('/account')
+      .get(accountService.confirmPasswordReset)
       .post(accountService.createAccount)
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockOrResetAccount)

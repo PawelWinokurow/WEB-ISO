@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ResetPasswordUserDialog } from 'src/app/dialogs/reset-password-user/reset-password-user.dialog';
+import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
@@ -16,11 +19,10 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm: FormGroup;
 
-
   constructor(private router: Router, public dictionaryService: DictionaryService, 
     private formBuilder: FormBuilder, private authService: AuthService, 
-    public errorMessageService: ErrorMessageService,
-    private tokenProlongationService: TokenProlongationService) { }
+    public errorMessageService: ErrorMessageService, private dialog: MatDialog,
+    private tokenProlongationService: TokenProlongationService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -43,12 +45,17 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  get loginFormControl() {
-    return this.loginForm.controls;
+  async forgotPassword() {
+    const resetPasswordDialog = this.dialog.open(ResetPasswordUserDialog);
+    const result = await resetPasswordDialog.afterClosed().toPromise();
+    if (result) {
+      const account = { result, operation: 'reset' };
+      await this.accountService.blockOrResetAccount(account).toPromise();
+    }
   }
 
-  forgotPassword(){
-
+  get loginFormControl() {
+    return this.loginForm.controls;
   }
   
   register() {

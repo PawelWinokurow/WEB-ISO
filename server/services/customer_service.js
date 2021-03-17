@@ -130,7 +130,7 @@ class OrganizationCreditFactory extends CustomerFactory {
 
 async function confirmCustomer(req, res) {
   try {
-    const result = await databaseService.checkConfirmation(req.query.hash);
+    const result = await databaseService.checkCustomerConfirmation(req.query.hash);
     const customer = JSON.parse(result[0].customer)
     soapService.sendCustomer(customer, WSDL_URL);
     res.send('<p>Success! The customer was confirmed.</p>');
@@ -163,7 +163,7 @@ async function createCustomer(req, res) {
     const requestCustomer = req.body.customer;
     const emailTo = req.body.decodedAccount.email;
     let sapCustomer = await composeCustomer(requestCustomer);
-    let envelope =sapCustomer.getJSONArgs();
+    let envelope = sapCustomer.getJSONArgs();
     if (requestCustomer.isDirect) {
       soapService.sendCustomer(envelope, WSDL_URL);
       res.json({

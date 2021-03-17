@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { DeleteAccountDialog } from 'src/app/dialogs/delete-account-dialog/delete-account.dialog';
 import { NewAccountDialog } from 'src/app/dialogs/new-account-dialog/new-account.dialog';
-import { ResetPasswordDialog } from 'src/app/dialogs/reset-password/reset-password.dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { AccountService } from 'src/app/services/account.service';
+import { ResetPasswordAdminDialog } from 'src/app/dialogs/reset-password-admin/reset-password-admin.dialog';
 
 @Component({
   selector: 'app-admin',
@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('accordion') accordion: MatAccordion;
 
   constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService,
-    private accountService: AccountService, public listService: ListService, private dialog: MatDialog,) {
+    private accountService: AccountService, public listService: ListService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -113,7 +113,7 @@ export class AdminComponent implements OnInit {
   }
 
   async resetPassword(accountToReset) {
-    const resetPasswordDialog = this.dialog.open(ResetPasswordDialog, {
+    const resetPasswordDialog = this.dialog.open(ResetPasswordAdminDialog, {
       data: {
         username: accountToReset.username
       }
@@ -125,3 +125,4 @@ export class AdminComponent implements OnInit {
     }
   }
 }
+

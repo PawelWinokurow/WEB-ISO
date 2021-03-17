@@ -29,11 +29,12 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AccountService } from './services/account.service';
 import { RecaptchaService } from './services/recaptcha.service';
 import { CustomerService } from './services/customer.service';
-import { ResetPasswordDialog } from './dialogs/reset-password/reset-password.dialog';
 import { DeleteAccountDialog } from './dialogs/delete-account-dialog/delete-account.dialog';
 import { SendCustomerConfirmationDialog } from './dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialog';
+import { ResetPasswordAdminDialog } from './dialogs/reset-password-admin/reset-password-admin.dialog';
+import { ResetPasswordUserDialog } from './dialogs/reset-password-user/reset-password-user.dialog';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialo
     SettingsComponent,
     AdminComponent,
     DeleteAccountDialog,
-    ResetPasswordDialog,
+    ResetPasswordUserDialog,
+    ResetPasswordAdminDialog,
     NewAccountDialog, 
   ],
   imports: [

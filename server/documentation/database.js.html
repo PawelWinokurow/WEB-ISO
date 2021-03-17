@@ -75,7 +75,7 @@ exports.storeMask = function (hash, mask) {
   });
 }
 
-exports.checkConfirmation = function (hash) {
+exports.checkCustomerConfirmation = function (hash) {
   return new Promise((resolve, reject) => {
     const selectStatement = 'SELECT mask FROM masks WHERE hash = ?';
     //Select values
