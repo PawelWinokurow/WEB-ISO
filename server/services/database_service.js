@@ -109,8 +109,6 @@ function storeCustomer(hash, customer) {
 function storeAccount(account) {
   const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked) VALUES (?);';
   const values = [[account.email, account.username, account.password, account.companyCode, account.role, false]];
-  console.log(insertStatement)
-  console.log(values)
   return insertQueryPromise(insertStatement, values);
 }
 

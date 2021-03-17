@@ -77,8 +77,6 @@ class OrganizationDebitFactory extends CustomerFactory {
     //TAX number
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].BUS_EI_BUPA_TAXNUMBER[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.taxId]
 
-
-
     //Address
     //Street
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].STREET = [this.customerData.data.street]
