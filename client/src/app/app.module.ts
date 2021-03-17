@@ -35,6 +35,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NewAccountDialog } from './dialogs/new-account-dialog/new-account.dialog';
 import { ResetPasswordAdminDialog } from './dialogs/reset-password-admin/reset-password-admin.dialog';
 import { ResetPasswordUserDialog } from './dialogs/reset-password-user/reset-password-user.dialog';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ResetPasswordUserDialog } from './dialogs/reset-password-user/reset-pas
     DeleteAccountDialog,
     ResetPasswordUserDialog,
     ResetPasswordAdminDialog,
-    NewAccountDialog, 
+    NewAccountDialog,
+    ResetPasswordComponent, 
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,15 @@ export class AuthService {
     return result;
   }
 
+  async loginByHash(hash: string) {
+    let result = await this.httpService.request(this.http.post(`${environment.serverURL}/loginbyhash`, 
+    {account: { hash: hash }})).toPromise();
+    if (result){
+      this.setSession(result)
+    }
+    return result;
+  }
+
   public setSession(result) {
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
