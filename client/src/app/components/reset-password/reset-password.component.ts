@@ -10,19 +10,24 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ResetPasswordComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, private authService: AuthService) {
-    activeRoute.queryParams
-      .subscribe((params) => 
-        {
-          console.log(params)
-          this.authService.loginByHash("params");
-          this.authService.loginByHash("params").then(isSuccessful => { if (isSuccessful) {
-
-          }});;
-
-    });
+    this.login();
   }
 
   ngOnInit(): void {
+  }
+
+  async login(){
+    try {
+      let params = await this.activeRoute.queryParams.toPromise();
+      console.log(params)
+      let isSuccessful = await this.authService.loginByHash(params.hash)
+      if (isSuccessful) {
+
+      }
+    } catch(e) {
+
+    }
+
   }
 
 }
