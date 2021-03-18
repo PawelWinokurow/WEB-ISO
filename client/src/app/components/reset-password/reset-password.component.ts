@@ -39,7 +39,7 @@ export class ResetPasswordComponent implements OnInit {
     try {
       this.hash = this.route.snapshot.queryParamMap.get('hash');
       if (this.hash) {
-        let result = await this.authService.checkHash(this.hash);
+        let result = await this.accountService.validatePasswordResetHash({hash: this.hash}).toPromise();
         if (result?.isTrue) {
           this.showResetForm = true;
         }
@@ -52,13 +52,15 @@ export class ResetPasswordComponent implements OnInit {
   async change() {
     if (this.passwordForm.valid) {
       try{
-        let result = await this.accountService.resetPassword({hash: this.hash, password:this.passwordForm.controls['password'].value}).toPromise();
+        const result = await this.accountService.resetPassword({hash: this.hash, password:this.passwordForm.controls['password'].value}).toPromise();
+        if (result){
+          this.authService.setSession(result)
+        }
         this.router.navigate(['/login']);
       } catch (e){
         console.error(e);
       }
     } else {
-      //Trigger password form validation
       this.passwordForm.markAllAsTouched();
     }
   }

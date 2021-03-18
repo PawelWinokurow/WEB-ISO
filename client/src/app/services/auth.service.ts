@@ -20,11 +20,6 @@ export class AuthService {
     return result;
   }
 
-  async checkHash(hash: string) {
-    let result = await this.httpService.request(this.http.get(`${environment.serverURL}/reset?hash=${hash}`)).toPromise();
-    return result;
-  }
-
   public setSession(result) {
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');

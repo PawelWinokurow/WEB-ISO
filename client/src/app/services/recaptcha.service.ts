@@ -16,6 +16,6 @@ export class RecaptchaService {
    * @param token 
    */
      sendToken(token): Observable<any>{
-      return this.httpService.request(this.http.post(`${environment.serverURL}/recaptcha`, {recaptcha: token}))
+      return this.httpService.request(this.http.post(`${environment.serverURL}/customers/recaptcha`, {recaptcha: token}))
     }
 }

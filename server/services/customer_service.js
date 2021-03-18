@@ -52,7 +52,7 @@ class OrganizationDebitFactory extends CustomerFactory {
 
   getJSONArgs() {
     let dateToday = formatDate(new Date());
-    
+
     //console.log(this.customerData.data)
 
     //General
@@ -61,7 +61,7 @@ class OrganizationDebitFactory extends CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
     //Add. name
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].C_O_NAME = [this.customerData.data.additionalName]
-    
+
     //Contact
 
     //Street
@@ -90,7 +90,7 @@ class OrganizationDebitFactory extends CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].BUS_EI_BUPA_FAX[0].CONTACT[0].DATA[0].FAX_NO = [this.customerData.data.fax]
     //Email
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].BUS_EI_BUPA_SMTP[0].CONTACT[0].DATA[0].E_MAIL = [this.customerData.data.email]
-    
+
 
     //Payment
     //IBAN
@@ -99,21 +99,21 @@ class OrganizationDebitFactory extends CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].IBAN_FROM_DATE = [dateToday]
     //BANKDETAILVALIDFROM
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].BUS_EI_BUPA_BANKDETAIL[0].DATA[0].BANKDETAILVALIDFROM = [dateToday]
-    
+
     //Branche
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
     //Branchencode
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].BUS_EI_BUPA_INDUSTRYSECTOR[0].DATA_KEY[0].IND_SECTOR = [this.customerData.data.industryField]
     //TAX number
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].BUS_EI_BUPA_TAXNUMBER[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.taxId]
-    
+
     //let before = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE
     //console.log(`before: ${before}`)
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [dateToday]
 
     //let after = this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE
     //console.log(`after: ${after}`)
-    
+
     return this.envelope;
   }
 }
@@ -128,6 +128,24 @@ class OrganizationCreditFactory extends CustomerFactory {
   }
 }
 
+function composeCustomer(customerData) {
+  let customerFactory = null
+  if (customerData.customerType === 'person') {
+    if (customerData.debitCreditType === 'debit') {
+      customerFactory = new PersonDebitFactory(customerData, ENVELOPE_URL);
+    } else if (customerData.debitCreditType === 'credit') {
+      customerFactory = new PersonCreditFactory(customerData, ENVELOPE_URL);
+    }
+  } else if (customerData.customerType === 'organization') {
+    if (customerData.debitCreditType === 'debit') {
+      customerFactory = new OrganizationDebitFactory(customerData, ENVELOPE_URL);
+    } else if (customerData.debitCreditType === 'credit') {
+      customerFactory = new OrganizationCreditFactory(customerData, ENVELOPE_URL);
+    }
+  }
+  return customerFactory.build();
+}
+
 async function confirmCustomer(req, res) {
   try {
     const result = await databaseService.checkCustomerConfirmation(req.query.hash);
@@ -140,49 +158,40 @@ async function confirmCustomer(req, res) {
   }
 }
 
-async function createCustomer(req, res) {
-  function composeCustomer(customerData) {
-    let customerFactory = null
-    if (customerData.customerType === 'person') {
-      if (customerData.debitCreditType === 'debit') {
-        customerFactory = new PersonDebitFactory(customerData, ENVELOPE_URL);
-      } else if (customerData.debitCreditType === 'credit') {
-        customerFactory = new PersonCreditFactory(customerData, ENVELOPE_URL);
-      }
-    } else if (customerData.customerType === 'organization') {
-      if (customerData.debitCreditType === 'debit') {
-        customerFactory = new OrganizationDebitFactory(customerData, ENVELOPE_URL);
-      } else if (customerData.debitCreditType === 'credit') {
-        customerFactory = new OrganizationCreditFactory(customerData, ENVELOPE_URL);
-      }
-    }
-    return customerFactory.build();
-  }
-
+async function requestCustomer(req, res) {
   try {
     const requestCustomer = req.body.customer;
-    const emailTo = req.body.decodedAccount.email;
     let sapCustomer = await composeCustomer(requestCustomer);
     let envelope = sapCustomer.getJSONArgs();
-    if (requestCustomer.isDirect) {
-      soapService.sendCustomer(envelope, WSDL_URL);
-      res.json({
-        message: 'CUSISSND',
+    const emailTo = req.body.decodedAccount.email;
+    const hash = cryptoService.generateHash();
+    await databaseService.storeCustomer(hash, envelope);
+    emailService.sendCustomerConfirmation(emailTo, hash);
+    res.json({
+      message: 'CONFISSND',
     });
-    } else {
-      const hash = cryptoService.generateHash();
-      await databaseService.storeCustomer(hash, envelope);
-      emailService.sendCustomerConfirmation(emailTo, hash);
-      res.json({
-        message: 'CONFISSND',
-    });
-    }
-
   } catch (e) {
     console.error(e.stack);
     res.status(500).send({
       error: e
-  });
+    });
+  }
+}
+
+async function createCustomer(req, res) {
+  try {
+    const requestCustomer = req.body.customer;
+    let sapCustomer = await composeCustomer(requestCustomer);
+    let envelope = sapCustomer.getJSONArgs();
+    soapService.sendCustomer(envelope, WSDL_URL);
+    res.json({
+      message: 'CUSISSND',
+    });
+  } catch (e) {
+    console.error(e.stack);
+    res.status(500).send({
+      error: e
+    });
   }
 }
 
@@ -205,5 +214,6 @@ module.exports = {
   OrganizationDebitFactory: OrganizationDebitFactory,
   OrganizationCreditFactory: OrganizationCreditFactory,
   confirmCustomer,
-  createCustomer
+  createCustomer,
+  requestCustomer
 }

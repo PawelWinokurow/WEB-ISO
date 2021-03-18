@@ -64,7 +64,7 @@ exports.sendEmail = function (hash, emailTo) {
         from: "BayWa",
         to: emailTo,
         subject: 'Mask confirmation',
-        html: '&lt;p>Click &lt;a href="http://localhost:3000/confirm?hash=' + hash + '">here&lt;/a> to confirm the mask.&lt;/p>'
+        html: '&lt;p>Click &lt;a href="http://localhost:3000/customers/confirm?hash=' + hash + '">here&lt;/a> to confirm the mask.&lt;/p>'
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

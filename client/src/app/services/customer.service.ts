@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { DateService } from './date.service';
@@ -15,12 +14,21 @@ export class CustomerService {
     private dateService: DateService) { }
 
   /**
- * Sends customer to the server as JSON.
- * @param customer Object { isDirect: boolean, sapCustomer: SharedCustomer }
- * @returns Response observable.
- */
-  async sendCustomer(customer) {
-    return await this.httpService.request(this.http.post(`${environment.serverURL}/request`, { customer: customer })).toPromise()
+   * Sends customer to the server as JSON.
+   * @param customer Object sapCustomer: SharedCustomer
+   * @returns Response observable.
+   */
+  sendCustomer(customer) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/customers`, { customer }))
+  }
+
+  /**
+   * Sends customer creation request to the server as JSON.
+   * @param customer Object sapCustomer: SharedCustomer
+   * @returns Response observable.
+   */
+  sendCustomerRequest(customer) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/customers/request`, { customer }))
   }
 
   constructObject(generalInformation, contactInformation, payment, applicant, upload) {
@@ -34,7 +42,7 @@ export class CustomerService {
       interfaceNumber: generalInformation?.get('interfaceNumber')?.value ?? '',
       salutation: generalInformation?.get('salutation')?.value?.code ?? '',
       additionalName: generalInformation?.get("additionalName")?.value ?? '',
-      
+
       //Address information
       street: contactInformation?.get("street")?.value ?? '',
       houseNumber: contactInformation?.get("houseNumber")?.value ?? '',

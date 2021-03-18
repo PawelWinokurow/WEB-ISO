@@ -33,7 +33,7 @@ export class ResetPasswordUserDialog implements OnInit {
    */
    async onYesClick() {
       if (this.emailForm.valid) {
-        this.dialogRef.close({email: this.emailForm.controls['email'].value});
+        this.dialogRef.close(this.emailForm.controls['email'].value);
       } else {
         this.emailForm.markAllAsTouched();
     }

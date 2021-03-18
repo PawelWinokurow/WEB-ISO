@@ -10,7 +10,7 @@ function sendEmail(message) {
         port: 465,
         secure: true, // use SSL
         auth: {
-            account: 'paulweinmacher@googlemail.com',
+            user: 'paulweinmacher@googlemail.com',
             pass: 'Tromboman8919'
         }
     }
@@ -21,7 +21,7 @@ function sendEmail(message) {
     let transporter = nodemailer.createTransport(emailOptions);
     transporter.sendMail(message, function (error, info) {
         if (error) {
-            console.log(error);
+            console.error(error);
         } else {
             console.log('Email sent: ' + info.response);
         }
@@ -43,34 +43,24 @@ function sendNewAccount(account) {
     sendEmail(message);
 }
 
-function resetPassword(emailTo, password) {
-    const message = {
-        from: "WEB-ISO",
-        to: emailTo,
-        subject: 'New password WEB-ISO',
-        html: `<p>Your WEB-ISO password was reset. New WEB-ISO password: ${password}</p>`
-    };
-    sendEmail(message);
-}
-
 function sendCustomerConfirmation(emailTo, hash) {
     const message = {
         from: "BayWa",
         to: emailTo,
         subject: 'Customer confirmation',
-        html: `<p>Click <a href="${process.env.HOST}/confirm?hash=${hash}">here</a> to confirm the customer.</p>`
+        html: `<p>Click ${process.env.HOST}/customers/confirm?hash=${hash}" to send the customer.</p>`
     };
     sendEmail(message);
 }
 
-function sendAccountResetConfirmation(emailTo, hash) {
+function sendPasswordResetLink(emailTo, hash) {
     const message = {
         from: "BayWa",
         to: emailTo,
         subject: 'Pasword reset confirmation',
-        html: `<p>Click <a href="${process.env.HOST}/account?hash=${hash}">here</a> to reset your password.</p>`
+        html: `<p>Click ${process.env.APP_HOST}/resetpassword?hash=${hash} to reset your password.</p>`
     };
     sendEmail(message);
 }
 
-module.exports = { sendCustomerConfirmation, resetPassword, sendNewAccount, sendAccountResetConfirmation };
+module.exports = { sendCustomerConfirmation, sendNewAccount, sendPasswordResetLink };

@@ -21,6 +21,7 @@ export class DictionaryService {
     ['HELLO', 'Hallo, '],
     ['ID', 'E-Mail oder Benutzername'],
     ['PSWDFOG', 'Passwort vergessen?'],
+    ['PSWDWILLRES', 'Eine Bestätigungsmail mit weiteren Anweisungen wird an Ihre E-Mail-Adresse gesendet.'],
     
     ['NEWCUS', 'Neuer Kunde'],
     ['ACC', 'Konto'],
@@ -158,6 +159,8 @@ export class DictionaryService {
     ['PSWD', 'Password'],
     ['ID', 'Email or username'],
     ['PSWDFOG', 'Forgot password?'],
+    ['PSWDWILLRES', 'A confirmation e-mail with further instructions will be sent to your e-mail address.'],
+
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     

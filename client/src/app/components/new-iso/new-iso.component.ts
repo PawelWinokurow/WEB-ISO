@@ -268,24 +268,24 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer dialog.
    */
   async openSendSOAPDialog() {
-    const customer = this.constructCustomer(true)
-    await this.customerService.sendCustomer(customer);
-    return
-    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog, {
-      //disableClose: true,
-      //backdropClass: 'backdrop-background',
-    });
-
-    sendCustomerDialogRef.afterClosed().subscribe(async isDirect => {
-      const customer = this.constructCustomer(isDirect);
-      if (isDirect) {
-        await this.customerService.sendCustomer(customer);
-      } else {
-        await this.customerService.sendCustomer(
-          { emailTo: this.authService.getAccount().email, ...customer });
-      }
-      //this.router.navigate(['/preselection']);
-    });
+    //const customer = this.constructCustomer(true)
+    //await this.customerService.sendCustomer(customer);
+    //return
+    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog);
+    const isDirect = await sendCustomerDialogRef.afterClosed().toPromise();
+    const customer= {
+      data: this.customerService.constructObject(this.generalInformation, 
+        this.contactInformation, this.payment, this.applicant, this.upload), 
+        customerType: this.storageService.customerType,
+      debitCreditType: this.storageService.debitCreditType
+    };
+    if (isDirect) {
+      await this.customerService.sendCustomer(customer);
+    } else {
+      await this.customerService.sendCustomerRequest(
+        { emailTo: this.authService.getAccount().email, ...customer });
+    }
+    //this.router.navigate(['/preselection']);
   }
 
   /**
@@ -302,20 +302,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
   unsetIbanBicRequired() {
     this.payment.get('iban').setValidators([]);
     this.payment.get('bic').setValidators([]);
-  }
-
-  /**
-   * Constructs customer from ControlForms.
-   * @param isDirect Send customer directly to SAP or with confirmation email.
-   * @returns Customer object to send.
-   */
-  constructCustomer(isDirect: boolean) {
-    const customerObject = this.customerService.constructObject(this.generalInformation,
-      this.contactInformation, this.payment, this.applicant, this.upload);
-    return {
-      isDirect: isDirect, customerType: this.storageService.customerType,
-      debitCreditType: this.storageService.debitCreditType, data: customerObject
-    }
   }
 
   /**

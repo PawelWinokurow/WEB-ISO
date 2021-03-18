@@ -95,14 +95,14 @@ async function getAccounts(req, res) {
     }
 }
 
-async function resetPassword(req, res) {
+async function requestPasswordReset(req, res) {
     try {
         const email = req.body.account.email;
         const hash = cryptoService.generateHash();
         await databaseService.storePasswordReset(hash, email);
-        emailService.sendAccountResetConfirmation(emailTo, hash);
+        emailService.sendPasswordResetLink(email, hash);
         res.json({
-            message: 'PSWDISRES',
+            message: 'PSWDWILLRES',
         });
     } catch (e) {
         console.error(e.stack);
@@ -112,9 +112,9 @@ async function resetPassword(req, res) {
     }
 }
 
-async function confirmPasswordReset(req, res) {
-    let isInDB = await databaseService.checkPasswordResetConfirmation(req.query.hash);
-    if (isInDB){
+async function validatePasswordResetHash(req, res) {
+    let isInDB = await databaseService.checkPasswordResetConfirmation(req.body.account.hash);
+    if (isInDB) {
         res.status(200).json({
             isTrue: isInDB
         });
@@ -123,8 +123,8 @@ async function confirmPasswordReset(req, res) {
 
 async function resetPassword(req, res) {
     try {
-        const hash = req.body.hash
-        const password = req.body.password
+        const hash = req.body.account.hash;
+        const password = req.body.account.password;
         const email = await databaseService.checkPasswordResetConfirmation(hash);
         let dbAccount = await databaseService.getAccount({ email: email });
         dbAccount.password = cryptoService.hashPassword(password);
@@ -165,6 +165,7 @@ module.exports = {
     deleteAccount,
     resetPassword,
     getAccounts,
-    confirmPasswordReset,
+    validatePasswordResetHash,
+    requestPasswordReset,
     blockAccount,
 };

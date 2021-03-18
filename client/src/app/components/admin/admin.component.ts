@@ -112,7 +112,6 @@ export class AdminComponent implements OnInit {
   }
 
   async resetPassword(accountToReset) {
-    /*
     const resetPasswordDialog = this.dialog.open(ResetPasswordAdminDialog, {
       data: {
         username: accountToReset.username
@@ -120,9 +119,8 @@ export class AdminComponent implements OnInit {
     });
     const result = await resetPasswordDialog.afterClosed().toPromise();
     if (result) {
-      const account = { ...accountToReset, operation: 'reset' };
-      await this.accountService.blockOrResetAccount(account).toPromise();
-    }*/
+      await this.accountService.requestPasswordReset(accountToReset).toPromise();
+    }
   }
 }
 

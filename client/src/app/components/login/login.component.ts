@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     const resetPasswordDialog = this.dialog.open(ResetPasswordUserDialog);
     const result = await resetPasswordDialog.afterClosed().toPromise();
     if (result) {
-      //await this.accountService.r(account).toPromise();
+      await this.accountService.requestPasswordReset({email: result}).toPromise();
     }
   }
 
@@ -57,8 +57,4 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
   
-  register() {
-    this.router.navigate(['/registration']);
-  }
-
 }

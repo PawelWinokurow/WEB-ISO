@@ -61,34 +61,53 @@ class Server {
   }
 
   configureEndPoints() {
-    /**
-     * Enpoint to get new customers from application.
-     */
-    this.expressApp.route("/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomer);
 
     /**
      * Endpoint to get login data.
      */
-    this.expressApp.route("/login")
-      .post(authService.login)
-      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
+     this.expressApp.route("/login")
+     .post(authService.login)
+     .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
 
     /**
-     * Endpoint to reset password.
+     * Enpoint to get new customers from application.
      */
-     this.expressApp.route("/reset")
-     .get(accountService.confirmPasswordReset)
-     .post(accountService.resetPassword);
+    this.expressApp.route("/customers").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomer);
+
+    /**
+     * Enpoint to request new customers from application.
+     */
+     this.expressApp.route("/customers/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.requestCustomer);
 
     /**
      * Endpoint to get email confirmations.
      */
-    this.expressApp.route("/confirm").get(customerService.confirmCustomer);
+     this.expressApp.route("/customers/confirm").get(customerService.confirmCustomer);
 
     /**
      * Endpoint to get recaptcha token from the client.
      */
-    this.expressApp.route('/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
+     this.expressApp.route('/customers/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
+
+
+    /**
+     * Endpoint to reset password.
+     */
+     this.expressApp.route("/accounts/reset")
+     .post(accountService.resetPassword);
+
+    /**
+    * Endpoint to request password reset.
+    */
+     this.expressApp.route("/accounts/reset/request")
+     .post(accountService.requestPasswordReset);
+
+     /**
+     * Endpoint to validate hash sent by email.
+     */
+     this.expressApp.route("/accounts/reset/validation")
+       .post(accountService.validatePasswordResetHash);
+
 
     /**
      * Endpoint for account operations.
@@ -97,12 +116,11 @@ class Server {
      * patch: block account
      * delete: delete account
      */
-    this.expressApp.route('/account')
+    this.expressApp.route('/accounts')
       .post(accountService.createAccount)
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockAccount)
       .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
-
     this.expressApp.route('/accounts').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);
   }
 
@@ -151,7 +169,7 @@ async function storeTestData() {
     },
     {
       username: 'user3',
-      email: 'user3@user3.de',
+      email: 'pawelwinokurow@gmail.com',
       companyCode: '1100',
       password: cryptoService.hashPassword('user3'),
       blocked: false,

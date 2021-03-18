@@ -12,26 +12,34 @@ export class AccountService {
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
   createAccount(account) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/account`, { account }));
+    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts`, { account }));
   }
 
   updateAccount(account) {
-    return this.httpService.request(this.http.put(`${environment.serverURL}/account`, { account }));
+    return this.httpService.request(this.http.put(`${environment.serverURL}/accounts`, { account }));
   }
 
   deleteAccount(account) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {account: account}
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: { account }
     };
-    return this.httpService.request(this.http.delete(`${environment.serverURL}/account`, httpOptions));
+    return this.httpService.request(this.http.delete(`${environment.serverURL}/accounts`, httpOptions));
   }
 
   blockAccount(account) {
-    return this.httpService.request(this.http.patch(`${environment.serverURL}/account`, { account }));
+    return this.httpService.request(this.http.patch(`${environment.serverURL}/accounts`, { account }));
   }
 
-  resetPassword(password) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/reset`, password));
+  resetPassword(account) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset`, { account }));
+  }
+
+  validatePasswordResetHash(account) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset/validation`, { account }));
+  }
+
+  requestPasswordReset(account) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset/request`, { account }));
   }
 
   getAccounts(): Observable<any> {
