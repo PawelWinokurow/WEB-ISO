@@ -17,8 +17,7 @@ async function createAccount(req, res) {
         accountToStore.password = cryptoService.hashPassword(firstPassword);
         accountToSend.password = firstPassword;
 
-        let isAccountNotExists = await databaseService.isAccountNotExists(requestAccount);
-        if (isAccountNotExists) {
+        if (databaseService.isAccountNotExists(requestAccount)) {
             await databaseService.storeAccount(accountToStore);
             // emailService.sendNewAccount(accountToSend);
             res.json({
@@ -109,7 +108,7 @@ async function resetPassword(req, res) {
     try {
         const email = req.body.account.email;
         const hash = cryptoService.generateHash();
-        await databaseService.storeResetAccount(hash, email);
+        await databaseService.storePasswordReset(hash, email);
         emailService.sendAccountResetConfirmation(emailTo, hash);
         res.json({
             message: 'PSWDISRES',

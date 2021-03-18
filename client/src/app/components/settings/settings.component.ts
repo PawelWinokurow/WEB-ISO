@@ -21,7 +21,6 @@ export class SettingsComponent implements OnInit {
   passwordForm: FormGroup;
   companyCode: FormControl;
   selected = this.authService.getAccount().companyCode;
-
   setting = 1;
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,

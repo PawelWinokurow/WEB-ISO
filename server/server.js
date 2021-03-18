@@ -122,7 +122,7 @@ async function storeTestData() {
     {
       username: 'admin',
       email: 'admin@admin.de',
-      companyCode: '1001',
+      companyCode: '1100',
       password: cryptoService.hashPassword('admin'),
       blocked: false,
       role: 'ADMIN',
@@ -130,7 +130,7 @@ async function storeTestData() {
     {
       username: 'user',
       email: 'user@user.de',
-      companyCode: '1001',
+      companyCode: '1100',
       password: cryptoService.hashPassword('user'),
       blocked: false,
       role: 'USER',
@@ -138,7 +138,7 @@ async function storeTestData() {
     {
       username: 'user2',
       email: 'user2@user2.de',
-      companyCode: '1001',
+      companyCode: '1100',
       password: cryptoService.hashPassword('user2'),
       blocked: false,
       role: 'USER',
@@ -146,18 +146,27 @@ async function storeTestData() {
     {
       username: 'user3',
       email: 'user3@user3.de',
-      companyCode: '1001',
+      companyCode: '1100',
       password: cryptoService.hashPassword('user3'),
       blocked: false,
       role: 'USER',
     },
   ];
 
-  for (const accountToStore of accounts) {
-    try {
-      await databaseService.storeAccount(accountToStore)
-    } catch (e) {
-      console.error(e.stack);
-    }
+  let reset = {
+    hash: '100',
+    email: 'user@user.de'
   }
+
+  try {
+  for (const accountToStore of accounts) {
+      await databaseService.storeAccount(accountToStore)
+  }
+  await databaseService.storePasswordReset(reset.hash, reset.email)
+
+
+} catch (e) {
+  console.error(e.stack);
+}
+
 }
