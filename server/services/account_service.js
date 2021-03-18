@@ -30,7 +30,7 @@ async function createAccount(req, res) {
             });
         }
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -62,7 +62,7 @@ async function updateAccount(req, res) {
             });
         }
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -77,7 +77,7 @@ async function deleteAccount(req, res) {
             message: 'USRISDEL'
         })
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -89,7 +89,7 @@ async function getAccounts(req, res) {
         const accounts = await databaseService.getAccounts();
         res.json(accounts)
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -115,7 +115,7 @@ async function resetPassword(req, res) {
             message: 'PSWDISRES',
         });
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -142,7 +142,7 @@ async function confirmPasswordReset(req, res) {
         });
 
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.send('<p>Error! The password was not reset.</p>');
     }
 }
@@ -165,7 +165,7 @@ async function resetPassword(req, res) {
         })
 
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });
@@ -181,7 +181,7 @@ async function blockAccount(req, res) {
             account: requestAccount
         })
     } catch (e) {
-        console.log(e.stack);
+        console.error(e.stack);
         res.status(500).send({
             error: e
         });

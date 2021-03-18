@@ -4,6 +4,7 @@ const cors = require('cors');
 const logger = require('morgan');
 const fetch = require('node-fetch');
 const httpsProxyAgent = require('https-proxy-agent');
+const cryptoService = require('./services/crypto_service');
 
 require('dotenv').config();
 
@@ -15,28 +16,39 @@ const accountService = require('./services/account_service');
 const recaptchaService = require('./services/recaptcha_service');
 const soapService = require('./services/soap_service');
 
-databaseService.connect();
-
-
 /**
  * Class to to manage the server. It contains node js express application.
  */
 class Server {
 
   constructor() {
+    this.init();
+  }
+
+  async init() {
     this.expressApp = express();
     this.expressApp.use(logger('dev'));
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
-    fetch(process.env.PROXY).then(() => {
+    await databaseService.connect();
+    await databaseService.createTables();
+    storeTestData();
+    try {
+      await fetch(process.env.PROXY);
       process.env.HTTP_PROXY = process.env.PROXY;
       process.env.HTTPS_PROXY = process.env.PROXY;
       // We need HttpsProxyAgent to use proxy for re-captcha
       recaptchaService.setProxyAgent(new httpsProxyAgent(process.env.EMAIL_PROXY));
-    }).catch(() => { }).finally(() => {
+    } catch (e) {
+      if (e.code === 'ENOTFOUND') {
+        console.log('Not in proxy');
+      } else {
+        console.error(e.stack);
+      }
+    } finally {
       this.runSchedule();
       this.configureEndPoints();
-    });
+    }
   }
 
   /**
@@ -100,3 +112,52 @@ new Server().start()
 setTimeout(function () {
   //soapService.test()
 }, 1000);
+
+async function storeTestData() {
+  await databaseService.connect()
+  await databaseService.dropTables();
+  await databaseService.createTables();
+
+  let accounts = [
+    {
+      username: 'admin',
+      email: 'admin@admin.de',
+      companyCode: '1001',
+      password: cryptoService.hashPassword('admin'),
+      blocked: false,
+      role: 'ADMIN',
+    },
+    {
+      username: 'user',
+      email: 'user@user.de',
+      companyCode: '1001',
+      password: cryptoService.hashPassword('user'),
+      blocked: false,
+      role: 'USER',
+    },
+    {
+      username: 'user2',
+      email: 'user2@user2.de',
+      companyCode: '1001',
+      password: cryptoService.hashPassword('user2'),
+      blocked: false,
+      role: 'USER',
+    },
+    {
+      username: 'user3',
+      email: 'user3@user3.de',
+      companyCode: '1001',
+      password: cryptoService.hashPassword('user3'),
+      blocked: false,
+      role: 'USER',
+    },
+  ];
+
+  for (const accountToStore of accounts) {
+    try {
+      await databaseService.storeAccount(accountToStore)
+    } catch (e) {
+      console.error(e.stack);
+    }
+  }
+}

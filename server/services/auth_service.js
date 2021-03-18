@@ -26,7 +26,7 @@ async function refreshToken(req, res) {
             account: dbAccount
         });
     } catch (e) {
-        console.log( e.stack );
+        console.error(e.stack);
         res.status(401).send({
             error: e
         });
@@ -56,7 +56,7 @@ async function login(req, res) {
             })
         }
     } catch (e) {
-        console.log( e.stack );
+        console.error(e.stack);
         res.status(401).send({
             error: e
         });

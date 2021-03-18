@@ -1,53 +1,84 @@
 const mysql = require("mysql2");
+const util = require('util');
 
 const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers ( 
-  hash VARCHAR(255) NOT NULL PRIMARY KEY, 
+  hash VARCHAR(255) NOT NULL, 
   customer TEXT NOT NULL, 
-  datetime DATETIME NOT NULL);`;
+  datetime DATETIME NOT NULL,
+  PRIMARY KEY (hash));`;
 
-const USERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts ( 
-  email VARCHAR(255) NOT NULL PRIMARY KEY, 
+const ACCOUNTS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts ( 
+  email VARCHAR(255) NOT NULL, 
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
-  companycode VARCHAR(255),
-  role VARCHAR(255),
-  blocked BOOLEAN);`;
+  companycode VARCHAR(255) NOT NULL,
+  role VARCHAR(255) NOT NULL,
+  blocked BOOLEAN NOT NULL,
+  PRIMARY KEY (email));`;
 
-const RESETS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS resets (
-    hash VARCHAR(255) NOT NULL PRIMARY KEY,
+const RESETS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS passwordresets (
+    hash VARCHAR(255) NOT NULL,
     datetime DATETIME NOT NULL,
-    email VARCHAR(255) NOT NULL FOREIGN KEY REFERENCES accounts(email));`;
+    email VARCHAR(255) NOT NULL,
+    PRIMARY KEY (hash),
+    FOREIGN KEY (email) REFERENCES accounts(email));`;
 
-let connection;
+let connection = {};
 
 /**
  * Establishes a connection to the database server.
  */
 function connect() {
   //Create DB connection
-  connection = mysql.createConnection({
+  let pool = mysql.createPool({
+    connectionLimit: process.env.DB_NUM_CONNECTIONS,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     port: process.env.DB_PORT,
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
   });
-  //Connect to database
-  connection.connect(function (err) {
-    if (err) throw err;
-    [CUSTOMERS_TABLE_CREATION, USERS_TABLE_CREATION, RESETS_TABLE_CREATION].forEach(query => {
-      //Create table if table not exists
-      connection.query(query,
-        function (err, results, fields) {
-          if (err) {
-            console.log(err);
-            throw err;
-          }
-          //console.log(results);
-        });
-    });
-    return connection;
-  });
+
+  pool.getConnection((err, connection) => {
+    if (err) {
+      if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+        console.error('Database connection was closed.')
+      }
+      if (err.code === 'ER_CON_COUNT_ERROR') {
+        console.error('Database has too many connections.')
+      }
+      if (err.code === 'ECONNREFUSED') {
+        console.error('Database connection was refused.')
+      }
+    }
+    if (connection) connection.release()
+    return
+  })
+  connection.query = util.promisify(pool.query).bind(pool);
+}
+
+async function createTables() {
+  const creations = [CUSTOMERS_TABLE_CREATION, ACCOUNTS_TABLE_CREATION, RESETS_TABLE_CREATION]
+  for (const q of creations) {
+    try {
+      await connection.query(q);
+    } catch (e) {
+      console.error(e.stack);
+    }
+  }
+}
+
+async function dropTables() {
+  const drops = ['DROP TABLE passwordresets;', 'DROP TABLE accounts;', 'DROP TABLE customers;'];
+  for (const q of drops) {
+    try {
+      await connection.query(q);
+    } catch (e) {
+      if (e.code !== 'ER_BAD_TABLE_ERROR') {
+        console.error(e.stack);
+      }
+    }
+  }
 }
 
 function insertQueryPromise(insertStatement, values) {
@@ -122,7 +153,7 @@ function storeAccount(account) {
  * @param  {string} hash
  * @param  {string} email  
  */
- function storeResetAccount(hash, email) {
+function storeResetAccount(hash, email) {
   const insertStatement = 'INSERT INTO resets (hash, email, datetime) VALUES (?, NOW());';
   const values = [[hash, email]];
   return insertQueryPromise(insertStatement, values);
@@ -192,7 +223,7 @@ function checkCustomerConfirmation(hash) {
  * Checks if password reset with a given hash is in the database.
  * @param {string} hash hash string from the email message
  */
- function checkPasswordResetConfirmation(hash) {
+function checkPasswordResetConfirmation(hash) {
   const selectStatement = 'SELECT * FROM resets WHERE hash = ?';
   const values = [hash];
   return selectQueryPromise(selectStatement, values)
@@ -237,7 +268,7 @@ async function getAccount(account) {
     }
     return result;
   } catch (e) {
-    console.log(e.stack);
+    console.error(e.stack);
   }
 }
 
@@ -261,19 +292,11 @@ async function getAccounts() {
     });
     return accounts;
   } catch (e) {
-    console.log(e.stack);
+    console.error(e.stack);
   }
 }
 
-/**
- * Closes connection to the database server.
- */
-function close() {
-  connection.end();
-}
-
 module.exports = {
-  close,
   getAccounts,
   getAccount,
   removeOldCustomers,
@@ -285,5 +308,7 @@ module.exports = {
   storeAccount,
   storeCustomer,
   storeResetAccount,
+  createTables,
+  dropTables,
   connect
 };

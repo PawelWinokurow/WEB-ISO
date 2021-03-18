@@ -12,11 +12,12 @@ admin = {
     role: 'ADMIN',
 };
 
-function storeAdmin(accountToStore){
-    databaseService.connect();
-    setTimeout(async function() {
-        await databaseService.storeAccount(accountToStore)
-    }, 2000);
+async function storeAdmin(accountToStore){
+    await databaseService.connect()
+    await databaseService.dropTables();
+    await databaseService.createTables();
+    await databaseService.storeAccount(accountToStore)
+    console.log('Administrator was created');
 }
 
 storeAdmin(admin);
