@@ -1,7 +1,7 @@
 const cryptoService = require('./crypto_service');
 const databaseService = require('./database_service');
 const emailService = require('./email_service');
-const jwt = require('jsonwebtoken');
+const authService = require('./auth_service');
 
 async function createAccount(req, res) {
     try {
@@ -119,9 +119,7 @@ async function confirmPasswordReset(req, res) {
             isTrue: isInDB
         });
     }
-
 }
-
 
 async function resetPassword(req, res) {
     try {
@@ -133,18 +131,10 @@ async function resetPassword(req, res) {
         await databaseService.updateAccount(dbAccount);
         delete dbAccount.password;
         delete dbAccount.blocked;
-        const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
-            algorithm: 'RS256',
-            expiresIn: process.env.JWT_DURATION,
-        });
+        let JWT = authService.createJWT(dbAccount);
+        JWT.message = 'PSWDISRES';
         //Send JWT back
-        res.status(200).json({
-            message: 'PSWDISRES',
-            idToken: jwtBearerToken,
-            expiresIn: process.env.JWT_DURATION,
-            account: dbAccount
-        });
-
+        res.status(200).json(JWT);
     } catch (e) {
         console.error(e.stack);
         res.status(500).send({

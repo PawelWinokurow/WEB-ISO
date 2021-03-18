@@ -15,16 +15,9 @@ async function refreshToken(req, res) {
 
         delete dbAccount.password;
         delete dbAccount.blocked;
-        const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
-            algorithm: 'RS256',
-            expiresIn: process.env.JWT_DURATION,
-        });
+        const JWT = createJWT(dbAccount);
         //Send JWT back
-        res.status(200).json({
-            idToken: jwtBearerToken,
-            expiresIn: process.env.JWT_DURATION,
-            account: dbAccount
-        });
+        res.status(200).json(JWT);
     } catch (e) {
         console.error(e.stack);
         res.status(401).send({
@@ -40,16 +33,9 @@ async function login(req, res) {
         if (dbAccount && !dbAccount.blocked && cryptoService.comparePasswords(requestAccount.password, dbAccount.password)) {
             delete dbAccount.password;
             delete dbAccount.blocked;
-            const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
-                algorithm: 'RS256',
-                expiresIn: process.env.JWT_DURATION,
-            });
+            const JWT = createJWT(dbAccount);
             //Send JWT back
-            res.status(200).json({
-                idToken: jwtBearerToken,
-                expiresIn: process.env.JWT_DURATION,
-                account: dbAccount
-            });
+            res.status(200).json(JWT);
         } else {
             res.json({
                 error: `IDINC`
@@ -63,7 +49,21 @@ async function login(req, res) {
     }
 }
 
+function createJWT(account) {
+    const jwtBearerToken = jwt.sign(account, PRIVATE_KEY, {
+        algorithm: 'RS256',
+        expiresIn: process.env.JWT_DURATION,
+    });
+    const JWT = {
+        idToken: jwtBearerToken,
+        expiresIn: process.env.JWT_DURATION,
+        account
+    };
+    return JWT;
+}
+
 module.exports = {
     refreshToken,
+    createJWT,
     login
 };
