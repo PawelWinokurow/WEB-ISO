@@ -121,11 +121,20 @@ async function resetPassword(req, res) {
     }
 }
 
+
 async function confirmPasswordReset(req, res) {
-    try {
-        //TODO use join
-        //TODO return link to app
-        const email = await databaseService.checkPasswordResetConfirmation(req.query.hash);
+    const hash = req.query.hash;
+    console.log(hash)
+    let isInDB = await databaseService.checkPasswordResetConfirmation(req.query.hash);
+    console.log(isInDB)
+    res.status(200).json({
+        isTrue: isInDB
+    });
+    //TODO use join
+    //TODO return link to app
+
+    /*try {
+    const email = await databaseService.checkPasswordResetConfirmation(req.query.hash);
         let dbAccount = await databaseService.getAccount({ email: email });
         delete dbAccount.password;
         delete dbAccount.blocked;
@@ -143,7 +152,7 @@ async function confirmPasswordReset(req, res) {
     } catch (e) {
         console.error(e.stack);
         res.send('<p>Error! The password was not reset.</p>');
-    }
+    }*/
 }
 
 /*
@@ -194,5 +203,7 @@ module.exports = {
     resetPassword,
     getAccounts,
     blockOrResetAccount,
-    confirmPasswordReset
+    confirmPasswordReset,
+    
+
 };

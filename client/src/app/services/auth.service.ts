@@ -20,12 +20,8 @@ export class AuthService {
     return result;
   }
 
-  async loginByHash(hash: string) {
-    let result = await this.httpService.request(this.http.post(`${environment.serverURL}/loginbyhash`, 
-    {account: { hash: hash }})).toPromise();
-    if (result){
-      this.setSession(result)
-    }
+  async checkHash(hash: string) {
+    let result = await this.httpService.request(this.http.get(`${environment.serverURL}/reset?hash=${hash}`)).toPromise();
     return result;
   }
 

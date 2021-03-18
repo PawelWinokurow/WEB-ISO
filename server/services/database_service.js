@@ -202,7 +202,7 @@ async function checkPasswordResetConfirmation(hash) {
   const values = [hash];
   let result = await selectQuery(selectStatement, values);
   if (Array.isArray(result) && result.length) {
-    return result[0].email;
+    return true;
   } else {
     return false;
   }

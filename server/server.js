@@ -74,6 +74,13 @@ class Server {
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
 
     /**
+     * Endpoint to reset password.
+     */
+     this.expressApp.route("/reset")
+     .get(accountService.confirmPasswordReset);
+     //.post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
+
+    /**
      * Endpoint to get email confirmations.
      */
     this.expressApp.route("/confirm").get(customerService.confirmCustomer);
@@ -84,14 +91,13 @@ class Server {
     this.expressApp.route('/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
 
     /**
-     * Endpoint for account CRUD.
+     * Endpoint for account operations.
      * post: create account
      * put: update account
      * patch: block account
      * delete: delete account
      */
     this.expressApp.route('/account')
-      .get(accountService.confirmPasswordReset)
       .post(accountService.createAccount)
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockOrResetAccount)
@@ -159,14 +165,12 @@ async function storeTestData() {
   }
 
   try {
-  for (const accountToStore of accounts) {
+    for (const accountToStore of accounts) {
       await databaseService.storeAccount(accountToStore)
+    }
+    await databaseService.storePasswordReset(reset.hash, reset.email)
+  } catch (e) {
+    console.error(e.stack);
   }
-  await databaseService.storePasswordReset(reset.hash, reset.email)
-
-
-} catch (e) {
-  console.error(e.stack);
-}
 
 }
