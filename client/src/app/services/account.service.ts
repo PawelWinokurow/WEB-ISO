@@ -26,8 +26,12 @@ export class AccountService {
     return this.httpService.request(this.http.delete(`${environment.serverURL}/account`, httpOptions));
   }
 
-  blockOrResetAccount(account) {
+  blockAccount(account) {
     return this.httpService.request(this.http.patch(`${environment.serverURL}/account`, { account }));
+  }
+
+  resetPassword(password) {
+    return this.httpService.request(this.http.post(`${environment.serverURL}/reset`, password));
   }
 
   getAccounts(): Observable<any> {

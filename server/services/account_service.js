@@ -1,7 +1,7 @@
 const cryptoService = require('./crypto_service');
 const databaseService = require('./database_service');
 const emailService = require('./email_service');
-
+const jwt = require('jsonwebtoken');
 
 async function createAccount(req, res) {
     try {
@@ -95,15 +95,6 @@ async function getAccounts(req, res) {
     }
 }
 
-function blockOrResetAccount(req, res) {
-    const requestAccount = req.body.account;
-    if (requestAccount?.operation === 'block') {
-        blockAccount(req, res);
-    } else if (requestAccount?.operation === 'reset') {
-        resetPassword(req, res);
-    }
-}
-
 async function resetPassword(req, res) {
     try {
         const email = req.body.account.email;
@@ -121,21 +112,25 @@ async function resetPassword(req, res) {
     }
 }
 
-
 async function confirmPasswordReset(req, res) {
-    const hash = req.query.hash;
-    console.log(hash)
     let isInDB = await databaseService.checkPasswordResetConfirmation(req.query.hash);
-    console.log(isInDB)
-    res.status(200).json({
-        isTrue: isInDB
-    });
-    //TODO use join
-    //TODO return link to app
+    if (isInDB){
+        res.status(200).json({
+            isTrue: isInDB
+        });
+    }
 
-    /*try {
-    const email = await databaseService.checkPasswordResetConfirmation(req.query.hash);
+}
+
+
+async function resetPassword(req, res) {
+    try {
+        const hash = req.body.hash
+        const password = req.body.password
+        const email = await databaseService.checkPasswordResetConfirmation(hash);
         let dbAccount = await databaseService.getAccount({ email: email });
+        dbAccount.password = cryptoService.hashPassword(password);
+        await databaseService.updateAccount(dbAccount);
         delete dbAccount.password;
         delete dbAccount.blocked;
         const jwtBearerToken = jwt.sign(dbAccount, PRIVATE_KEY, {
@@ -144,6 +139,7 @@ async function confirmPasswordReset(req, res) {
         });
         //Send JWT back
         res.status(200).json({
+            message: 'PSWDISRES',
             idToken: jwtBearerToken,
             expiresIn: process.env.JWT_DURATION,
             account: dbAccount
@@ -151,34 +147,11 @@ async function confirmPasswordReset(req, res) {
 
     } catch (e) {
         console.error(e.stack);
-        res.send('<p>Error! The password was not reset.</p>');
-    }*/
-}
-
-/*
-async function resetPassword(req, res) {
-    try {
-        const requestAccount = req.body.account;
-        let oldAccount = {
-            ...requestAccount
-        }
-        const newPassword = cryptoService.generatePassword();
-        requestAccount.password = cryptoService.hashPassword(newPassword);
-
-        await databaseService.updateAccount(requestAccount);
-        emailService.resetPassword(requestAccount.email, newPassword);
-
-        res.json({
-            message: 'PSWDISRES',
-        })
-
-    } catch (e) {
-        console.error(e.stack);
         res.status(500).send({
             error: e
         });
     }
-}*/
+}
 
 async function blockAccount(req, res) {
     try {
@@ -202,8 +175,6 @@ module.exports = {
     deleteAccount,
     resetPassword,
     getAccounts,
-    blockOrResetAccount,
     confirmPasswordReset,
-    
-
+    blockAccount,
 };

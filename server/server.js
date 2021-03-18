@@ -77,8 +77,8 @@ class Server {
      * Endpoint to reset password.
      */
      this.expressApp.route("/reset")
-     .get(accountService.confirmPasswordReset);
-     //.post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
+     .get(accountService.confirmPasswordReset)
+     .post(accountService.resetPassword);
 
     /**
      * Endpoint to get email confirmations.
@@ -100,7 +100,7 @@ class Server {
     this.expressApp.route('/account')
       .post(accountService.createAccount)
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
-      .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockOrResetAccount)
+      .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockAccount)
       .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
 
     this.expressApp.route('/accounts').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);

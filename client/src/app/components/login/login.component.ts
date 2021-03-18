@@ -49,8 +49,7 @@ export class LoginComponent implements OnInit {
     const resetPasswordDialog = this.dialog.open(ResetPasswordUserDialog);
     const result = await resetPasswordDialog.afterClosed().toPromise();
     if (result) {
-      const account = { result, operation: 'reset' };
-      await this.accountService.blockOrResetAccount(account).toPromise();
+      //await this.accountService.r(account).toPromise();
     }
   }
 

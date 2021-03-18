@@ -6,6 +6,7 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AccountService } from 'src/app/services/account.service';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +27,7 @@ export class SettingsComponent implements OnInit {
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public storageService: StorageService, private accountService: AccountService,
     public errorMessageService: ErrorMessageService, private authService: AuthService,
-    public listService: ListService) {
+    public listService: ListService, private validationService: ValidationService) {
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class SettingsComponent implements OnInit {
       passwordOld: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-    }, { validators: MustMatch('password', 'confirmPassword') });
+    }, { validators: this.validationService.mustMatch('password', 'confirmPassword') });
   }
 
   change() {
@@ -94,25 +95,5 @@ export class SettingsComponent implements OnInit {
 
   get passwordFormControl() {
     return this.passwordForm.controls;
-  }
-}
-
-// custom validator to check that two fields match
-export function MustMatch(controlName: string, matchingControlName: string): ValidatorFn {
-  return (formGroup: FormGroup): ValidationErrors => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
-
-    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-      // return if another validator has already found an error on the matchingControl
-      return;
-    }
-
-    // set error on matchingControl if validation fails
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
   }
 }

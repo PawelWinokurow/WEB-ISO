@@ -94,9 +94,8 @@ export class AdminComponent implements OnInit {
 
   async blockAccount(accountToBlock) {
     try {
-      var account = { ...accountToBlock, operation: 'block' };
-      account.blocked = !account.blocked;
-      const res = await this.accountService.blockOrResetAccount(account).toPromise();
+      accountToBlock.blocked = !accountToBlock.blocked;
+      const res = await this.accountService.blockAccount(accountToBlock).toPromise();
 
       //TODO iterate over array may be to slow
       this.accounts.forEach(u => {
@@ -113,6 +112,7 @@ export class AdminComponent implements OnInit {
   }
 
   async resetPassword(accountToReset) {
+    /*
     const resetPasswordDialog = this.dialog.open(ResetPasswordAdminDialog, {
       data: {
         username: accountToReset.username
@@ -122,7 +122,7 @@ export class AdminComponent implements OnInit {
     if (result) {
       const account = { ...accountToReset, operation: 'reset' };
       await this.accountService.blockOrResetAccount(account).toPromise();
-    }
+    }*/
   }
 }
 

@@ -102,7 +102,7 @@ async function selectQuery(selectStatement, values) {
 }
 
 /**
- * Stores customer in the database.
+ * Stores customer.
  * @param  {string} hash Hash string
  * @param  {object} customer Customer object 
  */
@@ -115,7 +115,7 @@ async function storeCustomer(hash, customer) {
 }
 
 /**
- * Stores account in the database.
+ * Stores account.
  * @param  {object} account Account object 
  */
 async function storeAccount(account) {
@@ -125,7 +125,7 @@ async function storeAccount(account) {
 }
 
 /**
- * Stores reset account in the database.
+ * Stores password reset.
  * @param  {string} hash
  * @param  {string} email  
  */
@@ -136,7 +136,7 @@ async function storePasswordReset(hash, email) {
 }
 
 /**
- * Updates account in the database.
+ * Updates account.
  * @param  {object} account Account object 
  */
 async function updateAccount(account) {
@@ -165,7 +165,7 @@ async function deleteAccount(account) {
 /**
  * Checks if account not exists.
  * @param  {object} account Account object 
- * @returns true if account is not in the database
+ * @returns true if account is not
  */
 async function isAccountNotExists(account) {
   const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
@@ -179,7 +179,7 @@ async function isAccountNotExists(account) {
 }
 
 /**
- * Checks if customer with a given hash is in the database.
+ * Checks if customer with a given hash.
  * @param {string} hash hashstring from the email message
  */
 async function checkCustomerConfirmation(hash) {
@@ -194,7 +194,7 @@ async function checkCustomerConfirmation(hash) {
 }
 
 /**
- * Checks if password reset with a given hash is in the database.
+ * Checks if password reset with a given hash.
  * @param {string} hash hash string from the email message
  */
 async function checkPasswordResetConfirmation(hash) {
@@ -202,11 +202,12 @@ async function checkPasswordResetConfirmation(hash) {
   const values = [hash];
   let result = await selectQuery(selectStatement, values);
   if (Array.isArray(result) && result.length) {
-    return true;
+    return result[0].email;
   } else {
     return false;
   }
 }
+
 
 /**
  * Removes old unconfirmed customers.
