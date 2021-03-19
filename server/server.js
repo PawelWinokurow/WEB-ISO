@@ -169,7 +169,7 @@ async function storeTestData() {
     },
     {
       username: 'user3',
-      email: 'pawelwinokurow@gmail.com',
+      email: 'user3@user3.de',
       companyCode: '1100',
       password: cryptoService.hashPassword('user3'),
       blocked: false,

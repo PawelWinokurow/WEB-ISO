@@ -17,7 +17,6 @@ describe('AuthService', () => {
     }
   };
 
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
@@ -27,8 +26,9 @@ describe('AuthService', () => {
         ...externalModules
       ]
     })
-    .compileComponents();
+    .compileComponents(); 
     authService = TestBed.inject(AuthService);
+    authService.logout();
     await authService.login('admin', 'admin');
   });
 
@@ -50,5 +50,9 @@ describe('AuthService', () => {
     expect(authService.isLoggedOut()).toBeTrue();
   });
 
+  it('refreshtoken', async () => {
+    const token = await authService.refreshToken();
+    expect('error' in token).toBeFalse();
+  });
 
 });

@@ -54,13 +54,17 @@ async function updateAccount(req, res) {
                 })
             }
         } else {
+            
             await databaseService.updateAccount(requestAccount);
+            
+            console.log(requestAccount)
             res.json({
                 message: 'USRISUPD',
                 account: requestAccount
             });
         }
     } catch (e) {
+        console.log("error")
         console.error(e.stack);
         res.status(500).send({
             error: e

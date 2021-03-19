@@ -10,8 +10,8 @@ function sendEmail(message) {
         port: 465,
         secure: true, // use SSL
         auth: {
-            user: 'paulweinmacher@googlemail.com',
-            pass: 'Tromboman8919'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
         }
     }
 

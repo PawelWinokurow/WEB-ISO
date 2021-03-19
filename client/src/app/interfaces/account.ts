@@ -5,6 +5,7 @@ export interface Account {
     role: string,
     blocked?: boolean,
     password?: string
+    passwordOld?: string
 }
 
 export interface AccountJWT {

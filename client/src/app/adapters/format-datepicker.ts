@@ -1,8 +1,10 @@
+import { Injectable } from '@angular/core';
 import { MatDateFormats, NativeDateAdapter } from '@angular/material/core';
 
 /**
  * Date adapter for Material Datepicker to show the date in DD-MM-YYYY format.
  */
+ @Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {

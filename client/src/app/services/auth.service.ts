@@ -15,9 +15,9 @@ export class AuthService {
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
   async login(identifier: string, password: string) {
-    let result = await this.httpService.request<AccountJWT>(this.http.post(`${environment.serverURL}/login`, 
-    {account: { email: identifier, username: identifier, password: password }})).toPromise();
-    if (result){
+    let result = await this.httpService.request<AccountJWT>(this.http.post(`${environment.serverURL}/login`,
+      { account: { email: identifier, username: identifier, password: password } })).toPromise();
+    if (result) {
       this.setSession(result)
     }
     return result;
@@ -67,25 +67,33 @@ export class AuthService {
   }
 
   //Call refreshToken every 10 minutes
-  startChecking(defaultInterval = 10){
-    this.timer = setInterval(this.refreshToken.bind(this), defaultInterval * 60 * 1000);
+  startChecking(defaultInterval = 10) {
+    this.timer = setInterval(this.checkTokenExpiration.bind(this), defaultInterval * 60 * 1000);
   }
 
-  stopChecking(){
+  stopChecking() {
     clearInterval(this.timer);
   }
 
-  async refreshToken(){
+  async refreshToken() {
+    console.log(this.account)
+    //console.log(this.account())
+    return await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.account)).toPromise();
+  }
+
+  async checkTokenExpiration() {
     const exp = this.getExpiration();
     const now = moment();
     //If JWT expires in < 30 minutes => update it
-    if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30){
+    if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30) {
       try {
-        let jwtAccount = await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.account)).toPromise()
+        let jwtAccount = await this.refreshToken();
         this.setSession(jwtAccount);
+        return true;
       } catch (e) {
         this.stopChecking();
         console.error(e.stack);
+        return false;
       }
     }
   }

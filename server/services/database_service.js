@@ -208,7 +208,6 @@ async function checkPasswordResetConfirmation(hash) {
   }
 }
 
-
 /**
  * Removes old unconfirmed customers.
  */
