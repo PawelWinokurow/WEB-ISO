@@ -33,7 +33,7 @@ export class CustomerService {
 
   constructObject(generalInformation, contactInformation, payment, applicant, upload) {
     const data = {
-      companyCode: this.authService.getAccount().companyCode?.code ?? '',
+      companyCode: this.authService.account.companyCode?.code ?? '',
 
       //Shared forms
 

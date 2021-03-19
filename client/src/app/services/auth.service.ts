@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from './../../environments/environment';
 import { HttpService } from './http.service';
-import { AccountJWT, Account } from 'src/app/interfaces/account';
+import { AccountJWT } from 'src/app/interfaces/account';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,7 @@ export class AuthService {
     localStorage.setItem("account", JSON.stringify(account));
   }
 
-  getAccount() {
+  get account() {
     return JSON.parse(localStorage.getItem("account"))
   }
 
@@ -66,9 +66,9 @@ export class AuthService {
     return moment(expiresAt);
   }
 
-  startChecking(){
-    //Call refreshToken every 10 minutes
-    this.timer = setInterval(this.refreshToken.bind(this), 10 * 60 * 1000);
+  //Call refreshToken every 10 minutes
+  startChecking(defaultInterval = 10){
+    this.timer = setInterval(this.refreshToken.bind(this), defaultInterval * 60 * 1000);
   }
 
   stopChecking(){
@@ -81,7 +81,7 @@ export class AuthService {
     //If JWT expires in < 30 minutes => update it
     if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30){
       try {
-        let jwtAccount = await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.getAccount())).toPromise()
+        let jwtAccount = await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.account)).toPromise()
         this.setSession(jwtAccount);
       } catch (e) {
         this.stopChecking();

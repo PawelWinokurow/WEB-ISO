@@ -5,7 +5,7 @@ import { AccountJWT, Account } from 'src/app/interfaces/account';
 
 
 describe('AuthService', () => {
-  let service: AuthService;
+  let authService: AuthService;
   const account: AccountJWT = {
     idToken: 'token',
     expiresIn: '100000',
@@ -28,15 +28,26 @@ describe('AuthService', () => {
       ]
     })
     .compileComponents();
-    service = TestBed.inject(AuthService);
+    authService = TestBed.inject(AuthService);
+    await authService.login('admin', 'admin');
   });
 
   it('setSessionTrue', () => {
-    expect(service.setSession(account)).toBeTrue();
+    expect(authService.setSession(account)).toBeTrue();
   });
 
   it('setSessionFalse', () => {
-    expect(service.setSession(null)).toBeFalse();
+    expect(authService.setSession(null)).toBeFalse();
+  });
+
+  it('logout', () => {
+    authService.logout();
+    expect(authService.isLoggedIn()).toBeFalse();
+  });
+
+  it('logout2', () => {
+    authService.logout();
+    expect(authService.isLoggedOut()).toBeTrue();
   });
 
 

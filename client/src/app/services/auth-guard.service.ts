@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
 
     checkAccountLogin(route: ActivatedRouteSnapshot, url: any): boolean {
         if (this.authService.isLoggedIn()) {
-          const accountRole = this.authService.getAccount().role;
+          const accountRole = this.authService.account.role;
           if (route.data.roles && route.data.roles.indexOf(accountRole) === -1) {
             alert(this.dictionaryService.get('NOTALLOWED'));
             this.router.navigate(['/login']);

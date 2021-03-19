@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   accountForm: FormGroup;
   passwordForm: FormGroup;
   companyCode: FormControl;
-  selected = this.authService.getAccount().companyCode;
+  selected = this.authService.account.companyCode;
   setting = 1;
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
@@ -33,8 +33,8 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountForm = this.formBuilder.group({
-      username: new FormControl({ value: this.authService.getAccount().username, disabled: true }),
-      email: new FormControl({ value: this.authService.getAccount().email, disabled: true }),
+      username: new FormControl({ value: this.authService.account.username, disabled: true }),
+      email: new FormControl({ value: this.authService.account.email, disabled: true }),
       companyCode: ['', [Validators.required]]
     });
 
@@ -48,7 +48,7 @@ export class SettingsComponent implements OnInit {
   change() {
     //If account form valid
     if (this.accountForm.valid) {
-      var accountToChange = this.authService.getAccount();
+      var accountToChange = this.authService.account;
       //If password doesn't update account without password
       if (this.passwordForm.controls['passwordOld'].value +
         this.passwordForm.controls['password'].value +
