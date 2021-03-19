@@ -11,38 +11,38 @@ export class AccountService {
 
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
-  createAccount(account) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts`, { account }));
+  createAccount<T>(account) {
+    return this.httpService.request<T>(this.http.post(`${environment.serverURL}/accounts`, { account }));
   }
 
-  updateAccount(account) {
-    return this.httpService.request(this.http.put(`${environment.serverURL}/accounts`, { account }));
+  updateAccount<T>(account) {
+    return this.httpService.request<T>(this.http.put(`${environment.serverURL}/accounts`, { account }));
   }
 
-  deleteAccount(account) {
+  deleteAccount<T>(account) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: { account }
     };
-    return this.httpService.request(this.http.delete(`${environment.serverURL}/accounts`, httpOptions));
+    return this.httpService.request<T>(this.http.delete(`${environment.serverURL}/accounts`, httpOptions));
   }
 
-  blockAccount(account) {
-    return this.httpService.request(this.http.patch(`${environment.serverURL}/accounts`, { account }));
+  blockAccount<T>(account) {
+    return this.httpService.request<T>(this.http.patch(`${environment.serverURL}/accounts`, { account }));
   }
 
-  resetPassword(account) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset`, { account }));
+  resetPassword<T>(account) {
+    return this.httpService.request<T>(this.http.post(`${environment.serverURL}/accounts/reset`, { account }));
   }
 
-  validatePasswordResetHash(account) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset/validation`, { account }));
+  validatePasswordResetHash<T>(account) {
+    return this.httpService.request<T>(this.http.post(`${environment.serverURL}/accounts/reset/validation`, { account }));
   }
 
-  requestPasswordReset(account) {
-    return this.httpService.request(this.http.post(`${environment.serverURL}/accounts/reset/request`, { account }));
+  requestPasswordReset<T>(account) {
+    return this.httpService.request<T>(this.http.post(`${environment.serverURL}/accounts/reset/request`, { account }));
   }
 
-  getAccounts(): Observable<any> {
-    return this.httpService.request(this.http.get(`${environment.serverURL}/accounts`));
+  getAccounts<T>(){
+    return this.httpService.request<T>(this.http.get(`${environment.serverURL}/accounts`));
   }
 }

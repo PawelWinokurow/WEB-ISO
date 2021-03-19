@@ -34,8 +34,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { AppDateAdapter, APP_DATE_FORMATS } from './adapters/format-datepicker';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../adapters/format-datepicker';
 
 const materialModules = [
   CdkTreeModule,
@@ -73,7 +73,7 @@ const materialModules = [
   MatTooltipModule,
   MatStepperModule,
   MatSlideToggleModule,
-  NgxMatSelectSearchModule
+  NgxMatSelectSearchModule,
 ];
 
 /**

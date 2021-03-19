@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { TokenProlongationService } from 'src/app/services/token-prolongation.service';
 
 /**
  * Contains application  header and is also the parent component of the NewISOComponent.
@@ -18,8 +17,7 @@ export class MainComponent implements OnInit {
   selectedLanguage = 'DE';
 
   constructor(public router: Router, public dictionaryService: DictionaryService, 
-    public storageService: StorageService, public authService: AuthService, 
-    private tokenProlongationService: TokenProlongationService){
+    public storageService: StorageService, public authService: AuthService){
   }
 
   ngOnInit(): void {}
@@ -36,7 +34,7 @@ export class MainComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
-    this.tokenProlongationService.stopChecking();
+    this.authService.stopChecking();
     this.reset();
   }
 }

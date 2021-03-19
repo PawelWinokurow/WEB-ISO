@@ -3,16 +3,19 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from './../../environments/environment';
 import { HttpService } from './http.service';
+import { AccountJWT, Account } from 'src/app/interfaces/account';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  timer = null;
+
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
   async login(identifier: string, password: string) {
-    let result = await this.httpService.request(this.http.post(`${environment.serverURL}/login`, 
+    let result = await this.httpService.request<AccountJWT>(this.http.post(`${environment.serverURL}/login`, 
     {account: { email: identifier, username: identifier, password: password }})).toPromise();
     if (result){
       this.setSession(result)
@@ -20,7 +23,7 @@ export class AuthService {
     return result;
   }
 
-  public setSession(result) {
+  public setSession(result: AccountJWT) {
     if (result) {
       const expiresAt = moment().add(result.expiresIn, 'milliseconds');
       localStorage.setItem('id_token', result.idToken);
@@ -63,7 +66,27 @@ export class AuthService {
     return moment(expiresAt);
   }
 
-  prolongToken(account) {
-    return this.http.put(`${environment.serverURL}/login`, account);
+  startChecking(){
+    //Call refreshToken every 10 minutes
+    this.timer = setInterval(this.refreshToken.bind(this), 10 * 60 * 1000);
+  }
+
+  stopChecking(){
+    clearInterval(this.timer);
+  }
+
+  async refreshToken(){
+    const exp = this.getExpiration();
+    const now = moment();
+    //If JWT expires in < 30 minutes => update it
+    if (exp.diff(now, 'minutes') > 0 && exp.diff(now, 'minutes') < 30){
+      try {
+        let jwtAccount = await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.getAccount())).toPromise()
+        this.setSession(jwtAccount);
+      } catch (e) {
+        this.stopChecking();
+        console.error(e.stack);
+      }
+    }
   }
 }

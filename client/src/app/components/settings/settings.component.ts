@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
@@ -7,6 +7,7 @@ import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ValidationService } from 'src/app/services/validation.service';
+import { AccountJWT, Account, AccountDTO } from 'src/app/interfaces/account';
 
 @Component({
   selector: 'app-settings',
@@ -82,7 +83,7 @@ export class SettingsComponent implements OnInit {
 
   async updateAccount(accountToChange) {
     accountToChange.blocked = false;
-    let accountResponse = await this.accountService.updateAccount(accountToChange).toPromise();
+    let accountResponse = await this.accountService.updateAccount<AccountDTO>(accountToChange).toPromise();
     if ('account' in accountResponse) {
       this.authService.setAccount(accountResponse.account);
     }

@@ -33,7 +33,7 @@ export class HttpService {
     return response;
   }
 
-  request(func): Observable<any>{
+  request<T>(func): Observable<T>{
     return func.pipe(map(this.handleResponseMessages), catchError(this.handleError()));
   }
 

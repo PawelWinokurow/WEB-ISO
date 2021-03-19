@@ -113,11 +113,9 @@ async function requestPasswordReset(req, res) {
 }
 
 async function validatePasswordResetHash(req, res) {
-    let isInDB = await databaseService.checkPasswordResetConfirmation(req.body.account.hash);
-    if (isInDB) {
-        res.status(200).json({
-            isTrue: isInDB
-        });
+    let isTrue = await databaseService.checkPasswordResetConfirmation(req.body.account.hash);
+    if (isTrue) {
+        res.status(200).json({isTrue});
     }
 }
 

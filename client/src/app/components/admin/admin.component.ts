@@ -9,6 +9,7 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ResetPasswordAdminDialog } from 'src/app/dialogs/reset-password-admin/reset-password-admin.dialog';
+import { AccountJWT, Account, AccountDTO } from 'src/app/interfaces/account';
 
 @Component({
   selector: 'app-admin',
@@ -34,19 +35,23 @@ export class AdminComponent implements OnInit {
     this.companyCodeDetails = this.listService.companyCodes.reduce((acc, x) => ({ ...acc, [x.code]: x.details }), {})
   }
 
-  async fetchAccounts(){
-    this.accounts = await this.accountService.getAccounts().toPromise();
-    this.sortByUsername(this.accounts);
-    this.filteredAccounts = [...this.accounts];
+  async fetchAccounts() {
+    try {
+      this.accounts = await this.accountService.getAccounts().toPromise();
+      this.sortByUsername(this.accounts);
+      this.filteredAccounts = [...this.accounts];
+    } catch (e) {
+      console.error(e.stack);
+    }
   }
 
-  async initAccountSearch() {
+  initAccountSearch() {
     this.filter.valueChanges.subscribe(val => {
       this.filterQuery(val);
     });
   }
 
-  filterQuery(val){
+  filterQuery(val) {
     var val = val.toLowerCase();
     this.filteredAccounts = this.accounts.filter(account =>
       account.username.toLowerCase().includes(val)
@@ -56,8 +61,8 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  sortByUsername(array){
-    array.sort(function(a, b) {
+  sortByUsername(array) {
+    array.sort(function (a, b) {
       var nameA = a.username.toLowerCase();
       var nameB = b.username.toLowerCase();
       return nameA > nameB ? 1 : nameB > nameA ? -1 : 0;
@@ -95,19 +100,21 @@ export class AdminComponent implements OnInit {
   async blockAccount(accountToBlock) {
     try {
       accountToBlock.blocked = !accountToBlock.blocked;
-      const res = await this.accountService.blockAccount(accountToBlock).toPromise();
+      const accountResponse = await this.accountService.blockAccount<AccountDTO>(accountToBlock).toPromise();
 
-      //TODO iterate over array may be to slow
-      this.accounts.forEach(u => {
-        if (u.email === res.account.email) {
-          u.blocked = res.account.blocked;
-        }
-      });
-      this.filteredAccounts.forEach(u => {
-        if (u.email === res.account.email) {
-          u.blocked = res.account.blocked;
-        }
-      });
+      if ('account' in accountResponse) {
+        //TODO iterate over array may be to slow
+        this.accounts.forEach(u => {
+          if (u.email === accountResponse.account.email) {
+            u.blocked = accountResponse.account.blocked;
+          }
+        });
+        this.filteredAccounts.forEach(u => {
+          if (u.email === accountResponse.account.email) {
+            u.blocked = accountResponse.account.blocked;
+          }
+        });
+      }
     } catch (e) { }
   }
 

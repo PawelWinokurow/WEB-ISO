@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccountJWT } from 'src/app/interfaces/account';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -39,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
     try {
       this.hash = this.route.snapshot.queryParamMap.get('hash');
       if (this.hash) {
-        let result = await this.accountService.validatePasswordResetHash({hash: this.hash}).toPromise();
+        let result = await this.accountService.validatePasswordResetHash<{isTrue: boolean}>({hash: this.hash}).toPromise();
         if (result?.isTrue) {
           this.showResetForm = true;
         }
@@ -52,7 +53,7 @@ export class ResetPasswordComponent implements OnInit {
   async change() {
     if (this.passwordForm.valid) {
       try{
-        const result = await this.accountService.resetPassword({hash: this.hash, password:this.passwordForm.controls['password'].value}).toPromise();
+        const result = await this.accountService.resetPassword<AccountJWT>({hash: this.hash, password:this.passwordForm.controls['password'].value}).toPromise();
         if (result){
           this.authService.setSession(result)
         }
