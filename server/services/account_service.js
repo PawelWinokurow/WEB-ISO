@@ -7,18 +7,20 @@ const validationService = require('./validation_service');
 async function createAccount(req, res) {
     try {
         const requestAccount = req.body.account;
+        const validatedAccount = await validationService.validateAccount(requestAccount);
+
         let accountToStore = {
-            ...requestAccount
+            ...validatedAccount
         };
         let accountToSend = {
-            ...requestAccount
+            ...validatedAccount
         };
 
         const firstPassword = cryptoService.generatePassword();
         accountToStore.password = cryptoService.hashPassword(firstPassword);
         accountToSend.password = firstPassword;
 
-        if (databaseService.isAccountNotExists(requestAccount)) {
+        if (databaseService.isAccountNotExists(validatedAccount)) {
             await databaseService.storeAccount(accountToStore);
             //emailService.sendNewAccount(accountToSend);
             res.json({
@@ -40,14 +42,15 @@ async function createAccount(req, res) {
 async function updateAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        if (requestAccount?.password) {
-            const dbAccount = await databaseService.getAccount(requestAccount);
-            if (dbAccount && cryptoService.comparePasswords(requestAccount.passwordOld, dbAccount.password)) {
-                requestAccount.password = cryptoService.hashPassword(requestAccount.password);
-                await databaseService.updateAccount(requestAccount);
+        const validatedAccount = await validationService.validateAccount(requestAccount);
+        if (validatedAccount?.password) {
+            const dbAccount = await databaseService.getAccount(validatedAccount);
+            if (dbAccount && cryptoService.comparePasswords(validatedAccount.passwordOld, dbAccount.password)) {
+                validatedAccount.password = cryptoService.hashPassword(validatedAccount.password);
+                await databaseService.updateAccount(validatedAccount);
                 res.json({
                     message: 'USRISUPD',
-                    account: requestAccount
+                    account: validatedAccount
                 });
             } else {
                 res.json({
@@ -56,11 +59,11 @@ async function updateAccount(req, res) {
             }
         } else {
             
-            await databaseService.updateAccount(requestAccount);
+            await databaseService.updateAccount(validatedAccount);
             
             res.json({
                 message: 'USRISUPD',
-                account: requestAccount
+                account: validatedAccount
             });
         }
     } catch (e) {
@@ -74,7 +77,8 @@ async function updateAccount(req, res) {
 async function deleteAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        await databaseService.deleteAccount(requestAccount);
+        const validatedAccount = await validationService.validateAccount(requestAccount);
+        await databaseService.deleteAccount(validatedAccount);
         res.json({
             message: 'USRISDEL'
         })
@@ -132,10 +136,7 @@ async function resetPassword(req, res) {
         await databaseService.updateAccount(dbAccount);
         delete dbAccount.password;
         delete dbAccount.blocked;
-
-        const validatedAccount = validationService.validateAccountWithoutPassword(dbAccount);
-
-        let JWT = authService.createJWT(validatedAccount);
+        let JWT = authService.createJWT(dbAccount);
         JWT.message = 'PSWDISRES';
         //Send JWT back
         res.status(200).json(JWT);
@@ -150,10 +151,8 @@ async function resetPassword(req, res) {
 async function blockAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        await databaseService.updateAccount(requestAccount);
-
-        const validatedAccount = await validationService.validateAccountWithoutPassword(requestAccount);
-
+        const validatedAccount = await validationService.validateAccount(requestAccount);
+        await databaseService.updateAccount(validatedAccount);
         res.json({
             message: validatedAccount.blocked ? 'USRISBL' : 'USRISUN',
             account: validatedAccount

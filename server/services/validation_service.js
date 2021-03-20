@@ -9,11 +9,14 @@ const userWithoutPasswordSchema = {
         email: { type: "string" },
         role: { type: "string" },
         companyCode: { type: "string" },
+        blocked: { type: "boolean" },
+        password: { type: "string" },
+        passwordOld: { type: "string" },
     },
 };
 
-async function validateAccountWithoutPassword(model) {
-    const ajv = new Ajv({ allErrors: true, async: true });
+async function validateAccount(model) {
+    const ajv = new Ajv();
     const validate = ajv.compile(userWithoutPasswordSchema);
     const result = await validate(model);
     if (!result) {
@@ -41,5 +44,5 @@ async function parseErrors(validationErrors) {
   }
 
 module.exports = {
-    validateAccountWithoutPassword,
+  validateAccount,
 }
