@@ -14,7 +14,7 @@ function checkIfAuthenticated(req, res, next) {
             algorithm: ['RS256']
         }, (err, account) => {
             if (err) {
-                console.log(err);
+                console.error(err.stack);
                 return res.sendStatus(403);
             }
             req.body.decodedAccount = account;

@@ -2,6 +2,7 @@ const cryptoService = require('./crypto_service');
 const databaseService = require('./database_service');
 const emailService = require('./email_service');
 const authService = require('./auth_service');
+const validationService = require('./validation_service');
 
 async function createAccount(req, res) {
     try {
@@ -19,7 +20,7 @@ async function createAccount(req, res) {
 
         if (databaseService.isAccountNotExists(requestAccount)) {
             await databaseService.storeAccount(accountToStore);
-            // emailService.sendNewAccount(accountToSend);
+            //emailService.sendNewAccount(accountToSend);
             res.json({
                 message: 'USRISCR'
             });
@@ -57,14 +58,12 @@ async function updateAccount(req, res) {
             
             await databaseService.updateAccount(requestAccount);
             
-            console.log(requestAccount)
             res.json({
                 message: 'USRISUPD',
                 account: requestAccount
             });
         }
     } catch (e) {
-        console.log("error")
         console.error(e.stack);
         res.status(500).send({
             error: e
@@ -133,7 +132,10 @@ async function resetPassword(req, res) {
         await databaseService.updateAccount(dbAccount);
         delete dbAccount.password;
         delete dbAccount.blocked;
-        let JWT = authService.createJWT(dbAccount);
+
+        const validatedAccount = validationService.validateAccountWithoutPassword(dbAccount);
+
+        let JWT = authService.createJWT(validatedAccount);
         JWT.message = 'PSWDISRES';
         //Send JWT back
         res.status(200).json(JWT);
@@ -149,9 +151,12 @@ async function blockAccount(req, res) {
     try {
         const requestAccount = req.body.account;
         await databaseService.updateAccount(requestAccount);
+
+        const validatedAccount = await validationService.validateAccountWithoutPassword(requestAccount);
+
         res.json({
-            message: requestAccount.blocked ? 'USRISBL' : 'USRISUN',
-            account: requestAccount
+            message: validatedAccount.blocked ? 'USRISBL' : 'USRISUN',
+            account: validatedAccount
         })
     } catch (e) {
         console.error(e.stack);

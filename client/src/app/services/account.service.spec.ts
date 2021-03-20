@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { serviceModules, externalModules } from '../modules/modules';
+import { services, externalModules } from '../modules/modules';
 import { Account, AccountDTO } from 'src/app/interfaces/account';
 import { AccountService } from './account.service';
 import { AuthService } from './auth.service';
@@ -21,7 +21,7 @@ describe('AccountService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        ...serviceModules
+        ...services
       ],
       imports: [
         ...externalModules
@@ -81,9 +81,7 @@ describe('AccountService', () => {
     newAccount.blocked = !newAccount.blocked;
     let blockedAccount = await accountService.blockAccount<AccountDTO>(newAccount).toPromise();
     await accountService.deleteAccount<AccountDTO>(newAccount).toPromise();
-    expect(blockedAccount && blockedAccount.account.blocked === newAccount.blocked).toBeTrue();
+    expect(blockedAccount && blockedAccount.account.blocked == newAccount.blocked).toBeTrue();
   });
-
-
 
 });

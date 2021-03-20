@@ -76,8 +76,6 @@ export class AuthService {
   }
 
   async refreshToken() {
-    console.log(this.account)
-    //console.log(this.account())
     return await this.httpService.request<AccountJWT>(this.http.put(`${environment.serverURL}/login`, this.account)).toPromise();
   }
 

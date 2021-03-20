@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
-import { ValidationService } from 'src/app/services/validation.service';
+import { FormValidationService } from 'src/app/services/form-validation.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private route: ActivatedRoute, public dictionaryService: DictionaryService,
     private formBuilder: FormBuilder, public errorMessageService: ErrorMessageService,
     private authService: AuthService, private accountService: AccountService,
-    private validationService: ValidationService, private router: Router) {
+    private formValidationService: FormValidationService, private router: Router) {
     this.checkHash();
   }
 
@@ -33,7 +33,7 @@ export class ResetPasswordComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-    }, { validators: this.validationService.mustMatch('password', 'confirmPassword') });
+    }, { validators: this.formValidationService.mustMatch('password', 'confirmPassword') });
   }
 
   async checkHash() {

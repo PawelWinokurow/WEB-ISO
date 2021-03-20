@@ -6,8 +6,8 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AccountService } from 'src/app/services/account.service';
-import { ValidationService } from 'src/app/services/validation.service';
-import { AccountJWT, Account, AccountDTO } from 'src/app/interfaces/account';
+import { AccountDTO } from 'src/app/interfaces/account';
+import { FormValidationService } from 'src/app/services/form-validation.service';
 
 @Component({
   selector: 'app-settings',
@@ -28,7 +28,7 @@ export class SettingsComponent implements OnInit {
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
     public storageService: StorageService, private accountService: AccountService,
     public errorMessageService: ErrorMessageService, private authService: AuthService,
-    public listService: ListService, private validationService: ValidationService) {
+    public listService: ListService, private formValidationService: FormValidationService) {
   }
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
       passwordOld: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-    }, { validators: this.validationService.mustMatch('password', 'confirmPassword') });
+    }, { validators: this.formValidationService.mustMatch('password', 'confirmPassword') });
   }
 
   change() {

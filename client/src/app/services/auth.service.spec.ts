@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { serviceModules, externalModules } from '../modules/modules';
+import { services, externalModules } from '../modules/modules';
 import { AuthService } from './auth.service';
 import { AccountJWT, Account } from 'src/app/interfaces/account';
 
@@ -20,7 +20,7 @@ describe('AuthService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        ...serviceModules
+        ...services
       ],
       imports: [
         ...externalModules

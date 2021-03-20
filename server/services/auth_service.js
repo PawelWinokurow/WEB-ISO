@@ -16,7 +16,6 @@ async function refreshToken(req, res) {
         delete dbAccount.password;
         delete dbAccount.blocked;
         const JWT = createJWT(dbAccount);
-        console.log(JWT)
         //Send JWT back
         res.status(200).json(JWT);
     } catch (e) {
