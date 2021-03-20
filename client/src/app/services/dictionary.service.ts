@@ -35,6 +35,10 @@ export class DictionaryService {
     ['ADM', 'Administrator'],
     ['CREATE', 'Anlegen'],
 
+    ['RESETPSWDTEXT', `Wenn Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. 
+    Geben Sie bitte Ihre registrierte E-Mail Adresse ein und drücken Sie “Passwort zurücksetzen”. 
+    Danach wird Ihnen eine E-Mail mit einem Link zugesandt.`],
+
     ['RESETPSWD', 'Passwort zurücksetzen'],
     ['BLOCKUSR', 'Sperren'],
     ['UNBLOCKUSR', 'Entsperren'],
@@ -160,7 +164,6 @@ export class DictionaryService {
     ['ID', 'Email or username'],
     ['PSWDFOG', 'Forgot password?'],
     ['PSWDWILLRES', 'A confirmation e-mail with further instructions will be sent to your e-mail address.'],
-
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     
@@ -186,6 +189,10 @@ export class DictionaryService {
     ['ACCSET', 'Account settings'],
     ['SECSET', 'Security settings'],
     
+    ['RESETPSWDTEXT', `If you forget your password, you can request to reset your password. 
+    Please enter your registered email address and press “Reset password”. 
+    We will send you an email containing a link enabling you to create a new password.`],
+
     ['RESETPSWD', 'Reset password'],
     ['BLOCKUSR', 'Block'],
     ['UNBLOCKUSR', 'Unblock'],

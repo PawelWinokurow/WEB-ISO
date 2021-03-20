@@ -4,7 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
-import { NgxSoapModule } from "ngx-soap";
 import { ToastrModule } from "ngx-toastr";
 import { AccountService } from "../services/account.service";
 import { AuthGuardService } from "../services/auth-guard.service";
@@ -48,15 +47,11 @@ export const services = [
 
 export const externalModules = [
     BrowserModule,
-    NgxSoapModule,
     HttpClientModule,
-    BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     ToastrModule.forRoot(),

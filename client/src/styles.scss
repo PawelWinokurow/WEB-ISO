@@ -188,3 +188,12 @@ button:focus, button:active:focus, button.active:focus {
 .mat-form-field-label {
   color: rgb(46, 46, 46);
 }
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(160, 160, 160);
+}
+
+.mat-raised-button, .mat-stroked-button, .mat-button, .mat-button-toggle-group{
+  border: 1px solid rgb(160, 160, 160) !important;
+}
