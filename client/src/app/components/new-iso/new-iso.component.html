@@ -1,6 +1,6 @@
 <div class="inner-component">
     <div class="stepper-container">
-        <mat-horizontal-stepper color="primary" linear="true" #stepper>
+        <mat-horizontal-stepper color="primary" linear="false" #stepper>
 
             <!--general information mat-step for person-->
             <mat-step *ngIf="storageService.customerType === 'person'" [stepControl]="generalInformation">
@@ -441,7 +441,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
                                             <textarea matInput formControlName="notes" cdkTextareaAutosize
-                                                cdkAutosizeMinRows="4" cdkAutosizeMaxRows="4"></textarea>
+                                                cdkAutosizeMinRows="3" cdkAutosizeMaxRows="3"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -1223,8 +1223,8 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4"
-                                                cdkAutosizeMaxRows="4" formControlName="notes"></textarea>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                                                cdkAutosizeMaxRows="3" formControlName="notes"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>

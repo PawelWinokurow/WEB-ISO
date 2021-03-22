@@ -9,7 +9,6 @@ const WSDL_URL = path.join(__dirname, "..", "wsdl", 'SI_ISO_MGB_BAPI_MAINTAIN_PA
 function test() {
     fs.readFile(ENVELOPE_URL, function (err, data) {
         xml2js.parseString(data, function (err, args) {
-            console.log(args.ENVELOPE)
             soap.createClient(WSDL_URL, function (err, soapClient) {
                 if (err) {
                     console.log("error", err);
@@ -39,7 +38,6 @@ function sendCustomer(customer, wsdlUrl) {
                     console.log("error", err);
                 }
                 soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
-                var description = soapClient.describe()
                 soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(customer, function (err, result, raw, headers) {
                     if (err) {
                         //console.log(err);
