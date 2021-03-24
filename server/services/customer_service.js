@@ -117,7 +117,7 @@ class OrganizationDebitFactory extends CustomerFactory {
 
     //Terms of payment
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].CMDS_EI_COMPANY[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
-    //Remarks
+    //Remarks?
 
     return this.envelope;
   }
