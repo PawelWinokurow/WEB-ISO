@@ -212,7 +212,7 @@ async function checkPasswordResetConfirmation(hash) {
  * Removes old unconfirmed customers.
  */
 async function removeOldCustomers() {
-  const remove_statement = "DELETE FROM customers WHERE datetime < NOW() - INTERVAL ? DAY";
+  const deleteStatement = "DELETE FROM customers WHERE datetime < NOW() - INTERVAL ? DAY";
   const values = [process.env.DB_STORAGE_DURATION];
   //Remove all customers, which are older than process.env.DB_STORAGE_DURATION
   await cudQuery(deleteStatement, values);

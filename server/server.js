@@ -4,10 +4,12 @@ const cors = require('cors');
 const logger = require('morgan');
 const fetch = require('node-fetch');
 const httpsProxyAgent = require('https-proxy-agent');
-const cryptoService = require('./services/crypto_service');
+const swaggerUi = require('swagger-ui-express')
+swaggerDocument = require('./swagger.json');
 
 require('dotenv').config();
 
+const cryptoService = require('./services/crypto_service');
 const databaseService = require('./services/database_service');
 const customerService = require('./services/customer_service');
 const middlewareService = require('./services/middleware_service');
@@ -30,6 +32,7 @@ class Server {
     this.expressApp.use(logger('dev'));
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
+    this.expressApp.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     await databaseService.connect();
     await databaseService.createTables();
     storeTestData();
@@ -55,7 +58,8 @@ class Server {
    * Runs each day at 00.00 and removes old not confirmed customers.
    */
   runSchedule() {
-    schedule.scheduleJob('0 0 * * *', function () {
+    //schedule.scheduleJob('0 0 * * *', function () {
+    schedule.scheduleJob('* * * * *', function () {
       databaseService.removeOldCustomers();
     });
   }

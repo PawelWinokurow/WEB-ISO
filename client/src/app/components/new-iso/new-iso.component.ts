@@ -268,15 +268,15 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer dialog.
    */
   async openSendSOAPDialog() {
-    const customer= {
+    /*const customer= {
       data: this.customerService.constructObject(this.generalInformation, 
         this.contactInformation, this.payment, this.applicant, this.upload), 
         customerType: this.storageService.customerType,
       debitCreditType: this.storageService.debitCreditType
     };
     await this.customerService.sendCustomer(customer).toPromise();
-    return
-    /*const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog);
+    return*/
+    const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog);
     const isDirect = await sendCustomerDialogRef.afterClosed().toPromise();
     const customer= {
       data: this.customerService.constructObject(this.generalInformation, 
@@ -290,7 +290,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
       await this.customerService.sendCustomerRequest(
         { emailTo: this.authService.account.email, ...customer }).toPromise();
     }
-    //this.router.navigate(['/preselection']);*/
+    //this.router.navigate(['/preselection']);
   }
 
   /**

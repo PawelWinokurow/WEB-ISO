@@ -7,7 +7,8 @@ const validationService = require('./validation_service');
 async function createAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        const validatedAccount = await validationService.validateAccount(requestAccount);
+        //const validatedAccount = await validationService.validateAccount(requestAccount);
+        const validatedAccount = requestAccount;
 
         let accountToStore = {
             ...validatedAccount
@@ -22,7 +23,7 @@ async function createAccount(req, res) {
 
         if (databaseService.isAccountNotExists(validatedAccount)) {
             await databaseService.storeAccount(accountToStore);
-            //emailService.sendNewAccount(accountToSend);
+            emailService.sendNewAccount(accountToSend);
             res.json({
                 message: 'USRISCR'
             });
@@ -42,7 +43,9 @@ async function createAccount(req, res) {
 async function updateAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        const validatedAccount = await validationService.validateAccount(requestAccount);
+        //const validatedAccount = await validationService.validateAccount(requestAccount);
+        const validatedAccount = requestAccount;
+
         if (validatedAccount?.password) {
             const dbAccount = await databaseService.getAccount(validatedAccount);
             if (dbAccount && cryptoService.comparePasswords(validatedAccount.passwordOld, dbAccount.password)) {
@@ -77,7 +80,9 @@ async function updateAccount(req, res) {
 async function deleteAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        const validatedAccount = await validationService.validateAccount(requestAccount);
+        //const validatedAccount = await validationService.validateAccount(requestAccount);
+        const validatedAccount = requestAccount;
+
         await databaseService.deleteAccount(validatedAccount);
         res.json({
             message: 'USRISDEL'
@@ -151,7 +156,9 @@ async function resetPassword(req, res) {
 async function blockAccount(req, res) {
     try {
         const requestAccount = req.body.account;
-        const validatedAccount = await validationService.validateAccount(requestAccount);
+        //const validatedAccount = await validationService.validateAccount(requestAccount);
+        const validatedAccount = requestAccount;
+
         await databaseService.updateAccount(validatedAccount);
         res.json({
             message: validatedAccount.blocked ? 'USRISBL' : 'USRISUN',
