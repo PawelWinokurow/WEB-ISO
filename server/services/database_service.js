@@ -138,7 +138,11 @@ async function storeCustomer(hash, email, customer) {
   const values = [hash];
   let result = (await selectQuery(selectStatement, values))[0];
   if (result) {
-    return JSON.parse(result.customer);
+    return {
+      customer: JSON.parse(result.customer),
+      email: result.email,
+      hash: result.hash,
+    };
   } else {
     return false;
   }

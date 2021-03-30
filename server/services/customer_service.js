@@ -157,12 +157,11 @@ function composeCustomer(customerData) {
 async function confirmCustomer(req, res) {
   try {
     const hash = req.query.hash;
-    const customer = await databaseService.getCustomer(hash);
-    if (customer) {
-      const sapID = await soapService.sendCustomer(customer);
-      await databaseService.setCustomerSAPID(sapID, hash)
-      //TODO get email
-      //emailService.sendCustomerAcknowledgement(email, sapID);
+    const result = await databaseService.getCustomer(hash);
+    if (result) {
+      const sapID = await soapService.sendCustomer(result.customer);
+      await databaseService.setCustomerSAPID(sapID, result.hash)
+      emailService.sendCustomerAcknowledgement(result.email, sapID);
       res.send('<p>Success! The customer was confirmed.</p>');
     }
   } catch (e) {
