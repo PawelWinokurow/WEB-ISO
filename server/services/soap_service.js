@@ -36,12 +36,11 @@ function test() {
  */
 async function sendCustomer(customer) {
     try {
-        const soapClient = await createClient(wsdlUrl);
+        const soapClient = await createClient(WSDL_URL);
         soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
         const soapRequest = util.promisify(soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound);
-
         const result = await soapRequest(customer);
-        console.log(result);
+        return result.EV_BELEGNR;
     } catch (e) {
         throw e;
     }
