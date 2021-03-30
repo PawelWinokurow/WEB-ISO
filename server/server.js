@@ -76,12 +76,12 @@ class Server {
     /**
      * Enpoint to get new customers from application.
      */
-    this.expressApp.route("/customers").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomer);
+    this.expressApp.route("/customers").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerDirect);
 
     /**
      * Enpoint to request new customers from application.
      */
-     this.expressApp.route("/customers/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.requestCustomer);
+     this.expressApp.route("/customers/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerRequest);
 
     /**
      * Endpoint to get email confirmations.

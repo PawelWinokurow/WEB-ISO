@@ -2,7 +2,14 @@ const soap = require('soap');
 const path = require('path');
 const fs = require('fs');
 const xml2js = require('xml2js');
+const util = require('util');
 
+const WSDL_URL = path.join(__dirname, '..', "wsdl", process.env.WSDL_FILENAME);
+
+const createClient = util.promisify(soap.createClient);
+const soapClient = await createClient(wsdlUrl);
+soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
+const soapRequest = util.promisify(soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound);
 
 const ENVELOPE_URL = path.join(__dirname, "..", "wsdl", 'envelope.xml');
 const WSDL_URL = path.join(__dirname, "..", "wsdl", 'SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outboundService_dev.wsdl');
@@ -30,21 +37,14 @@ function test() {
 /**
  * Sends customer to the PI/PO.
  * @param {object} customer  
- * @param {string} wsdlUrl path to wsdl
  */
-function sendCustomer(customer, wsdlUrl) {
-            soap.createClient(WSDL_URL, function (err, soapClient) {
-                if (err) {
-                    console.log("error", err);
-                }
-                soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
-                soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound(customer, function (err, result, raw, headers) {
-                    if (err) {
-                        //console.log(err);
-                    }
-                    console.log(JSON.stringify(result))
-                })
-            });
+async function sendCustomer(customer) {
+    try {
+        const result = await soapRequest(customer);
+        console.log(result);
+    } catch (e) {
+        throw e;
+    }
 }
 
 module.exports = { sendCustomer, test };

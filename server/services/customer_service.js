@@ -3,9 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 const soapService = require('./soap_service');
+const databaseService = require('./database_service');
+const cryptoService = require('./crypto_service');
 
 const ENVELOPE_URL = path.join(__dirname, '..', "wsdl", process.env.ENVELOPE_FILENAME);
-const WSDL_URL = path.join(__dirname, '..', "wsdl", process.env.WSDL_FILENAME);
+
 
 class CustomerFactory {
   constructor(customerData, ENVELOPE_URL) {
@@ -153,25 +155,37 @@ function composeCustomer(customerData) {
 
 async function confirmCustomer(req, res) {
   try {
-    const result = await databaseService.checkCustomerConfirmation(req.query.hash);
-    const customer = JSON.parse(result[0].customer)
-    soapService.sendCustomer(customer, WSDL_URL);
-    res.send('<p>Success! The customer was confirmed.</p>');
+    const hash = req.query.hash;
+    const customer = await databaseService.getCustomer(hash);
+    if (customer) {
+      const sapID = await soapService.sendCustomer(customer);
+      await databaseService.setCustomerSAPID(sapID, hash)
+      res.send('<p>Success! The customer was confirmed.</p>');
+    }
   } catch (e) {
     console.error(e.stack);
     res.send('<p>Error! The customer was not confirmed.</p>');
   }
 }
 
-async function requestCustomer(req, res) {
+async function storeCustomer(email, customer) {
   try {
-    const requestCustomer = req.body.customer;
-    let sapCustomer = await composeCustomer(requestCustomer);
+    let sapCustomer = await composeCustomer(customer);
     let envelope = sapCustomer.getJSONArgs();
-    const emailTo = req.body.decodedAccount.email;
     const hash = cryptoService.generateHash();
-    await databaseService.storeCustomer(hash, envelope);
-    emailService.sendCustomerConfirmation(emailTo, hash);
+    await databaseService.storeCustomer(hash, email, envelope);
+    return { hash, envelope };
+  } catch (e) {
+    throw e;
+  }
+}
+
+async function createCustomerRequest(req, res) {
+  try {
+    const customer = req.body.customer;
+    const email = req.body.decodedAccount.email;
+    const { hash, _ } = await storeCustomer(email, customer);
+    //emailService.sendCustomerConfirmation(email, hash);
     res.json({
       message: 'CONFISSND',
     });
@@ -183,12 +197,13 @@ async function requestCustomer(req, res) {
   }
 }
 
-async function createCustomer(req, res) {
+async function createCustomerDirect(req, res) {
   try {
-    const requestCustomer = req.body.customer;
-    let sapCustomer = await composeCustomer(requestCustomer);
-    let envelope = sapCustomer.getJSONArgs();
-    soapService.sendCustomer(envelope, WSDL_URL);
+    const customer = req.body.customer;
+    const email = req.body.decodedAccount.email;
+    const { hash, envelope } = await storeCustomer(email, customer);
+    const sapID = await soapService.sendCustomer(envelope);
+    await databaseService.setCustomerSAPID(sapID, hash)
     res.json({
       message: 'CUSISSND',
     });
@@ -219,6 +234,6 @@ module.exports = {
   OrganizationDebitFactory: OrganizationDebitFactory,
   OrganizationCreditFactory: OrganizationCreditFactory,
   confirmCustomer,
-  createCustomer,
-  requestCustomer
+  createCustomerDirect,
+  createCustomerRequest
 }

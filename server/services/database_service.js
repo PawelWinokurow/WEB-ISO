@@ -2,10 +2,13 @@ const mysql = require("mysql2");
 const util = require('util');
 
 const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers ( 
-  hash VARCHAR(255) NOT NULL, 
+  hash VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL, 
   customer TEXT NOT NULL, 
+  sapID VARCHAR(255),
   datetime DATETIME NOT NULL,
-  PRIMARY KEY (hash));`;
+  PRIMARY KEY (hash),
+  FOREIGN KEY (email) REFERENCES accounts(email));`;
 
 const ACCOUNTS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts ( 
   email VARCHAR(255) NOT NULL, 
@@ -58,7 +61,7 @@ function connect() {
 }
 
 async function createTables() {
-  const creations = [CUSTOMERS_TABLE_CREATION, ACCOUNTS_TABLE_CREATION, RESETS_TABLE_CREATION]
+  const creations = [ACCOUNTS_TABLE_CREATION, RESETS_TABLE_CREATION, CUSTOMERS_TABLE_CREATION]
   for (const q of creations) {
     try {
       await connection.query(q);
@@ -69,7 +72,7 @@ async function createTables() {
 }
 
 async function dropTables() {
-  const drops = ['DROP TABLE passwordresets;', 'DROP TABLE accounts;', 'DROP TABLE customers;'];
+  const drops = ['DROP TABLE passwordresets;', 'DROP TABLE customers;', 'DROP TABLE accounts;'];
   for (const q of drops) {
     try {
       await connection.query(q);
@@ -104,14 +107,41 @@ async function selectQuery(selectStatement, values) {
 /**
  * Stores customer.
  * @param  {string} hash Hash string
+ * @param  {object} email 
  * @param  {object} customer Customer object 
  */
-async function storeCustomer(hash, customer) {
-  const insertStatement = 'INSERT INTO customers (hash, customer, datetime) VALUES (?, NOW());';
+async function storeCustomer(hash, email, customer) {
+  const insertStatement = 'INSERT INTO customers (hash, email, customer, datetime) VALUES (?, NOW());';
   values = [
-    [hash, customer]
+    [hash, email, customer]
   ];
   await cudQuery(insertStatement, values);
+}
+
+/**
+ * Set SAP ID received from the PI/PO system.
+ * @param  {string} sapID 
+ * @param  {string} hash Hash string 
+ */
+ async function setCustomerSAPID(sapID, hash) {
+  let updateStatement = `UPDATE customers SET sapID = ? WHERE hash = ?;`;
+  let values = [sapID, hash];
+  await cudQuery(updateStatement, values);
+}
+
+/**
+ * Retrieves customer from the database.
+ * @param  {object} hash Hash string 
+ */
+ async function getCustomer(hash) {
+  const selectStatement = 'SELECT * FROM customers WHERE hash = ?';
+  const values = [hash];
+  let result = (await selectQuery(selectStatement, values))[0];
+  if (result) {
+    return JSON.parse(result.customer);
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -260,16 +290,18 @@ async function getAccounts() {
 }
 
 module.exports = {
-  getAccounts,
+  storeAccount,
   getAccount,
+  getAccounts,
+  deleteAccount,
+  updateAccount,
   removeOldCustomers,
   checkCustomerConfirmation,
   checkPasswordResetConfirmation,
   isAccountNotExists,
-  deleteAccount,
-  updateAccount,
-  storeAccount,
   storeCustomer,
+  getCustomer,
+  setCustomerSAPID,
   storePasswordReset,
   createTables,
   dropTables,

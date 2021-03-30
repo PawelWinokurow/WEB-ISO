@@ -287,8 +287,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     if (isDirect) {
       await this.customerService.sendCustomer(customer).toPromise();
     } else {
-      await this.customerService.sendCustomerRequest(
-        { emailTo: this.authService.account.email, ...customer }).toPromise();
+      await this.customerService.sendCustomerRequest(customer).toPromise();
     }
     //this.router.navigate(['/preselection']);
   }
