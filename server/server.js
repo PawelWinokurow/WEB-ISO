@@ -69,48 +69,52 @@ class Server {
     /**
      * Endpoint to get login data.
      */
-     this.expressApp.route("/login")
-     .post(authService.login)
-     .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
+    this.expressApp.route("/login")
+      .post(authService.login)
+      .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
 
     /**
      * Enpoint to get new customers from application.
      */
-    this.expressApp.route("/customers").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerDirect);
+    this.expressApp.route("/customers")
+      .post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerDirect);
 
     /**
      * Enpoint to request new customers from application.
      */
-     this.expressApp.route("/customers/request").post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerRequest);
+    this.expressApp.route("/customers/request")
+      .post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerRequest);
 
     /**
      * Endpoint to get email confirmations.
      */
-     this.expressApp.route("/customers/confirm").get(customerService.confirmCustomer);
+    this.expressApp.route("/customers/confirm")
+      .get(customerService.confirmCustomer);
 
     /**
      * Endpoint to get recaptcha token from the client.
      */
-     this.expressApp.route('/customers/recaptcha').post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
+    this.expressApp.route('/customers/recaptcha')
+      .post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, recaptchaService.validateRecaptcha);
 
 
     /**
      * Endpoint to reset password.
      */
-     this.expressApp.route("/accounts/reset")
-     .post(accountService.resetPassword);
+    this.expressApp.route("/accounts/reset")
+      .post(accountService.resetPassword);
 
     /**
     * Endpoint to request password reset.
     */
-     this.expressApp.route("/accounts/reset/request")
-     .post(accountService.requestPasswordReset);
+    this.expressApp.route("/accounts/reset/request")
+      .post(accountService.requestPasswordReset);
 
-     /**
-     * Endpoint to validate hash sent by email.
-     */
-     this.expressApp.route("/accounts/reset/validation")
-       .post(accountService.validatePasswordResetHash);
+    /**
+    * Endpoint to validate hash sent by email.
+    */
+    this.expressApp.route("/accounts/reset/validation")
+      .post(accountService.validatePasswordResetHash);
 
 
     /**
@@ -125,7 +129,9 @@ class Server {
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockAccount)
       .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
-    this.expressApp.route('/accounts').get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);
+
+    this.expressApp.route('/accounts')
+      .get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);
   }
 
   start() {
@@ -149,7 +155,7 @@ async function storeTestData() {
   let accounts = [
     {
       username: 'admin',
-      email: 'admin@admin.de',
+      email: 'pawelwinokurow@gmail.com',
       companyCode: '1100',
       password: cryptoService.hashPassword('admin'),
       blocked: false,

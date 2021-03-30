@@ -5,6 +5,7 @@ const path = require('path');
 const soapService = require('./soap_service');
 const databaseService = require('./database_service');
 const cryptoService = require('./crypto_service');
+const emailService = require('./email_service');
 
 const ENVELOPE_URL = path.join(__dirname, '..', "wsdl", process.env.ENVELOPE_FILENAME);
 
@@ -160,6 +161,8 @@ async function confirmCustomer(req, res) {
     if (customer) {
       const sapID = await soapService.sendCustomer(customer);
       await databaseService.setCustomerSAPID(sapID, hash)
+      //TODO get email
+      //emailService.sendCustomerAcknowledgement(email, sapID);
       res.send('<p>Success! The customer was confirmed.</p>');
     }
   } catch (e) {
@@ -185,7 +188,7 @@ async function createCustomerRequest(req, res) {
     const customer = req.body.customer;
     const email = req.body.decodedAccount.email;
     const { hash, _ } = await storeCustomer(email, customer);
-    //emailService.sendCustomerConfirmation(email, hash);
+    emailService.sendCustomerConfirmation(email, hash);
     res.json({
       message: 'CONFISSND',
     });
@@ -203,7 +206,9 @@ async function createCustomerDirect(req, res) {
     const email = req.body.decodedAccount.email;
     const { hash, envelope } = await storeCustomer(email, customer);
     const sapID = await soapService.sendCustomer(envelope);
+    console.log(sapID)
     await databaseService.setCustomerSAPID(sapID, hash)
+    emailService.sendCustomerAcknowledgement(email, sapID);
     res.json({
       message: 'CUSISSND',
     });
