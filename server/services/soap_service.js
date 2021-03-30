@@ -8,9 +8,7 @@ const WSDL_URL = path.join(__dirname, '..', "wsdl", process.env.WSDL_FILENAME);
 
 const createClient = util.promisify(soap.createClient);
 
-
 const ENVELOPE_URL = path.join(__dirname, "..", "wsdl", 'envelope.xml');
-const WSDL_URL = path.join(__dirname, "..", "wsdl", 'SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outboundService_dev.wsdl');
 function test() {
     fs.readFile(ENVELOPE_URL, function (err, data) {
         xml2js.parseString(data, function (err, args) {
