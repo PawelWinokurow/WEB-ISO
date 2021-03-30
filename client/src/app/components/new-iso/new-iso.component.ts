@@ -278,15 +278,15 @@ export class NewISOComponent implements OnInit, OnDestroy {
     return*/
     const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog);
     const isDirect = await sendCustomerDialogRef.afterClosed().toPromise();
-    const customer= {
-      data: this.customerService.constructObject(this.generalInformation, 
-        this.contactInformation, this.payment, this.applicant, this.upload), 
-        customerType: this.storageService.customerType,
+    const customer = {
+      data: this.customerService.constructObject(this.generalInformation,
+        this.contactInformation, this.payment, this.applicant, this.upload),
+      customerType: this.storageService.customerType,
       debitCreditType: this.storageService.debitCreditType
     };
-    if (isDirect) {
+    if (isDirect === true) {
       await this.customerService.sendCustomer(customer).toPromise();
-    } else {
+    } else if (isDirect === false) {
       await this.customerService.sendCustomerRequest(customer).toPromise();
     }
     //this.router.navigate(['/preselection']);

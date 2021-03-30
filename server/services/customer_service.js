@@ -157,6 +157,7 @@ function composeCustomer(customerData) {
 async function confirmCustomer(req, res) {
   try {
     const hash = req.query.hash;
+    console.log(hash)
     const result = await databaseService.getCustomer(hash);
     if (result) {
       const sapID = await soapService.sendCustomer(result.customer);

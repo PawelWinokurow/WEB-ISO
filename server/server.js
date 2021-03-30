@@ -58,8 +58,8 @@ class Server {
    * Runs each day at 00.00 and removes old not confirmed customers.
    */
   runSchedule() {
-    //schedule.scheduleJob('0 0 * * *', function () {
-    schedule.scheduleJob('* * * * *', function () {
+    schedule.scheduleJob('0 0 * * *', function () {
+    //chedule.scheduleJob('* * * * *', function () {
       databaseService.removeOldCustomers();
     });
   }

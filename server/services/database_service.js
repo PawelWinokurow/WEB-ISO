@@ -113,7 +113,7 @@ async function selectQuery(selectStatement, values) {
 async function storeCustomer(hash, email, customer) {
   const insertStatement = 'INSERT INTO customers (hash, email, customer, datetime) VALUES (?, NOW());';
   values = [
-    [hash, email, customer]
+    [hash, email, JSON.stringify(customer)]
   ];
   await cudQuery(insertStatement, values);
 }
