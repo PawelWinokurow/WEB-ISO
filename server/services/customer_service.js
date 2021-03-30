@@ -189,7 +189,7 @@ async function createCustomerRequest(req, res) {
     const { hash, _ } = await storeCustomer(email, customer);
     emailService.sendCustomerConfirmation(email, hash);
     res.json({
-      message: 'CONFISSND',
+      message: 'CUSCONFISSND',
     });
   } catch (e) {
     console.error(e.stack);
