@@ -56,7 +56,7 @@ class OrganizationDebitFactory extends CustomerFactory {
   getJSONArgs() {
     let dateToday = formatDate(new Date());
 
-    console.log(this.customerData.data)
+    //console.log(this.customerData.data)
 
     //General information
     //Interface number
@@ -206,7 +206,6 @@ async function createCustomerDirect(req, res) {
     const email = req.body.decodedAccount.email;
     const { hash, envelope } = await storeCustomer(email, customer);
     const sapID = await soapService.sendCustomer(envelope);
-    console.log(sapID)
     await databaseService.setCustomerSAPID(sapID, hash)
     emailService.sendCustomerAcknowledgement(email, sapID);
     res.json({
