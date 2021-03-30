@@ -7,9 +7,7 @@ const util = require('util');
 const WSDL_URL = path.join(__dirname, '..', "wsdl", process.env.WSDL_FILENAME);
 
 const createClient = util.promisify(soap.createClient);
-const soapClient = await createClient(wsdlUrl);
-soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
-const soapRequest = util.promisify(soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound);
+
 
 const ENVELOPE_URL = path.join(__dirname, "..", "wsdl", 'envelope.xml');
 const WSDL_URL = path.join(__dirname, "..", "wsdl", 'SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outboundService_dev.wsdl');
@@ -40,6 +38,10 @@ function test() {
  */
 async function sendCustomer(customer) {
     try {
+        const soapClient = await createClient(wsdlUrl);
+        soapClient.setSecurity(new soap.BasicAuthSecurity(process.env.SOAP_USER, process.env.SOAP_PASSWORD))
+        const soapRequest = util.promisify(soapClient.SI_ISO_MGB_BAPI_MAINTAIN_PARTNER_outbound);
+
         const result = await soapRequest(customer);
         console.log(result);
     } catch (e) {

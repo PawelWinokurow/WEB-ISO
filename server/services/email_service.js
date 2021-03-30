@@ -53,6 +53,16 @@ function sendCustomerConfirmation(emailTo, hash) {
     sendEmail(message);
 }
 
+function sendCustomerConfirmation(emailTo, sapID) {
+    const message = {
+        from: "BayWa",
+        to: emailTo,
+        subject: 'Acknowledgement of receipt',
+        html: `<p>The customer was successfully received and stored in the SAP system. SAPID: ${sapID}</p>`
+    };
+    sendEmail(message);
+}
+
 function sendPasswordResetLink(emailTo, hash) {
     const message = {
         from: "BayWa",
