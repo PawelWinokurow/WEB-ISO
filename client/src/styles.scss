@@ -197,3 +197,15 @@ button:focus, button:active:focus, button.active:focus {
 .mat-raised-button, .mat-stroked-button, .mat-button, .mat-button-toggle-group{
   border: 1px solid rgb(160, 160, 160) !important;
 }
+
+mat-panel-title {
+  align-items: center;
+}
+
+mat-panel-description {
+  align-items: center;
+}
+
+mat-expansion-panel-header > span.mat-content {
+  height: 30px;
+}

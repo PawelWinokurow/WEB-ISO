@@ -31,6 +31,10 @@ export class CustomerService {
     return this.httpService.request(this.http.post(`${environment.serverURL}/customers/request`, { customer }))
   }
 
+  getCustomers<T>(email){
+    return this.httpService.request<T>(this.http.get(`${environment.serverURL}/customers?email=${email}`));
+  }
+
   constructObject(generalInformation, contactInformation, payment, applicant, upload) {
     const data = {
       companyCode: this.authService.account.companyCode?.code ?? '',

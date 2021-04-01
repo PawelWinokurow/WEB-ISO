@@ -47,6 +47,15 @@ function checkIfUpdatesItself(req, res, next) {
     }
 }
 
+//Checks if email in get method == email of the requester 
+function checkEmail(req, res, next) {
+    const account = req.body.decodedAccount;
+    const email = req.query.email;
+    if (email === account.email) {
+        next();
+    }
+}
+
 //Checks if request comes from ADMIN
 function checkIfFromAdmin(req, res, next) {
     if (req.body.decodedAccount.role === 'ADMIN') {
@@ -56,4 +65,9 @@ function checkIfFromAdmin(req, res, next) {
     }
 }
 
-module.exports = { checkIfFromAdmin, checkIfUpdatesItself, checkIfAccountAvailable, checkIfAuthenticated };
+module.exports = { 
+    checkIfFromAdmin, 
+    checkIfUpdatesItself, 
+    checkIfAccountAvailable, 
+    checkIfAuthenticated, 
+    checkEmail };

@@ -24,6 +24,7 @@ export class DictionaryService {
     ['PSWDWILLRES', 'Eine Bestätigungsmail mit weiteren Anweisungen wird an Ihre E-Mail-Adresse gesendet.'],
     
     ['NEWCUS', 'Neuer Kunde'],
+    ['CUSS', 'Kunden'],
     ['ACC', 'Konto'],
     ['LANG', 'Sprache'],
     ['LOGOUT', 'Abmelden'],
@@ -66,6 +67,10 @@ export class DictionaryService {
     ['PSWDISRES', 'Das Passwort wurde zurückgesetzt.'],
     
     ['NOTALLOWED', 'Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.'],
+
+    ['SAPID', 'SAP ID'],
+    ['HASH', 'Hash'],
+    ['DATE', 'Datum'],
 
     ['APPLY', 'Übernehmen'],
     ['CHNGPSWD', 'Passwort ändern'],
@@ -167,6 +172,10 @@ export class DictionaryService {
     
     ['NOTALLOWED', 'You are not allowed to view this page or take an action. You are redirected to enter the login page.'],
     
+    ['SAPID', 'SAP ID'],
+    ['HASH', 'Hash'],
+    ['DATE', 'Date'],
+
     ['APPLY', 'Apply'],
     ['CHNGPSWD', 'Change password'],
     ['NEWACC', 'Create account'],
@@ -180,6 +189,7 @@ export class DictionaryService {
 
     ['HELLO', 'Hello, '],
     ['NEWCUS', 'New customer'],
+    ['CUSS', 'Customer'],
     ['LOGOUT', 'Sign out'],
     ['ACC', 'Account'],
     ['LANG', 'Language'],

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
 
 /**
  * The entry point of the application.
@@ -11,7 +9,4 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
-  constructor(private router: Router,){
-  }
-}
+export class AppComponent {}

@@ -219,6 +219,19 @@ async function createCustomerDirect(req, res) {
   }
 }
 
+async function getCustomers(req, res) {
+  try {
+      const email = req.body.decodedAccount.email;
+      const customers = await databaseService.getCustomers(email);
+      res.json(customers)
+  } catch (e) {
+      console.error(e.stack);
+      res.status(500).send({
+          error: e
+      });
+  }
+}
+
 function formatDate(date) {
   let month = '' + (date.getMonth() + 1)
   let day = '' + date.getDate()
@@ -239,5 +252,6 @@ module.exports = {
   OrganizationCreditFactory: OrganizationCreditFactory,
   confirmCustomer,
   createCustomerDirect,
-  createCustomerRequest
+  createCustomerRequest,
+  getCustomers
 }

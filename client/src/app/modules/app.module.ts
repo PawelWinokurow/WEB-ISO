@@ -13,6 +13,7 @@ import { ResetPasswordAdminDialog } from "../dialogs/reset-password-admin/reset-
 import { ResetPasswordUserDialog } from "../dialogs/reset-password-user/reset-password-user.dialog";
 import { SendCustomerConfirmationDialog } from "../dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog";
 import { externalModules, services } from "./modules";
+import { CustomersComponent } from '../components/customers/customers.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { externalModules, services } from "./modules";
     ResetPasswordAdminDialog,
     NewAccountDialog,
     ResetPasswordComponent,
+    CustomersComponent,
   ],
   imports: [
     ...externalModules,

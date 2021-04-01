@@ -71,9 +71,14 @@
         {{ dictionaryService.get('NEWCUS') }}
       </a>
       <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/customers'" (click)="sidenav.close();">
+        <mat-icon>group</mat-icon> &nbsp;
+        {{ dictionaryService.get('CUSS') }}
+      </a>
+      <mat-divider></mat-divider>
       <a *ngIf="authService.account?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
         (click)="sidenav.close();">
-        <mat-icon>supervisor_account</mat-icon> &nbsp;
+        <mat-icon>admin_panel_settings</mat-icon> &nbsp;
         {{ dictionaryService.get('ADMINAREA') }}
       </a>
 

@@ -1,0 +1,54 @@
+<div class="inner-component">
+    <div class="form-vertical-flex">
+        <div class="flex-column" style="padding-left: 15px;">
+            <div class="alternate-theme">
+                <div class="form-title">
+                    <span class="mat-h2">{{dictionaryService.get('CUSS')}}</span>
+                </div>
+                <div class="search-part">
+                    <mat-form-field color="primary" appearance="outline" style="flex: 2;">
+                        <mat-label>{{dictionaryService.get('SEARCH')}}</mat-label>
+                        <input matInput [formControl]="filter">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <button mat-stroked-button (click)="accordion.openAll()" style="height: 60px; top: -5px; flex: 1;">
+                        {{dictionaryService.get('EXPAND')}}
+                        <mat-icon>unfold_more</mat-icon>
+                    </button>
+                    <button mat-stroked-button (click)="accordion.closeAll()" style="height: 60px; top: -5px; flex: 1;">
+                        {{dictionaryService.get('COLLAPSE')}}
+                        <mat-icon>unfold_less</mat-icon>
+                    </button>
+                </div>
+
+                <div class="form-data paddinglr10px rounded-border"
+                    style="width: 800px; background-color: rgb(235, 235, 235);">
+                    <mat-accordion #accordion="matAccordion" multi>
+                        <mat-expansion-panel *ngFor="let customer of filteredCustomers"
+                            style="padding: 5px; margin-top: 10px;" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{dictionaryService.get('SAPID')}}: &nbsp;
+                                    {{customer.sapID}}
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <div class="space" style="text-align: center;"></div>
+                                    {{customer.datetime}}
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <div style="padding-left: 20px;">
+                                <p><span class="body-1">TODO details</span>
+                                </p>
+                            </div>
+                        </mat-expansion-panel>
+
+                    </mat-accordion>
+
+                </div>
+            </div>
+            <div class="space"></div>
+        </div>
+    </div>
+</div>

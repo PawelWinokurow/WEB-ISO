@@ -149,6 +149,25 @@ async function storeCustomer(hash, email, customer) {
 }
 
 /**
+ * Retrieves all customers from the database.
+ * @param  {string} email User email
+ */
+ async function getCustomers(email) {
+  const selectStatement = 'SELECT * FROM customers WHERE email = ?;';
+  const values = [email];
+  let customers = await selectQuery(selectStatement, values);
+  customers = customers.map(val => {
+    return {
+      customer: JSON.parse(val.customer),
+      email: val.email,
+      sapID: val.sapID,
+      datetime: val.datetime
+    }
+  });
+  return customers;
+}
+
+/**
  * Stores account.
  * @param  {object} account Account object 
  */
@@ -305,6 +324,7 @@ module.exports = {
   isAccountNotExists,
   storeCustomer,
   getCustomer,
+  getCustomers,
   setCustomerSAPID,
   storePasswordReset,
   createTables,

@@ -74,9 +74,12 @@ class Server {
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, authService.refreshToken);
 
     /**
-     * Enpoint to get new customers from application.
+     * Endpoint for customer operations.
+     * get: get all customer created by user
+     * post: send customer direct to sap
      */
     this.expressApp.route("/customers")
+      .get(middlewareService.checkIfAuthenticated, middlewareService.checkEmail, middlewareService.checkIfAccountAvailable, customerService.getCustomers)
       .post(middlewareService.checkIfAuthenticated, middlewareService.checkIfAccountAvailable, customerService.createCustomerDirect);
 
     /**
@@ -119,19 +122,19 @@ class Server {
 
     /**
      * Endpoint for account operations.
+     * get: get all accounts
      * post: create account
      * put: update account
      * patch: block account
      * delete: delete account
      */
     this.expressApp.route('/accounts')
+      .get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts)
       .post(accountService.createAccount)
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockAccount)
       .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
 
-    this.expressApp.route('/accounts')
-      .get(middlewareService.checkIfAuthenticated, middlewareService.checkIfFromAdmin, middlewareService.checkIfAccountAvailable, accountService.getAccounts);
   }
 
   start() {
@@ -197,6 +200,11 @@ async function storeTestData() {
       await databaseService.storeAccount(accountToStore)
     }
     await databaseService.storePasswordReset(reset.hash, reset.email)
+    
+    await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", "customer_object")
+    await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
+    await databaseService.storeCustomer("hash_customer2", "user@user.de", "customer_object2")
+    await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
   } catch (e) {
     console.error(e.stack);
   }

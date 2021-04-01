@@ -32,8 +32,8 @@
                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    <span>{{dictionaryService.get('USRNAME')}}:</span> &nbsp;
-                                    <span>{{account.username}}</span>
+                                    {{dictionaryService.get('USRNAME')}}: &nbsp;
+                                    {{account.username}}
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
