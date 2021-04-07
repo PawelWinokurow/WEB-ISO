@@ -42,9 +42,8 @@ export class CustomersComponent implements OnInit {
         } else {
           customer.datetime = moment(customer.datetime).format('DD/MM/YYYY, hh:mm')
         }
-
-        
       });
+      console.log(this.customers)
       this.sortByTimestamp(this.customers);
       this.filteredCustomers = [...this.customers];
     } catch (e) {

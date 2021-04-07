@@ -56,8 +56,6 @@ class OrganizationDebitFactory extends CustomerFactory {
   getJSONArgs() {
     let dateToday = formatDate(new Date());
 
-    //console.log(this.customerData.data)
-
     //General information
     //Interface number
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].CMDS_EI_COMPANY[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
@@ -154,13 +152,14 @@ function composeCustomer(customerData) {
   return customerFactory.build();
 }
 
-async function confirmCustomer(req, res) {
+async function confirmCustomerRequest(req, res) {
   try {
     const hash = req.query.hash;
-    console.log(hash)
     const result = await databaseService.getCustomer(hash);
     if (result) {
-      const sapID = await soapService.sendCustomer(result.customer);
+      const sapCustomer = await composeCustomer(result.customer);
+      const envelope = sapCustomer.getJSONArgs();
+      const sapID = await soapService.sendCustomer(envelope);
       await databaseService.setCustomerSAPID(sapID, result.hash)
       emailService.sendCustomerAcknowledgement(result.email, sapID);
       res.send('<p>Success! The customer was confirmed.</p>');
@@ -171,23 +170,12 @@ async function confirmCustomer(req, res) {
   }
 }
 
-async function storeCustomer(email, customer) {
-  try {
-    let sapCustomer = await composeCustomer(customer);
-    let envelope = sapCustomer.getJSONArgs();
-    const hash = cryptoService.generateHash();
-    await databaseService.storeCustomer(hash, email, envelope);
-    return { hash, envelope };
-  } catch (e) {
-    throw e;
-  }
-}
-
 async function createCustomerRequest(req, res) {
   try {
     const customer = req.body.customer;
     const email = req.body.decodedAccount.email;
-    const { hash, _ } = await storeCustomer(email, customer);
+    const hash = cryptoService.generateHash();
+    await databaseService.storeCustomer(hash, email, customer);
     emailService.sendCustomerConfirmation(email, hash);
     res.json({
       message: 'CUSCONFISSND',
@@ -204,7 +192,10 @@ async function createCustomerDirect(req, res) {
   try {
     const customer = req.body.customer;
     const email = req.body.decodedAccount.email;
-    const { hash, envelope } = await storeCustomer(email, customer);
+    const hash = cryptoService.generateHash();
+    await databaseService.storeCustomer(hash, email, customer);
+    const sapCustomer = await composeCustomer(customer);
+    const envelope = sapCustomer.getJSONArgs();
     const sapID = await soapService.sendCustomer(envelope);
     await databaseService.setCustomerSAPID(sapID, hash)
     emailService.sendCustomerAcknowledgement(email, sapID);
@@ -221,14 +212,14 @@ async function createCustomerDirect(req, res) {
 
 async function getCustomers(req, res) {
   try {
-      const email = req.body.decodedAccount.email;
-      const customers = await databaseService.getCustomers(email);
-      res.json(customers)
+    const email = req.body.decodedAccount.email;
+    const customers = await databaseService.getCustomers(email);
+    res.json(customers)
   } catch (e) {
-      console.error(e.stack);
-      res.status(500).send({
-          error: e
-      });
+    console.error(e.stack);
+    res.status(500).send({
+      error: e
+    });
   }
 }
 
@@ -250,7 +241,8 @@ module.exports = {
   PersonCreditFactory: PersonCreditFactory,
   OrganizationDebitFactory: OrganizationDebitFactory,
   OrganizationCreditFactory: OrganizationCreditFactory,
-  confirmCustomer,
+  confirmCustomerRequest,
+  composeCustomer,
   createCustomerDirect,
   createCustomerRequest,
   getCustomers

@@ -37,11 +37,89 @@
                                     {{customer.datetime}}
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-
                             <div style="padding-left: 20px;">
-                                <p><span class="body-1">TODO details</span>
-                                </p>
-                            </div>
+                            <table *ngIf="customer.customer.customerType === 'organization'">
+                                <tr>
+                                    <td>{{dictionaryService.get('CUSTYPE')}}:
+                                    </td>
+                                    <td>
+                                        {{dictionaryService.get('ORG')}} -
+                                        {{dictionaryService.get('DEB')}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('SAL')}}:
+                                    </td>
+                                    <td>
+                                        {{listService.getDetailsForCode(listService.salutationsOrganization,
+                                        customer.customer.data.salutation)}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('COMPERS')}}:
+                                    </td>
+                                    <td>
+                                        {{customer.customer.data.orgaPersons}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('LEGFRM')}}:
+                                    </td>
+                                    <td>
+                                        {{listService.getDetailsForCode(listService.legalFormsOrganization,
+                                        customer.customer.data.legalForm)}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <table *ngIf="customer.customer.customerType === 'person'">
+                                <tr>
+                                    <td>{{dictionaryService.get('CUSTYPE')}}:
+                                    </td>
+                                    <td>
+                                        {{dictionaryService.get('ORG')}} -
+                                        {{dictionaryService.get('DEB')}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('SAL')}}:
+                                    </td>
+                                    <td>
+                                        {{listService.getDetailsForCode(listService.salutationsOrganization,
+                                        customer.customer.data.salutation)}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="customer.customer.data.title !== ''">
+                                    <td>{{dictionaryService.get('TITLE')}}:
+                                    </td>
+                                    <td>
+                                        {{listService.getDetailsForCode(listService.titles,
+                                        customer.customer.data.title)}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('FNAME')}}:
+                                    </td>
+                                    <td>
+                                        {{customer.customer.data.firstName}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('SNAME')}}:
+                                    </td>
+                                    <td>
+                                        {{customer.customer.data.secondName}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{dictionaryService.get('LEGFRM')}}:
+                                    </td>
+                                    <td>
+                                        {{listService.getDetailsForCode(listService.legalFormsPerson,
+                                        customer.customer.data.legalForm)}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         </mat-expansion-panel>
 
                     </mat-accordion>

@@ -67,12 +67,12 @@
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
+                                            <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
                                             <mat-error
                                                 *ngFor="let errorType of generalInformation.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('LNAME', errorType.key)}}
+                                                {{errorMessageService.getError('FNAME', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -800,12 +800,12 @@
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
+                                            <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
                                             <input matInput formControlName="firstName" required>
                                             <mat-error
                                                 *ngFor="let errorType of applicant.get('firstName').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('LNAME', errorType.key)}}
+                                                {{errorMessageService.getError('FNAME', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -882,12 +882,12 @@
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
+                                            <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
                                             <input matInput formControlName="firstName1" required>
                                             <mat-error
                                                 *ngFor="let errorType of applicant.get('firstName1').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('LNAME', errorType.key)}}
+                                                {{errorMessageService.getError('FNAME', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -984,12 +984,12 @@
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('LNAME')}}</mat-label>
+                                            <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
                                             <input matInput formControlName="firstName2" required>
                                             <mat-error
                                                 *ngFor="let errorType of applicant.get('firstName2').errors | keyvalue;">
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('LNAME', errorType.key)}}
+                                                {{errorMessageService.getError('FNAME', errorType.key)}}
                                             </mat-error>
                                         </mat-form-field>
                                     </div>

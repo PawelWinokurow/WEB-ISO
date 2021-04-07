@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode, LegalForm, Title, Salutation } from '../interfaces/lists';
+import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode, LegalForm, Title, Salutation, CodeDetails } from '../interfaces/lists';
 
 /**
  * Contains the data for the drop-down lists
@@ -977,6 +977,10 @@ countries: Country[] = [
 
 ];
 
+
+getDetailsForCode(list: [CodeDetails], code){
+  return list.find(element => element.code === code).details
+}
 
 
 constructor() { }

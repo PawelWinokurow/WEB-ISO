@@ -138,7 +138,7 @@ export class DictionaryService {
     ['SAL', 'Anrede'],
     ['COMPERS', 'Firma / Personen'],
 
-    ['LNAME', 'Vorname'],
+    ['FNAME', 'Vorname'],
     ['SNAME', 'Nachname'],
     
     ['ENTEMAIL', 'Bitte geben Sie Ihre E-Mail-Adresse ein.'],
@@ -275,7 +275,7 @@ export class DictionaryService {
     ['TITLE', 'Title'],
     ['SAL', 'Salutation'],
     ['COMPERS', 'Company / Persons'],
-    ['LNAME', 'Name'],
+    ['FNAME', 'Name'],
     ['SNAME', 'Surname'],
     
     ['ENTEMAIL', 'Please enter your email address.'],

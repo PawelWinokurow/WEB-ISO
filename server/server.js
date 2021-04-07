@@ -17,6 +17,7 @@ const authService = require('./services/auth_service');
 const accountService = require('./services/account_service');
 const recaptchaService = require('./services/recaptcha_service');
 const soapService = require('./services/soap_service');
+const testService = require('./services/test_service');
 
 /**
  * Class to to manage the server. It contains node js express application.
@@ -35,7 +36,7 @@ class Server {
     this.expressApp.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     await databaseService.connect();
     await databaseService.createTables();
-    storeTestData();
+    await testService.storeTestData();
     try {
       await fetch(process.env.PROXY);
       process.env.HTTP_PROXY = process.env.PROXY;
@@ -92,7 +93,7 @@ class Server {
      * Endpoint to get email confirmations.
      */
     this.expressApp.route("/customers/confirm")
-      .get(customerService.confirmCustomer);
+      .get(customerService.confirmCustomerRequest);
 
     /**
      * Endpoint to get recaptcha token from the client.
@@ -134,7 +135,6 @@ class Server {
       .put(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.updateAccount)
       .patch(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.blockAccount)
       .delete(middlewareService.checkIfAuthenticated, middlewareService.checkIfUpdatesItself, middlewareService.checkIfAccountAvailable, accountService.deleteAccount);
-
   }
 
   start() {
@@ -149,64 +149,3 @@ new Server().start()
 setTimeout(function () {
   //soapService.test()
 }, 1000);
-
-async function storeTestData() {
-  await databaseService.connect()
-  await databaseService.dropTables();
-  await databaseService.createTables();
-
-  let accounts = [
-    {
-      username: 'admin',
-      email: 'pawelwinokurow@gmail.com',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('admin'),
-      blocked: false,
-      role: 'ADMIN',
-    },
-    {
-      username: 'user',
-      email: 'user@user.de',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('user'),
-      blocked: false,
-      role: 'USER',
-    },
-    {
-      username: 'user2',
-      email: 'user2@user2.de',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('user2'),
-      blocked: false,
-      role: 'USER',
-    },
-    {
-      username: 'user3',
-      email: 'user3@user3.de',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('user3'),
-      blocked: false,
-      role: 'USER',
-    },
-  ];
-
-  let reset = {
-    hash: '100',
-    email: 'user@user.de'
-  }
-
-  try {
-    for (const accountToStore of accounts) {
-      await databaseService.storeAccount(accountToStore)
-    }
-    await databaseService.storePasswordReset(reset.hash, reset.email)
-    
-    await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", "customer_object")
-    await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
-    await databaseService.storeCustomer("hash_customer2", "user@user.de", "customer_object2")
-    await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
-  } catch (e) {
-    console.error(e.stack);
-  }
-
-}
