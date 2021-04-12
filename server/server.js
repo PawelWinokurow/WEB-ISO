@@ -45,10 +45,6 @@ async function startServer(app) {
     process.env.HTTPS_PROXY = process.env.PROXY;
     // We need HttpsProxyAgent to use proxy for re-captcha
     recaptchaController.setProxyAgent(new httpsProxyAgent(process.env.EMAIL_PROXY));
-    // Start Server
-    app.listen(process.env.PORT, () => {
-      console.log(`WEB-ISO server is running at ${process.env.HOST}`)
-    })
   } catch (e) {
     if (e.code === 'ENOTFOUND') {
       console.log('Not in proxy');
@@ -56,6 +52,10 @@ async function startServer(app) {
       console.error(e.stack);
     }
   } finally {
+    // Start Server
+    app.listen(process.env.PORT, () => {
+      console.log(`WEB-ISO server is running at ${process.env.HOST}`)
+    })
     /**
      * Runs each day at 00.00 and removes old not confirmed customers.
      */

@@ -36,10 +36,10 @@ export class SettingsComponent implements OnInit {
       username: new FormControl({ value: this.authService.account.username, disabled: true }),
       email: new FormControl({ value: this.authService.account.email, disabled: true }),
       companyCode: ['', [Validators.required]],
-      firstName: [''],
-      secondName: [''],
-      phone: [''],
-      mobile: [''],
+      firstName: [this.authService.account.firstName],
+      secondName: [this.authService.account.secondName],
+      phone: [this.authService.account.phone],
+      mobile: [this.authService.account.mobile],
     });
 
     this.passwordForm = this.formBuilder.group({
@@ -53,18 +53,22 @@ export class SettingsComponent implements OnInit {
     //If account form valid
     if (this.accountForm.valid) {
       var accountToChange = this.authService.account;
+      accountToChange.companyCode = this.accountForm.controls['companyCode'].value;
+      accountToChange.firstName = this.accountForm.controls['firstName'].value;
+      accountToChange.secondName = this.accountForm.controls['secondName'].value;
+      accountToChange.phone = this.accountForm.controls['phone'].value;
+      accountToChange.mobile = this.accountForm.controls['mobile'].value;
+
       //If password doesn't update account without password
       if (this.passwordForm.controls['passwordOld'].value +
         this.passwordForm.controls['password'].value +
         this.passwordForm.controls['confirmPassword'].value === '') {
-        accountToChange.companyCode = this.accountForm.controls['companyCode'].value;
         this.updateAccount(accountToChange)
       }
       //If password is changing and password form is valid update with password
       else if (this.passwordForm.valid) {
         accountToChange.password = this.passwordForm.controls['password'].value;
         accountToChange.passwordOld = this.passwordForm.controls['passwordOld'].value;
-        accountToChange.companyCode = this.accountForm.controls['companyCode'].value;
         this.updateAccount(accountToChange)
       } else {
         //Trigger password form validation

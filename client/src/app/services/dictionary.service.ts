@@ -111,9 +111,9 @@ export class DictionaryService {
     ['ZIP', 'PLZ'],
     ['CITY', 'Ort'],
     ['COU', 'Land'],
-    ['TEL', 'Telefon'],
+    ['TEL', 'Telefonnummer'],
     ['FAX', 'Telefax'],
-    ['MOB', 'Mobiltelefon'],
+    ['MOB', 'Mobiltelefonnummer'],
     ['EMAIL', 'E-Mail-Adresse'],
 
     ['TAX', 'Steuernummer'],

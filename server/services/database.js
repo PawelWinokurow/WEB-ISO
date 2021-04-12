@@ -176,8 +176,8 @@ async function storeCustomer(hash, email, customer) {
  * @param  {object} account Account object 
  */
 async function storeAccount(account) {
-  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked) VALUES (?);';
-  const values = [[account.email, account.username, account.password, account.companyCode, account.role, false]];
+  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked, firstname, secondname, phone, mobile) VALUES (?);';
+  const values = [[account.email, account.username, account.password, account.companyCode, account.role, false, account.firstName, account.secondName, account.phone, account.mobile]];
   await cudQuery(insertStatement, values);
 }
 
@@ -197,12 +197,12 @@ async function storePasswordReset(hash, email) {
  * @param  {object} account Account object 
  */
 async function updateAccount(account) {
-  let updateStatement = `UPDATE accounts SET companycode = ?, blocked = ? WHERE email = ?;`;
-  let values = [account.companyCode, account.blocked, account.email];
+  let updateStatement = `UPDATE accounts SET companycode = ?, blocked = ?, firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.blocked, account.firstName, account.secondName, account.phone, account.mobile, account.email];
   //If we change password
   if (account.password) {
-    updateStatement = `UPDATE accounts SET password = ?, companycode = ?, blocked = ? WHERE email = ?;`;
-    values = [account.password, account.companyCode, account.blocked, account.email];
+    updateStatement = `UPDATE accounts SET password = ?, companycode = ?, blocked = ?, firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
+    values = [account.password, account.companyCode, account.blocked, account.firstName,  account.secondName, account.phone, account.mobile, account.email];
   }
   await cudQuery(updateStatement, values);
 }
@@ -233,6 +233,55 @@ async function isAccountNotExists(account) {
   } else {
     return true;
   }
+}
+
+/**
+ * Retrieves account from the database.
+ * @param  {object} account Account object 
+ */
+ async function getAccount(account) {
+  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
+  const values = [account.email, account.username];
+  let result = (await selectQuery(selectStatement, values))[0];
+  if (result) {
+    return {
+      username: result.username,
+      email: result.email,
+      companyCode: result.companycode,
+      firstName: result.firstname || '',
+      secondName: result.secondname || '',
+      phone: result.phone || '',
+      mobile: result.mobile || '',
+      role: result.role,
+      blocked: result.blocked,
+      password: result.password
+    };
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Retrieves all accounts from the database.
+ */
+async function getAccounts() {
+  const selectStatement = 'SELECT * FROM accounts;';
+  const values = [];
+  let accounts = await selectQuery(selectStatement, values);
+  accounts = accounts.map(val => {
+    return {
+      username: val.username,
+      email: val.email,
+      companyCode: val.companycode,
+      firstName: val.firstname || '',
+      secondName: val.secondname || '',
+      phone: val.phone || '',
+      mobile: val.mobile || '',
+      role: val.role,
+      blocked: val.blocked
+    }
+  });
+  return accounts;
 }
 
 /**
@@ -273,47 +322,6 @@ async function removeOldCustomers() {
   const values = [process.env.DB_STORAGE_DURATION];
   //Remove all customers, which are older than process.env.DB_STORAGE_DURATION
   await cudQuery(deleteStatement, values);
-}
-
-/**
- * Retrieves account from the database.
- * @param  {object} account Account object 
- */
-async function getAccount(account) {
-  const selectStatement = 'SELECT * FROM accounts WHERE email = ? OR username = ?';
-  const values = [account.email, account.username];
-  let result = (await selectQuery(selectStatement, values))[0];
-  if (result) {
-    return {
-      username: result.username,
-      email: result.email,
-      companyCode: result.companycode,
-      role: result.role,
-      blocked: result.blocked,
-      password: result.password
-    };
-  } else {
-    return false;
-  }
-}
-
-/**
- * Retrieves all accounts from the database.
- */
-async function getAccounts() {
-  const selectStatement = 'SELECT * FROM accounts;';
-  const values = [];
-  let accounts = await selectQuery(selectStatement, values);
-  accounts = accounts.map(val => {
-    return {
-      username: val.username,
-      email: val.email,
-      companyCode: val.companycode,
-      role: val.role,
-      blocked: val.blocked
-    }
-  });
-  return accounts;
 }
 
 module.exports = {
