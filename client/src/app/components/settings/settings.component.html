@@ -18,7 +18,6 @@
                     </div>
                 </div>
                 <div class="settings-window">
-
                     <div class="form-data" *ngIf="setting == 1">
                         <form [formGroup]="accountForm" class="alternate-theme">
                             <div class="paddinglr10px">
@@ -54,6 +53,30 @@
                                         <mat-icon style="margin-right: 5px;">error</mat-icon>
                                         {{errorMessageService.getError('COMCODE', errorType.key)}}
                                     </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="paddinglr10px">
+                                <mat-form-field color="primary" appearance="outline" disabled>
+                                    <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
+                                    <input matInput formControlName="firstName">
+                                </mat-form-field>
+                            </div>
+                            <div class="paddinglr10px">
+                                <mat-form-field color="primary" appearance="outline" disabled>
+                                    <mat-label>{{dictionaryService.get('SNAME')}}</mat-label>
+                                    <input matInput formControlName="secondName">
+                                </mat-form-field>
+                            </div>
+                            <div class="paddinglr10px">
+                                <mat-form-field color="primary" appearance="outline" disabled>
+                                    <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                                    <input matInput formControlName="phone">
+                                </mat-form-field>
+                            </div>
+                            <div class="paddinglr10px">
+                                <mat-form-field color="primary" appearance="outline" disabled>
+                                    <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                                    <input matInput formControlName="mobile">
                                 </mat-form-field>
                             </div>
                         </form>

@@ -35,7 +35,11 @@ export class SettingsComponent implements OnInit {
     this.accountForm = this.formBuilder.group({
       username: new FormControl({ value: this.authService.account.username, disabled: true }),
       email: new FormControl({ value: this.authService.account.email, disabled: true }),
-      companyCode: ['', [Validators.required]]
+      companyCode: ['', [Validators.required]],
+      firstName: [''],
+      secondName: [''],
+      phone: [''],
+      mobile: [''],
     });
 
     this.passwordForm = this.formBuilder.group({

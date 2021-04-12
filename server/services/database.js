@@ -15,6 +15,10 @@ const ACCOUNTS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts (
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
   companycode VARCHAR(255) NOT NULL,
+  firstname VARCHAR(255),
+  secondname VARCHAR(255),
+  phone VARCHAR(255),
+  mobile VARCHAR(255),
   role VARCHAR(255) NOT NULL,
   blocked BOOLEAN NOT NULL,
   PRIMARY KEY (email));`;
