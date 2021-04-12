@@ -23,7 +23,6 @@ body {
 }
 
 .inner-component {
-  padding: 10px 0 0 0;
   position: relative;
   height: calc(100vh - 64px);  
   background-color: rgb(240, 240, 240);
@@ -106,7 +105,7 @@ mat-button-toggle {
 }
 
 .vertical-flex{
-  height: calc(100vh - 212px);
+  height: calc(100vh - 202px);
   display: flex;
   overflow: auto;
 }
@@ -140,7 +139,7 @@ mat-button-toggle {
 
 .form-title {
  width: 400px;
- padding: 10px;
+ padding: 20px 10px 10px 10px;
 }
 
 .form-controls {

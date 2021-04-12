@@ -167,8 +167,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
       industryFieldCode: new FormControl({ value: "", disabled: true }, [Validators.required]),
       industryField: ['', Validators.required],
       iban: [''],
-      bic: [''],
-      bank: [''],
       paymentTerm: ['', Validators.required],
       notes: [''],
       sepa: [false],
@@ -223,7 +221,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.initOrganizationForms();
     this.applicant = this.formBuilder.group({
       salutation: ['', Validators.required],
-      title: [''],
       firstName: ['', Validators.required],
       secondName: ['', Validators.required],
       birthDate: [''],
@@ -232,7 +229,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
       email: ['', Validators.email],
 
       salutation1: ['', Validators.required],
-      title1: [''],
       firstName1: ['', Validators.required],
       secondName1: ['', Validators.required],
       birthDate1: ['', Validators.required],
@@ -241,7 +237,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
       email1: ['', Validators.email],
 
       salutation2: ['', Validators.required],
-      title2: [''],
       firstName2: ['', Validators.required],
       secondName2: ['', Validators.required],
       birthDate2: ['', Validators.required],
@@ -291,19 +286,17 @@ export class NewISOComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Sets IBAN and BIC required validator.
+   * Sets IBAN required validator.
    */
-  setIbanBicRequired() {
+  setIbanRequired() {
     this.payment.get('iban').setValidators([Validators.required]);
-    this.payment.get('bic').setValidators([Validators.required]);
   }
 
   /**
-   * Unsets IBAN and BIC required validator.
+   * Unsets IBAN required validator.
    */
-  unsetIbanBicRequired() {
+  unsetIbanRequired() {
     this.payment.get('iban').setValidators([]);
-    this.payment.get('bic').setValidators([]);
   }
 
   /**

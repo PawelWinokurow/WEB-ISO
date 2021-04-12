@@ -208,7 +208,7 @@
                                     </div>
                                 </div>
 
-                                
+
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -351,11 +351,11 @@
                                                 {{dictionaryService.get('HSEPA')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
-                                                    <mat-radio-button [value]="true" (click)="setIbanBicRequired()">
+                                                    <mat-radio-button [value]="true" (click)="setIbanRequired()">
                                                         {{dictionaryService.get('YES')}}
                                                     </mat-radio-button>
                                                     <mat-radio-button [value]="false" [checked]="true"
-                                                        (click)="unsetIbanBicRequired()" style="margin-left:40px">
+                                                        (click)="unsetIbanRequired()" style="margin-left:40px">
                                                         {{dictionaryService.get('NO')}}</mat-radio-button>
                                                 </mat-radio-group>
                                             </div>
@@ -366,7 +366,6 @@
 
                                 <div style="display: flex;">
                                     <div class="paddinglr10px" style="width: 50%;">
-
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('IBA')}}</mat-label>
                                             <input matInput formControlName="iban"
@@ -377,40 +376,7 @@
                                                 {{errorMessageService.getError('IBA', 'required')}}
                                             </mat-error>
                                         </mat-form-field>
-
                                     </div>
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BIC')}}</mat-label>
-                                            <input matInput formControlName="bic"
-                                                [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
-                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('BIC', 'required')}}
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-                                <div style="display: flex;">
-
-                                    <div *ngIf="storageService.debitCreditType !== 'debit'" class="paddinglr10px"
-                                        style="width: 100%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BANK')}}</mat-label>
-                                            <input matInput formControlName="bank">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
-                                        style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BANK')}}</mat-label>
-                                            <input matInput formControlName="bank">
-                                        </mat-form-field>
-                                    </div>
-
                                     <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
                                         style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
@@ -443,7 +409,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
                                             <textarea matInput formControlName="notes" cdkTextareaAutosize
-                                                cdkAutosizeMinRows="3" cdkAutosizeMaxRows="3"></textarea>
+                                                maxlength="72" cdkAutosizeMinRows="4" cdkAutosizeMaxRows="4"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -785,16 +751,6 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('TITLE')}}</mat-label>
-                                            <mat-select formControlName="title">
-                                                <mat-option *ngFor="let title of titles" [value]="title">
-                                                    {{title.details}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
                                 </div>
 
                                 <div style="display: flex;">
@@ -836,7 +792,7 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                                <div style="width: calc(50% - 20px);">
+                                <div style="width: 50%">
                                     <mat-form-field class="paddinglr10px" color="accent" appearance="outline">
                                         <mat-label>{{dictionaryService.get('EMAIL')}}</mat-label>
                                         <input matInput formControlName="email">
@@ -865,16 +821,6 @@
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('TITLE')}}</mat-label>
-                                            <mat-select formControlName="title1">
-                                                <mat-option *ngFor="let title of titles" [value]="title">
-                                                    {{title.details}}
-                                                </mat-option>
-                                            </mat-select>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -967,16 +913,6 @@
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('SAL', errorType.key)}}
                                             </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('TITLE')}}</mat-label>
-                                            <mat-select formControlName="title2">
-                                                <mat-option *ngFor="let title of titles" [value]="title">
-                                                    {{title.details}}
-                                                </mat-option>
-                                            </mat-select>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -1140,11 +1076,11 @@
                                                 {{dictionaryService.get('HSEPA')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
-                                                    <mat-radio-button [value]="true" (click)="setIbanBicRequired()">
+                                                    <mat-radio-button [value]="true" (click)="setIbanRequired()">
                                                         {{dictionaryService.get('YES')}}
                                                     </mat-radio-button>
                                                     <mat-radio-button [value]="false" [checked]="true"
-                                                        (click)="unsetIbanBicRequired()" style="margin-left:40px">
+                                                        (click)="unsetIbanRequired()" style="margin-left:40px">
                                                         {{dictionaryService.get('NO')}}</mat-radio-button>
                                                 </mat-radio-group>
                                             </div>
@@ -1163,35 +1099,6 @@
                                                 <mat-icon style="margin-right: 5px;">error</mat-icon>
                                                 {{errorMessageService.getError('IBA', 'required')}}
                                             </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="paddinglr10px" style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BIC')}}</mat-label>
-                                            <input matInput formControlName="bic"
-                                                [required]="payment.get('sepa').value === true">
-                                            <mat-error
-                                                *ngIf="payment.get('sepa').value === true && payment.get('bic').invalid">
-                                                <mat-icon style="margin-right: 5px;">error</mat-icon>
-                                                {{errorMessageService.getError('BIC', 'required')}}
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-                                <div style="display: flex;">
-                                    <div *ngIf="storageService.debitCreditType === 'credit'" class="paddinglr10px"
-                                        style="width: 100%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BANK')}}</mat-label>
-                                            <input matInput formControlName="bank">
-                                        </mat-form-field>
-                                    </div>
-                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
-                                        style="width: 50%;">
-                                        <mat-form-field color="accent" appearance="outline">
-                                            <mat-label>{{dictionaryService.get('BANK')}}</mat-label>
-                                            <input matInput formControlName="bank">
                                         </mat-form-field>
                                     </div>
                                     <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
@@ -1225,8 +1132,8 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
-                                                cdkAutosizeMaxRows="3" formControlName="notes"></textarea>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" maxlength="72"
+                                                cdkAutosizeMaxRows="4" formControlName="notes"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>
