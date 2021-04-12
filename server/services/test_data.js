@@ -1,6 +1,5 @@
 const cryptoService = require('./crypto');
 const databaseService = require('./database');
-const customerService = require('./customer');
 
 
 async function storeTestData() {
@@ -118,7 +117,6 @@ async function storeTestData() {
       await databaseService.storeAccount(accountToStore)
     }
     await databaseService.storePasswordReset(reset.hash, reset.email)
-
     await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", customer)
     await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
     await databaseService.storeCustomer("hash_customer2", "user@user.de", "customer_object2")
@@ -126,7 +124,6 @@ async function storeTestData() {
   } catch (e) {
     console.error(e.stack);
   }
-
 }
 
 module.exports = {

@@ -3,7 +3,6 @@ import { services, externalModules } from '../modules/modules';
 import { AuthService } from './auth.service';
 import { AccountJWT, Account } from 'src/app/interfaces/account';
 
-
 describe('AuthService', () => {
   let authService: AuthService;
   const account: AccountJWT = {
@@ -23,7 +22,7 @@ describe('AuthService', () => {
         ...services
       ],
       imports: [
-        ...externalModules
+        ...externalModules,
       ]
     })
     .compileComponents(); 
