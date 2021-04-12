@@ -1,4 +1,5 @@
 const express = require('express');
+const rateLimit = require("express-rate-limit");
 const schedule = require('node-schedule');
 const cors = require('cors');
 const logger = require('morgan');
@@ -6,10 +7,15 @@ const fetch = require('node-fetch');
 const httpsProxyAgent = require('https-proxy-agent');
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json');
-const config = require('dotenv').config();
+const config = require('dotenv').config({ path: './config.env' })
 const databaseService = require('./services/database');
 const recaptchaController = require('./controllers/recaptcha');
 const testDataService = require('./services/test_data');
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5
+});
 
 const app = express();
 
@@ -17,9 +23,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use(require('./routes/account'));
-app.use(require('./routes/auth'));
-app.use(require('./routes/customer'));
+app.use('/api', require('./routes/account'));
+app.use('/api', require('./routes/auth'));
+app.use('/api', require('./routes/customer'));
+app.use("/api/", apiLimiter);
 
 
 startServer(app);

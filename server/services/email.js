@@ -19,13 +19,13 @@ function sendEmail(message) {
         emailOptions.proxy = process.env.EMAIL_PROXY;
     }
     let transporter = nodemailer.createTransport(emailOptions);
-    /*transporter.sendMail(message, function (error, info) {
+    transporter.sendMail(message, function (error, info) {
         if (error) {
             console.error(error);
         } else {
             console.log('Email sent: ' + info.response);
         }
-    });*/
+    });
 }
 
 function sendNewAccount(account) {
