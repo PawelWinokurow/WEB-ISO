@@ -1,8 +1,9 @@
-const cryptoService = require('./crypto_service');
-const databaseService = require('./database_service');
-const emailService = require('./email_service');
-const authService = require('./auth_service');
-const validationService = require('./validation_service');
+const cryptoService = require('../services/crypto');
+const databaseService = require('../services/database');
+const emailService = require('../services/email');
+const authController = require('./auth');
+const validationService = require('../services/validation');
+const errorHandler = require('../middlewares/error');
 
 async function createAccount(req, res) {
     try {
@@ -33,10 +34,7 @@ async function createAccount(req, res) {
             });
         }
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -70,10 +68,7 @@ async function updateAccount(req, res) {
             });
         }
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -88,10 +83,7 @@ async function deleteAccount(req, res) {
             message: 'USRISDEL'
         })
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -100,10 +92,7 @@ async function getAccounts(req, res) {
         const accounts = await databaseService.getAccounts();
         res.json(accounts)
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -117,10 +106,7 @@ async function requestPasswordReset(req, res) {
             message: 'PSWDWILLRES',
         });
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -131,7 +117,7 @@ async function validatePasswordResetHash(req, res) {
     }
 }
 
-async function resetPassword(req, res) {
+async function resetPasswordFromEmail(req, res) {
     try {
         const hash = req.body.account.hash;
         const password = req.body.account.password;
@@ -141,15 +127,12 @@ async function resetPassword(req, res) {
         await databaseService.updateAccount(dbAccount);
         delete dbAccount.password;
         delete dbAccount.blocked;
-        let JWT = authService.createJWT(dbAccount);
+        let JWT = authController.createJWT(dbAccount);
         JWT.message = 'PSWDISRES';
         //Send JWT back
         res.status(200).json(JWT);
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -165,10 +148,7 @@ async function blockAccount(req, res) {
             account: validatedAccount
         })
     } catch (e) {
-        console.error(e.stack);
-        res.status(500).send({
-            error: e
-        });
+        errorHandler.unknownErrorResponse(e, 500);
     }
 }
 
@@ -176,9 +156,9 @@ module.exports = {
     createAccount,
     updateAccount,
     deleteAccount,
-    resetPassword,
-    getAccounts,
+    blockAccount,
+    resetPasswordFromEmail,
     validatePasswordResetHash,
     requestPasswordReset,
-    blockAccount,
+    getAccounts,
 };

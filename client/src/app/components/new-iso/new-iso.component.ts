@@ -11,10 +11,8 @@ import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
 import { SendCustomerConfirmationDialog } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
-import { DateService } from 'src/app/services/date.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
-import { Router } from '@angular/router';
 
 
 /**

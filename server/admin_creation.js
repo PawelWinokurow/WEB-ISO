@@ -1,5 +1,5 @@
-const databaseService = require('./services/database_service');
-const cryptoService = require('./services/crypto_service');
+const databaseService = require('./services/database');
+const cryptoService = require('./services/crypto');
 
 require('dotenv').config();
 

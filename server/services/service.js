@@ -1,7 +1,5 @@
-const cryptoService = require('./crypto_service');
-const databaseService = require('./database_service');
-const customerService = require('./customer_service');
-
+const cryptoService = require('./crypto');
+const databaseService = require('./database');
 
 async function storeTestData() {
   await databaseService.connect()

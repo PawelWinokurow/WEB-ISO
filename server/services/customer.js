@@ -2,13 +2,9 @@ const xml2js = require('xml2js');
 const fs = require('fs');
 const path = require('path');
 
-const soapService = require('./soap_service');
-const databaseService = require('./database_service');
-const cryptoService = require('./crypto_service');
-const emailService = require('./email_service');
+const formatDateService = require('./date_format');
 
-const ENVELOPE_URL = path.join(__dirname, '..', "wsdl", process.env.ENVELOPE_FILENAME);
-
+const ENVELOPE_URL = path.join(process.cwd(), "wsdl", process.env.ENVELOPE_FILENAME);
 
 class CustomerFactory {
   constructor(customerData, ENVELOPE_URL) {
@@ -54,7 +50,7 @@ class OrganizationDebitFactory extends CustomerFactory {
   }
 
   getJSONArgs() {
-    let dateToday = formatDate(new Date());
+    let dateToday = formatDateService.formatDate(new Date());
 
     //General information
     //Interface number
@@ -152,98 +148,11 @@ function composeCustomer(customerData) {
   return customerFactory.build();
 }
 
-async function confirmCustomerRequest(req, res) {
-  try {
-    const hash = req.query.hash;
-    const result = await databaseService.getCustomer(hash);
-    if (result) {
-      const sapCustomer = await composeCustomer(result.customer);
-      const envelope = sapCustomer.getJSONArgs();
-      const sapID = await soapService.sendCustomer(envelope);
-      await databaseService.setCustomerSAPID(sapID, result.hash)
-      emailService.sendCustomerAcknowledgement(result.email, sapID);
-      res.send('<p>Success! The customer was confirmed.</p>');
-    }
-  } catch (e) {
-    console.error(e.stack);
-    res.send('<p>Error! The customer was not confirmed.</p>');
-  }
-}
-
-async function createCustomerRequest(req, res) {
-  try {
-    const customer = req.body.customer;
-    const email = req.body.decodedAccount.email;
-    const hash = cryptoService.generateHash();
-    await databaseService.storeCustomer(hash, email, customer);
-    emailService.sendCustomerConfirmation(email, hash);
-    res.json({
-      message: 'CUSCONFISSND',
-    });
-  } catch (e) {
-    console.error(e.stack);
-    res.status(500).send({
-      error: e
-    });
-  }
-}
-
-async function createCustomerDirect(req, res) {
-  try {
-    const customer = req.body.customer;
-    const email = req.body.decodedAccount.email;
-    const hash = cryptoService.generateHash();
-    await databaseService.storeCustomer(hash, email, customer);
-    const sapCustomer = await composeCustomer(customer);
-    const envelope = sapCustomer.getJSONArgs();
-    const sapID = await soapService.sendCustomer(envelope);
-    await databaseService.setCustomerSAPID(sapID, hash)
-    emailService.sendCustomerAcknowledgement(email, sapID);
-    res.json({
-      message: 'CUSISSND',
-    });
-  } catch (e) {
-    console.error(e.stack);
-    res.status(500).send({
-      error: e
-    });
-  }
-}
-
-async function getCustomers(req, res) {
-  try {
-    const email = req.body.decodedAccount.email;
-    const customers = await databaseService.getCustomers(email);
-    res.json(customers)
-  } catch (e) {
-    console.error(e.stack);
-    res.status(500).send({
-      error: e
-    });
-  }
-}
-
-function formatDate(date) {
-  let month = '' + (date.getMonth() + 1)
-  let day = '' + date.getDate()
-  let year = date.getFullYear()
-
-  if (month.length < 2)
-    month = '0' + month;
-  if (day.length < 2)
-    day = '0' + day;
-
-  return [year, month, day].join('-');
-}
 
 module.exports = {
   PersonDebitFactory: PersonDebitFactory,
   PersonCreditFactory: PersonCreditFactory,
   OrganizationDebitFactory: OrganizationDebitFactory,
   OrganizationCreditFactory: OrganizationCreditFactory,
-  confirmCustomerRequest,
-  composeCustomer,
-  createCustomerDirect,
-  createCustomerRequest,
-  getCustomers
+  composeCustomer
 }
