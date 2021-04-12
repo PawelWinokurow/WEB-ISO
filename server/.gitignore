@@ -1,5 +1,5 @@
 # Do not store the .env file on the git repository
-.env
+*.env
 
 # Logs
 logs
