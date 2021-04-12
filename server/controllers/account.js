@@ -43,7 +43,6 @@ async function updateAccount(req, res) {
         const requestAccount = req.body.account;
         //const validatedAccount = await validationService.validateAccount(requestAccount);
         const validatedAccount = requestAccount;
-
         if (validatedAccount?.password) {
             const dbAccount = await databaseService.getAccount(validatedAccount);
             if (dbAccount && cryptoService.comparePasswords(validatedAccount.passwordOld, dbAccount.password)) {
@@ -59,9 +58,7 @@ async function updateAccount(req, res) {
                 })
             }
         } else {
-            
             await databaseService.updateAccount(validatedAccount);
-            
             res.json({
                 message: 'USRISUPD',
                 account: validatedAccount
