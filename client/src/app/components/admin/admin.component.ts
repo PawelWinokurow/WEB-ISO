@@ -9,7 +9,7 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ResetPasswordAdminDialog } from 'src/app/dialogs/reset-password-admin/reset-password-admin.dialog';
-import { AccountJWT, Account, AccountDTO } from 'src/app/interfaces/account';
+import { AccountDTO } from 'src/app/interfaces/account';
 
 @Component({
   selector: 'app-admin',

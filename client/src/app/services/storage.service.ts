@@ -9,17 +9,30 @@ import { DictionaryService } from './dictionary.service';
 })
 export class StorageService {
 
-  customerType: string = 'person';
-  debitCreditType: string = 'debit';
-
   constructor(private dictionaryService: DictionaryService) { }
 
   /**
    * Resets preselection types.
    */
   resetValues() {
-    this.customerType = 'person';
-    this.debitCreditType = 'debit';
+    localStorage.setItem('customer_type', 'person');
+    localStorage.setItem('debit_credit_type', 'debit');
+  }
+
+  get customerType() {
+    return localStorage.getItem("customer_type")
+  }
+
+  get debitCreditType() {
+    return localStorage.getItem("debit_credit_type")
+  }
+
+  set customerType(customerType: string) {
+    localStorage.setItem('customer_type', customerType);
+  }
+
+  set debitCreditType(debitCreditType: string) {
+    localStorage.setItem('debit_credit_type', debitCreditType);
   }
 
   /**

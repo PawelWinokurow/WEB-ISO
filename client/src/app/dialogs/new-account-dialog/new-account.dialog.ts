@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
+import { FormValidationService } from 'src/app/services/form-validation.service';
 import { ListService } from 'src/app/services/list.service';
 
 @Component({
@@ -17,16 +18,19 @@ export class NewAccountDialog implements OnInit {
   registerForm: FormGroup;
   accountType = 'USER';
 
-  constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
+  constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder, private formValidationService: FormValidationService,
     public errorMessageService: ErrorMessageService, public listService: ListService, private dialogRef: MatDialogRef<NewAccountDialog>) {
   }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      //TODO username:only letters and no @
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, this.formValidationService.validateUsername]],
       email: ['', [Validators.required, Validators.email]],
       companyCode: ['', [Validators.required]],
+      firstName: ['', [Validators.required, this.formValidationService.validateName]],
+      secondName: ['', [Validators.required, this.formValidationService.validateName]],
+      phone: [''],
+      mobile: [''],
     });
   }
 
@@ -39,6 +43,10 @@ export class NewAccountDialog implements OnInit {
       var newAccount = {
         username: this.registerForm.controls['username'].value,
         email: this.registerForm.controls['email'].value,
+        firstName: this.registerForm.controls['firstName'].value,
+        secondName: this.registerForm.controls['secondName'].value,
+        phone: this.registerForm.controls['phone'].value,
+        mobile: this.registerForm.controls['mobile'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
         role: this.accountType,
         blocked: false
