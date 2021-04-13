@@ -35,20 +35,4 @@ export class StorageService {
     localStorage.setItem('debit_credit_type', debitCreditType);
   }
 
-  /**
-   * Gets the selected client type.
-   * @returns Customer type value.
-   */
-  getCustomerTypeName(): string {
-    return this.customerType === 'person' ? this.dictionaryService.get('PER') : this.dictionaryService.get('ORG');
-  }
-
-  /**
-   * Gets the selected debit/credit type.
-   * @returns Debit/credit type value.
-   */
-  getDebitCreditTypeName(): string {
-    return this.debitCreditType === 'debit' ? this.dictionaryService.get('DEB') : this.dictionaryService.get('CRE');
-  }
-
 }
