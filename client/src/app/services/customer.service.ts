@@ -44,7 +44,7 @@ export class CustomerService {
       //General information
       legalForm: generalInformation?.get('legalForm')?.value?.code ?? '',
       interfaceNumber: generalInformation?.get('interfaceNumber')?.value ?? '',
-      salutation: generalInformation?.get('salutation')?.value?.code ?? '',
+      salutation: generalInformation?.get('salutation')?.value?.code ?? '0000',
       additionalName: generalInformation?.get("additionalName")?.value ?? '',
 
       //Address information
@@ -91,7 +91,7 @@ export class CustomerService {
       //Organization debit forms
 
       //Applicant 0
-      applicantSalutation0: applicant?.get('salutation')?.value?.code ?? '',
+      applicantSalutation0: applicant?.get('salutation')?.value?.code ?? '0000',
       applicantTitle0: applicant?.get('title')?.value?.code ?? '',
       applicantFirstName0: applicant?.get('firstName')?.value ?? '',
       applicantSecondName0: applicant?.get('secondName')?.value ?? '',
@@ -102,7 +102,7 @@ export class CustomerService {
       applicantEmail0: applicant?.get('email')?.value ?? '',
 
       //Applicant 1
-      applicantSalutation1: applicant?.get('salutation1')?.value?.code ?? '',
+      applicantSalutation1: applicant?.get('salutation1')?.value?.code ?? '0000',
       applicantTitle1: applicant?.get('title1')?.value?.code ?? '',
       applicantFirstName1: applicant?.get('firstName1')?.value ?? '',
       applicantSecondName1: applicant?.get('secondName1')?.value ?? '',
@@ -113,7 +113,7 @@ export class CustomerService {
       applicantEmail1: applicant?.get('email1')?.value ?? '',
 
       //Applicant 2
-      applicantSalutation2: applicant?.get('salutation2')?.value?.code ?? '',
+      applicantSalutation2: applicant?.get('salutation2')?.value?.code ?? '0000',
       applicantTitle2: applicant?.get('title2')?.value?.code ?? '',
       applicantFirstName2: applicant?.get('firstName2')?.value ?? '',
       applicantSecondName2: applicant?.get('secondName2')?.value ?? '',

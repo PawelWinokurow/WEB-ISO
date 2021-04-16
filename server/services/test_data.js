@@ -12,6 +12,7 @@ async function storeTestData() {
       username: 'admin',
       email: 'pawelwinokurow@gmail.com',
       companyCode: '1100',
+      salutationCode: '0002',
       firstName: 'Vorname_admin',
       secondName: 'Nachname_admin',
       phone: 'Telefonnummer_admin',

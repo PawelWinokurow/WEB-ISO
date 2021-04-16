@@ -10,7 +10,6 @@ async function createAccount(req, res) {
         const requestAccount = req.body.account;
         //const validatedAccount = await validationService.validateAccount(requestAccount);
         const validatedAccount = requestAccount;
-
         let accountToStore = {
             ...validatedAccount
         };

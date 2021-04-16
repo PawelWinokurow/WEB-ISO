@@ -47,6 +47,7 @@ export class ListService {
   ]
 
   salutationsOrganization: Salutation[] = [
+    { details: '', code: "0000" },
     { details: 'Firma', code: "0003" },
     { details: 'Frau und Frau', code: "0006" },
     { details: 'Frau und Herrn', code: "0005" },
@@ -55,8 +56,9 @@ export class ListService {
   ]
 
   salutationsPerson: Salutation[] = [
-    { details: 'Herr', code: "0002" },
+    { details: '', code: "0000" },
     { details: 'Frau', code: "0001" },
+    { details: 'Herr', code: "0002" },
   ]
 
   paymentTermsDebit: PaymentTerm[] = [

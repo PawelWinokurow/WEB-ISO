@@ -26,6 +26,7 @@ export class NewAccountDialog implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, this.formValidationService.validateUsername]],
       email: ['', [Validators.required, Validators.email]],
+      salutation: [this.listService.salutationsPerson[0], Validators.required],
       companyCode: ['', [Validators.required]],
       firstName: ['', [Validators.required, this.formValidationService.validateName]],
       secondName: ['', [Validators.required, this.formValidationService.validateName]],
@@ -40,6 +41,7 @@ export class NewAccountDialog implements OnInit {
 
   async register() {
     if (this.registerForm.valid) {
+      const salutationCode = this.registerForm.controls['salutation'].value === '' ? '0000' : this.registerForm.controls['salutation'].value.code
       var newAccount = {
         username: this.registerForm.controls['username'].value,
         email: this.registerForm.controls['email'].value,
@@ -48,6 +50,7 @@ export class NewAccountDialog implements OnInit {
         phone: this.registerForm.controls['phone'].value,
         mobile: this.registerForm.controls['mobile'].value,
         companyCode: this.registerForm.controls['companyCode'].value.code,
+        salutationCode: salutationCode,
         role: this.accountType,
         blocked: false
       }

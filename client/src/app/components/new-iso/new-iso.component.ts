@@ -49,9 +49,11 @@ export class NewISOComponent implements OnInit, OnDestroy {
   legalForms;
   titles;
   salutations;
+  salutationsApplicant;
   countries;
   paymentTerms;
   industryFields;
+  applicantDefault;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -60,9 +62,13 @@ export class NewISOComponent implements OnInit, OnDestroy {
     public errorMessageService: ErrorMessageService, private searchService: SearchService, public authService: AuthService) {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
+    this.salutationsApplicant = this.listService.salutationsPerson;
+    
+    
   }
 
   ngOnInit(): void {
+    this.applicantDefault = this.listService.salutationsPerson[0];
     //Initializes forms for selected types
     this.initForms();
     //Enable 'industryFieldCode' field, if industry field is selected
@@ -143,7 +149,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.generalInformation = this.formBuilder.group({
       legalForm: ['', Validators.required],
       interfaceNumber: [''],
-      salutation: ['', Validators.required],
+      salutation: [''],
       additionalName: [''],
     });
 
@@ -218,15 +224,19 @@ export class NewISOComponent implements OnInit, OnDestroy {
   initOrganizationDebitForms() {
     this.initSharedForms();
     this.initOrganizationForms();
+    if (this.authService.account.salutationCode !== '0000') {
+      this.applicantDefault = this.listService.salutationsPerson.find(s => s.code == this.authService.account.salutationCode)
+    }
+
     this.applicant = this.formBuilder.group({
-      salutation: ['', Validators.required],
+      salutation: [this.applicantDefault, Validators.required],
       firstName: [this.authService.account.firstName, Validators.required],
       secondName: [this.authService.account.secondName, Validators.required],
       phone: [this.authService.account.phone],
       mobile: [this.authService.account.mobile],
       email: [this.authService.account.email, Validators.email],
 
-      salutation1: ['', Validators.required],
+      salutation1: [this.applicantDefault, Validators.required],
       firstName1: [this.authService.account.firstName, Validators.required],
       secondName1: [this.authService.account.secondName, Validators.required],
       birthDate1: ['', Validators.required],

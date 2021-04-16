@@ -15,6 +15,7 @@ const ACCOUNTS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts (
   username VARCHAR(255) NOT NULL UNIQUE, 
   password VARCHAR(255) NOT NULL, 
   companycode VARCHAR(255) NOT NULL,
+  salutationcode VARCHAR(255),
   firstname VARCHAR(255),
   secondname VARCHAR(255),
   phone VARCHAR(255),
@@ -176,8 +177,8 @@ async function storeCustomer(hash, email, customer) {
  * @param  {object} account Account object 
  */
 async function storeAccount(account) {
-  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, role, blocked, firstname, secondname, phone, mobile) VALUES (?);';
-  const values = [[account.email, account.username, account.password, account.companyCode, account.role, false, account.firstName, account.secondName, account.phone, account.mobile]];
+  const insertStatement = 'INSERT INTO accounts (email, username, password, companycode, salutationcode, role, blocked, firstname, secondname, phone, mobile) VALUES (?);';
+  const values = [[account.email, account.username, account.password, account.companyCode, account.salutationCode, account.role, false, account.firstName, account.secondName, account.phone, account.mobile]];
   await cudQuery(insertStatement, values);
 }
 
@@ -248,6 +249,7 @@ async function isAccountNotExists(account) {
       username: result.username,
       email: result.email,
       companyCode: result.companycode,
+      salutationCode: result.salutationcode || '0000',
       firstName: result.firstname || '',
       secondName: result.secondname || '',
       phone: result.phone || '',
@@ -273,6 +275,7 @@ async function getAccounts() {
       username: val.username,
       email: val.email,
       companyCode: val.companycode,
+      salutationCode: val.salutationcode || '0000',
       firstName: val.firstname || '',
       secondName: val.secondname || '',
       phone: val.phone || '',
