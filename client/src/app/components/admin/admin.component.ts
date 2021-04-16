@@ -100,7 +100,7 @@ export class AdminComponent implements OnInit {
   async blockAccount(accountToBlock) {
     try {
       accountToBlock.blocked = !accountToBlock.blocked;
-      const accountResponse = await this.accountService.blockAccount<AccountDTO>(accountToBlock).toPromise();
+      const accountResponse = await this.accountService.updateAccount<AccountDTO>(accountToBlock).toPromise();
 
       if ('account' in accountResponse) {
         //TODO iterate over array may be to slow

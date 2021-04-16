@@ -15,7 +15,7 @@ function checkIfAccountAvailable(req, res, next) {
 }
 
 //Checks if request updates itself or ADMIN updates USER
-function checkIfUpdatesItself(req, res, next) {
+function checkIfUpdatesItselfOrAdmin(req, res, next) {
     const account = req.body.decodedAccount;
     const updatedAccount = req.body.account;
     if (updatedAccount.email === account.email ||
@@ -44,6 +44,6 @@ function checkIfFromAdmin(req, res, next) {
 
 module.exports = { 
     checkIfFromAdmin, 
-    checkIfUpdatesItself, 
+    checkIfUpdatesItselfOrAdmin, 
     checkIfAccountAvailable, 
     checkEmail };

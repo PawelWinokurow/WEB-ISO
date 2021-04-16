@@ -25,10 +25,6 @@ export class AccountService {
     return this.httpService.request<T>(this.http.delete(`${environment.serverURL}/accounts`, httpOptions));
   }
 
-  blockAccount<T>(account) {
-    return this.httpService.request<T>(this.http.patch(`${environment.serverURL}/accounts`, { account }));
-  }
-
   resetPassword<T>(account) {
     return this.httpService.request<T>(this.http.post(`${environment.serverURL}/accounts/reset`, { account }));
   }

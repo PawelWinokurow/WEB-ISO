@@ -70,7 +70,7 @@ describe('AccountService', () => {
   
     it('blockAccount', async () => {
       newAccount.blocked = !newAccount.blocked;
-      let blockedAccount = await accountService.blockAccount<AccountDTO>(newAccount).toPromise();
+      let blockedAccount = await accountService.updateAccount<AccountDTO>(newAccount).toPromise();
       expect(blockedAccount && blockedAccount.account.blocked == newAccount.blocked).toBeTrue();
     });
   

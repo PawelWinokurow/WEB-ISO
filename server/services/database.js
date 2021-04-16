@@ -194,19 +194,46 @@ async function storePasswordReset(hash, email) {
 }
 
 /**
- * Updates account.
+ * Updates account if ADMIN updates USER.
  * @param  {object} account Account object 
  */
-async function updateAccount(account) {
-  let updateStatement = `UPDATE accounts SET companycode = ?, blocked = ?, firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
-  let values = [account.companyCode, account.blocked, account.firstName, account.secondName, account.phone, account.mobile, account.email];
+async function updateAccountADMIN(account) {
+  let updateStatement = `UPDATE accounts SET companycode = ?, salutationcode = ? , blocked = ?, firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.salutationCode, account.blocked, account.firstName, account.secondName, account.phone, account.mobile, account.email];
+  await cudQuery(updateStatement, values);
+}
+
+/**
+ * Updates account if ADMIN updates Itself.
+ * @param  {object} account Account object 
+ */
+ async function updateAccountADMINItself(account) {
+  let updateStatement = `UPDATE accounts SET companycode = ?, salutationcode = ? , firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.salutationCode, account.firstName, account.secondName, account.phone, account.mobile, account.email];
   //If we change password
   if (account.password) {
-    updateStatement = `UPDATE accounts SET password = ?, companycode = ?, blocked = ?, firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
-    values = [account.password, account.companyCode, account.blocked, account.firstName,  account.secondName, account.phone, account.mobile, account.email];
+    updateStatement = `UPDATE accounts SET password = ?,  companycode = ?, salutationcode = ? , firstname = ?, secondname = ?, phone = ?, mobile = ? WHERE email = ?;`;
+    values = [account.password, account.companyCode, account.salutationCode, account.firstName, account.secondName, account.phone, account.mobile, account.email];
   }
   await cudQuery(updateStatement, values);
 }
+
+/**
+ * Updates account for USER.
+ * @param  {object} account Account object 
+ */
+ async function updateAccountUSERItself(account) {
+  let updateStatement = `UPDATE accounts SET companycode = ? WHERE email = ?;`;
+  let values = [account.companyCode, account.email];
+  //If we change password
+  if (account.password) {
+    updateStatement = `UPDATE accounts SET password = ?, companycode = ? WHERE email = ?;`;
+    values = [account.password, account.companyCode];
+  }
+  await cudQuery(updateStatement, values);
+}
+
+
 
 /**
  * Deletes account from the database.
@@ -332,7 +359,9 @@ module.exports = {
   getAccount,
   getAccounts,
   deleteAccount,
-  updateAccount,
+  updateAccountUSERItself,
+  updateAccountADMIN,
+  updateAccountADMINItself,
   removeOldCustomers,
   checkCustomerConfirmation,
   checkPasswordResetConfirmation,

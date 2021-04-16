@@ -27,14 +27,12 @@ router.route("/accounts/reset/validation")
  * get: get all accounts
  * post: create account
  * put: update account
- * patch: block account
  * delete: delete account
  */
 router.route('/accounts')
   .get(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfFromAdmin, rightsMiddleware.checkIfAccountAvailable, accountController.getAccounts)
   .post(accountController.createAccount)
-  .put(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfUpdatesItself, rightsMiddleware.checkIfAccountAvailable, accountController.updateAccount)
-  .patch(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfUpdatesItself, rightsMiddleware.checkIfAccountAvailable, accountController.blockAccount)
-  .delete(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfUpdatesItself, rightsMiddleware.checkIfAccountAvailable, accountController.deleteAccount);
+  .put(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfUpdatesItselfOrAdmin, rightsMiddleware.checkIfAccountAvailable, accountController.updateAccount)
+  .delete(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfUpdatesItselfOrAdmin, rightsMiddleware.checkIfAccountAvailable, accountController.deleteAccount);
 
 module.exports = router;

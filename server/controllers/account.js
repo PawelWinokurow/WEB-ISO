@@ -39,30 +39,45 @@ async function createAccount(req, res) {
 
 async function updateAccount(req, res) {
     try {
+        const decodedAccount = req.body.decodedAccount
         const requestAccount = req.body.account;
+        //TODO validation
         //const validatedAccount = await validationService.validateAccount(requestAccount);
-        const validatedAccount = requestAccount;
-        if (validatedAccount?.password) {
-            const dbAccount = await databaseService.getAccount(validatedAccount);
-            if (dbAccount && cryptoService.comparePasswords(validatedAccount.passwordOld, dbAccount.password)) {
-                validatedAccount.password = cryptoService.hashPassword(validatedAccount.password);
-                await databaseService.updateAccount(validatedAccount);
+        const validatedAccount = requestAccount
+
+        //Updates itself
+        if (requestAccount.email === decodedAccount.email) {
+
+            if (validatedAccount?.password) {
+                const dbAccount = await databaseService.getAccount(validatedAccount);
+                if (dbAccount && cryptoService.comparePasswords(validatedAccount.passwordOld, dbAccount.password)) {
+                    validatedAccount.password = cryptoService.hashPassword(validatedAccount.password);
+                    decodedAccount.role == 'ADMIN' ? await databaseService.updateAccountADMINItself(validatedAccount) : await databaseService.updateAccountUSERItself(validatedAccount)
+                    res.json({
+                        message: 'USRISUPD',
+                        account: validatedAccount
+                    });
+                } else {
+                    res.json({
+                        error: `PSWDOLDNMATCH`
+                    })
+                }
+            } else {
+                decodedAccount.role == 'ADMIN' ? await databaseService.updateAccountADMINItself(validatedAccount) : await databaseService.updateAccountUSERItself(validatedAccount)
                 res.json({
                     message: 'USRISUPD',
                     account: validatedAccount
                 });
-            } else {
-                res.json({
-                    error: `PSWDOLDNMATCH`
-                })
             }
-        } else {
-            await databaseService.updateAccount(validatedAccount);
+        //ADMIN updates USER
+        } else if (decodedAccount.role == 'ADMIN' && requestAccount.role == 'USER') {
+            await databaseService.updateAccountADMIN(validatedAccount);
             res.json({
                 message: 'USRISUPD',
                 account: validatedAccount
-            });
+            })
         }
+
     } catch (e) {
         errorHandler.unknownErrorResponse(e, 500);
     }
@@ -109,7 +124,7 @@ async function requestPasswordReset(req, res) {
 async function validatePasswordResetHash(req, res) {
     let isTrue = await databaseService.checkPasswordResetConfirmation(req.body.account.hash);
     if (isTrue) {
-        res.status(200).json({isTrue});
+        res.status(200).json({ isTrue });
     }
 }
 
@@ -132,27 +147,11 @@ async function resetPasswordFromEmail(req, res) {
     }
 }
 
-async function blockAccount(req, res) {
-    try {
-        const requestAccount = req.body.account;
-        //const validatedAccount = await validationService.validateAccount(requestAccount);
-        const validatedAccount = requestAccount;
-
-        await databaseService.updateAccount(validatedAccount);
-        res.json({
-            message: validatedAccount.blocked ? 'USRISBL' : 'USRISUN',
-            account: validatedAccount
-        })
-    } catch (e) {
-        errorHandler.unknownErrorResponse(e, 500);
-    }
-}
 
 module.exports = {
     createAccount,
     updateAccount,
     deleteAccount,
-    blockAccount,
     resetPasswordFromEmail,
     validatePasswordResetHash,
     requestPasswordReset,
