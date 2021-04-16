@@ -6,13 +6,13 @@ import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ReplaySubject, Subject } from 'rxjs';
-import { IndustryFieldCode } from 'src/app/interfaces/lists';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
 import { SendCustomerConfirmationDialog } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { CodeDetails } from 'src/app/interfaces/list';
 
 
 /**
@@ -40,8 +40,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
 
   industryFieldCodesSearchCtrl: FormControl = new FormControl('');
   countrySearchCtrl: FormControl = new FormControl('');
-  public filteredFieldCodes: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
-  public filteredCountries: ReplaySubject<IndustryFieldCode[]> = new ReplaySubject<IndustryFieldCode[]>(1);
+  public filteredFieldCodes: ReplaySubject<CodeDetails[]> = new ReplaySubject<CodeDetails[]>(1);
+  public filteredCountries: ReplaySubject<CodeDetails[]> = new ReplaySubject<CodeDetails[]>(1);
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
   onDestroyIndustryFieldCode = new Subject<void>();
   onDestroyCountry = new Subject<void>();
@@ -225,7 +225,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.initSharedForms();
     this.initOrganizationForms();
     if (this.authService.account.salutationCode !== '0000') {
-      this.applicantDefault = this.listService.salutationsPerson.find(s => s.code == this.authService.account.salutationCode)
+      this.applicantDefault = this.listService.salutationsPerson.getObjectForCode(this.authService.account.salutationCode) 
     }
 
     this.applicant = this.formBuilder.group({

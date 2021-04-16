@@ -1,5 +1,21 @@
 import { Injectable } from '@angular/core';
-import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode, LegalForm, Title, Salutation, CodeDetails } from '../interfaces/lists';
+
+declare global {
+  interface Array<T> {
+      getDetailsForCode(code: string): string;
+      getObjectForCode(code: string): T;
+  }
+}
+
+Array.prototype.getDetailsForCode = function (code) {
+  return this.find(element => element.code === code).details
+}
+
+Array.prototype.getObjectForCode = function (code) {
+  return this.find(element => element.code === code)
+}
+
+
 
 /**
  * Contains the data for the drop-down lists
@@ -9,7 +25,7 @@ import { IndustryField, IndustryFieldCode, Country, PaymentTerm, CompanyCode, Le
 })
 export class ListService {
 
-  legalFormsOrganization: LegalForm [] = [
+  legalFormsOrganization = [
     { details: 'AG', code: "01"},
     { details: 'eG E. Genossenschaft', code: "09" },
     { details: 'eV Eingetr. Verein', code: "10" },
@@ -28,7 +44,7 @@ export class ListService {
     { details: 'Privat', code: "19" },
   ];
 
-  legalFormsPerson: LegalForm[] = [
+  legalFormsPerson = [
     { details: 'Eingetragener Kfm.', code: "11" },
     { details: 'Einzelunternehmen', code: "16" },
     { details: 'Freier Beruf', code: "15" },
@@ -37,7 +53,7 @@ export class ListService {
     { details: 'Privat', code: "19" },
   ];
 
-  titles: Title[] = [
+  titles = [
     { details: 'Dr.', code: "0001" },
     { details: 'Prof.', code: "0002" },
     { details: 'Prof. Dr.', code: "0003" },
@@ -46,7 +62,7 @@ export class ListService {
     { details: 'Ph.D.', code: "0006" },
   ]
 
-  salutationsOrganization: Salutation[] = [
+  salutationsOrganization = [
     { details: '', code: "0000" },
     { details: 'Firma', code: "0003" },
     { details: 'Frau und Frau', code: "0006" },
@@ -55,13 +71,13 @@ export class ListService {
     { details: 'Herrn und Herrn', code: "0007" },
   ]
 
-  salutationsPerson: Salutation[] = [
+  salutationsPerson = [
     { details: '', code: "0000" },
     { details: 'Frau', code: "0001" },
     { details: 'Herr', code: "0002" },
   ]
 
-  paymentTermsDebit: PaymentTerm[] = [
+  paymentTermsDebit = [
     { code: '0000', details: 'B000/000/000 fällig sofort netto' },
     { code: '0300', details: 'D003/000/000: fällig in 3 Tagen netto' },
     { code: '0800', details: 'B008/000/000 fällig in 8 Tagen netto' },
@@ -100,7 +116,7 @@ export class ListService {
     { code: 'AVOR', details: 'Vorauskasse' },
   ];
 
-  paymentTermsCredit: PaymentTerm[] = [
+  paymentTermsCredit = [
     { code: '0000', details: 'B000/000/000 fällig sofort netto' },
     { code: '0500', details: 'K005/000/000: Beleg-Datum + 5 Tage netto' },
     { code: '0700', details: 'K007/000/000: Beleg-Datum + 7 Tage netto' },
@@ -133,7 +149,7 @@ export class ListService {
     { code: '9999', details: 'FiBu-Erfassung mit vorgegebenen Zahlbar-Daten' },
   ];
 
-  industryFields: IndustryField[] = [
+  industryFields = [
     { code: 'A1', details: 'Acker- und Planzenbau' },
     { code: 'A3', details: 'Tierhaltung' },
     { code: 'A5', details: 'sonstige Landwirtschaft' },
@@ -166,7 +182,7 @@ export class ListService {
     { code: 'U1', details: 'Exterritoriale Organisationen und Körperschaften' }
   ];
 
-  industryFieldCodeA1: IndustryFieldCode[] = [
+  industryFieldCodeA1 = [
     { code: '0111', details: 'Anbau von Getreide (ohne Reis), Hülsenfrüchten und Ölsaaten' },
     { code: '0112', details: 'Anbau von Reis' },
     { code: '0113', details: 'Anbau von Gemüse und Melonen sowie Wurzeln und Knollen' },
@@ -186,7 +202,7 @@ export class ListService {
     { code: '0130', details: 'Betrieb von Baumschulen, sowie Anbau von Pflanzen zu Vermehrungszwecken' },
   ];
 
-  industryFieldCodeA3: IndustryFieldCode[] = [
+  industryFieldCodeA3 = [
     { code: '0141', details: 'Haltung von Milchkühen' },
     { code: '0142', details: 'Haltung von Pferden und Eseln' },
     { code: '0143', details: 'Haltung von Kamelen' },
@@ -196,7 +212,7 @@ export class ListService {
     { code: '0149', details: 'Sonstige Tierhaltung' },
   ];
 
-  industryFieldCodeA5: IndustryFieldCode[] = [
+  industryFieldCodeA5 = [
     { code: '0150', details: 'Gemischte Landwirtschaft' },
     { code: '0161', details: 'Erbringung von landwirtschaftlichen Dienstleistungen für den Pflanzenbau' },
     { code: '0163', details: 'Nach der Ernte anfallende Tätigkeiten in der pflanzlichen Erzeugung' },
@@ -204,21 +220,21 @@ export class ListService {
     { code: '0170', details: 'Jagd, Fallenstellerei und damit verbundene Tätigkeiten' },
   ];
 
-  industryFieldCodeA7: IndustryFieldCode[] = [
+  industryFieldCodeA7 = [
     { code: '0210', details: 'Forstwirtschaft' },
     { code: '0220', details: 'Holzeinschlag' },
     { code: '0230', details: 'Sammeln von wild wachsenden Produkten (ohne Holz)' },
     { code: '0240', details: 'Erbringung von Dienstleistungen für Forstwirtschaft und Holzeinschlag' },
   ];
 
-  industryFieldCodeA9: IndustryFieldCode[] = [
+  industryFieldCodeA9 = [
     { code: '0311', details: 'Meeresfischerei' },
     { code: '0312', details: 'Süßwasserfischerei' },
     { code: '0321', details: 'Meeresaquakultur' },
     { code: '0322', details: 'Süßwasseraquakultur' },
   ];
 
-  industryFieldCodeB1: IndustryFieldCode[] = [
+  industryFieldCodeB1 = [
     { code: '0510', details: 'Steinkohlenbergbau' },
     { code: '0520', details: 'Braunkohlenbergbau' },
     { code: '0610', details: 'Gewinnung von Erdöl' },
@@ -235,7 +251,7 @@ export class ListService {
     { code: '0990', details: 'Erbringung von Dienstleistungen für den sonstigen Bergbau und die Gewinnung von Steinen und Erden' },
   ];
 
-  industryFieldCodeC1: IndustryFieldCode[] = [
+  industryFieldCodeC1 = [
     { code: '1010', details: 'Schlachten (ohne Schlachten von Geflügel)' },
     { code: '1020', details: 'Fischverarbeitung' },
     { code: '1030', details: 'Kartoffelverarbeitung' },
@@ -375,17 +391,17 @@ export class ListService {
     { code: '3320', details: 'Installation von Maschinen und Ausrüstungen a. n. g.' },
   ];
 
-  industryFieldCodeD1: IndustryFieldCode[] = [
+  industryFieldCodeD1 = [
     { code: '3510', details: 'Elektrizitätserzeugung' },
     { code: '3520', details: 'Gaserzeugung' },
     { code: '3530', details: 'Wärme- und Kälteversorgung' },
   ];
 
-  industryFieldCodeE1: IndustryFieldCode[] = [
+  industryFieldCodeE1 = [
     { code: '3600', details: 'Wasserversorgung' },
   ];
 
-  industryFieldCodeE5: IndustryFieldCode[] = [
+  industryFieldCodeE5 = [
 { code: '3700', details: 'Abwasserentsorgung' },
 { code: '3811', details: 'Sammlung nicht gefährlicher Abfälle' },
 { code: '3812', details: 'Sammlung gefährlicher Abfälle' },
@@ -395,17 +411,17 @@ export class ListService {
 { code: '3900', details: 'Beseitigung von Umweltverschmutzungen und sonstige Entsorgung' },
 ];
 
-industryFieldCodeF1: IndustryFieldCode[] = [
+industryFieldCodeF1 = [
 { code: '4100', details: 'Erschließung von Grundstücken; Bauträger' },
 ];
 
-industryFieldCodeF3: IndustryFieldCode[] = [
+industryFieldCodeF3 = [
 { code: '4210', details: 'Bau von Straßen' },
 { code: '4220', details: 'Rohrleitungstiefbau, Brunnenbau und Kläranlagenbau' },
 { code: '4290', details: 'Wasserbau' },
 ];
 
-industryFieldCodeF5: IndustryFieldCode[] = [
+industryFieldCodeF5 = [
 { code: '4311', details: 'Abbrucharbeiten' },
 { code: '4312', details: 'Vorbereitende Baustellenarbeiten' },
 { code: '4321', details: 'Elektroinstallation' },
@@ -415,14 +431,14 @@ industryFieldCodeF5: IndustryFieldCode[] = [
 { code: '4390', details: 'Dachdeckerei und Zimmerei' },
 ];
 
-industryFieldCodeG1: IndustryFieldCode[] = [
+industryFieldCodeG1 = [
 { code: '4510', details: 'Handel mit Kraftwagen mit einem Gesamtgewicht von 3,5 t oder weniger' },
 { code: '4520', details: 'Instandhaltung und Reparatur von Kraftwagen' },
 { code: '4530', details: 'Großhandel mit Kraftwagenteilen und -zubehör' },
 { code: '4540', details: 'Handel mit Krafträdern, Kraftradteilen und -zubehör; Instandhaltung und Reparatur von Krafträdern' },
 ];
 
-industryFieldCodeG4: IndustryFieldCode[] = [
+industryFieldCodeG4 = [
 { code: '4610', details: 'Handelsvermittlung von landwirtschaftlichen Grundstoffen, lebenden Tieren, textilen Rohstoffen und H' },
 { code: '4620', details: 'Großhandel mit Getreide, Rohtabak, Saatgut und Futtermitteln' },
 { code: '4630', details: 'Großhandel mit Obst, Gemüse und Kartoffeln' },
@@ -439,7 +455,7 @@ industryFieldCodeG4: IndustryFieldCode[] = [
 { code: '4690', details: 'Großhandel ohne ausgeprägten Schwerpunkt' },
 ];
 
-industryFieldCodeG7: IndustryFieldCode[] = [
+industryFieldCodeG7 = [
 { code: '4711', details: 'Einzelhandel mit Waren verschiedener Art, Hauptrichtung Nahrungs- und Genussmittel, Getränke und Tab' },
 { code: '4719', details: 'Sonstiger Einzelhandel mit Waren verschiedener Art' },
 { code: '4721', details: 'Einzelhandel mit Obst, Gemüse und Kartoffeln' },
@@ -467,7 +483,7 @@ industryFieldCodeG7: IndustryFieldCode[] = [
 { code: '4799', details: 'Sonstiger Einzelhandel, nicht in Verkaufsräumen, an Verkaufsständen oder auf Märkten' },
 ];
 
-industryFieldCodeH1: IndustryFieldCode[] = [
+industryFieldCodeH1 = [
 { code: '4911', details: 'Personenbeförderung im Eisenbahnfernverkehr' },
 { code: '4912', details: 'Güterbeförderung im Eisenbahnverkehr' },
 { code: '4921', details: 'Personenbeförderung im Nahverkehr zu Lande (ohne Taxis)' },
@@ -490,7 +506,7 @@ industryFieldCodeH1: IndustryFieldCode[] = [
 { code: '5320', details: 'Sonstige Post-, Kurier- und Expressdienste' },
 ];
 
-industryFieldCodeI1: IndustryFieldCode[] = [
+industryFieldCodeI1 = [
 { code: '5510', details: 'Hotels, Gasthöfe und Pensionen' },
 { code: '5520', details: 'Campingplätze' },
 { code: '5590', details: 'Sonstige Beherbergungsstätten' },
@@ -500,7 +516,7 @@ industryFieldCodeI1: IndustryFieldCode[] = [
 { code: '5630', details: 'Ausschank von Getränken' },
 ];
 
-industryFieldCodeJ1: IndustryFieldCode[] = [
+industryFieldCodeJ1 = [
 { code: '5811', details: 'Verlegen von Büchern' },
 { code: '5812', details: 'Verlegen von Adressbüchern und Verzeichnissen' },
 { code: '5813', details: 'Verlegen von Zeitungen' },
@@ -526,7 +542,7 @@ industryFieldCodeJ1: IndustryFieldCode[] = [
 { code: '6399', details: 'Erbringung von sonstigen Informationsdienstleistungen a. n. g.' },
 ];
 
-industryFieldCodeK1: IndustryFieldCode[] = [
+industryFieldCodeK1 = [
 { code: '6411', details: 'Zentralbanken' },
 { code: '6419', details: 'Kreditinstitute (ohne Spezialkreditinstitute)' },
 { code: '6420', details: 'Beteiligungsgesellschaften' },
@@ -547,12 +563,12 @@ industryFieldCodeK1: IndustryFieldCode[] = [
 { code: '6630', details: 'Fondsmanagement' },
 ];
 
-industryFieldCodeL1: IndustryFieldCode[] = [
+industryFieldCodeL1 = [
 { code: '6810', details: 'Kauf und Verkauf von eigenen Grundstücken, Gebäuden und Wohnungen' },
 { code: '6820', details: 'Vermittlung von Grundstücken, Gebäuden und Wohnungen für Dritte' },
 ];
 
-industryFieldCodeM1: IndustryFieldCode[] = [
+industryFieldCodeM1 = [
 { code: '6910', details: 'Rechtsberatung' },
 { code: '6920', details: 'Wirtschaftsprüfung und Steuerberatung; Buchführung' },
 { code: '7010', details: 'Verwaltung und Führung von Unternehmen und Betrieben' },
@@ -569,7 +585,7 @@ industryFieldCodeM1: IndustryFieldCode[] = [
 { code: '7500', details: 'Veterinärwesen' },
 ];
 
-industryFieldCodeN1: IndustryFieldCode[] = [
+industryFieldCodeN1 = [
 { code: '7710', details: 'Vermietung von Kraftwagen mit einem Gesamtgewicht von 3,5 t oder weniger' },
 { code: '7721', details: 'Vermietung von Sport- und Freizeitgeräten' },
 { code: '7722', details: 'Videotheken' },
@@ -598,7 +614,7 @@ industryFieldCodeN1: IndustryFieldCode[] = [
 { code: '8299', details: 'Erbringung sonstiger wirtschaftlicher Dienstleistungen für Unternehmen und Privatpersonen a. n. g.' },
 ];
 
-industryFieldCodeO1: IndustryFieldCode[] = [
+industryFieldCodeO1 = [
 { code: '8411', details: 'Allgemeine öffentliche Verwaltung' },
 { code: '8412', details: 'Öffentliche Verwaltung auf den Gebieten Gesundheitswesen, Bildung, Kultur und Sozialwesen' },
 { code: '8413', details: 'Wirtschaftsförderung, -ordnung und -aufsicht' },
@@ -608,7 +624,7 @@ industryFieldCodeO1: IndustryFieldCode[] = [
 { code: '8430', details: 'Sozialversicherung' },
 ];
 
-industryFieldCodeP1: IndustryFieldCode[] = [
+industryFieldCodeP1 = [
 { code: '8510', details: 'Kindergärten und Vorschulen' },
 { code: '8521', details: 'Allgemein bildende weiterführende Schulen' },
 { code: '8522', details: 'Berufsbildende weiterführende Schulen' },
@@ -619,7 +635,7 @@ industryFieldCodeP1: IndustryFieldCode[] = [
 { code: '8550', details: 'Erbringung von Dienstleistungen für den Unterricht' },
 ];
 
-industryFieldCodeQ1: IndustryFieldCode[] = [
+industryFieldCodeQ1 = [
 { code: '8610', details: 'Krankenhäuser' },
 { code: '8620', details: 'Arztpraxen für Allgemeinmedizin' },
 { code: '8690', details: 'Gesundheitswesen a. n. g.' },
@@ -631,7 +647,7 @@ industryFieldCodeQ1: IndustryFieldCode[] = [
 { code: '8890', details: 'Tagesbetreuung von Kindern' },
 ];
 
-industryFieldCodeR1: IndustryFieldCode[] = [
+industryFieldCodeR1 = [
 { code: '9000', details: 'Darstellende Kunst' },
 { code: '9101', details: 'Bibliotheken und Archive' },
 { code: '9102', details: 'Museen' },
@@ -644,7 +660,7 @@ industryFieldCodeR1: IndustryFieldCode[] = [
 { code: '9329', details: 'Erbringung von Dienstleistungen der Unterhaltung und der Erholung a. n. g.' },
 ];
 
-industryFieldCodeS1: IndustryFieldCode[] = [
+industryFieldCodeS1 = [
 { code: '9411', details: 'Wirtschafts- und Arbeitgeberverbände' },
 { code: '9412', details: 'Berufsorganisationen' },
 { code: '9420', details: 'Arbeitnehmervereinigungen' },
@@ -664,17 +680,17 @@ industryFieldCodeS1: IndustryFieldCode[] = [
 { code: '9609', details: 'Saunas, Solarien, Bäder u. Ä.' },
 ];
 
-industryFieldCodeT1: IndustryFieldCode[] = [
+industryFieldCodeT1 = [
 { code: '9700', details: 'Private Haushalte mit Hauspersonal' },
 ];
 
-industryFieldCodeU1: IndustryFieldCode[] = [
+industryFieldCodeU1 = [
 { code: '9810', details: 'Herstellung von Waren durch private Haushalte für den Eigenbedarf ohne ausgeprägten Schwerpunkt' },
 { code: '9820', details: 'Erbringungen von Dienstleistungen durch private Haushalte für den Eigenbedarf ohne ausgeprägten Schw' },
 { code: '9900', details: 'Exterritoriale Organisationen und Körperschaften' },
 ];
 
-companyCodes: CompanyCode[] = [
+companyCodes = [
   { code: '1100', details: 'BayWa Haustechnik GmbH' },
   { code: '1101', details: 'BayWa Rent GmbH' },
   { code: '1104', details: 'Peter Frey GmbH' },
@@ -718,7 +734,7 @@ industryFieldCodes = new Map([
 ]);
 
 
-countries: Country[] = [
+countries = [
   { details: 'Andorra', code: 'AD' },
   { details: 'Ver.Arab.Emir.', code: 'AE' },
   { details: 'Afghanistan', code: 'AF' },
@@ -980,9 +996,6 @@ countries: Country[] = [
 ];
 
 
-getDetailsForCode(list: [CodeDetails], code){
-  return list.find(element => element.code === code).details
-}
 
 
 constructor() { }

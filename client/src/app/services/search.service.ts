@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
-import { CodeDetails, IndustryFieldCode } from '../interfaces/lists';
+import { CodeDetails } from '../interfaces/list';
 
 /**
  * Enables free text search filtering.
@@ -19,7 +19,7 @@ export class SearchService {
    * @param list List in which to search for
    * @param filteredValues Filtered values
    */
-  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject<IndustryFieldCode[]>) {
+  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject<CodeDetails[]>) {
     if (!list) {
       return;
     }

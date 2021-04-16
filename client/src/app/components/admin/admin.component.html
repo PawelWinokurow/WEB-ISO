@@ -28,12 +28,13 @@
                 <div class="form-data paddinglr10px rounded-border"
                     style="width: 800px; background-color: rgb(235, 235, 235);">
                     <mat-accordion #accordion="matAccordion" multi>
-                        <mat-expansion-panel *ngFor="let account of filteredAccounts" style="padding: 5px; margin-top: 10px;"
-                            (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel *ngFor="let account of filteredAccounts"
+                            style="padding: 5px; margin-top: 10px;" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{dictionaryService.get('USRNAME')}}: &nbsp;
-                                    {{account.username}}
+                                    {{dictionaryService.get('NAME')}}: &nbsp;
+                                    {{listService.salutationsPerson.getDetailsForCode(account.salutationCode)}} {{account.firstName}} {{account.secondName}}
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <div class="space" style="text-align: center;">
@@ -45,14 +46,23 @@
                             </mat-expansion-panel-header>
 
                             <div style="padding-left: 20px;">
+                                <p><span class="body-1">{{dictionaryService.get('USRNAME')}}:
+                                        {{account.username}}</span></p>
                                 <p><span class="body-1">{{dictionaryService.get('EMAIL')}}: {{account.email}}</span></p>
                                 <p><span class="body-1">{{dictionaryService.get('COMCODE')}}:
                                         {{companyCodeDetails[account.companyCode]}}</span></p>
+                                <p><span class="body-1">{{dictionaryService.get('TEL')}}: {{account.phone}}</span></p>
+                                <p><span class="body-1">{{dictionaryService.get('MOB')}}: {{account.mobile}}</span></p>
                                 <p><span class="body-1">{{dictionaryService.get('ROLE')}}: {{account.role}}</span></p>
                             </div>
 
-                            <mat-action-row *ngIf="account.role !== 'ADMIN'">
-                                <button mat-stroked-button style="color: rgb(179, 9, 9);" (click)="deleteAccount(account)">
+                            <mat-action-row style="padding: 16px" *ngIf="account.role !== 'ADMIN'">
+                                <button mat-stroked-button (click)="editAccount(account)">
+                                    <mat-icon inline=true style="margin-right: 5px;">edit</mat-icon>
+                                    {{dictionaryService.get('CHNGACC')}}
+                                </button>
+                                <button mat-stroked-button style="color: rgb(179, 9, 9);"
+                                    (click)="deleteAccount(account)">
                                     <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>
                                     {{dictionaryService.get('DELUSR')}}
                                 </button>

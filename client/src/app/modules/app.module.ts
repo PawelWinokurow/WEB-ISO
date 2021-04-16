@@ -14,6 +14,7 @@ import { ResetPasswordUserDialog } from "../dialogs/reset-password-user/reset-pa
 import { SendCustomerConfirmationDialog } from "../dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog";
 import { externalModules, services } from "./modules";
 import { CustomersComponent } from '../components/customers/customers.component';
+import { EditAccountDialog } from "../dialogs/edit-account-dialog/edit-account.dialog";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { CustomersComponent } from '../components/customers/customers.component'
     ResetPasswordUserDialog,
     ResetPasswordAdminDialog,
     NewAccountDialog,
+    EditAccountDialog,
     ResetPasswordComponent,
     CustomersComponent,
   ],

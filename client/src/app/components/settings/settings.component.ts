@@ -22,7 +22,6 @@ export class SettingsComponent implements OnInit {
   accountForm: FormGroup;
   passwordForm: FormGroup;
   companyCode: FormControl;
-  selected = this.authService.account.companyCode;
   setting = 1;
 
   constructor(public dictionaryService: DictionaryService, private formBuilder: FormBuilder,
@@ -32,10 +31,12 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let a = this.listService.companyCodes.getObjectForCode(this.authService.account.companyCode)
+    console.log(a)
     this.accountForm = this.formBuilder.group({
       username: new FormControl({ value: this.authService.account.username, disabled: true }),
       email: new FormControl({ value: this.authService.account.email, disabled: true }),
-      companyCode: ['', [Validators.required]],
+      companyCode: [a , [Validators.required]],
       firstName: [{ value: this.authService.account.firstName, disabled: this.authService.account.role !== 'ADMIN' ? true : false }],
       secondName: [{ value: this.authService.account.secondName, disabled: this.authService.account.role !== 'ADMIN' ? true : false }],
       phone: [{ value: this.authService.account.phone, disabled: this.authService.account.role !== 'ADMIN' ? true : false }],

@@ -54,6 +54,8 @@ export class DictionaryService {
     ['SECSET', 'Sicherheitseinstellungen'],
 
     ['NEWACC', 'Konto anlegen'],
+    ['CHNGACC', 'Konto ändern'],
+    ['CHNG', 'Ändern'],
     ['CONFIRM', 'Bestätigen'],
     ['PSWDCONF', 'Passwortbestätigung'],
     ['PSWDOLD', 'Altes Passwort'],
@@ -100,7 +102,7 @@ export class DictionaryService {
     ['PAYINF', 'Zahlungsinformationen'],
     ['ATTACH', 'Datei anhängen'],
 
-    ['NAME', 'Namensangaben'],
+    ['NAME', 'Name'],
     ['ADDR', 'Anschrift'],
     ['ADNAME', 'Zus. Namensangaben (c/o)'],
     ['BRTH', 'Geburtsdatum'],
@@ -177,6 +179,8 @@ export class DictionaryService {
     ['APPLY', 'Apply'],
     ['CHNGPSWD', 'Change password'],
     ['NEWACC', 'Create account'],
+    ['CHNGACC', 'Change account'],
+    ['CHNG', 'Change'],
     ['CONFIRM', 'Confirm'],
     ['PSWDCONF', 'Password confirmation'],
     ['PSWDOLD', 'Old password'],

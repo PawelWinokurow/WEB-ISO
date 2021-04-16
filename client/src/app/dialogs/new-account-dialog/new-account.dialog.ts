@@ -13,8 +13,6 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class NewAccountDialog implements OnInit {
 
-  hide1 = true;
-  hide2 = true;
   registerForm: FormGroup;
   accountType = 'USER';
 

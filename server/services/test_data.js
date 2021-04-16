@@ -13,8 +13,8 @@ async function storeTestData() {
       email: 'pawelwinokurow@gmail.com',
       companyCode: '1100',
       salutationCode: '0002',
-      firstName: 'Vorname_admin',
-      secondName: 'Nachname_admin',
+      firstName: 'VornameAdmin',
+      secondName: 'NachnameAdmin',
       phone: 'Telefonnummer_admin',
       mobile: 'Mobiltelefonnummer_admin',
       password: cryptoService.hashPassword('admin'),
@@ -22,39 +22,24 @@ async function storeTestData() {
       role: 'ADMIN',
     },
     {
-      username: 'user',
-      email: 'user@user.de',
+      username: 'userA',
+      email: 'userA@userA.de',
       companyCode: '1100',
       salutationCode: '0001',
-      firstName: 'Vorname_user',
-      secondName: 'Nachname_user',
+      firstName: 'VornameUserA',
+      secondName: 'NachnameUserA',
       phone: 'Telefonnummer_user',
       mobile: 'Mobiltelefonnummer_user',
-      password: cryptoService.hashPassword('user'),
+      password: cryptoService.hashPassword('userA'),
       blocked: false,
       role: 'USER',
     },
-    {
-      username: 'user2',
-      email: 'user2@user2.de',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('user2'),
-      blocked: false,
-      role: 'USER',
-    },
-    {
-      username: 'user3',
-      email: 'user3@user3.de',
-      companyCode: '1100',
-      password: cryptoService.hashPassword('user3'),
-      blocked: false,
-      role: 'USER',
-    },
+   
   ];
 
   let reset = {
     hash: '100',
-    email: 'user@user.de'
+    email: 'userA@userA.de'
   }
 
   const customer = {
@@ -129,7 +114,7 @@ async function storeTestData() {
     await databaseService.storePasswordReset(reset.hash, reset.email)
     await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", customer)
     await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
-    await databaseService.storeCustomer("hash_customer2", "user@user.de", "customer_object2")
+    await databaseService.storeCustomer("hash_customer2", "userA@userA.de", "customer_object2")
     await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
   } catch (e) {
     console.error(e.stack);

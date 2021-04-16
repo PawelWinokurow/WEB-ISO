@@ -51,8 +51,7 @@
                                     <td>{{dictionaryService.get('SAL')}}:
                                     </td>
                                     <td>
-                                        {{listService.getDetailsForCode(listService.salutationsOrganization,
-                                        customer.customer.data.salutation)}}
+                                        {{listService.salutationsOrganization.getDetailsForCode(customer.customer.data.salutation)}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -66,8 +65,7 @@
                                     <td>{{dictionaryService.get('LEGFRM')}}:
                                     </td>
                                     <td>
-                                        {{listService.getDetailsForCode(listService.legalFormsOrganization,
-                                        customer.customer.data.legalForm)}}
+                                        {{listService.legalFormsOrganization.getDetailsForCode(customer.customer.data.legalForm)}}
                                     </td>
                                 </tr>
                             </table>
@@ -84,16 +82,14 @@
                                     <td>{{dictionaryService.get('SAL')}}:
                                     </td>
                                     <td>
-                                        {{listService.getDetailsForCode(listService.salutationsOrganization,
-                                        customer.customer.data.salutation)}}
+                                        {{listService.salutationsOrganization.getDetailsForCode(customer.customer.data.salutation)}}
                                     </td>
                                 </tr>
                                 <tr *ngIf="customer.customer.data.title !== ''">
                                     <td>{{dictionaryService.get('TITLE')}}:
                                     </td>
                                     <td>
-                                        {{listService.getDetailsForCode(listService.titles,
-                                        customer.customer.data.title)}}
+                                        {{listService.titles.getDetailsForCode(customer.customer.data.title)}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -114,8 +110,8 @@
                                     <td>{{dictionaryService.get('LEGFRM')}}:
                                     </td>
                                     <td>
-                                        {{listService.getDetailsForCode(listService.legalFormsPerson,
-                                        customer.customer.data.legalForm)}}
+                                        {{listService.legalFormsPerson.getDetailsForCode(customer.customer.data.legalForm)}}
+
                                     </td>
                                 </tr>
                             </table>

@@ -1,0 +1,119 @@
+<div class="alternate-theme" style="width: 700px;">
+    <h1 mat-dialog-title>{{dictionaryService.get('CHNGACC')}}</h1>
+
+    <div class="flex-column rounded-border">
+        <form [formGroup]="registerForm" class="alternate-theme">
+            <div style="display: flex;">
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('USRNAME')}}</mat-label>
+                        <input matInput formControlName="username" required>
+                        <mat-error *ngFor="let errorType of registerFormControl.username.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('USRNAME', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('EMAIL')}}</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngFor="let errorType of registerFormControl.email.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('EMAIL', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div style="display: flex;">
+
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('COMCODE')}}</mat-label>
+                        <mat-select formControlName="companyCode" required>
+                            <mat-option *ngFor="let field of listService.companyCodes" [value]="field">
+                                {{field.details}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngFor="let errorType of registerForm.get('companyCode').errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('COMCODE', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="accent" appearance="outline">
+                        <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
+                        <mat-select formControlName="salutation">
+                            <mat-option *ngFor="let sal of this.listService.salutationsPerson" [value]="sal">
+                                {{sal.details}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngFor="let errorType of registerForm.get('salutation').errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('SAL', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('FNAME')}}</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error *ngFor="let errorType of registerFormControl.firstName.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('FNAME', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('SNAME')}}</mat-label>
+                        <input matInput formControlName="secondName" required>
+                        <mat-error *ngFor="let errorType of registerFormControl.secondName.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('SNAME', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('TEL')}}</mat-label>
+                        <input matInput formControlName="phone">
+                        <mat-error *ngFor="let errorType of registerFormControl.phone.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('TEL', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="padding10px" style="width: 50%;">
+                    <mat-form-field color="primary" appearance="outline">
+                        <mat-label>{{dictionaryService.get('MOB')}}</mat-label>
+                        <input matInput formControlName="mobile">
+                        <mat-error *ngFor="let errorType of registerFormControl.mobile.errors | keyvalue;">
+                            <mat-icon style="margin-right: 5px;">error</mat-icon>
+                            {{errorMessageService.getError('MOB', errorType.key)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions align="center" style="padding-top: 20px;">
+        <div class="form-controls buttons-theme">
+            <span class="space"></span>
+            <button mat-raised-button (click)="register()" color="primary"
+                style="height: 40px; ">{{dictionaryService.get('CHNG')}}</button>
+            <button mat-stroked-button style="height: 40px; margin-left: 10px;"
+                (click)="close()">{{dictionaryService.get('CAN')}}</button>
+            <span class="space"></span>
+        </div>
+    </div>
+</div>

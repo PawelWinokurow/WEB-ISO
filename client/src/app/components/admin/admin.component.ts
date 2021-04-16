@@ -10,6 +10,7 @@ import { ListService } from 'src/app/services/list.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ResetPasswordAdminDialog } from 'src/app/dialogs/reset-password-admin/reset-password-admin.dialog';
 import { AccountDTO } from 'src/app/interfaces/account';
+import { EditAccountDialog } from 'src/app/dialogs/edit-account-dialog/edit-account.dialog';
 
 @Component({
   selector: 'app-admin',
@@ -115,6 +116,28 @@ export class AdminComponent implements OnInit {
           }
         });
       }
+    } catch (e) { }
+  }
+
+  async editAccount(accountToEdit) {
+    try {
+      const editAccountDialog = this.dialog.open(EditAccountDialog, {
+        data: {
+          accountToEdit
+        }
+      });
+      const accountToSend = await editAccountDialog.afterClosed().toPromise();
+      if (accountToSend) {
+        try {
+          await this.accountService.updateAccount(accountToSend).toPromise();
+          let indexAccounts = this.accounts.findIndex((el) => el.email === accountToSend.email);
+          if (indexAccounts != -1) this.accounts[indexAccounts] = accountToSend
+          let indexFilteredAccounts = this.filteredAccounts.findIndex((el) => el.email === accountToSend.email);
+          if (indexFilteredAccounts != -1) this.filteredAccounts[indexFilteredAccounts] = accountToSend
+        } catch (e) { }
+      }
+
+      await this.accountService.updateAccount<AccountDTO>(accountToEdit).toPromise();
     } catch (e) { }
   }
 
