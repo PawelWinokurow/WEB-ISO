@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div style="display: flex;">
-                                    <div class="paddinglr10px" style="width: 50%;">
+                                    <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('ADNAME')}}</mat-label>
                                             <input matInput formControlName="additionalName">
@@ -409,7 +409,10 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
                                             <textarea matInput formControlName="notes" cdkTextareaAutosize
-                                                maxlength="72" cdkAutosizeMinRows="4" cdkAutosizeMaxRows="4"></textarea>
+                                                [maxLength]="remarksLength" cdkAutosizeMinRows="4"
+                                                cdkAutosizeMaxRows="4"></textarea>
+                                            <mat-hint>{{remarksLength - payment?.get("notes")?.value?.length}}
+                                                {{dictionaryService.get('CHLEFT')}}</mat-hint>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -554,7 +557,7 @@
                                 </div>
 
                                 <div style="display: flex;">
-                                    <div class="paddinglr10px" style="width: 50%;">
+                                    <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('ADNAME')}}</mat-label>
                                             <input matInput formControlName="additionalName">
@@ -740,8 +743,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation">
-                                                <mat-option *ngFor="let sal of salutationsApplicant"
-                                                    [value]="sal">
+                                                <mat-option *ngFor="let sal of salutationsApplicant" [value]="sal">
                                                     {{sal.details}}
                                                 </mat-option>
                                             </mat-select>
@@ -813,8 +815,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation1">
-                                                <mat-option *ngFor="let sal of salutationsApplicant"
-                                                    [value]="sal">
+                                                <mat-option *ngFor="let sal of salutationsApplicant" [value]="sal">
                                                     {{sal.details}}
                                                 </mat-option>
                                             </mat-select>
@@ -905,8 +906,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('SAL')}}</mat-label>
                                             <mat-select formControlName="salutation2">
-                                                <mat-option *ngFor="let sal of salutationsApplicant"
-                                                    [value]="sal">
+                                                <mat-option *ngFor="let sal of salutationsApplicant" [value]="sal">
                                                     {{sal.details}}
                                                 </mat-option>
                                             </mat-select>
@@ -1134,8 +1134,11 @@
                                     <div class="paddinglr10px" style="width: 100%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('REMARKS')}}</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" maxlength="72"
-                                                cdkAutosizeMaxRows="4" formControlName="notes"></textarea>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4"
+                                                [maxLength]="remarksLength" cdkAutosizeMaxRows="4"
+                                                formControlName="notes"></textarea>
+                                            <mat-hint>{{remarksLength - payment?.get("notes")?.value?.length}}
+                                                {{dictionaryService.get('CHLEFT')}}</mat-hint>
                                         </mat-form-field>
                                     </div>
                                 </div>

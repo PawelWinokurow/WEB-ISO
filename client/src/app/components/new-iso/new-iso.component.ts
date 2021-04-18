@@ -54,6 +54,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
   paymentTerms;
   industryFields;
   applicantDefault;
+  remarksLength = 72;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -298,6 +299,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   setIbanRequired() {
     this.payment.get('iban').setValidators([Validators.required]);
+    this.remarksLength = 60;
+    this.payment?.get("notes")?.setValue(this.payment.get("notes").value.slice(0, this.remarksLength))
   }
 
   /**
@@ -305,6 +308,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   unsetIbanRequired() {
     this.payment.get('iban').setValidators([]);
+    this.remarksLength = 72;
   }
 
   /**

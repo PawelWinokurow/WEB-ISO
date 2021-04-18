@@ -104,7 +104,7 @@ export class DictionaryService {
 
     ['NAME', 'Name'],
     ['ADDR', 'Anschrift'],
-    ['ADNAME', 'Zus. Namensangaben (c/o)'],
+    ['ADNAME', 'Zus. Namensangaben (Name 2)'],
     ['BRTH', 'Geburtsdatum'],
     ['STR', 'Straße'],
     ['HNO', 'Hnr.'],
@@ -129,6 +129,7 @@ export class DictionaryService {
     ['PAYTERMS', 'Zahlungsbedingung'],
     ['CRELMT', 'Kreditlimit'],
     ['REMARKS', 'Bemerkungsfeld'],
+    ['CHLEFT', ' Zeichen verbleibend'],
 
     ['APP', 'Antragstellerinformationen'],
     ['APP1', '1. Antragsteller'],
@@ -136,7 +137,7 @@ export class DictionaryService {
    
     ['TITLE', 'Titel'],
     ['SAL', 'Anrede'],
-    ['COMPERS', 'Firma / Personen'],
+    ['COMPERS', 'Firma / Personen (Name 1)'],
 
     ['FNAME', 'Vorname'],
     ['SNAME', 'Nachname'],
@@ -242,7 +243,7 @@ export class DictionaryService {
     ['NAME', 'Name'],
     ['ADDR', 'Address'],
     ['ORG', 'Organization'],
-    ['ADNAME', 'Additional name'],
+    ['ADNAME', 'Additional name (Name 2)'],
     ['BRTH', 'Birth date'],
     ['STR', 'Street'],
     ['HNO', 'House no.'],
@@ -267,6 +268,7 @@ export class DictionaryService {
     ['CRELMT', 'Credit limit'],
     ['PAYTERMS', 'Terms of payment'],
     ['REMARKS', 'Remarks field'],
+    ['CHLEFT', ' characters left'],
 
     ['APP', 'Applicant information'],
     ['APP1', 'Applicant 1'],
@@ -274,7 +276,7 @@ export class DictionaryService {
 
     ['TITLE', 'Title'],
     ['SAL', 'Salutation'],
-    ['COMPERS', 'Company / Persons'],
+    ['COMPERS', 'Company / Persons (Name 1)'],
     ['FNAME', 'Name'],
     ['SNAME', 'Surname'],
     

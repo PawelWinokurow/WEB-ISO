@@ -70,7 +70,6 @@ export class CustomerService {
       bank: payment?.get("bank")?.value ?? '',
       paymentTerm: payment?.get("paymentTerm")?.value?.code ?? '',
       notes: payment?.get("notes")?.value ?? '',
-      sepa: payment?.get("sepa")?.value ?? '',
       //Uploaded files
       files: upload?.get("files")?.value ?? '',
 
@@ -124,6 +123,9 @@ export class CustomerService {
       applicantEmail2: applicant?.get('email2')?.value ?? '',
 
     };
+    console.log(data.notes)
+    data.notes += payment?.get("sepa")?.value ? ' SEPA-Mandat' : '' 
+    console.log(data.notes)
     return data;
   }
 }
