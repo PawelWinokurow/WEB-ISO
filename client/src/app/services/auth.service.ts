@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { environment } from './../../environments/environment';
 import { HttpService } from './http.service';
 import { AccountJWT } from 'src/app/interfaces/account';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
 
   timer = null;
 
-  constructor(private http: HttpClient, private httpService: HttpService) { }
+  constructor(private http: HttpClient, private httpService: HttpService, private router: Router) { }
 
   async login(identifier: string, password: string) {
     let result = await this.httpService.request<AccountJWT>(this.http.post(`${environment.serverURL}/login`,
@@ -43,7 +44,9 @@ export class AuthService {
   }
 
   isLoggedOut() {
-    return !this.isLoggedIn();
+    const isLoggedOut = !this.isLoggedIn()
+    if (isLoggedOut && this.router.url !== '/login') this.router.navigate(['/login']);
+    return isLoggedOut;
   }
 
   setAccount(account) {
