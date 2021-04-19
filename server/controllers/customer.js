@@ -2,6 +2,8 @@ const soapService = require('../services/soap');
 const databaseService = require('../services/database');
 const cryptoService = require('../services/crypto');
 const emailService = require('../services/email');
+const customerService = require('../services/customer');
+const dataService = require('../services/data');
 const errorHandler = require('../middlewares/error');
 
 
@@ -10,7 +12,7 @@ async function confirmCustomerRequest(req, res) {
     const hash = req.query.hash;
     const result = await databaseService.getCustomer(hash);
     if (result) {
-      const sapCustomer = await composeCustomer(result.customer);
+      const sapCustomer = await customerService.composeCustomer(result.customer);
       const envelope = sapCustomer.getJSONArgs();
       const sapID = await soapService.sendCustomer(envelope);
       await databaseService.setCustomerSAPID(sapID, result.hash)
@@ -40,11 +42,13 @@ async function createCustomerRequest(req, res) {
 
 async function createCustomerDirect(req, res) {
   try {
-    const customer = req.body.customer;
+    let customer = req.body.customer;
     const email = req.body.decodedAccount.email;
     const hash = cryptoService.generateHash();
+    dataService.storeFiles(customer.data.files, hash)
+    delete customer.data.files
     await databaseService.storeCustomer(hash, email, customer);
-    const sapCustomer = await composeCustomer(customer);
+    const sapCustomer = await customerService.composeCustomer(customer);
     const envelope = sapCustomer.getJSONArgs();
     const sapID = await soapService.sendCustomer(envelope);
     await databaseService.setCustomerSAPID(sapID, hash)

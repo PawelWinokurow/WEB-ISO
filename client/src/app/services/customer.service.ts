@@ -71,7 +71,7 @@ export class CustomerService {
       paymentTerm: payment?.get("paymentTerm")?.value?.code ?? '',
       notes: payment?.get("notes")?.value ?? '',
       //Uploaded files
-      files: this.stringifyFile(upload?.get("files")?.value),
+      files: upload?.get("files")?.value,
 
       //Person forms
       title: generalInformation?.get('title')?.value?.code ?? '',
@@ -123,19 +123,8 @@ export class CustomerService {
       applicantEmail2: applicant?.get('email2')?.value ?? '',
 
     };
-    console.log(data.notes)
     data.notes += payment?.get("sepa")?.value ? ' SEPA-Mandat' : '' 
-    console.log(data.notes)
     return data;
   }
 
-  stringifyFile(files) {
-    console.log(files)
-    if (files && files.length > 0) {
-
-      const reader = new FileReader();
-
-    }
-    return ''
-}
 }

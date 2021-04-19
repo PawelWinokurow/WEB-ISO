@@ -270,14 +270,15 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer dialog.
    */
   async openSendSOAPDialog() {
-    /*const customer= {
+    const customer= {
       data: this.customerService.constructObject(this.generalInformation, 
         this.contactInformation, this.payment, this.applicant, this.upload), 
         customerType: this.storageService.customerType,
       debitCreditType: this.storageService.debitCreditType
     };
     await this.customerService.sendCustomer(customer).toPromise();
-    return*/
+    return
+    /*
     const sendCustomerDialogRef = this.dialog.open(SendCustomerConfirmationDialog);
     const isDirect = await sendCustomerDialogRef.afterClosed().toPromise();
     const customer = {
@@ -291,6 +292,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     } else if (isDirect === false) {
       await this.customerService.sendCustomerRequest(customer).toPromise();
     }
+    */
     //this.router.navigate(['/preselection']);
   }
 
@@ -316,13 +318,25 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * The method allows to choose files to upload. 
    * @param $event Input event
    */
-  uploadFile($event) {
+  async uploadFile(event) {
     let files = this.upload.get('files').value;
-    for (var file of $event.target.files) {
-      files.push(file);
+    if (event.target.files && event.target.files.length) {
+      for (let file of event.target.files) {
+        let fileContent = await this.pFileReader(file)
+        files.push({content: fileContent, filename: file.name});
+      }
     }
     this.fileInput.nativeElement.value = "";
     this.upload.get('files').setValue(files);
+  }
+
+  pFileReader(file){
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();  
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   /**
