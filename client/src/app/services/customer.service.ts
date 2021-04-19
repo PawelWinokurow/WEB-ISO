@@ -123,7 +123,7 @@ export class CustomerService {
       applicantEmail2: applicant?.get('email2')?.value ?? '',
 
     };
-    data.notes += payment?.get("sepa")?.value ? ' SEPA-Mandat' : '' 
+    data.notes += payment?.get("sepa")?.value ? ' *SEPA-Mandat*' : '' 
     return data;
   }
 

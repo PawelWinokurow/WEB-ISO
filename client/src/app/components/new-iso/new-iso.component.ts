@@ -301,7 +301,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
    */
   setIbanRequired() {
     this.payment.get('iban').setValidators([Validators.required]);
-    this.remarksLength = 60;
+    this.remarksLength = 58;
     this.payment?.get("notes")?.setValue(this.payment.get("notes").value.slice(0, this.remarksLength))
   }
 

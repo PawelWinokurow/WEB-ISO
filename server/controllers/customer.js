@@ -51,6 +51,7 @@ async function createCustomerDirect(req, res) {
     const sapCustomer = await customerService.composeCustomer(customer);
     const envelope = sapCustomer.getJSONArgs();
     const sapID = await soapService.sendCustomer(envelope);
+    console.log(sapID)
     await databaseService.setCustomerSAPID(sapID, hash)
     emailService.sendCustomerAcknowledgement(email, sapID);
     res.json({

@@ -55,13 +55,13 @@ class OrganizationDebitFactory extends CustomerFactory {
     //General information
     //Interface number
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].CMDS_EI_COMPANY[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
-    //LegalForm?
+    //LegalForm
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
     //Salutation
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].TITLE_KEY = [this.customerData.data.salutation]
-    //Firma / Persons
+    //Firma / Persons (Name 1)
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].NAME1 = [this.customerData.data.orgaPersons]
-    //Additional name
+    //Additional name (Name 2)
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].NAME2 = [this.customerData.data.additionalName]
 
     //Contact
@@ -80,7 +80,7 @@ class OrganizationDebitFactory extends CustomerFactory {
     //Country
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].COUNTRY = [this.customerData.data.country]
     //Country ISO 
-    //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].COUNTRYISO = [this.customerData.data.country]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].COUNTRYISO = [this.customerData.data.country]
     //VALIDFROMDATE
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [dateToday]
 
@@ -89,13 +89,11 @@ class OrganizationDebitFactory extends CustomerFactory {
     //Mobile
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].BUS_EI_BUPA_TELEPHONE[1].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.mobile]
     //Fax
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].BUS_EI_BUPA_FAX[0].CONTACT[0].DATA[0].FAX_NO = [this.customerData.data.fax]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].BUS_EI_BUPA_FAX[0].CONTACT[0].DATA[0].FAX = [this.customerData.data.fax]
     //Email
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].BUS_EI_BUPA_ADDRESS[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].BUS_EI_BUPA_SMTP[0].CONTACT[0].DATA[0].E_MAIL = [this.customerData.data.email]
 
-
     //Payment
-
     //TAX id
     this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
     //VAT id
@@ -114,7 +112,9 @@ class OrganizationDebitFactory extends CustomerFactory {
 
     //Terms of payment
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].CMDS_EI_COMPANY[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
+    
     //Remarks?
+    this.envelope.IT_NOTE[0] = [this.customerData.data.notes]
 
     return this.envelope;
   }
