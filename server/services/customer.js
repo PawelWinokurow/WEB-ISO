@@ -49,23 +49,20 @@ class CustomerFactory {
 
     //Phone
     if (this.customerData.data.phone.length) {
-      //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TELEPHONE = ["this.customerData.data.phone"]
-      //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.phone]
-      //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
-      //TODO Phone VALID_FROM like 20201124000000
+      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.phone]
+      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
     } else {
-      //this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA = [];
+      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA = [];
     }
 
     //Mobile
-    /*
-    console.log(this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0])
+
     if (this.customerData.data.mobile.length) {
       this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.mobile]
       this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
     } else {
       this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA = [];
-    }*/
+    }
 
     //Fax
     if (this.customerData.data.fax.length) {

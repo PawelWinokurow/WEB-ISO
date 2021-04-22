@@ -262,89 +262,10 @@
                               <COUNTRY>DE</COUNTRY>
                               <COUNTRYISO>DE</COUNTRYISO>
                               <STD_NO>X</STD_NO>
-                              <TELEPHONE>07144/5012797</TELEPHONE>
+                              <TELEPHONE>tel1</TELEPHONE>
                               <EXTENSION/>
-                              <TEL_NO>+4971445012797</TEL_NO>
-                              <CALLER_NO>071445012797</CALLER_NO>
-                              <STD_RECIP/>
-                              <R_3_USER>1</R_3_USER>
-                              <HOME_FLAG>X</HOME_FLAG>
-                              <CONSNUMBER>001</CONSNUMBER>
-                              <ERRORFLAG/>
-                              <FLG_NOUSE/>
-                              <VALID_FROM>20201124000000</VALID_FROM>
-                              <VALID_TO>99991231235959</VALID_TO>
-                           </DATA>
-                           <DATAX>
-                              <COUNTRY>X</COUNTRY>
-                              <COUNTRYISO>X</COUNTRYISO>
-                              <STD_NO>X</STD_NO>
-                              <TELEPHONE>X</TELEPHONE>
-                              <EXTENSION>X</EXTENSION>
-                              <TEL_NO>X</TEL_NO>
-                              <CALLER_NO>X</CALLER_NO>
-                              <STD_RECIP>X</STD_RECIP>
-                              <R_3_USER>X</R_3_USER>
-                              <HOME_FLAG>X</HOME_FLAG>
-                              <CONSNUMBER>X</CONSNUMBER>
-                              <UPDATEFLAG>X</UPDATEFLAG>
-                              <FLG_NOUSE>X</FLG_NOUSE>
-                              <VALID_FROM>X</VALID_FROM>
-                              <VALID_TO>X</VALID_TO>
-                           </DATAX>
-                        </CONTACT>
-                        <REMARK>
-                           <CURRENT_STATE></CURRENT_STATE>
-                           <REMARKS>
-                              <item>
-                                 <TASK></TASK>
-                                 <DATA>
-                                    <LANGU></LANGU>
-                                    <LANGU_ISO></LANGU_ISO>
-                                    <COMM_NOTES></COMM_NOTES>
-                                 </DATA>
-                                 <DATAX>
-                                    <LANGU></LANGU>
-                                    <LANGU_ISO></LANGU_ISO>
-                                    <COMM_NOTES></COMM_NOTES>
-                                 </DATAX>
-                              </item>
-                           </REMARKS>
-                        </REMARK>
-                        <CURRENTLY_VALID>X</CURRENTLY_VALID>
-                        <COMM_USAGE>
-                           <CURRENT_STATE></CURRENT_STATE>
-                           <COMM_USAGES>
-                              <item>
-                                 <TASK></TASK>
-                                 <DATA_KEY>
-                                    <COMM_USAGE></COMM_USAGE>
-                                    <VALID_TO></VALID_TO>
-                                 </DATA_KEY>
-                                 <DATA>
-                                    <VALID_FROM></VALID_FROM>
-                                    <DEF_USAGE></DEF_USAGE>
-                                 </DATA>
-                                 <DATAX>
-                                    <VALID_FROM></VALID_FROM>
-                                    <DEF_USAGE></DEF_USAGE>
-                                 </DATAX>
-                                 <CURRENTLY_VALID></CURRENTLY_VALID>
-                              </item>
-                           </COMM_USAGES>
-                        </COMM_USAGE>
-                     </item>
-                     <item>
-                        <CONTACT>
-                           <TASK>I</TASK>
-                           <DATA>
-                              <COUNTRY>DE</COUNTRY>
-                              <COUNTRYISO>DE</COUNTRYISO>
-                              <STD_NO>X</STD_NO>
-                              <TELEPHONE>07144/5012797</TELEPHONE>
-                              <EXTENSION/>
-                              <TEL_NO>+4971445012797</TEL_NO>
-                              <CALLER_NO>071445012797</CALLER_NO>
+                              <TEL_NO>tel1</TEL_NO>
+                              <CALLER_NO>tel1</CALLER_NO>
                               <STD_RECIP/>
                               <R_3_USER>1</R_3_USER>
                               <HOME_FLAG>X</HOME_FLAG>
@@ -425,10 +346,10 @@
                               <COUNTRY>DE</COUNTRY>
                               <COUNTRYISO>DE</COUNTRYISO>
                               <STD_NO>X</STD_NO>
-                              <FAX>0179/7532712</FAX>
+                              <FAX></FAX>
                               <EXTENSION/>
-                              <FAX_NO>+491797532712</FAX_NO>
-                              <SENDER_NO>01797532712</SENDER_NO>
+                              <FAX_NO></FAX_NO>
+                              <SENDER_NO></SENDER_NO>
                               <FAX_GROUP/>
                               <STD_RECIP/>
                               <R_3_USER/>
@@ -509,8 +430,8 @@
                            <TASK></TASK>
                            <DATA>
                               <STD_NO>X</STD_NO>
-                              <E_MAIL>info@schempp-handel.de</E_MAIL>
-                              <EMAIL_SRCH>INFO@SCHEMPP-HANDEL.</EMAIL_SRCH>
+                              <E_MAIL></E_MAIL>
+                              <EMAIL_SRCH></EMAIL_SRCH>
                               <STD_RECIP/>
                               <R_3_USER/>
                               <ENCODE/>
@@ -582,7 +503,7 @@
                   </SMTP>
                </SMTP>
                <TIME_DEPENDENT></TIME_DEPENDENT>
-            </COMMUNICATION>
+            </COMMUNICATION>-->
             <ADDRESS>
                <CURRENT_STATE></CURRENT_STATE>
                <ADDRESSES>
@@ -752,14 +673,93 @@
                                           <COUNTRY>DE</COUNTRY>
                                           <COUNTRYISO>DE</COUNTRYISO>
                                           <STD_NO>X</STD_NO>
-                                          <TELEPHONE>07144/5012797</TELEPHONE>
+                                          <TELEPHONE>telephone</TELEPHONE>
                                           <EXTENSION></EXTENSION>
-                                          <TEL_NO>+4971445012797</TEL_NO>
+                                          <TEL_NO>telephone</TEL_NO>
                                           <CALLER_NO></CALLER_NO>
                                           <STD_RECIP></STD_RECIP>
                                           <R_3_USER>1</R_3_USER>
                                           <HOME_FLAG>X</HOME_FLAG>
                                           <CONSNUMBER>001</CONSNUMBER>
+                                          <ERRORFLAG></ERRORFLAG>
+                                          <FLG_NOUSE></FLG_NOUSE>
+                                          <VALID_FROM></VALID_FROM>
+                                          <VALID_TO>99991231235959</VALID_TO>
+                                       </DATA>
+                                       <DATAX>
+                                          <COUNTRY>X</COUNTRY>
+                                          <COUNTRYISO>X</COUNTRYISO>
+                                          <STD_NO>X</STD_NO>
+                                          <TELEPHONE>X</TELEPHONE>
+                                          <EXTENSION>X</EXTENSION>
+                                          <TEL_NO>X</TEL_NO>
+                                          <CALLER_NO>X</CALLER_NO>
+                                          <STD_RECIP>X</STD_RECIP>
+                                          <R_3_USER>X</R_3_USER>
+                                          <HOME_FLAG>X</HOME_FLAG>
+                                          <CONSNUMBER>X</CONSNUMBER>
+                                          <UPDATEFLAG>X</UPDATEFLAG>
+                                          <FLG_NOUSE>X</FLG_NOUSE>
+                                          <VALID_FROM>X</VALID_FROM>
+                                          <VALID_TO>X</VALID_TO>
+                                       </DATAX>
+                                    </CONTACT>
+                                    <REMARK>
+                                       <CURRENT_STATE>X</CURRENT_STATE>
+                                       <REMARKS>
+                                          <item>
+                                             <TASK></TASK>
+                                             <DATA>
+                                                <LANGU></LANGU>
+                                                <LANGU_ISO></LANGU_ISO>
+                                                <COMM_NOTES></COMM_NOTES>
+                                             </DATA>
+                                             <DATAX>
+                                                <LANGU></LANGU>
+                                                <LANGU_ISO></LANGU_ISO>
+                                                <COMM_NOTES></COMM_NOTES>
+                                             </DATAX>
+                                          </item>
+                                       </REMARKS>
+                                    </REMARK>
+                                    <CURRENTLY_VALID>X</CURRENTLY_VALID>
+                                    <COMM_USAGE>
+                                       <CURRENT_STATE>X</CURRENT_STATE>
+                                       <COMM_USAGES>
+                                          <item>
+                                             <TASK></TASK>
+                                             <DATA_KEY>
+                                                <COMM_USAGE></COMM_USAGE>
+                                                <VALID_TO></VALID_TO>
+                                             </DATA_KEY>
+                                             <DATA>
+                                                <VALID_FROM></VALID_FROM>
+                                                <DEF_USAGE></DEF_USAGE>
+                                             </DATA>
+                                             <DATAX>
+                                                <VALID_FROM></VALID_FROM>
+                                                <DEF_USAGE></DEF_USAGE>
+                                             </DATAX>
+                                             <CURRENTLY_VALID></CURRENTLY_VALID>
+                                          </item>
+                                       </COMM_USAGES>
+                                    </COMM_USAGE>
+                                 </item>
+                                 <item>
+                                    <CONTACT>
+                                       <TASK>I</TASK>
+                                       <DATA>
+                                          <COUNTRY>DE</COUNTRY>
+                                          <COUNTRYISO>DE</COUNTRYISO>
+                                          <STD_NO>X</STD_NO>
+                                          <TELEPHONE>mobil</TELEPHONE>
+                                          <EXTENSION></EXTENSION>
+                                          <TEL_NO>mobil</TEL_NO>
+                                          <CALLER_NO></CALLER_NO>
+                                          <STD_RECIP></STD_RECIP>
+                                          <R_3_USER>1</R_3_USER>
+                                          <HOME_FLAG>X</HOME_FLAG>
+                                          <CONSNUMBER>002</CONSNUMBER>
                                           <ERRORFLAG></ERRORFLAG>
                                           <FLG_NOUSE></FLG_NOUSE>
                                           <VALID_FROM></VALID_FROM>
