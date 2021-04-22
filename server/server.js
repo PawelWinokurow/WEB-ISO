@@ -69,4 +69,4 @@ async function startServer(app) {
   }
 }
 
-setTimeout(soapService.test, 1000)
+//setTimeout(soapService.test, 1000)

@@ -37,7 +37,7 @@ export class CustomerService {
 
   constructObject(generalInformation, contactInformation, payment, applicant, upload) {
     const data = {
-      companyCode: this.authService.account.companyCode?.code ?? '',
+      companyCode: this.authService.account.companyCode ?? '',
 
       //Shared forms
 
@@ -124,6 +124,7 @@ export class CustomerService {
 
     };
     data.notes += payment?.get("sepa")?.value ? ' *SEPA-Mandat*' : '' 
+    console.log(data)
     return data;
   }
 
