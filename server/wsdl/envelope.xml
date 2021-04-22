@@ -19,16 +19,16 @@
                             <GROUPING>01</GROUPING>
                         </BP_CONTROL>
                         <BP_CENTRALDATA>
-                            <SEARCHTERM1>BSV TEST</SEARCHTERM1>
+                            <SEARCHTERM1></SEARCHTERM1>
                             <SEARCHTERM2/>
                             <PARTNERTYPE/>
-                            <AUTHORIZATIONGROUP>0190</AUTHORIZATIONGROUP>
+                            <AUTHORIZATIONGROUP></AUTHORIZATIONGROUP>
                             <PARTNERLANGUAGE/>
                             <PARTNERLANGUAGEISO/>
                             <DATAORIGINTYPE/>
                             <CENTRALARCHIVINGFLAG/>
                             <CENTRALBLOCK/>
-                            <TITLE_KEY>0003</TITLE_KEY>
+                            <TITLE_KEY></TITLE_KEY>
                             <CONTACTALLOWANCE/>
                             <PARTNEREXTERNAL/>
                             <TITLELETTER/>
@@ -69,17 +69,17 @@
                             <FULLNAME_MAN/>
                         </BP_PERSON>
                         <BP_ORGANIZATION>
-                            <NAME1>Schempp Handel UG</NAME1>
-                            <NAME2>(haftungsbeschränkt)</NAME2>
+                            <NAME1></NAME1>
+                            <NAME2></NAME2>
                             <NAME3/>
                             <NAME4/>
-                            <LEGALFORM>02</LEGALFORM>
+                            <LEGALFORM></LEGALFORM>
                             <INDUSTRYSECTOR/>
                             <FOUNDATIONDATE></FOUNDATIONDATE>
                             <LIQUIDATIONDATE></LIQUIDATIONDATE>
-                            <LOC_NO_1>0000000</LOC_NO_1>
-                            <LOC_NO_2>00000</LOC_NO_2>
-                            <CHK_DIGIT>0</CHK_DIGIT>
+                            <LOC_NO_1></LOC_NO_1>
+                            <LOC_NO_2></LOC_NO_2>
+                            <CHK_DIGIT></CHK_DIGIT>
                             <LEGALORG/>
                         </BP_ORGANIZATION>
                         <BP_GROUP>
@@ -165,12 +165,12 @@
                         <COMMON_DATA/>
                     </TIME_DEPENDENT_DATA>
                 </COMMON>
-                <ROLE>
+                <!--<ROLE>
                     <CURRENT_STATE/>
                     <ROLES>
                         <BUS_EI_BUPA_ROLES>
                             <TASK>I</TASK>
-                            <DATA_KEY>ALONEA</DATA_KEY>
+                            <DATA_KEY></DATA_KEY>
                             <DATA>
                                 <DIFFTYPEVALUE/>
                                 <ROLECATEGORY>FLCU00</ROLECATEGORY>
@@ -215,7 +215,7 @@
                         </BUS_EI_BUPA_ROLES>
                     </ROLES>
                     <TIME_DEPENDENT>X</TIME_DEPENDENT>
-                </ROLE>
+                </ROLE>-->
                 <BANKDETAIL>
                     <CURRENT_STATE>X</CURRENT_STATE>
                     <BANKDETAILS>
@@ -223,19 +223,19 @@
                             <TASK>I</TASK>
                             <DATA_KEY>EUR0</DATA_KEY>
                             <DATA>
-                                <BANK_CTRY>DE</BANK_CTRY>
-                                <BANK_CTRYISO>DE</BANK_CTRYISO>
-                                <BANK_KEY>60440073</BANK_KEY>
-                                <BANK_ACCT>7301740</BANK_ACCT>
+                                <BANK_CTRY></BANK_CTRY>
+                                <BANK_CTRYISO></BANK_CTRYISO>
+                                <BANK_KEY></BANK_KEY>
+                                <BANK_ACCT></BANK_ACCT>
                                 <CTRL_KEY/>
                                 <BANK_REF/>
                                 <ACCOUNTHOLDER/>
                                 <COLL_AUTH/>
                                 <EXTERNALBANKID/>
                                 <BANKACCOUNTNAME/>
-                                <IBAN>DE83604400730730174000</IBAN>
-                                <IBAN_FROM_DATE>2020-11-24</IBAN_FROM_DATE>
-                                <BANKDETAILVALIDFROM>2020-11-24</BANKDETAILVALIDFROM>
+                                <IBAN></IBAN>
+                                <IBAN_FROM_DATE></IBAN_FROM_DATE>
+                                <BANKDETAILVALIDFROM></BANKDETAILVALIDFROM>
                                 <BANKDETAILVALIDTO>9999-12-31</BANKDETAILVALIDTO>
                                 <BANKDETAILMOVEDATE></BANKDETAILMOVEDATE>
                                 <BANKDETAILMOVEID/>
@@ -277,8 +277,8 @@
                         <BUS_EI_BUPA_INDUSTRYSECTOR>
                             <TASK>I</TASK>
                             <DATA_KEY>
-                                <KEYSYSTEM>0001</KEYSYSTEM>
-                                <IND_SECTOR>A5</IND_SECTOR>
+                                <KEYSYSTEM></KEYSYSTEM>
+                                <IND_SECTOR></IND_SECTOR>
                             </DATA_KEY>
                             <DATA>
                                 <IND_DEFAULT/>
@@ -299,16 +299,16 @@
                         <BUS_EI_BUPA_TAXNUMBER>
                             <TASK>I</TASK>
                             <DATA_KEY>
-                                <TAXTYPE>DE0</TAXTYPE>
-                                <TAXNUMBER>DE123121111</TAXNUMBER>
+                                <TAXTYPE></TAXTYPE>
+                                <TAXNUMBER></TAXNUMBER>
                                 <TAXNUMXL/>
                             </DATA_KEY>
                         </BUS_EI_BUPA_TAXNUMBER>
                         <BUS_EI_BUPA_TAXNUMBER>
                             <TASK>I</TASK>
                             <DATA_KEY>
-                                <TAXTYPE>DE4</TAXTYPE>
-                                <TAXNUMBER>71352/01296</TAXNUMBER>
+                                <TAXTYPE></TAXTYPE>
+                                <TAXNUMBER></TAXNUMBER>
                                 <TAXNUMXL/>
                             </DATA_KEY>
                         </BUS_EI_BUPA_TAXNUMBER>
@@ -379,32 +379,32 @@
                         <BUS_EI_BUPA_ADDRESS>
                             <TASK>I</TASK>
                             <DATA_KEY>
-                                <GUID>00027368000000000000000000000000</GUID>
+                                <GUID></GUID>
                                 <OPERATION/>
                             </DATA_KEY>
                             <DATA>
                                 <POSTAL>
                                     <DATA>
                                         <STANDARDADDRESS>X</STANDARDADDRESS>
-                                        <C_O_NAME>c/o 100001146</C_O_NAME>
-                                        <CITY>Kirchberg-Neuhof</CITY>
+                                        <C_O_NAME></C_O_NAME>
+                                        <CITY></CITY>
                                         <DISTRICT/>
                                         <REGIOGROUP/>
-                                        <POSTL_COD1>71737</POSTL_COD1>
-                                        <POSTL_COD2>85327</POSTL_COD2>
+                                        <POSTL_COD1></POSTL_COD1>
+                                        <POSTL_COD2></POSTL_COD2>
                                         <POSTL_COD3/>
                                         <PCODE1_EXT/>
                                         <PCODE2_EXT/>
                                         <PCODE3_EXT/>
-                                        <PO_BOX>85314</PO_BOX>
+                                        <PO_BOX></PO_BOX>
                                         <PO_W_O_NO/>
                                         <PO_BOX_CIT/>
                                         <PO_BOX_REG/>
                                         <POBOX_CTRY/>
                                         <PO_CTRYISO/>
-                                        <STREET>Buchenweg</STREET>
+                                        <STREET></STREET>
                                         <STR_ABBR/>
-                                        <HOUSE_NO>9</HOUSE_NO>
+                                        <HOUSE_NO></HOUSE_NO>
                                         <HOUSE_NO2/>
                                         <HOUSE_NO3/>
                                         <STR_SUPPL1/>
@@ -414,8 +414,8 @@
                                         <BUILDING/>
                                         <FLOOR/>
                                         <ROOM_NO/>
-                                        <COUNTRY>DE</COUNTRY>
-                                        <COUNTRYISO>DE</COUNTRYISO>
+                                        <COUNTRY></COUNTRY>
+                                        <COUNTRYISO></COUNTRYISO>
                                         <REGION/>
                                         <TIME_ZONE>CET</TIME_ZONE>
                                         <TAXJURCODE/>
@@ -429,7 +429,7 @@
                                         <DONT_USE_S/>
                                         <MOVE_DATE></MOVE_DATE>
                                         <MOVE_ADDRESS/>
-                                        <VALIDFROMDATE>2020-11-24</VALIDFROMDATE>
+                                        <VALIDFROMDATE></VALIDFROMDATE>
                                         <VALIDTODATE>9999-12-31</VALIDTODATE>
                                         <MOVE_ADDR_GUID/>
                                         <CITY_NO/>
@@ -524,17 +524,17 @@
                                                         <COUNTRY>DE</COUNTRY>
                                                         <COUNTRYISO>DE</COUNTRYISO>
                                                         <STD_NO>X</STD_NO>
-                                                        <TELEPHONE>07144/5012797</TELEPHONE>
+                                                        <TELEPHONE></TELEPHONE>
                                                         <EXTENSION/>
-                                                        <TEL_NO>+4971445012797</TEL_NO>
-                                                        <CALLER_NO>071445012797</CALLER_NO>
+                                                        <TEL_NO></TEL_NO>
+                                                        <CALLER_NO></CALLER_NO>
                                                         <STD_RECIP/>
                                                         <R_3_USER>1</R_3_USER>
                                                         <HOME_FLAG>X</HOME_FLAG>
                                                         <CONSNUMBER>001</CONSNUMBER>
                                                         <ERRORFLAG/>
                                                         <FLG_NOUSE/>
-                                                        <VALID_FROM>20201124000000</VALID_FROM>
+                                                        <VALID_FROM></VALID_FROM>
                                                         <VALID_TO>99991231235959</VALID_TO>
                                                     </DATA>
                                                     <DATAX>
@@ -572,17 +572,17 @@
                                                         <COUNTRY>DE</COUNTRY>
                                                         <COUNTRYISO>DE</COUNTRYISO>
                                                         <STD_NO/>
-                                                        <TELEPHONE>0179/7532708</TELEPHONE>
+                                                        <TELEPHONE></TELEPHONE>
                                                         <EXTENSION/>
-                                                        <TEL_NO>+491797532708</TEL_NO>
-                                                        <CALLER_NO>01797532708</CALLER_NO>
+                                                        <TEL_NO></TEL_NO>
+                                                        <CALLER_NO></CALLER_NO>
                                                         <STD_RECIP>X</STD_RECIP>
                                                         <R_3_USER>3</R_3_USER>
                                                         <HOME_FLAG/>
                                                         <CONSNUMBER>002</CONSNUMBER>
                                                         <ERRORFLAG/>
                                                         <FLG_NOUSE/>
-                                                        <VALID_FROM>20201124000000</VALID_FROM>
+                                                        <VALID_FROM></VALID_FROM>
                                                         <VALID_TO>99991231235959</VALID_TO>
                                                     </DATA>
                                                     <DATAX>
@@ -625,10 +625,10 @@
                                                         <COUNTRY>DE</COUNTRY>
                                                         <COUNTRYISO>DE</COUNTRYISO>
                                                         <STD_NO>X</STD_NO>
-                                                        <FAX>0179/7532712</FAX>
+                                                        <FAX></FAX>
                                                         <EXTENSION/>
-                                                        <FAX_NO>+491797532712</FAX_NO>
-                                                        <SENDER_NO>01797532712</SENDER_NO>
+                                                        <FAX_NO></FAX_NO>
+                                                        <SENDER_NO></SENDER_NO>
                                                         <FAX_GROUP/>
                                                         <STD_RECIP/>
                                                         <R_3_USER/>
@@ -636,7 +636,7 @@
                                                         <CONSNUMBER>001</CONSNUMBER>
                                                         <ERRORFLAG/>
                                                         <FLG_NOUSE/>
-                                                        <VALID_FROM>20201124000000</VALID_FROM>
+                                                        <VALID_FROM></VALID_FROM>
                                                         <VALID_TO>99991231235959</VALID_TO>
                                                     </DATA>
                                                     <DATAX>
@@ -686,8 +686,8 @@
                                                     <TASK>I</TASK>
                                                     <DATA>
                                                         <STD_NO>X</STD_NO>
-                                                        <E_MAIL>info@schempp-handel.de</E_MAIL>
-                                                        <EMAIL_SRCH>INFO@SCHEMPP-HANDEL.</EMAIL_SRCH>
+                                                        <E_MAIL></E_MAIL>
+                                                        <EMAIL_SRCH></EMAIL_SRCH>
                                                         <STD_RECIP/>
                                                         <R_3_USER/>
                                                         <ENCODE/>
@@ -696,7 +696,7 @@
                                                         <CONSNUMBER>001</CONSNUMBER>
                                                         <ERRORFLAG/>
                                                         <FLG_NOUSE/>
-                                                        <VALID_FROM>20201124000000</VALID_FROM>
+                                                        <VALID_FROM></VALID_FROM>
                                                         <VALID_TO>99991231235959</VALID_TO>
                                                     </DATA>
                                                     <DATAX>
@@ -1389,8 +1389,8 @@
                         <STKZU/>
                         <XZEMP/>
                         <VBUND/>
-                        <STCEG>DE123121111</STCEG>
-                        <GFORM>02</GFORM>
+                        <STCEG></STCEG>
+                        <GFORM></GFORM>
                         <BRAN1/>
                         <BRAN2/>
                         <BRAN3/>
@@ -1422,7 +1422,7 @@
                         <FITYP/>
                         <STCDT/>
                         <STCD3/>
-                        <STCD4>71352/01296</STCD4>
+                        <STCD4></STCD4>
                         <XICMS/>
                         <XXIPI/>
                         <XSUBT/>
@@ -1471,7 +1471,7 @@
                         <DEAR3/>
                         <DEAR5/>
                         <WERKS/>
-                        <ADRNR>0000027369</ADRNR>
+                        <ADRNR></ADRNR>
                         <KNA1_EEW_CUST/>
                         <RULE_EXCLUSION/>
                         <ALC/>
@@ -1659,7 +1659,7 @@
                             <PO_CTRYISO/>
                             <DELIV_DIS/>
                             <TRANSPZONE/>
-                            <STREET/>
+                            <STREET></STREET>
                             <STREET_NO/>
                             <STR_ABBR/>
                             <HOUSE_NO/>
@@ -1903,35 +1903,35 @@
                     <CMDS_EI_COMPANY>
                         <TASK/>
                         <DATA_KEY>
-                            <BUKRS>1192</BUKRS>
+                            <BUKRS></BUKRS>
                         </DATA_KEY>
                         <DATA>
                             <SPERR/>
                             <LOEVM/>
-                            <ZUAWA>002</ZUAWA>
-                            <AKONT>0012000000</AKONT>
+                            <ZUAWA></ZUAWA>
+                            <AKONT></AKONT>
                             <BEGRU/>
                             <VZSKZ/>
-                            <ZWELS>JS</ZWELS>
+                            <ZWELS></ZWELS>
                             <XVERR/>
                             <ZAHLS/>
-                            <ZTERM>9999</ZTERM>
+                            <ZTERM></ZTERM>
                             <EIKTO/>
                             <ZSABE/>
                             <KVERM/>
                             <FDGRV/>
-                            <BUSAB>01</BUSAB>
+                            <BUSAB></BUSAB>
                             <ZINDT></ZINDT>
                             <ZINRT>00</ZINRT>
                             <DATLZ></DATLZ>
                             <XDEZV/>
                             <WEBTR>0.0</WEBTR>
                             <KULTG>0</KULTG>
-                            <TOGRU>DEB1</TOGRU>
+                            <TOGRU></TOGRU>
                             <HBKID/>
                             <XPORE/>
                             <BLNKZ/>
-                            <ALTKN>164830</ALTKN>
+                            <ALTKN></ALTKN>
                             <ZGRUP/>
                             <URLID/>
                             <MGRUP/>
@@ -1964,7 +1964,7 @@
                             <VERDT></VERDT>
                             <PERKZ/>
                             <REMIT/>
-                            <XZVER>X</XZVER>
+                            <XZVER></XZVER>
                             <EKVBD/>
                             <SREGL/>
                             <XKNZB/>
@@ -2054,13 +2054,13 @@
                                         <MABER/>
                                     </DATA_KEY>
                                     <DATA>
-                                        <MAHNA>B310</MAHNA>
+                                        <MAHNA></MAHNA>
                                         <MANSP/>
                                         <MADAT></MADAT>
                                         <MAHNS>0</MAHNS>
                                         <KNRMA/>
                                         <GMVDT></GMVDT>
-                                        <BUSAB>01</BUSAB>
+                                        <BUSAB></BUSAB>
                                     </DATA>
                                     <DATAX>
                                         <MAHNA/>

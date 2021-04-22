@@ -64,8 +64,6 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.titles = this.listService.titles;
     this.countries = this.listService.countries;
     this.salutationsApplicant = this.listService.salutationsPerson;
-    
-    
   }
 
   ngOnInit(): void {

@@ -11,6 +11,7 @@ const config = require('dotenv').config({ path: './config.env' })
 const databaseService = require('./services/database');
 const recaptchaController = require('./controllers/recaptcha');
 const testDataService = require('./services/test_data');
+const soapService = require('./services/soap');
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -65,5 +66,6 @@ async function startServer(app) {
         databaseService.removeOldCustomers();
       });
     */
+   setTimeout(soapService.test, 2)
   }
 }
