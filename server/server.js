@@ -66,6 +66,5 @@ async function startServer(app) {
         databaseService.removeOldCustomers();
       });
     */
-   setTimeout(soapService.test, 2)
   }
 }
