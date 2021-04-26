@@ -320,8 +320,8 @@ export class NewISOComponent implements OnInit, OnDestroy {
     let files = this.upload.get('files').value;
     if (event.target.files && event.target.files.length) {
       for (let file of event.target.files) {
-        let fileContent = await this.pFileReader(file)
-        files.push({content: fileContent, filename: file.name});
+        let fileContent = <string> await this.pFileReader(file)
+        files.push({content: fileContent, filename: file.name, length: file.size});
       }
     }
     this.fileInput.nativeElement.value = "";

@@ -30,6 +30,8 @@ async function createCustomerRequest(req, res) {
     const customer = req.body.customer;
     const email = req.body.decodedAccount.email;
     const hash = cryptoService.generateHash();
+    dataService.storeFiles(customer.data.files, hash)
+    delete customer.data.files
     await databaseService.storeCustomer(hash, email, customer);
     emailService.sendCustomerConfirmation(email, hash);
     res.json({
@@ -45,14 +47,16 @@ async function createCustomerDirect(req, res) {
     let customer = req.body.customer;
     const email = req.body.decodedAccount.email;
     const hash = cryptoService.generateHash();
-    dataService.storeFiles(customer.data.files, hash)
-    delete customer.data.files
-    await databaseService.storeCustomer(hash, email, customer);
+    
     const sapCustomer = await customerService.composeCustomer(customer);
     const envelope = sapCustomer.getJSONArgs();
     const sapID = await soapService.sendCustomer(envelope);
-    await databaseService.setCustomerSAPID(sapID, hash)
+    //await databaseService.setCustomerSAPID(sapID, hash)
     //emailService.sendCustomerAcknowledgement(email, sapID);
+
+    //dataService.storeFiles(customer.data.files, hash)
+    //delete customer.data.files
+    //await databaseService.storeCustomer(hash, email, customer);
     res.json({
       message: 'CUSISSND',
     });

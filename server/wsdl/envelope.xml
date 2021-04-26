@@ -251,7 +251,7 @@
                   </DATAX>
                </COMMON>
             </TAXNUMBER>
-            <COMMUNICATION>
+            <!--<COMMUNICATION>
                <PHONE>
                   <CURRENT_STATE>X</CURRENT_STATE>
                   <PHONE>
@@ -259,21 +259,21 @@
                         <CONTACT>
                            <TASK>I</TASK>
                            <DATA>
-                              <COUNTRY>DE</COUNTRY>
-                              <COUNTRYISO>DE</COUNTRYISO>
+                              <COUNTRY></COUNTRY>
+                              <COUNTRYISO></COUNTRYISO>
                               <STD_NO>X</STD_NO>
-                              <TELEPHONE>tel1</TELEPHONE>
+                              <TELEPHONE></TELEPHONE>
                               <EXTENSION/>
-                              <TEL_NO>tel1</TEL_NO>
-                              <CALLER_NO>tel1</CALLER_NO>
+                              <TEL_NO></TEL_NO>
+                              <CALLER_NO></CALLER_NO>
                               <STD_RECIP/>
                               <R_3_USER>1</R_3_USER>
                               <HOME_FLAG>X</HOME_FLAG>
                               <CONSNUMBER>001</CONSNUMBER>
                               <ERRORFLAG/>
                               <FLG_NOUSE/>
-                              <VALID_FROM>20201124000000</VALID_FROM>
-                              <VALID_TO>99991231235959</VALID_TO>
+                              <VALID_FROM></VALID_FROM>
+                              <VALID_TO></VALID_TO>
                            </DATA>
                            <DATAX>
                               <COUNTRY>X</COUNTRY>
@@ -666,16 +666,17 @@
                            <PHONE>
                               <CURRENT_STATE>X</CURRENT_STATE>
                               <PHONE>
+                              <!--Phones-->
                                  <item>
                                     <CONTACT>
                                        <TASK>I</TASK>
                                        <DATA>
-                                          <COUNTRY>DE</COUNTRY>
-                                          <COUNTRYISO>DE</COUNTRYISO>
+                                          <COUNTRY></COUNTRY>
+                                          <COUNTRYISO></COUNTRYISO>
                                           <STD_NO>X</STD_NO>
-                                          <TELEPHONE>telephone</TELEPHONE>
+                                          <TELEPHONE></TELEPHONE>
                                           <EXTENSION></EXTENSION>
-                                          <TEL_NO>telephone</TEL_NO>
+                                          <TEL_NO></TEL_NO>
                                           <CALLER_NO></CALLER_NO>
                                           <STD_RECIP></STD_RECIP>
                                           <R_3_USER>1</R_3_USER>
@@ -684,7 +685,7 @@
                                           <ERRORFLAG></ERRORFLAG>
                                           <FLG_NOUSE></FLG_NOUSE>
                                           <VALID_FROM></VALID_FROM>
-                                          <VALID_TO>99991231235959</VALID_TO>
+                                          <VALID_TO></VALID_TO>
                                        </DATA>
                                        <DATAX>
                                           <COUNTRY>X</COUNTRY>
@@ -749,21 +750,21 @@
                                     <CONTACT>
                                        <TASK>I</TASK>
                                        <DATA>
-                                          <COUNTRY>DE</COUNTRY>
-                                          <COUNTRYISO>DE</COUNTRYISO>
+                                          <COUNTRY></COUNTRY>
+                                          <COUNTRYISO></COUNTRYISO>
                                           <STD_NO>X</STD_NO>
-                                          <TELEPHONE>mobil</TELEPHONE>
+                                          <TELEPHONE></TELEPHONE>
                                           <EXTENSION></EXTENSION>
-                                          <TEL_NO>mobil</TEL_NO>
+                                          <TEL_NO></TEL_NO>
                                           <CALLER_NO></CALLER_NO>
                                           <STD_RECIP></STD_RECIP>
-                                          <R_3_USER>1</R_3_USER>
+                                          <R_3_USER>3</R_3_USER>
                                           <HOME_FLAG>X</HOME_FLAG>
                                           <CONSNUMBER>002</CONSNUMBER>
                                           <ERRORFLAG></ERRORFLAG>
                                           <FLG_NOUSE></FLG_NOUSE>
                                           <VALID_FROM></VALID_FROM>
-                                          <VALID_TO>99991231235959</VALID_TO>
+                                          <VALID_TO></VALID_TO>
                                        </DATA>
                                        <DATAX>
                                           <COUNTRY>X</COUNTRY>
@@ -920,7 +921,7 @@
                                        <TASK>I</TASK>
                                        <DATA>
                                           <STD_NO>X</STD_NO>
-                                          <E_MAIL>SOME_EMAIL@MAIL.de</E_MAIL>
+                                          <E_MAIL></E_MAIL>
                                           <EMAIL_SRCH></EMAIL_SRCH>
                                           <STD_RECIP></STD_RECIP>
                                           <R_3_USER></R_3_USER>
@@ -2107,7 +2108,7 @@
       </item>
    </IT_BDS>
    <IT_NOTE>
-      <item></item>
+      <item>asdasdas</item>
    </IT_NOTE>
    <IV_LANGU></IV_LANGU>
    <IV_LOGSYS></IV_LOGSYS>

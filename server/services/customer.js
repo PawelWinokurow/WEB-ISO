@@ -12,6 +12,7 @@ class CustomerFactory {
     this.ENVELOPE_URL = ENVELOPE_URL
     this.dateToday = formatDateService.formatDate(new Date());
     this.dateTodayValidation = formatDateService.formatDateValidation(new Date());
+    this.dateValidTo = '99991231000000';
   }
 
   build() {
@@ -48,37 +49,49 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [this.dateToday]
 
     //Phone
-    if (this.customerData.data.phone.length) {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.phone]
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
-    } else {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA = [];
-    }
-
+    if (this.customerData.data.phone.length) this.setPhone();
     //Mobile
-
-    if (this.customerData.data.mobile.length) {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.mobile]
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
-    } else {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA = [];
-    }
-
+    if (this.customerData.data.mobile.length) this.setMobile();
     //Fax
-    if (this.customerData.data.fax.length) {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].FAX = [this.customerData.data.fax]
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
-    } else {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA = [];
-    }
-
+    if (this.customerData.data.fax.length) this.setFax();
     //Email
-    if (this.customerData.data.email.length) {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].E_MAIL = [this.customerData.data.email]
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
-    } else {
-      this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA = [];
-    }
+    if (this.customerData.data.email.length) this.setEmail()
+  }
+
+  setPhone() {
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].COUNTRY = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].COUNTRYISO = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.phone]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].TEL_NO = [this.customerData.data.phone]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].CALLER_NO = [this.customerData.data.phone]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[0].CONTACT[0].DATA[0].VALID_TO = [this.dateValidTo]
+  }
+
+  setMobile() {
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].COUNTRY = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].COUNTRYISO = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].TELEPHONE = [this.customerData.data.mobile]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].TEL_NO = [this.customerData.data.mobile]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].CALLER_NO = [this.customerData.data.mobile]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].PHONE[0].PHONE[0].item[1].CONTACT[0].DATA[0].VALID_TO = [this.dateValidTo]
+  }
+
+  setFax() {
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].COUNTRY = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].COUNTRYISO = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].FAX = [this.customerData.data.fax]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].FAX[0].FAX[0].item[0].CONTACT[0].DATA[0].VALID_TO = [this.dateValidTo]
+  }
+
+  setEmail() {
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].COUNTRY = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].COUNTRYISO = 'DE'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].E_MAIL = [this.customerData.data.email]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].VALID_FROM = [this.dateTodayValidation]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].VALID_TO = [this.dateValidTo]
   }
 
   setPaymentCreditInformation() {
@@ -87,7 +100,7 @@ class CustomerFactory {
     //VAT id
     this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].item[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.vatId]
-    
+
     //Branche
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].item[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
     //Branchencode
@@ -102,7 +115,7 @@ class CustomerFactory {
     //Terms of payment
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
     //Remarks?
-    this.envelope.IT_NOTE[0] = [this.customerData.data.notes]
+    this.envelope.IT_NOTE[0].item = [this.customerData.data.notes]
   }
 
   setGeneralInformation() {
@@ -112,6 +125,9 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
     //Interface number
     this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
+
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGE = 'D';
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGEISO = 'DE';
   }
 
   setPaymentDebitInformation() {
@@ -121,6 +137,8 @@ class CustomerFactory {
 
   setGeneralPersonInformation() {
     this.setGeneralInformation();
+    //CATEGORY 1 is person, 2 is organization
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CONTROL[0].CATEGORY = '1';
     //SEARCHTERM1 = NAME1
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].SEARCHTERM1 = [this.customerData.data.secondName]
     //Salutation
@@ -133,10 +151,14 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_PERSON[0].LASTNAME = [this.customerData.data.secondName]
     //Birthdate
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_PERSON[0].BIRTHDATE = [this.customerData.data.birthDate]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_PERSON[0].CORRESPONDLANGUAGE = 'D'
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_PERSON[0].CORRESPONDLANGUAGEISO = 'DE'
   }
 
   setGeneralOrganizationInformation() {
     this.setGeneralInformation();
+    //CATEGORY 1 is person, 2 is organization
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CONTROL[0].CATEGORY = '2';
     //SEARCHTERM1 = NAME1
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].SEARCHTERM1 = [this.customerData.data.orgaPerson]
     //Salutation
@@ -145,6 +167,38 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].NAME1 = [this.customerData.data.orgaPersons]
     //Additional name (Name 2)
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].NAME2 = [this.customerData.data.additionalName]
+  }
+
+  stringChop(str, size){
+    if (str == null)
+       return [];
+       str = String(str);
+       return size > 0 ? str.match(new RegExp('.{1,' + size + '}', 'g')) : [{LINE: str}];
+ }
+
+  setFiles() {
+    if (this.customerData.data.files.length) {
+      for (let i = 0; i < this.customerData.data.files.length; i++) {
+        const file = this.customerData.data.files[i]
+        let base64String = file.content.replace(/^data:.*,/, '')
+
+        let lines = this.stringChop(base64String, 1022)
+        console.log(lines)
+        let file_xml = {
+          FILENAME: file.filename,
+          CONTENT: [{}],
+          FILELENGTH: base64String.length
+        }
+        file_xml.CONTENT.push({})
+
+        
+        for (let i = 0; i <  lines.length; i++) {
+          file_xml.CONTENT[0].item[i] = lines[i];
+        }
+        console.log(lines[0])
+        this.envelope.IT_BDS[0].item[i] = file_xml
+      } 
+    }
   }
 }
 
@@ -157,6 +211,7 @@ class PersonDebitFactory extends CustomerFactory {
     this.setGeneralPersonInformation();
     this.setContactInformation();
     this.setPaymentDebitInformation();
+    //this.setFiles();
     return this.envelope;
   }
 }
@@ -170,6 +225,7 @@ class PersonCreditFactory extends CustomerFactory {
     this.setGeneralPersonInformation();
     this.setContactInformation();
     this.setPaymentCreditInformation();
+    ///this.setFiles();
     return this.envelope;
   }
 }
@@ -183,6 +239,7 @@ class OrganizationDebitFactory extends CustomerFactory {
     this.setGeneralOrganizationInformation();
     this.setContactInformation();
     this.setPaymentDebitInformation();
+    //this.setFiles();
     return this.envelope;
   }
 }
@@ -196,6 +253,7 @@ class OrganizationCreditFactory extends CustomerFactory {
     this.setGeneralOrganizationInformation();
     this.setContactInformation();
     this.setPaymentCreditInformation();
+    //this.setFiles();
     return this.envelope;
   }
 }
