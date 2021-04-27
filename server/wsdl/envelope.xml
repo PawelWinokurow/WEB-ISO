@@ -2108,11 +2108,11 @@
       </item>
    </IT_BDS>
    <IT_NOTE>
-      <item>asdasdas</item>
+      <item></item>
    </IT_NOTE>
    <IV_LANGU></IV_LANGU>
    <IV_LOGSYS></IV_LOGSYS>
-   <IV_PROCESS>00001</IV_PROCESS>
+   <IV_PROCESS></IV_PROCESS>
    <IV_RESULT_ADDRESS_CHECK></IV_RESULT_ADDRESS_CHECK>
    <IV_SMTP></IV_SMTP>
    <IV_XDCHECK></IV_XDCHECK>

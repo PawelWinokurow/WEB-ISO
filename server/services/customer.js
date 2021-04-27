@@ -96,9 +96,9 @@ class CustomerFactory {
 
   setPaymentCreditInformation() {
     //TAX id
-    this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
+    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
     //VAT id
-    this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
+    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].item[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.vatId]
 
     //Branche
@@ -113,18 +113,18 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].item[0].DATA[0].BANKDETAILVALIDFROM = [this.dateToday]
 
     //Terms of payment
-    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
+    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
     //Remarks?
     this.envelope.IT_NOTE[0].item = [this.customerData.data.notes]
   }
 
   setGeneralInformation() {
     //Buchungskreis
-    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA_KEY[0].BUKRS = [this.customerData.data.companyCode]
+    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA_KEY[0].BUKRS = [this.customerData.data.companyCode]
     //LegalForm
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
     //Interface number
-    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
+    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
 
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGE = 'D';
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGEISO = 'DE';
@@ -173,32 +173,30 @@ class CustomerFactory {
     if (str == null)
        return [];
        str = String(str);
-       return size > 0 ? str.match(new RegExp('.{1,' + size + '}', 'g')) : [{LINE: str}];
+       return size > 0 ? str.match(new RegExp('.{1,' + size + '}', 'g')) : [str];
  }
 
   setFiles() {
     if (this.customerData.data.files.length) {
       for (let i = 0; i < this.customerData.data.files.length; i++) {
-        const file = this.customerData.data.files[i]
+        let file = this.customerData.data.files[i]
         let base64String = file.content.replace(/^data:.*,/, '')
-
-        let lines = this.stringChop(base64String, 1022)
-        console.log(lines)
+        let lines = this.stringChop(base64String, 76).map(str => {return {LINE: [str]}})
         let file_xml = {
           FILENAME: file.filename,
-          CONTENT: [{}],
-          FILELENGTH: base64String.length
+          FILELENGTH: file.length,
+          CONTENT: [{item: lines} ]
         }
-        file_xml.CONTENT.push({})
 
-        
-        for (let i = 0; i <  lines.length; i++) {
-          file_xml.CONTENT[0].item[i] = lines[i];
-        }
-        console.log(lines[0])
         this.envelope.IT_BDS[0].item[i] = file_xml
-      } 
+      }
+       
+      //console.log(this.envelope.IT_BDS[0])
     }
+  }
+
+  setProcess(process_number) {
+    this.envelope.IV_PROCESS = [process_number]
   }
 }
 
@@ -208,10 +206,11 @@ class PersonDebitFactory extends CustomerFactory {
   }
 
   getJSONArgs() {
+    this.setProcess('00001')
     this.setGeneralPersonInformation();
     this.setContactInformation();
     this.setPaymentDebitInformation();
-    //this.setFiles();
+    this.setFiles();
     return this.envelope;
   }
 }
@@ -222,10 +221,11 @@ class PersonCreditFactory extends CustomerFactory {
   }
 
   getJSONArgs() {
+    this.setProcess('00003')
     this.setGeneralPersonInformation();
     this.setContactInformation();
     this.setPaymentCreditInformation();
-    ///this.setFiles();
+    this.setFiles();
     return this.envelope;
   }
 }
@@ -236,10 +236,11 @@ class OrganizationDebitFactory extends CustomerFactory {
   }
 
   getJSONArgs() {
+    this.setProcess('00001')
     this.setGeneralOrganizationInformation();
     this.setContactInformation();
     this.setPaymentDebitInformation();
-    //this.setFiles();
+    this.setFiles();
     return this.envelope;
   }
 }
@@ -250,15 +251,14 @@ class OrganizationCreditFactory extends CustomerFactory {
   }
 
   getJSONArgs() {
+    this.setProcess('00003')
     this.setGeneralOrganizationInformation();
     this.setContactInformation();
     this.setPaymentCreditInformation();
-    //this.setFiles();
+    this.setFiles();
     return this.envelope;
   }
 }
-
-
 
 function composeCustomer(customerData) {
   let customerFactory = null

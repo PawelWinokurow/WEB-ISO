@@ -124,7 +124,6 @@ export class CustomerService {
 
     };
     data.notes += payment?.get("sepa")?.value ? ' *SEPA-Mandat*' : '' 
-    console.log(data)
     return data;
   }
 
