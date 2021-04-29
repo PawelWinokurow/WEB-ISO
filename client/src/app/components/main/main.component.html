@@ -34,8 +34,8 @@
               {{ dictionaryService.get('LANG') }}
             </div>
             <div mat-list-item class="flex-column" style="margin: 10px">
-              <mat-button-toggle-group [value]="selectedLanguage" mat-list-item value="EN" class="toggle-theme"
-                (change)="dictionaryService.switchLanguage()">
+              <mat-button-toggle-group [value]="dictionaryService.currentLanguage" mat-list-item value="EN" class="toggle-theme"
+                (change)="switchLanguage()">
                 <mat-button-toggle value="EN">EN</mat-button-toggle>
                 <mat-button-toggle value="DE">DE</mat-button-toggle>
               </mat-button-toggle-group>
