@@ -9,7 +9,7 @@ import { DictionaryService } from './dictionary.service';
 })
 export class StorageService {
 
-  constructor(private dictionaryService: DictionaryService) { }
+  constructor() { }
 
   /**
    * Resets preselection types.

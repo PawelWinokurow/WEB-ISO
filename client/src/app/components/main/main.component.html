@@ -8,9 +8,6 @@
     </div>
     <div *ngIf="authService.isLoggedIn() && router.url === '/iso' || router.url === '/preselection'"
       style="padding-left:10px;">
-      <!--<span class="mat-h2">
-        {{customerTypeName}} - {{debitCreditTypeName}}
-      </span>-->
     </div>
     <span class="space"></span>
     <div class="btn-group" dropdown style="margin-right: 20px;" triggers="hover" #dp="bs-dropdown" [insideClick]="true"

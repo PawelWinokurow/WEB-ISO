@@ -84,8 +84,10 @@ export class DictionaryService {
     ['CUSTYPE', 'Kundentyp'],
     ['PER', 'Person'],
     ['ORG', 'Organisation'],
+    ['PERORG', 'Person / Organization'],
     ['DEB', 'Debitor'],
     ['CRE', 'Kreditor'],
+    ['DEBCRE', 'Debitor / Kreditor'],
     ['COMCODE', 'Buchungskreis'],
 
     ['LEGFRM', 'Rechtsform'],
@@ -222,8 +224,11 @@ export class DictionaryService {
     
     ['CUSTYPE', 'Customer type'],
     ['PER', 'Person'],
+    ['ORG', 'Organization'],
+    ['PERORG', 'Person / Organization'],
     ['DEB', 'Debitor'],
     ['CRE', 'Creditor'],
+    ['DEBCRE', 'Debitor / Creditor'],
     ['COMCODE', 'Comapany code'],
     
     ['LEGFRM', 'Legal form'],
@@ -238,7 +243,6 @@ export class DictionaryService {
 
     ['NAME', 'Name'],
     ['ADDR', 'Address'],
-    ['ORG', 'Organization'],
     //['ADNAME', 'Additional name (Name 2)'],
     ['ADNAME', 'Name 2'],
     ['BRTH', 'Birth date'],

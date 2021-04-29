@@ -15,6 +15,8 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class PreselectionComponent implements OnInit {
 
+  debitCreditType = 'debitor';
+  customerType = 'person';
 
   constructor(public storageService: StorageService, private router: Router, public dictionaryService: DictionaryService, 
     public listService: ListService, public errorMessageService: ErrorMessageService) { }
@@ -24,33 +26,11 @@ export class PreselectionComponent implements OnInit {
   }
 
   /**
-   * Change of customer type triggers this method. The method set customerType in storageService. 
-   * @param event Change event
-   */
-  changeCustomerType(event: any) {
-    if (event.value === 'organization') {
-      this.storageService.customerType = 'organization';
-    } else {
-      this.storageService.customerType = 'person';
-    }
-  }
-
-  /**
-   * Change of debit/credit type triggers this method. The method set debit/credit in storageService. 
-   * @param event Change event
-   */
-  changeDebitCreditType(event: any) {
-    if (event.value === 'credit') {
-      this.storageService.debitCreditType = 'credit';
-    } else {
-      this.storageService.debitCreditType = 'debit';
-    }
-  }
-
-  /**
    * Click on the "New customer" button triggers this method. The method navigates to the NewISOComponent. 
    */
   onNewCustomer(){
+    this.storageService.debitCreditType = this.debitCreditType
+    this.storageService.customerType = this.customerType
     this.router.navigate(['/iso']);
   }
 }
