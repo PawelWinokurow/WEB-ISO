@@ -8,14 +8,13 @@
     </div>
     <div *ngIf="authService.isLoggedIn() && router.url === '/iso' || router.url === '/preselection'"
       style="padding-left:10px;">
-      <span class="mat-h2">
+      <!--<span class="mat-h2">
         {{customerTypeName}} - {{debitCreditTypeName}}
-      </span>
+      </span>-->
     </div>
     <span class="space"></span>
-
-    <div class="btn-group" dropdown style="margin-right: 20px;" triggers="mouseenter:mouseleave" #dp="bs-dropdown"
-      [insideClick]="true">
+    <div class="btn-group" dropdown style="margin-right: 20px;" triggers="hover" #dp="bs-dropdown" [insideClick]="true"
+      (mouseleave)="dp.hide()">
       <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
         aria-controls="dropdown-animated" style="background: transparent">
         <span class="mat-h3" *ngIf="authService.isLoggedIn()">
@@ -26,11 +25,11 @@
         </span>
         <span class="caret"></span>
       </button>
-      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
-        (mouseleave)="dp.hide()">
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
         <mat-nav-list>
           <div>
-            <div *ngIf="authService.isLoggedIn()" class="flex-row" style="padding: 10px 16px 0 16px; justify-content: start; align-items: center;">
+            <div *ngIf="authService.isLoggedIn()" class="flex-row"
+              style="padding: 10px 16px 0 16px; justify-content: start; align-items: center;">
               <mat-icon>language</mat-icon> &nbsp;
               {{ dictionaryService.get('LANG') }}
             </div>
@@ -76,8 +75,7 @@
         {{ dictionaryService.get('CUSS') }}
       </a>
       <mat-divider></mat-divider>
-      <a *ngIf="authService.account?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'"
-        (click)="sidenav.close();">
+      <a *ngIf="authService.account?.role == 'ADMIN'" mat-list-item [routerLink]="'/admin'" (click)="sidenav.close();">
         <mat-icon>admin_panel_settings</mat-icon> &nbsp;
         {{ dictionaryService.get('ADMINAREA') }}
       </a>

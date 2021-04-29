@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
@@ -12,22 +12,12 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   selectedLanguage = 'DE';
 
   constructor(public router: Router, public dictionaryService: DictionaryService,
     public storageService: StorageService, public authService: AuthService) {
-  }
-
-  ngOnInit(): void { }
-
-  get customerTypeName() {
-    return this.storageService.customerType === 'person' ? this.dictionaryService.get('PER') : this.dictionaryService.get('ORG');
-  }
-
-  get debitCreditTypeName() {
-    return this.storageService.debitCreditType === 'debit' ? this.dictionaryService.get('DEB') : this.dictionaryService.get('CRE');
   }
 
   /**

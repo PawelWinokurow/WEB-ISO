@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Injectable } from '@angular/core';
 import { DictionaryService } from './dictionary.service';
 
 /**

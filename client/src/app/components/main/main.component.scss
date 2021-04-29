@@ -12,6 +12,7 @@ mat-sidenav {
 }
 
 .dropdown-menu {
+    margin-top: -1px;
     left: 50% !important;
     transform: translateX(-50%) !important;
     padding: 0;
@@ -20,4 +21,6 @@ mat-sidenav {
 .mat-list-base {
     padding: 0;
 }
+
+
 
