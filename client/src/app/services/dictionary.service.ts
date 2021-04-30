@@ -9,12 +9,7 @@ import { Injectable } from '@angular/core';
 })
 export class DictionaryService {
 
-  currentLanguage: string = 'Deutsch';
-
-  languages = new Map([
-    ['Deutsch', 'Deutsch'],
-    ['English', 'English'],
-  ]);
+  currentLanguage: string = 'DE';
 
   dictionaryDE = new Map([
     ['LOGIN', 'Anmeldung'],
@@ -89,8 +84,10 @@ export class DictionaryService {
     ['CUSTYPE', 'Kundentyp'],
     ['PER', 'Person'],
     ['ORG', 'Organisation'],
+    ['PERORG', 'Person / Organization'],
     ['DEB', 'Debitor'],
     ['CRE', 'Kreditor'],
+    ['DEBCRE', 'Debitor / Kreditor'],
     ['COMCODE', 'Buchungskreis'],
 
     ['LEGFRM', 'Rechtsform'],
@@ -227,8 +224,11 @@ export class DictionaryService {
     
     ['CUSTYPE', 'Customer type'],
     ['PER', 'Person'],
+    ['ORG', 'Organization'],
+    ['PERORG', 'Person / Organization'],
     ['DEB', 'Debitor'],
     ['CRE', 'Creditor'],
+    ['DEBCRE', 'Debitor / Creditor'],
     ['COMCODE', 'Comapany code'],
     
     ['LEGFRM', 'Legal form'],
@@ -243,7 +243,6 @@ export class DictionaryService {
 
     ['NAME', 'Name'],
     ['ADDR', 'Address'],
-    ['ORG', 'Organization'],
     //['ADNAME', 'Additional name (Name 2)'],
     ['ADNAME', 'Name 2'],
     ['BRTH', 'Birth date'],
@@ -316,8 +315,8 @@ export class DictionaryService {
   ])
 
   dictionary = new Map([
-    ['Deutsch', this.dictionaryDE],
-    ['English', this.dictionaryEN]
+    ['DE', this.dictionaryDE],
+    ['EN', this.dictionaryEN]
   ])
 
   constructor() { }
@@ -326,7 +325,7 @@ export class DictionaryService {
    * Switches language between English and German.
    */
   switchLanguage() {
-    this.currentLanguage = (this.currentLanguage == 'Deutsch' ? 'English' : 'Deutsch')
+    this.currentLanguage = (this.currentLanguage == 'DE' ? 'EN' : 'DE')
   }
 
   /**

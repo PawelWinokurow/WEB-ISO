@@ -22,6 +22,7 @@ import { SearchService } from "../services/search.service";
 import { StorageService } from "../services/storage.service";
 import { AngularMaterialModule } from "./angular-material.module";
 import { AppRoutingModule } from "./app-routing.module";
+import { CookieService } from "ngx-cookie-service";
 
 export const services = [
     DictionaryService,
@@ -38,6 +39,7 @@ export const services = [
     CustomerService,
     FormValidationService,
     JSONValidationService,
+    CookieService,
     {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

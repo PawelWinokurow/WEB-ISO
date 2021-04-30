@@ -1,27 +1,34 @@
 <div class="inner-component">
-    <mat-card class="card">
+    <mat-card class="card" style="padding: 20px">
         <mat-card-title class="paddinglr10px">
             <h1>{{dictionaryService.get('CUSTYPE')}}</h1>
             </mat-card-title>
         <mat-card-content align="center">
-            <div class="padding10px toggle-theme">
-                <mat-button-toggle-group value="debit" (change)="changeDebitCreditType($event)">
-                    <mat-button-toggle value="debit">{{ dictionaryService.get('DEB') }}
-                    </mat-button-toggle>
-                    <mat-button-toggle value="credit">{{ dictionaryService.get('CRE') }}
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
+            <div style="padding: 10px 10px 0 10px;">
+            <mat-form-field color="primary" appearance="outline">
+              <mat-label>{{dictionaryService.get('PERORG')}}</mat-label>
+              <mat-select [(value)]="customerType">
+                <mat-option value="person">
+                  {{dictionaryService.get('PER')}}
+                </mat-option>
+                <mat-option value="organization">
+                  {{dictionaryService.get('ORG')}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field color="primary" appearance="outline">
+                <mat-label>{{dictionaryService.get('DEBCRE')}}</mat-label>
+                <mat-select [(value)]="debitCreditType">
+                  <mat-option value="debitor">
+                    {{dictionaryService.get('DEB')}}
+                  </mat-option>
+                  <mat-option value="creditor">
+                    {{dictionaryService.get('CRE')}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div class="padding10px toggle-theme">
-                <mat-button-toggle-group value="person" (change)="changeCustomerType($event)">
-                    <mat-button-toggle value="person">{{ dictionaryService.get('PER') }}
-                    </mat-button-toggle>
-                    <mat-button-toggle value="organization">{{ dictionaryService.get('ORG') }}
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
-            </div>
-
-            <div class="buttons-theme" style="display: flex; padding-bottom: 10px; padding-top: 20px;">
+            <div class="buttons-theme" style="display: flex; padding-bottom: 10px;">
                 <span class="space"></span>
                 <button mat-stroked-button (click)="onNewCustomer()" style="height: 46px;">
                     <mat-icon style="margin-right: 5px;">assignment</mat-icon>

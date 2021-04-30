@@ -1,5 +1,6 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,20 +15,18 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class MainComponent implements OnInit {
 
-  selectedLanguage = 'DE';
-
   constructor(public router: Router, public dictionaryService: DictionaryService,
-    public storageService: StorageService, public authService: AuthService) {
+    public storageService: StorageService, public authService: AuthService, private cookieService: CookieService) {
   }
 
-  ngOnInit(): void { }
-
-  get customerTypeName() {
-    return this.storageService.customerType === 'person' ? this.dictionaryService.get('PER') : this.dictionaryService.get('ORG');
+  ngOnInit(): void {
+    let language = this.cookieService.get('lang');
+    if (language && language.length) this.dictionaryService.currentLanguage = language
   }
 
-  get debitCreditTypeName() {
-    return this.storageService.debitCreditType === 'debit' ? this.dictionaryService.get('DEB') : this.dictionaryService.get('CRE');
+  switchLanguage() {
+    this.dictionaryService.switchLanguage();
+    this.cookieService.set('lang', this.dictionaryService.currentLanguage);
   }
 
   /**
