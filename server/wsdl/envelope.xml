@@ -1504,19 +1504,19 @@
                <item>
                   <TASK>I</TASK>
                   <DATA_KEY>
-                     <BUKRS>1192</BUKRS>
+                     <BUKRS></BUKRS>
                   </DATA_KEY>
                   <DATA>
                      <SPERR></SPERR>
                      <LOEVM></LOEVM>
-                     <ZUAWA>002</ZUAWA>
-                     <AKONT>0012000000</AKONT>
+                     <ZUAWA></ZUAWA>
+                     <AKONT></AKONT>
                      <BEGRU></BEGRU>
                      <VZSKZ></VZSKZ>
                      <ZWELS></ZWELS>
                      <XVERR></XVERR>
                      <ZAHLS></ZAHLS>
-                     <ZTERM>9999</ZTERM>
+                     <ZTERM></ZTERM>
                      <EIKTO></EIKTO>
                      <ZSABE></ZSABE>
                      <KVERM></KVERM>
@@ -1684,7 +1684,7 @@
             <OBJECT_INSTANCE>
                <LIFNR></LIFNR>
             </OBJECT_INSTANCE>
-            <OBJECT_TASK></OBJECT_TASK>
+            <OBJECT_TASK>I</OBJECT_TASK>
          </HEADER>
          <CENTRAL_DATA>
             <CENTRAL>

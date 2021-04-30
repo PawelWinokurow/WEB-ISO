@@ -94,13 +94,8 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].COMMUNICATION[0].SMTP[0].SMTP[0].item[0].CONTACT[0].DATA[0].VALID_TO = [this.dateValidTo]
   }
 
-  setPaymentCreditInformation() {
-    //TAX id
-    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
-    //VAT id
-    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
+  setPaymentInformation() {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].TAXNUMBER[0].TAXNUMBERS[0].item[0].DATA_KEY[0].TAXNUMBER = [this.customerData.data.vatId]
-
     //Branche
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].INDUSTRY[0].INDUSTRIES[0].item[0].DATA_KEY[0].KEYSYSTEM = [this.customerData.data.industryFieldCode]
     //Branchencode
@@ -111,32 +106,46 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].item[0].DATA[0].IBAN_FROM_DATE = [this.dateToday]
     //BANKDETAILVALIDFROM
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].BANKDETAIL[0].BANKDETAILS[0].item[0].DATA[0].BANKDETAILVALIDFROM = [this.dateToday]
-
-    //Terms of payment
-    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
     //Remarks?
     this.envelope.IT_NOTE[0].item = [this.customerData.data.notes]
   }
 
-  setGeneralInformation() {
+  setCreditInformation() {
     //Buchungskreis
-    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA_KEY[0].BUKRS = [this.customerData.data.companyCode]
-    //LegalForm
-    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
+    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA_KEY[0].BUKRS = [this.customerData.data.companyCode.code]
     //Interface number
     this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
+    //Terms of payment
+    this.envelope.IS_EXTERN[0].VENDOR[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
+    //TAX id
+    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
+    //VAT id
+    this.envelope.IS_EXTERN[0].VENDOR[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
+  }
+
+  setDebitInformation() {
+    //Buchungskreis
+    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA_KEY[0].BUKRS = [this.customerData.data.companyCode.code]
+    //Interface number
+    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ALTKN = [this.customerData.data.interfaceNumber]
+    //Terms of payment
+    this.envelope.IS_EXTERN[0].CUSTOMER[0].COMPANY_DATA[0].COMPANY[0].item[0].DATA[0].ZTERM = [this.customerData.data.paymentTerm]
+    //TAX id
+    this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCD4 = [this.customerData.data.taxId]
+    //VAT id
+    this.envelope.IS_EXTERN[0].CUSTOMER[0].CENTRAL_DATA[0].CENTRAL[0].DATA[0].STCEG = [this.customerData.data.vatId]
+  }
+
+  setGeneralInformation() {
+    //LegalForm
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_ORGANIZATION[0].LEGALFORM = [this.customerData.data.legalForm]
 
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGE = 'D';
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CENTRALDATA[0].PARTNERLANGUAGEISO = 'DE';
   }
 
-  setPaymentDebitInformation() {
-    this.setPaymentCreditInformation();
-    //TODO creditlimit
-  }
 
-  setGeneralPersonInformation() {
-    this.setGeneralInformation();
+  setPersonInformation() {
     //CATEGORY 1 is person, 2 is organization
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CONTROL[0].CATEGORY = '1';
     //SEARCHTERM1 = NAME1
@@ -155,8 +164,7 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_PERSON[0].CORRESPONDLANGUAGEISO = 'DE'
   }
 
-  setGeneralOrganizationInformation() {
-    this.setGeneralInformation();
+  setOrganizationInformation() {
     //CATEGORY 1 is person, 2 is organization
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].COMMON[0].DATA[0].BP_CONTROL[0].CATEGORY = '2';
     //SEARCHTERM1 = NAME1
@@ -207,9 +215,11 @@ class PersonDebitFactory extends CustomerFactory {
 
   getJSONArgs() {
     this.setProcess('00001')
-    this.setGeneralPersonInformation();
+    this.setGeneralInformation()
+    this.setPaymentInformation();
     this.setContactInformation();
-    this.setPaymentDebitInformation();
+    this.setPersonInformation();
+    this.setDebitInformation();
     this.setFiles();
     return this.envelope;
   }
@@ -222,9 +232,11 @@ class PersonCreditFactory extends CustomerFactory {
 
   getJSONArgs() {
     this.setProcess('00003')
-    this.setGeneralPersonInformation();
+    this.setGeneralInformation()
+    this.setPaymentInformation();
     this.setContactInformation();
-    this.setPaymentCreditInformation();
+    this.setPersonInformation();
+    this.setCreditInformation();
     this.setFiles();
     return this.envelope;
   }
@@ -237,9 +249,11 @@ class OrganizationDebitFactory extends CustomerFactory {
 
   getJSONArgs() {
     this.setProcess('00001')
-    this.setGeneralOrganizationInformation();
+    this.setGeneralInformation()
+    this.setPaymentInformation();
     this.setContactInformation();
-    this.setPaymentDebitInformation();
+    this.setOrganizationInformation();
+    this.setDebitInformation();
     this.setFiles();
     return this.envelope;
   }
@@ -252,9 +266,11 @@ class OrganizationCreditFactory extends CustomerFactory {
 
   getJSONArgs() {
     this.setProcess('00003')
-    this.setGeneralOrganizationInformation();
+    this.setGeneralInformation()
+    this.setPaymentInformation();
     this.setContactInformation();
-    this.setPaymentCreditInformation();
+    this.setOrganizationInformation();
+    this.setCreditInformation();
     this.setFiles();
     return this.envelope;
   }
