@@ -6,9 +6,7 @@ const databaseService = require('../services/database');
 const cryptoService = require('../services/crypto');
 const PRIVATE_KEY = fs.readFileSync(path.join(process.cwd(), process.env.PRIVATE_KEY));
 const ldap = require('ldapjs');
-const clientLDAP = ldap.createClient({
-    url: req.body.serverUrl
-});
+const assert = require('assert');
 
 
 async function refreshToken(req, res) {
@@ -27,56 +25,53 @@ async function refreshToken(req, res) {
     }
 }
 
-//$dns = 'dc._msdcs.root.local';
-//$adServerHost = "mucdc001.root.local";
-//$adServerPort = "389";
-//$dn = "CN={$username},OU=D,OU=standarduser,OU=X-RIS,DC=root,DC=local";
+function pBindLDAP(client, adSuffix, password) {
+    return new Promise((resolve, reject) => {
+        client.bind(adSuffix, password, (err, res) => {
+            if (err) {
+                reject(false);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+}
+
+
 async function login(req, res) {
     try {
         const requestAccount = req.body.account;
-
+        let dbAccount = await databaseService.getAccount(requestAccount);
         // LDAP Connection Settings
-        const server = "dns or ip here"; // 192.168.1.1
-        const userPrincipalName = ""; // Username
-        const password = "myPassword"; // User password
-        const adSuffix = "dc=root,dc=local"; // test.com
-
+        const server = "mucdc001.root.local";
+        const userPrincipalName = requestAccount.username;
+        const password = requestAccount.password;
+        const adSuffix = `CN=${userPrincipalName},OU=D,OU=standarduser,OU=X-RIS,DC=root,DC=local`;
         // Create client and bind to AD
         const client = ldap.createClient({
             url: `ldap://${server}`
         });
 
-        client.bind(userPrincipalName, password, err => {
-            assert.ifError(err);
-        });
+        let isLDAPAuth = await pBindLDAP(client, adSuffix, password)
 
-        // Search AD for user
-        const searchOptions = {
-            scope: "sub",
-            filter: `(userPrincipalName=${userPrincipalName})`
-        };
+        if (dbAccount && isLDAPAuth && !dbAccount.blocked) {
+            delete dbAccount.password;
+            delete dbAccount.blocked;
+            const JWT = createJWT(dbAccount);
+            //Send JWT back
+            res.status(200).json(JWT);
+        } else {
+            res.json({
+                error: `IDINC`
+            })
+        }
 
-        client.search(adSuffix, searchOptions, (err, res) => {
-            assert.ifError(err);
-
-            res.on('searchEntry', entry => {
-                console.log(entry.object.name);
-            });
-            res.on('searchReference', referral => {
-                console.log('referral: ' + referral.uris.join());
-            });
-            res.on('error', err => {
-                console.error('error: ' + err.message);
-            });
-            res.on('end', result => {
-                console.log(result);
-            });
-        });
 
         // Wrap up
         client.unbind(err => {
             assert.ifError(err);
         });
+
     } catch (e) {
         errorHandler.unknownErrorResponse(e, 401);
     }

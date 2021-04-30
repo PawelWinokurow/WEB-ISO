@@ -22,17 +22,17 @@ async function storeTestData() {
       role: 'ADMIN',
     },
     {
-      username: 'userA',
-      email: 'userA@userA.de',
+      username: 'winokurowp',
+      email: 'paulweinmacher@gmail.com',
       companyCode: '1100',
-      salutationCode: '0001',
-      firstName: 'VornameUserA',
-      secondName: 'NachnameUserA',
-      phone: 'Telefonnummer_user',
-      mobile: 'Mobiltelefonnummer_user',
-      password: cryptoService.hashPassword('userA'),
+      salutationCode: '0002',
+      firstName: 'VornameAdmin',
+      secondName: 'NachnameAdmin',
+      phone: 'Telefonnummer_admin',
+      mobile: 'Mobiltelefonnummer_admin',
+      password: cryptoService.hashPassword('admin'),
       blocked: false,
-      role: 'USER',
+      role: 'ADMIN',
     },
    
   ];
@@ -111,11 +111,11 @@ async function storeTestData() {
     for (const accountToStore of accounts) {
       await databaseService.storeAccount(accountToStore)
     }
-    await databaseService.storePasswordReset(reset.hash, reset.email)
     await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", customer, true)
-    await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
-    await databaseService.storeCustomer("hash_customer2", "userA@userA.de", "customer_object2", true)
-    await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
+    //await databaseService.storePasswordReset(reset.hash, reset.email)
+    //await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
+    //await databaseService.storeCustomer("hash_customer2", "userA@userA.de", "customer_object2", true)
+    //await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
   } catch (e) {
     console.error(e.stack);
   }
