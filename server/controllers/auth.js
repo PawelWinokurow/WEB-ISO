@@ -27,6 +27,9 @@ async function refreshToken(req, res) {
     }
 }
 
+//$dns = 'dc._msdcs.root.local';
+//$adServerHost = "mucdc001.root.local";
+//$adServerPort = "389";
 //$dn = "CN={$username},OU=D,OU=standarduser,OU=X-RIS,DC=root,DC=local";
 async function login(req, res) {
     try {
