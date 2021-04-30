@@ -21,7 +21,7 @@ const apiLimiter = rateLimit({
 const app = express();
 
 app.use(logger('dev'));
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api', require('./routes/account'));
@@ -60,12 +60,11 @@ async function startServer(app) {
     /**
      * Runs each day at 00.00 and removes old not confirmed customers.
      */
-    /*
-    schedule.scheduleJob('0 0 * * *', function () {
-      //chedule.scheduleJob('* * * * *', function () {
-        databaseService.removeOldCustomers();
-      });
-    */
+
+    schedule.scheduleJob('0 * * * *', function () {
+      databaseService.removeOldCustomers();
+    });
+
   }
 }
 

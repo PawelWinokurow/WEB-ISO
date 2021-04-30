@@ -7,6 +7,7 @@ const CUSTOMERS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS customers (
   customer TEXT NOT NULL, 
   sapID VARCHAR(255),
   datetime DATETIME NOT NULL,
+  confirmed BOOLEAN NOT NULL,
   PRIMARY KEY (hash),
   FOREIGN KEY (email) REFERENCES accounts(email));`;
 
@@ -115,22 +116,32 @@ async function selectQuery(selectStatement, values) {
  * @param  {object} email 
  * @param  {object} customer Customer object 
  */
-async function storeCustomer(hash, email, customer) {
-  const insertStatement = 'INSERT INTO customers (hash, email, customer, datetime) VALUES (?, NOW());';
+async function storeCustomer(hash, email, customer, confirmed) {
+  const insertStatement = 'INSERT INTO customers (hash, email, customer, confirmed, datetime) VALUES (?, NOW());';
   values = [
-    [hash, email, JSON.stringify(customer)]
+    [hash, email, JSON.stringify(customer), confirmed]
   ];
   await cudQuery(insertStatement, values);
 }
 
 /**
- * Set SAP ID received from the PI/PO system.
+ * Sets SAP ID received from the PI/PO system.
  * @param  {string} sapID 
  * @param  {string} hash Hash string 
  */
  async function setCustomerSAPID(sapID, hash) {
   let updateStatement = `UPDATE customers SET sapID = ? WHERE hash = ?;`;
   let values = [sapID, hash];
+  await cudQuery(updateStatement, values);
+}
+
+/**
+ * Confirms the customer.
+ * @param  {string} hash Hash string 
+ */
+ async function setCustomerConfirmation(hash) {
+  let updateStatement = `UPDATE customers SET confirmation = TRUE WHERE hash = ?;`;
+  let values = [hash];
   await cudQuery(updateStatement, values);
 }
 
@@ -348,8 +359,8 @@ async function checkPasswordResetConfirmation(hash) {
  * Removes old unconfirmed customers.
  */
 async function removeOldCustomers() {
-  const deleteStatement = "DELETE FROM customers WHERE datetime < NOW() - INTERVAL ? DAY";
-  const values = [process.env.DB_STORAGE_DURATION];
+  const deleteStatement = "DELETE FROM customers WHERE confirmed IS TRUE AND datetime < NOW() - INTERVAL ? DAY OR confirmed IS NOT TRUE AND datetime < NOW() - INTERVAL ? DAY";
+  const values = [process.env.DB_CONFIRMED_STORAGE_DURATION, process.env.DB_REQUEST_STORAGE_DURATION];
   //Remove all customers, which are older than process.env.DB_STORAGE_DURATION
   await cudQuery(deleteStatement, values);
 }
@@ -370,6 +381,7 @@ module.exports = {
   getCustomer,
   getCustomers,
   setCustomerSAPID,
+  setCustomerConfirmation,
   storePasswordReset,
   createTables,
   dropTables,

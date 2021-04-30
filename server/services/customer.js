@@ -47,6 +47,7 @@ class CustomerFactory {
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].POSTAL[0].DATA[0].COUNTRYISO = [this.customerData.data.country]
     //VALIDFROMDATE
     this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].POSTAL[0].DATA[0].VALIDFROMDATE = [this.dateToday]
+    this.envelope.IS_EXTERN[0].PARTNER[0].CENTRAL_DATA[0].ADDRESS[0].ADDRESSES[0].item[0].DATA[0].ADDR_USAGE[0].ADDR_USAGES[0].item[0].DATA[0].VALID_FROM = [this.dateToday]
 
     //Phone
     if (this.customerData.data.phone.length) this.setPhone();

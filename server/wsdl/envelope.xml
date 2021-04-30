@@ -166,10 +166,10 @@
                <BANKDETAILS>
                   <item>
                      <TASK>I</TASK>
-                     <DATA_KEY></DATA_KEY>
+                     <DATA_KEY>0001</DATA_KEY>
                      <DATA>
-                        <BANK_CTRY></BANK_CTRY>
-                        <BANK_CTRYISO></BANK_CTRYISO>
+                        <BANK_CTRY>DE</BANK_CTRY>
+                        <BANK_CTRYISO>DE</BANK_CTRYISO>
                         <BANK_KEY></BANK_KEY>
                         <BANK_ACCT></BANK_ACCT>
                         <CTRL_KEY></CTRL_KEY>
@@ -178,7 +178,7 @@
                         <COLL_AUTH></COLL_AUTH>
                         <EXTERNALBANKID></EXTERNALBANKID>
                         <BANKACCOUNTNAME></BANKACCOUNTNAME>
-                        <IBAN>DE83604400730730174000</IBAN>
+                        <IBAN></IBAN>
                         <IBAN_FROM_DATE></IBAN_FROM_DATE>
                         <BANKDETAILVALIDFROM></BANKDETAILVALIDFROM>
                         <BANKDETAILVALIDTO></BANKDETAILVALIDTO>
@@ -666,7 +666,7 @@
                            <PHONE>
                               <CURRENT_STATE>X</CURRENT_STATE>
                               <PHONE>
-                              <!--Phones-->
+                                 <!--Phones-->
                                  <item>
                                     <CONTACT>
                                        <TASK>I</TASK>
@@ -996,23 +996,23 @@
                            <TIME_DEPENDENT></TIME_DEPENDENT>
                         </COMMUNICATION>
                         <ADDR_USAGE>
-                           <CURRENT_STATE></CURRENT_STATE>
+                           <CURRENT_STATE/>
                            <ADDR_USAGES>
                               <item>
-                                 <TASK></TASK>
+                                 <TASK>I</TASK>
                                  <DATA_KEY>
-                                    <ADDRESSTYPE></ADDRESSTYPE>
-                                    <VALID_TO></VALID_TO>
+                                    <ADDRESSTYPE>XXDEFAULT</ADDRESSTYPE>
+                                    <VALID_TO>9999-12-31</VALID_TO>
                                  </DATA_KEY>
                                  <DATA>
-                                    <STANDARD></STANDARD>
-                                    <VALID_FROM></VALID_FROM>
+                                    <STANDARD>X</STANDARD>
+                                    <VALID_FROM>2021-04-29</VALID_FROM>
                                  </DATA>
                                  <DATAX>
-                                    <STANDARD></STANDARD>
-                                    <VALID_FROM></VALID_FROM>
+                                    <STANDARD>X</STANDARD>
+                                    <VALID_FROM>X</VALID_FROM>
                                  </DATAX>
-                                 <CURRENTLY_VALID></CURRENTLY_VALID>
+                                 <CURRENTLY_VALID/>
                               </item>
                            </ADDR_USAGES>
                         </ADDR_USAGE>

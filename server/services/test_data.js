@@ -112,9 +112,9 @@ async function storeTestData() {
       await databaseService.storeAccount(accountToStore)
     }
     await databaseService.storePasswordReset(reset.hash, reset.email)
-    await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", customer)
+    await databaseService.storeCustomer("hash_customer", "pawelwinokurow@gmail.com", customer, true)
     await databaseService.setCustomerSAPID("sap_ID", "hash_customer")
-    await databaseService.storeCustomer("hash_customer2", "userA@userA.de", "customer_object2")
+    await databaseService.storeCustomer("hash_customer2", "userA@userA.de", "customer_object2", true)
     await databaseService.setCustomerSAPID("sap_ID2", "hash_customer2")
   } catch (e) {
     console.error(e.stack);

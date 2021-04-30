@@ -15,7 +15,8 @@ async function confirmCustomerRequest(req, res) {
       const sapCustomer = await customerService.composeCustomer(result.customer);
       const envelope = sapCustomer.getJSONArgs();
       const sapID = await soapService.sendCustomer(envelope);
-      await databaseService.setCustomerSAPID(sapID, result.hash)
+      //await databaseService.setCustomerSAPID(sapID, result.hash)
+      await databaseService.setCustomerConfirmation(hash)
       emailService.sendCustomerAcknowledgement(result.email, sapID);
       res.send('<p>Success! The customer was confirmed.</p>');
     }
@@ -32,7 +33,7 @@ async function createCustomerRequest(req, res) {
     const hash = cryptoService.generateHash();
     dataService.storeFiles(customer.data.files, hash)
     delete customer.data.files
-    await databaseService.storeCustomer(hash, email, customer);
+    await databaseService.storeCustomer(hash, email, customer, false);
     emailService.sendCustomerConfirmation(email, hash);
     res.json({
       message: 'CUSCONFISSND',
@@ -51,12 +52,12 @@ async function createCustomerDirect(req, res) {
     const sapCustomer = await customerService.composeCustomer(customer);
     const envelope = sapCustomer.getJSONArgs();
     const sapID = await soapService.sendCustomer(envelope);
+    dataService.storeFiles(customer.data.files, hash)
+    delete customer.data.files
+    await databaseService.storeCustomer(hash, email, customer, true);
     //await databaseService.setCustomerSAPID(sapID, hash)
     //emailService.sendCustomerAcknowledgement(email, sapID);
 
-    //dataService.storeFiles(customer.data.files, hash)
-    //delete customer.data.files
-    //await databaseService.storeCustomer(hash, email, customer);
     res.json({
       message: 'CUSISSND',
     });
