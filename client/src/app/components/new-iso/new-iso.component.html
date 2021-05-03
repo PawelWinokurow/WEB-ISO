@@ -101,7 +101,7 @@
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('BRTH')}}</mat-label>
                                             <input matInput [matDatepicker]="birthDate" formControlName="birthDate"
-                                                [required]="storageService.debitCreditType === 'debit'">
+                                                [required]="storageService.debitCreditType === 'debitor'">
                                             <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
                                             <mat-datepicker #birthDate></mat-datepicker>
                                             <mat-error
@@ -346,9 +346,9 @@
                                 <div style="display: flex; margin-bottom: 20px; margin-left:10px">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <form [formGroup]="payment" appearance="outline" color="accent">
-                                            <mat-label *ngIf="storageService.debitCreditType === 'debit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'debitor'">
                                                 {{dictionaryService.get('GSEPA')}}</mat-label>
-                                            <mat-label *ngIf="storageService.debitCreditType === 'credit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'creditor'">
                                                 {{dictionaryService.get('HSEPA')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
@@ -378,7 +378,7 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
+                                    <div *ngIf="storageService.debitCreditType === 'debitor'" class="paddinglr10px"
                                         style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CRELMT')}}</mat-label>
@@ -729,7 +729,7 @@
 
             <!--applicant information mat-step for organization-->
             <mat-step [stepControl]="applicant"
-                *ngIf="storageService.customerType === 'organization' && storageService.debitCreditType === 'debit'">
+                *ngIf="storageService.customerType === 'organization' && storageService.debitCreditType === 'debitor'">
                 <form [formGroup]="applicant">
                     <ng-template matStepLabel>{{dictionaryService.get('APP')}}</ng-template>
                     <div class="vertical-flex bottom-border top-border">
@@ -1073,9 +1073,9 @@
                                 <div style="display: flex; margin-bottom: 20px; margin-left:10px">
                                     <div class="paddinglr10px" style="width: 50%;">
                                         <form [formGroup]="payment" appearance="outline" color="accent">
-                                            <mat-label *ngIf="storageService.debitCreditType === 'debit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'debitor'">
                                                 {{dictionaryService.get('RSEPA')}}</mat-label>
-                                            <mat-label *ngIf="storageService.debitCreditType === 'credit'">
+                                            <mat-label *ngIf="storageService.debitCreditType === 'creditor'">
                                                 {{dictionaryService.get('HSEPA')}}</mat-label>
                                             <div style="margin-top: 10px;">
                                                 <mat-radio-group formControlName="sepa">
@@ -1104,7 +1104,7 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="storageService.debitCreditType === 'debit'" class="paddinglr10px"
+                                    <div *ngIf="storageService.debitCreditType === 'debitor'" class="paddinglr10px"
                                         style="width: 50%;">
                                         <mat-form-field color="accent" appearance="outline">
                                             <mat-label>{{dictionaryService.get('CRELMT')}}</mat-label>

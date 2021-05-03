@@ -7,7 +7,7 @@ import { NewISOComponent } from '../components/new-iso/new-iso.component';
 import { PreselectionComponent } from '../components/preselection/preselection.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 import { SettingsComponent } from '../components/settings/settings.component';
-import { AuthGuardService } from '../services/auth-guard.service';
+import { AuthGuardService } from '../services/auth/auth-guard.service';
 
 
 const routes: Routes = [

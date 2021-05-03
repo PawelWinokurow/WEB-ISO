@@ -37,7 +37,7 @@ function pBindLDAP(client, adSuffix, password) {
     });
 }
 
-
+/*
 async function login(req, res) {
     try {
         const requestAccount = req.body.account;
@@ -76,7 +76,9 @@ async function login(req, res) {
         errorHandler.unknownErrorResponse(e, 401);
     }
 }
-/*
+*/
+
+
 async function login(req, res) {
     try {
         const requestAccount = req.body.account;
@@ -96,7 +98,7 @@ async function login(req, res) {
         errorHandler.unknownErrorResponse(e, 401);
     }
 }
-*/
+
 
 function createJWT(account) {
     const jwtBearerToken = jwt.sign(account, PRIVATE_KEY, {

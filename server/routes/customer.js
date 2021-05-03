@@ -12,13 +12,13 @@ const recaptchaController = require('../controllers/recaptcha');
  */
 router.route("/customers")
     .get(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkEmail, rightsMiddleware.checkIfAccountAvailable, customerController.getCustomers)
-    .post(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfAccountAvailable, customerController.createCustomerDirect);
+    .post(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfAccountAvailable, customerController.sendCustomerDirect);
 
 /**
  * Enpoint to request new customers from application.
  */
 router.route("/customers/request")
-    .post(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfAccountAvailable, customerController.createCustomerRequest);
+    .post(authMiddleware.checkIfAuthenticated, rightsMiddleware.checkIfAccountAvailable, customerController.sendCustomerRequest);
 
 /**
  * Endpoint to get email confirmations.

@@ -26,7 +26,7 @@ async function confirmCustomerRequest(req, res) {
   }
 }
 
-async function createCustomerRequest(req, res) {
+async function sendCustomerRequest(req, res) {
   try {
     const customer = req.body.customer;
     const email = req.body.decodedAccount.email;
@@ -43,7 +43,7 @@ async function createCustomerRequest(req, res) {
   }
 }
 
-async function createCustomerDirect(req, res) {
+async function sendCustomerDirect(req, res) {
   try {
     let customer = req.body.customer;
     const email = req.body.decodedAccount.email;
@@ -78,7 +78,7 @@ async function getCustomers(req, res) {
 
 module.exports = {
   confirmCustomerRequest,
-  createCustomerDirect,
-  createCustomerRequest,
+  sendCustomerDirect,
+  sendCustomerRequest,
   getCustomers
 }

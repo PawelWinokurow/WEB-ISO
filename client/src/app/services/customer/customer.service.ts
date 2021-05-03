@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth.service';
-import { DateService } from './date.service';
-import { HttpService } from './http.service';
+import { AuthService } from '../auth/auth.service';
+import { DateService } from '../date.service';
+import { HttpService } from '../http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class CustomerService {
     return this.httpService.request(this.http.post(`${environment.serverURL}/customers/request`, { customer }))
   }
 
-  getCustomers<T>(email){
+  getCustomers<T>(email) {
     return this.httpService.request<T>(this.http.get(`${environment.serverURL}/customers?email=${email}`));
   }
 
@@ -123,7 +123,7 @@ export class CustomerService {
       applicantEmail2: applicant?.get('email2')?.value ?? '',
 
     };
-    data.notes += payment?.get("sepa")?.value ? ' *SEPA-Mandat*' : '' 
+    data.notes += payment?.get("sepa")?.value ? ' *SEPA-Mandat*' : ''
     return data;
   }
 

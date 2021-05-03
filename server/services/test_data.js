@@ -104,7 +104,7 @@ async function storeTestData() {
       applicantEmail2: ''
     },
     customerType: 'organization',
-    debitCreditType: 'debit'
+    debitCreditType: 'debitor'
   }
 
   try {

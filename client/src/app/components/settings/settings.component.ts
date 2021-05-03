@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { ListService } from 'src/app/services/list.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { AccountService } from 'src/app/services/account.service';
 import { AccountDTO } from 'src/app/interfaces/account';
 import { FormValidationService } from 'src/app/services/form-validation.service';
+import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-settings',

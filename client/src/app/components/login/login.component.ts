@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ResetPasswordUserDialog } from 'src/app/dialogs/reset-password-user/reset-password-user.dialog';
-import { AccountService } from 'src/app/services/account.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AccountService } from 'src/app/services/account/account.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { ErrorMessageService } from 'src/app/services/error-message.service';
 

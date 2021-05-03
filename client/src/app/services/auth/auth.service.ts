@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { environment } from './../../environments/environment';
-import { HttpService } from './http.service';
+import { environment } from '../../../environments/environment';
+import { HttpService } from '../http.service';
 import { AccountJWT } from 'src/app/interfaces/account';
 import { Router } from '@angular/router';
 

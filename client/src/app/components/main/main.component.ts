@@ -1,7 +1,7 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { DictionaryService } from 'src/app/services/dictionary.service';
 import { StorageService } from 'src/app/services/storage.service';
 

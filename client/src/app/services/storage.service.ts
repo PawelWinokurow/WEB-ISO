@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Injectable } from '@angular/core';
-import { DictionaryService } from './dictionary.service';
+import { Injectable } from '@angular/core';
 
 /**
  * Temporarily stores the data. 
@@ -16,7 +15,7 @@ export class StorageService {
    */
   resetValues() {
     localStorage.setItem('customer_type', 'person');
-    localStorage.setItem('debit_credit_type', 'debit');
+    localStorage.setItem('debit_credit_type', 'debitor');
   }
 
   get customerType() {

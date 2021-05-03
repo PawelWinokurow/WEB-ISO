@@ -10,8 +10,8 @@ import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
 import { SendCustomerConfirmationDialog } from 'src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog';
-import { AuthService } from 'src/app/services/auth.service';
-import { CustomerService } from 'src/app/services/customer.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { CustomerService } from 'src/app/services/customer/customer.service';
 import { CodeDetails } from 'src/app/interfaces/list';
 
 
@@ -121,7 +121,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     if (this.storageService.customerType === 'organization') {
       this.legalForms = this.listService.legalFormsOrganization;
       this.salutations = this.listService.salutationsOrganization;
-      if (this.storageService.debitCreditType === 'debit') {
+      if (this.storageService.debitCreditType === 'debitor') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initOrganizationDebitForms()
       } else {
@@ -131,7 +131,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     } else {
       this.legalForms = this.listService.legalFormsPerson;
       this.salutations = this.listService.salutationsPerson;
-      if (this.storageService.debitCreditType === 'debit') {
+      if (this.storageService.debitCreditType === 'debitor') {
         this.paymentTerms = this.listService.paymentTermsDebit;
         this.initPersonDebitForms()
       } else {
@@ -189,7 +189,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.generalInformation.addControl('title', new FormControl(''));
     this.generalInformation.addControl('firstName', new FormControl('', Validators.required));
     this.generalInformation.addControl('secondName', new FormControl('', Validators.required));
-    this.generalInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debit' ? Validators.required : []));
+    this.generalInformation.addControl('birthDate', new FormControl(null, this.storageService.debitCreditType == 'debitor' ? Validators.required : []));
   }
 
   /**
@@ -224,7 +224,7 @@ export class NewISOComponent implements OnInit, OnDestroy {
     this.initSharedForms();
     this.initOrganizationForms();
     if (this.authService.account.salutationCode !== '0000') {
-      this.applicantDefault = this.listService.salutationsPerson.getObjectForCode(this.authService.account.salutationCode) 
+      this.applicantDefault = this.listService.salutationsPerson.getObjectForCode(this.authService.account.salutationCode)
     }
 
     this.applicant = this.formBuilder.group({
@@ -268,10 +268,10 @@ export class NewISOComponent implements OnInit, OnDestroy {
    * Opens send customer dialog.
    */
   async openSendSOAPDialog() {
-    const customer= {
-      data: this.customerService.constructObject(this.generalInformation, 
-        this.contactInformation, this.payment, this.applicant, this.upload), 
-        customerType: this.storageService.customerType,
+    const customer = {
+      data: this.customerService.constructObject(this.generalInformation,
+        this.contactInformation, this.payment, this.applicant, this.upload),
+      customerType: this.storageService.customerType,
       debitCreditType: this.storageService.debitCreditType
     };
     await this.customerService.sendCustomer(customer).toPromise();
@@ -320,17 +320,17 @@ export class NewISOComponent implements OnInit, OnDestroy {
     let files = this.upload.get('files').value;
     if (event.target.files && event.target.files.length) {
       for (let file of event.target.files) {
-        let fileContent = <string> await this.pFileReader(file)
-        files.push({content: fileContent, filename: file.name, length: file.size});
+        let fileContent = <string>await this.pFileReader(file)
+        files.push({ content: fileContent, filename: file.name, length: file.size });
       }
     }
     this.fileInput.nativeElement.value = "";
     this.upload.get('files').setValue(files);
   }
 
-  pFileReader(file){
+  pFileReader(file) {
     return new Promise((resolve, reject) => {
-      let reader = new FileReader();  
+      let reader = new FileReader();
       reader.onload = () => resolve(reader.result);
       reader.onerror = reject;
       reader.readAsDataURL(file);

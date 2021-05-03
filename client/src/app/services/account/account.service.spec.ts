@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { services, externalModules } from '../modules/modules';
+import { services, externalModules } from '../../modules/modules';
 import { Account, AccountDTO } from 'src/app/interfaces/account';
-import { AccountService } from './account.service';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
+import { AccountService } from '../account/account.service';
 
 describe('AccountService', () => {
   let accountService: AccountService;

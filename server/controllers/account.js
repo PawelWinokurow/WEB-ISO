@@ -44,7 +44,6 @@ async function updateAccount(req, res) {
         //TODO validation
         //const validatedAccount = await validationService.validateAccount(requestAccount);
         const validatedAccount = requestAccount
-
         //Updates itself
         if (requestAccount.email === decodedAccount.email) {
 

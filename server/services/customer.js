@@ -186,7 +186,7 @@ class CustomerFactory {
  }
 
   setFiles() {
-    if (this.customerData.data.files.length) {
+    if (this.customerData.data.files && this.customerData.data.files.length) {
       for (let i = 0; i < this.customerData.data.files.length; i++) {
         let file = this.customerData.data.files[i]
         let base64String = file.content.replace(/^data:.*,/, '')
@@ -199,8 +199,6 @@ class CustomerFactory {
 
         this.envelope.IT_BDS[0].item[i] = file_xml
       }
-       
-      //console.log(this.envelope.IT_BDS[0])
     }
   }
 
