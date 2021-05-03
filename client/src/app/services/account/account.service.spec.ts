@@ -14,7 +14,8 @@ describe('AccountService', () => {
     companyCode: '1100',
     role: 'USER',
     password: 'password',
-    passwordOld: 'password'
+    passwordOld: 'password',
+    blocked: false
   }
 
   beforeEach(async () => {

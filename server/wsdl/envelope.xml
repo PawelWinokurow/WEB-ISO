@@ -15,7 +15,7 @@
             <COMMON>
                <DATA>
                   <BP_CONTROL>
-                     <CATEGORY>2</CATEGORY>
+                     <CATEGORY></CATEGORY>
                      <GROUPING>01</GROUPING>
                   </BP_CONTROL>
                   <BP_CENTRALDATA>
@@ -236,7 +236,7 @@
                   <item>
                      <TASK>I</TASK>
                      <DATA_KEY>
-                        <TAXTYPE>DE0</TAXTYPE>
+                        <TAXTYPE></TAXTYPE>
                         <TAXNUMBER></TAXNUMBER>
                         <TAXNUMXL></TAXNUMXL>
                      </DATA_KEY>
@@ -510,7 +510,7 @@
                   <item>
                      <TASK>I</TASK>
                      <DATA_KEY>
-                        <GUID>00000000000000000000000000000000</GUID>
+                        <GUID></GUID>
                         <OPERATION></OPERATION>
                      </DATA_KEY>
                      <DATA>
@@ -552,8 +552,8 @@
                               <TAXJURCODE></TAXJURCODE>
                               <HOME_CITY></HOME_CITY>
                               <TRANSPZONE></TRANSPZONE>
-                              <LANGU>D</LANGU>
-                              <LANGUISO>DE</LANGUISO>
+                              <LANGU></LANGU>
+                              <LANGUISO></LANGUISO>
                               <COMM_TYPE></COMM_TYPE>
                               <EXTADDRESSNUMBER></EXTADDRESSNUMBER>
                               <DONT_USE_P></DONT_USE_P>
@@ -726,25 +726,25 @@
                                     <CURRENTLY_VALID>X</CURRENTLY_VALID>
                                     <COMM_USAGE>
                                        <CURRENT_STATE>X</CURRENT_STATE>
-                                          <COMM_USAGES>
-                                             <item>
-                                                <TASK>I</TASK>
-                                                <DATA_KEY>
-                                                   <COMM_USAGE>AD_NMBDEFA</COMM_USAGE>
-                                                   <VALID_TO>99991231000000</VALID_TO>
-                                                </DATA_KEY>
-                                                <DATA>
-                                                   <VALID_FROM>20210429000000</VALID_FROM>
-                                                   <DEF_USAGE/>
-                                                </DATA>
-                                                <DATAX>
-                                                   <VALID_FROM>X</VALID_FROM>
-                                                   <DEF_USAGE/>
-                                                </DATAX>
-                                                <CURRENTLY_VALID/>
-                                             </item>
-                                          </COMM_USAGES>
-                                       </COMM_USAGE>
+                                       <COMM_USAGES>
+                                          <item>
+                                             <TASK>I</TASK>
+                                             <DATA_KEY>
+                                                <COMM_USAGE>AD_NMBDEFA</COMM_USAGE>
+                                                <VALID_TO>99991231000000</VALID_TO>
+                                             </DATA_KEY>
+                                             <DATA>
+                                                <VALID_FROM>20210429000000</VALID_FROM>
+                                                <DEF_USAGE/>
+                                             </DATA>
+                                             <DATAX>
+                                                <VALID_FROM>X</VALID_FROM>
+                                                <DEF_USAGE/>
+                                             </DATAX>
+                                             <CURRENTLY_VALID/>
+                                          </item>
+                                       </COMM_USAGES>
+                                    </COMM_USAGE>
                                  </item>
                                  <item>
                                     <CONTACT>
@@ -1926,7 +1926,7 @@
             <CURRENT_STATE></CURRENT_STATE>
             <COMPANY>
                <item>
-                  <TASK></TASK>
+                  <TASK>I</TASK>
                   <DATA_KEY>
                      <BUKRS></BUKRS>
                   </DATA_KEY>

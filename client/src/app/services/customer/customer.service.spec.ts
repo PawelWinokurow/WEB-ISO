@@ -187,22 +187,22 @@ describe('CustomerService', () => {
   });
 
   it('sendPersonDebitor', async () => {
-    customerService.sendCustomer(personDebitor).toPromise()
+    await customerService.sendCustomer(personDebitor).toPromise()
     expect(true).toBeTrue();
   });
 
   it('sendPersonCreditor', async () => {
-    customerService.sendCustomer(personCreditor).toPromise()
+    await customerService.sendCustomer(personCreditor).toPromise()
     expect(true).toBeTrue();
   });
 
   it('sendOrganizationDebitor', async () => {
-    customerService.sendCustomer(organizationDebitor).toPromise()
+    await customerService.sendCustomer(organizationDebitor).toPromise()
     expect(true).toBeTrue();
   });
 
   it('sendOrganizationCreditor', async () => {
-    customerService.sendCustomer(organizationCreditor).toPromise()
+    await customerService.sendCustomer(organizationCreditor).toPromise()
     expect(true).toBeTrue();
   });
 
