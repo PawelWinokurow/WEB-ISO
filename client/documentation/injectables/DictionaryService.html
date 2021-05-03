@@ -94,9 +94,6 @@ There are two versions of mappings: one for English and one for German.</p>
                             <li>
                                 <a href="#dictionaryEN">dictionaryEN</a>
                             </li>
-                            <li>
-                                <a href="#languages">languages</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -138,7 +135,7 @@ There are two versions of mappings: one for English and one for German.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/services/dictionary.service.ts:180</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="320" class="link-to-prism">src/app/services/dictionary.service.ts:320</a></div>
                             </td>
                         </tr>
 
@@ -173,8 +170,8 @@ There are two versions of mappings: one for English and one for German.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="196"
-                            class="link-to-prism">src/app/services/dictionary.service.ts:196</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="336"
+                            class="link-to-prism">src/app/services/dictionary.service.ts:336</a></div>
                 </td>
             </tr>
 
@@ -251,8 +248,8 @@ There are two versions of mappings: one for English and one for German.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="187"
-                            class="link-to-prism">src/app/services/dictionary.service.ts:187</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="327"
+                            class="link-to-prism">src/app/services/dictionary.service.ts:327</a></div>
                 </td>
             </tr>
 
@@ -330,7 +327,7 @@ There are two versions of mappings: one for English and one for German.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/services/dictionary.service.ts:177</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="317" class="link-to-prism">src/app/services/dictionary.service.ts:317</a></div>
                             </td>
                         </tr>
 
@@ -352,88 +349,158 @@ There are two versions of mappings: one for English and one for German.</p>
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>new Map([
+    [&#x27;LOGIN&#x27;, &#x27;Anmeldung&#x27;],
+    [&#x27;HELLO&#x27;, &#x27;Hallo, &#x27;],
+    [&#x27;ID&#x27;, &#x27;E-Mail oder Benutzername&#x27;],
+    [&#x27;PSWDFOG&#x27;, &#x27;Passwort vergessen?&#x27;],
+    [&#x27;PSWDWILLRES&#x27;, &#x27;Eine Bestätigungsmail mit weiteren Anweisungen wird an Ihre E-Mail-Adresse gesendet.&#x27;],
+    
+    [&#x27;NEWCUS&#x27;, &#x27;Neuer Kunde&#x27;],
+    [&#x27;CUSS&#x27;, &#x27;Kunden&#x27;],
+    [&#x27;ACC&#x27;, &#x27;Konto&#x27;],
+    [&#x27;LANG&#x27;, &#x27;Sprache&#x27;],
+    [&#x27;LOGOUT&#x27;, &#x27;Abmelden&#x27;],
+    [&#x27;ADMINAREA&#x27;, &#x27;Admin-Bereich&#x27;],
+    
+    [&#x27;USRNAME&#x27;, &#x27;Benutzername&#x27;],
+    [&#x27;PSWD&#x27;, &#x27;Passwort&#x27;],
+    [&#x27;USR&#x27;, &#x27;Benutzer&#x27;],
+    [&#x27;ADM&#x27;, &#x27;Administrator&#x27;],
+    [&#x27;CREATE&#x27;, &#x27;Anlegen&#x27;],
+
+    [&#x27;RESETPSWDTEXT&#x27;, &#x60;Wenn Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. 
+    Geben Sie bitte Ihre registrierte E-Mail Adresse ein und drücken Sie “Passwort zurücksetzen”. 
+    Danach wird Ihnen eine E-Mail mit einem Link zugesandt.&#x60;],
+
+    [&#x27;RESETPSWD&#x27;, &#x27;Passwort zurücksetzen&#x27;],
+    [&#x27;BLOCKUSR&#x27;, &#x27;Sperren&#x27;],
+    [&#x27;UNBLOCKUSR&#x27;, &#x27;Entsperren&#x27;],
+    [&#x27;DELUSR&#x27;, &#x27;Löschen&#x27;],
+    [&#x27;BLOCKED&#x27;, &#x27;Gesperrt&#x27;],
+    [&#x27;EXPAND&#x27;, &#x27;Alle ausklappen&#x27;],
+    [&#x27;COLLAPSE&#x27;, &#x27;Alle zuklappen&#x27;],
+    [&#x27;SEARCH&#x27;, &#x27;Suche&#x27;],
+    [&#x27;ROLE&#x27;, &#x27;Rolle&#x27;],
+
+    [&#x27;ACCSET&#x27;, &#x27;Kontoeinstellungen&#x27;],
+    [&#x27;SECSET&#x27;, &#x27;Sicherheitseinstellungen&#x27;],
+
+    [&#x27;NEWACC&#x27;, &#x27;Konto anlegen&#x27;],
+    [&#x27;CHNGACC&#x27;, &#x27;Konto ändern&#x27;],
+    [&#x27;CHNG&#x27;, &#x27;Ändern&#x27;],
+    [&#x27;CONFIRM&#x27;, &#x27;Bestätigen&#x27;],
+    [&#x27;PSWDCONF&#x27;, &#x27;Passwortbestätigung&#x27;],
+    [&#x27;PSWDOLD&#x27;, &#x27;Altes Passwort&#x27;],
+    [&#x27;PSWDOLDNMATCH&#x27;, &#x27;Das alte Passwort ist falsch.&#x27;],
+    [&#x27;PSWDNMATCH&#x27;, &#x27;Die Passwörter stimmen nicht überein.&#x27;],
+    [&#x27;IDUSED&#x27;, &#x27;Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.&#x27;],
+    [&#x27;IDINC&#x27;, &#x27;Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.&#x27;],
+    [&#x27;USRISBL&#x27;, &#x27;Der Benutzer wurde gesperrt.&#x27;],
+    [&#x27;USRISUN&#x27;, &#x27;Der Benutzer wurde entsperrt.&#x27;],
+    [&#x27;USRISDEL&#x27;, &#x27;Der Benutzer wurde gelöscht.&#x27;],
+    [&#x27;PSWDISRES&#x27;, &#x27;Das Passwort wurde zurückgesetzt.&#x27;],
+    
+    [&#x27;NOTALLOWED&#x27;, &#x27;Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.&#x27;],
+
+    [&#x27;SAPID&#x27;, &#x27;SAP ID&#x27;],
+    [&#x27;HASH&#x27;, &#x27;Hash&#x27;],
+    [&#x27;DATE&#x27;, &#x27;Datum&#x27;],
+
+    [&#x27;APPLY&#x27;, &#x27;Übernehmen&#x27;],
+    [&#x27;CHNGPSWD&#x27;, &#x27;Passwort ändern&#x27;],
+
     [&#x27;YES&#x27;, &#x27;Ja&#x27;],
-    [&#x27;NOO&#x27;, &#x27;Nein&#x27;],
+    [&#x27;NO&#x27;, &#x27;Nein&#x27;],
     [&#x27;CAN&#x27;, &#x27;Abbrechen&#x27;],
     
     [&#x27;BCK&#x27;, &#x27;Zurück&#x27;],
     [&#x27;NXT&#x27;, &#x27;Weiter&#x27;],
     [&#x27;SND&#x27;, &#x27;Senden&#x27;],
-    [&#x27;ATB&#x27;, &#x27;Datei hinzufügen&#x27;],
+    [&#x27;ADDFILE&#x27;, &#x27;Datei hinzufügen&#x27;],
 
-    [&#x27;MGE&#x27;, &#x27;Maske generieren&#x27;],
-
-    [&#x27;PRS&#x27;, &#x27;Vorauswahl&#x27;],
-    [&#x27;CUT&#x27;, &#x27;Kundentyp&#x27;],
+    [&#x27;CUSTYPE&#x27;, &#x27;Kundentyp&#x27;],
     [&#x27;PER&#x27;, &#x27;Person&#x27;],
     [&#x27;ORG&#x27;, &#x27;Organisation&#x27;],
+    [&#x27;PERORG&#x27;, &#x27;Person / Organization&#x27;],
     [&#x27;DEB&#x27;, &#x27;Debitor&#x27;],
     [&#x27;CRE&#x27;, &#x27;Kreditor&#x27;],
-    [&#x27;CCO&#x27;, &#x27;Buchungskreis&#x27;],
+    [&#x27;DEBCRE&#x27;, &#x27;Debitor / Kreditor&#x27;],
+    [&#x27;COMCODE&#x27;, &#x27;Buchungskreis&#x27;],
 
-    [&#x27;LEF&#x27;, &#x27;Rechtsform&#x27;],
-    [&#x27;SSN&#x27;, &#x27;Schnittstellennummer&#x27;],
+    [&#x27;LEGFRM&#x27;, &#x27;Rechtsform&#x27;],
+    [&#x27;INTERFNUM&#x27;, &#x27;Schnittstellennummer&#x27;],
 
-    [&#x27;CND&#x27;, &#x27;Kontaktdaten&#x27;],
-    [&#x27;GEI&#x27;, &#x27;Allgemeine Informationen&#x27;],
-    [&#x27;ADI&#x27;, &#x27;Adressinformationen&#x27;],
-    [&#x27;PAI&#x27;, &#x27;Zahlungsinformationen&#x27;],
-    [&#x27;ATF&#x27;, &#x27;Datei anhängen&#x27;],
+    [&#x27;CONTACT&#x27;, &#x27;Kontaktdaten&#x27;],
+    [&#x27;GENINF&#x27;, &#x27;Allgemeine Informationen&#x27;],
+    [&#x27;CONTINF&#x27;, &#x27;Kontaktinformationen&#x27;],
+    [&#x27;PAYINF&#x27;, &#x27;Zahlungsinformationen&#x27;],
+    [&#x27;ATTACH&#x27;, &#x27;Datei anhängen&#x27;],
 
-    [&#x27;NIF&#x27;, &#x27;Namensangaben&#x27;],
-    [&#x27;ADR&#x27;, &#x27;Anschrift&#x27;],
-    [&#x27;CON&#x27;, &#x27;Kontakt&#x27;],
-    [&#x27;ANI&#x27;, &#x27;Zus. Namensangaben (c/o)&#x27;],
-    [&#x27;BRT&#x27;, &#x27;Geburtsdatum&#x27;],
+    [&#x27;NAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;ADDR&#x27;, &#x27;Anschrift&#x27;],
+    //[&#x27;ADNAME&#x27;, &#x27;Zus. Namensangaben (Name 2)&#x27;],
+    [&#x27;ADNAME&#x27;, &#x27;Name 2&#x27;],
+    [&#x27;BRTH&#x27;, &#x27;Geburtsdatum&#x27;],
     [&#x27;STR&#x27;, &#x27;Straße&#x27;],
-    [&#x27;HNU&#x27;, &#x27;Hnr.&#x27;],
-    [&#x27;MBX&#x27;, &#x27;Postfach&#x27;],
-    [&#x27;MBP&#x27;, &#x27;Postfach PLZ&#x27;],
+    [&#x27;HNO&#x27;, &#x27;Hnr.&#x27;],
+    [&#x27;MAILBX&#x27;, &#x27;Postfach&#x27;],
+    [&#x27;MAILBXZIP&#x27;, &#x27;Postfach PLZ&#x27;],
     [&#x27;ZIP&#x27;, &#x27;PLZ&#x27;],
-    [&#x27;CIT&#x27;, &#x27;Ort&#x27;],
+    [&#x27;CITY&#x27;, &#x27;Ort&#x27;],
     [&#x27;COU&#x27;, &#x27;Land&#x27;],
-    [&#x27;TEL&#x27;, &#x27;Telefon&#x27;],
+    [&#x27;TEL&#x27;, &#x27;Telefonnummer&#x27;],
     [&#x27;FAX&#x27;, &#x27;Telefax&#x27;],
-    [&#x27;MOB&#x27;, &#x27;Mobiltelefon&#x27;],
-    [&#x27;EMA&#x27;, &#x27;E-Mail-Adresse&#x27;],
+    [&#x27;MOB&#x27;, &#x27;Mobiltelefonnummer&#x27;],
+    [&#x27;EMAIL&#x27;, &#x27;E-Mail-Adresse&#x27;],
 
     [&#x27;TAX&#x27;, &#x27;Steuernummer&#x27;],
     [&#x27;VAT&#x27;, &#x27;Umsatzsteuer-ID&#x27;],
-    [&#x27;IFI&#x27;, &#x27;Branche&#x27;],
-    [&#x27;IFC&#x27;, &#x27;Branchencode&#x27;],
-    [&#x27;HSP&#x27;, &#x27;Lieferant hat SEPA-Lastschrift&#x27;],
-    [&#x27;GSP&#x27;, &#x27;SEPA-Lastschrift erteilen&#x27;],
-    [&#x27;RSP&#x27;, &#x27;SEPA-Lastschrift anfordern&#x27;],
+    [&#x27;INDFI&#x27;, &#x27;Branche&#x27;],
+    [&#x27;INDFICODE&#x27;, &#x27;Branchencode&#x27;],
+    [&#x27;HSEPA&#x27;, &#x27;Lieferant hat SEPA-Lastschrift&#x27;],
+    [&#x27;GSEPA&#x27;, &#x27;SEPA-Lastschrift erteilen&#x27;],
+    [&#x27;RSEPA&#x27;, &#x27;SEPA-Lastschrift anfordern&#x27;],
     [&#x27;IBA&#x27;, &#x27;IBAN&#x27;],
-    [&#x27;BIC&#x27;, &#x27;BIC&#x27;],
-    [&#x27;BNK&#x27;, &#x27;Kreditinstitut&#x27;],
-    [&#x27;TPA&#x27;, &#x27;Zahlungsbedingung&#x27;],
-    [&#x27;CRL&#x27;, &#x27;Kreditlimit&#x27;],
-    [&#x27;REF&#x27;, &#x27;Bemerkungsfeld&#x27;],
+    [&#x27;PAYTERMS&#x27;, &#x27;Zahlungsbedingung&#x27;],
+    [&#x27;CRELMT&#x27;, &#x27;Kreditlimit&#x27;],
+    [&#x27;REMARKS&#x27;, &#x27;Bemerkungsfeld&#x27;],
+    [&#x27;CHLEFT&#x27;, &#x27; Zeichen verbleibend&#x27;],
 
-    [&#x27;APP&#x27;, &#x27;Antragsteller&#x27;],
-    [&#x27;AP1&#x27;, &#x27;1. Antragsteller&#x27;],
-    [&#x27;AP2&#x27;, &#x27;2. Antragsteller&#x27;],
+    [&#x27;APP&#x27;, &#x27;Antragstellerinformationen&#x27;],
+    [&#x27;APP1&#x27;, &#x27;1. Antragsteller&#x27;],
+    [&#x27;APP2&#x27;, &#x27;2. Antragsteller&#x27;],
    
-    [&#x27;TLE&#x27;, &#x27;Titel&#x27;],
+    [&#x27;TITLE&#x27;, &#x27;Titel&#x27;],
     [&#x27;SAL&#x27;, &#x27;Anrede&#x27;],
-    [&#x27;COP&#x27;, &#x27;Firma / Personen&#x27;],
+    [&#x27;COMPERS&#x27;, &#x27;Firma / Personen (Name 1)&#x27;],
 
-    [&#x27;FNA&#x27;, &#x27;Vorname&#x27;],
-    [&#x27;SNA&#x27;, &#x27;Nachname&#x27;],
+    [&#x27;FNAME&#x27;, &#x27;Vorname&#x27;],
+    [&#x27;SNAME&#x27;, &#x27;Nachname&#x27;],
     
-    [&#x27;EEM&#x27;, &#x27;Bitte geben Sie Ihre E-Mail-Adresse ein.&#x27;],
-    [&#x27;SUB&#x27;, &#x27;Einreichen&#x27;],
-    [&#x27;DIS&#x27;, &#x27;Maske senden&#x27;],
-    [&#x27;DIQ&#x27;, &#x27;Wollen Sie die Maske direkt senden?&#x27;],    
-    [&#x27;SNT&#x27;, &#x27;Die Maske wurde gesendet.&#x27;],
+    [&#x27;ENTEMAIL&#x27;, &#x27;Bitte geben Sie Ihre E-Mail-Adresse ein.&#x27;],
+    [&#x27;SUBMIT&#x27;, &#x27;Einreichen&#x27;],
+    [&#x27;SNDCUS&#x27;, &#x27;Kunde senden&#x27;],
+    [&#x27;SNDDIR&#x27;, &#x27;Direkt senden&#x27;],
+    [&#x27;SNDCONFEMAIL&#x27;, &#x27;Bestätigungs-E-Mail senden&#x27;],
+
+    [&#x27;DELUSR1&#x27;, &quot;&quot;],
+    [&#x27;DELUSR2&#x27;, &quot; löschen?&quot;],
+    [&#x27;RESETPSWD1&#x27;, &quot;Passwort von &quot;],
+    [&#x27;RESETPSWD2&#x27;, &quot; zurücksetzen?&quot;],
+    [&#x27;CUSISSND&#x27;, &#x27;Der Kunde wurde gesendet.&#x27;],
+    [&#x27;CUSCONFISSND&#x27;, &#x27;Die Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.&#x27;],
+    [&#x27;USRISCR&#x27;, &#x27;Der Benutzer wurde angelegt.&#x27;],
+    [&#x27;USRISUPD&#x27;, &#x27;Der Benutzer wurde geändert.&#x27;],
+    [&#x27;USRISNUPD&#x27;, &#x27;Der Benutzer wurde nicht geändert.&#x27;],
+
     [&#x27;SUC&#x27;, &#x27;Erfolg!&#x27;],
+    [&#x27;ERR&#x27;, &#x27;Fehler!&#x27;],
   ])</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/services/dictionary.service.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/dictionary.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -455,117 +522,163 @@ There are two versions of mappings: one for English and one for German.</p>
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>new Map([
+
+    [&#x27;LOGIN&#x27;, &#x27;Sign in&#x27;],
+    [&#x27;USRNAME&#x27;, &#x27;Username&#x27;],
+    [&#x27;PSWD&#x27;, &#x27;Password&#x27;],
+    [&#x27;ID&#x27;, &#x27;Email or username&#x27;],
+    [&#x27;PSWDFOG&#x27;, &#x27;Forgot password?&#x27;],
+    [&#x27;PSWDWILLRES&#x27;, &#x27;A confirmation e-mail with further instructions will be sent to your e-mail address.&#x27;],
+    
+    [&#x27;NOTALLOWED&#x27;, &#x27;You are not allowed to view this page or take an action. You are redirected to enter the login page.&#x27;],
+    
+    [&#x27;SAPID&#x27;, &#x27;SAP ID&#x27;],
+    [&#x27;HASH&#x27;, &#x27;Hash&#x27;],
+    [&#x27;DATE&#x27;, &#x27;Date&#x27;],
+
+    [&#x27;APPLY&#x27;, &#x27;Apply&#x27;],
+    [&#x27;CHNGPSWD&#x27;, &#x27;Change password&#x27;],
+    [&#x27;NEWACC&#x27;, &#x27;Create account&#x27;],
+    [&#x27;CHNGACC&#x27;, &#x27;Change account&#x27;],
+    [&#x27;CHNG&#x27;, &#x27;Change&#x27;],
+    [&#x27;CONFIRM&#x27;, &#x27;Confirm&#x27;],
+    [&#x27;PSWDCONF&#x27;, &#x27;Password confirmation&#x27;],
+    [&#x27;PSWDOLD&#x27;, &#x27;Old password&#x27;],
+    
+    [&#x27;CREATE&#x27;, &#x27;Create&#x27;],
+    [&#x27;USR&#x27;, &#x27;Account&#x27;],
+    [&#x27;ADM&#x27;, &#x27;Administrator&#x27;],
+
+    [&#x27;HELLO&#x27;, &#x27;Hello, &#x27;],
+    [&#x27;NEWCUS&#x27;, &#x27;New customer&#x27;],
+    [&#x27;CUSS&#x27;, &#x27;Customer&#x27;],
+    [&#x27;LOGOUT&#x27;, &#x27;Sign out&#x27;],
+    [&#x27;ACC&#x27;, &#x27;Account&#x27;],
+    [&#x27;LANG&#x27;, &#x27;Language&#x27;],
+    [&#x27;ADMINAREA&#x27;, &#x27;Admin area&#x27;],
+    [&#x27;ROLE&#x27;, &#x27;Role&#x27;],
+
+    [&#x27;ACCSET&#x27;, &#x27;Account settings&#x27;],
+    [&#x27;SECSET&#x27;, &#x27;Security settings&#x27;],
+    
+    [&#x27;RESETPSWDTEXT&#x27;, &#x60;If you forget your password, you can request to reset your password. 
+    Please enter your registered email address and press “Reset password”. 
+    We will send you an email containing a link enabling you to create a new password.&#x60;],
+
+    [&#x27;RESETPSWD&#x27;, &#x27;Reset password&#x27;],
+    [&#x27;BLOCKUSR&#x27;, &#x27;Block&#x27;],
+    [&#x27;UNBLOCKUSR&#x27;, &#x27;Unblock&#x27;],
+    [&#x27;DELUSR&#x27;, &#x27;Delete&#x27;],
+    [&#x27;BLOCKED&#x27;, &#x27;Blocked&#x27;],
+    [&#x27;EXPAND&#x27;, &#x27;Expand all&#x27;],
+    [&#x27;COLLAPSE&#x27;, &#x27;Collapse all&#x27;],
+    [&#x27;SEARCH&#x27;, &#x27;Search&#x27;],
+
     [&#x27;YES&#x27;, &#x27;Yes&#x27;],
-    [&#x27;NOO&#x27;, &#x27;No&#x27;],
+    [&#x27;NO&#x27;, &#x27;No&#x27;],
     [&#x27;CAN&#x27;, &#x27;Cancel&#x27;],
 
     [&#x27;BCK&#x27;, &#x27;Back&#x27;],
     [&#x27;NXT&#x27;, &#x27;Next&#x27;],
     [&#x27;SND&#x27;, &#x27;Send&#x27;],
-    [&#x27;ATB&#x27;, &#x27;Add file&#x27;],
+    [&#x27;ADDFILE&#x27;, &#x27;Add file&#x27;],
     
-    [&#x27;MGE&#x27;, &#x27;Generate mask&#x27;],
-    [&#x27;PRS&#x27;, &#x27;Preselection&#x27;],
-    [&#x27;CUT&#x27;, &#x27;Customer type&#x27;],
+    [&#x27;CUSTYPE&#x27;, &#x27;Customer type&#x27;],
     [&#x27;PER&#x27;, &#x27;Person&#x27;],
+    [&#x27;ORG&#x27;, &#x27;Organization&#x27;],
+    [&#x27;PERORG&#x27;, &#x27;Person / Organization&#x27;],
     [&#x27;DEB&#x27;, &#x27;Debitor&#x27;],
     [&#x27;CRE&#x27;, &#x27;Creditor&#x27;],
-    [&#x27;CCO&#x27;, &#x27;Comapany code&#x27;],
+    [&#x27;DEBCRE&#x27;, &#x27;Debitor / Creditor&#x27;],
+    [&#x27;COMCODE&#x27;, &#x27;Comapany code&#x27;],
     
-    [&#x27;LEF&#x27;, &#x27;Legal form&#x27;],
+    [&#x27;LEGFRM&#x27;, &#x27;Legal form&#x27;],
     
-    [&#x27;SSN&#x27;, &#x27;Interface number&#x27;],
+    [&#x27;INTERFNUM&#x27;, &#x27;Interface number&#x27;],
     
-    [&#x27;CND&#x27;, &#x27;Contact&#x27;],
-    [&#x27;GEI&#x27;, &#x27;General information&#x27;],
-    [&#x27;ADI&#x27;, &#x27;Address information&#x27;],
-    [&#x27;PAI&#x27;, &#x27;Payment information&#x27;],
-    [&#x27;ATF&#x27;, &#x27;Attach file&#x27;],
+    [&#x27;CONTACT&#x27;, &#x27;Contact&#x27;],
+    [&#x27;GENINF&#x27;, &#x27;General information&#x27;],
+    [&#x27;CONTINF&#x27;, &#x27;Contact information&#x27;],
+    [&#x27;PAYINF&#x27;, &#x27;Payment information&#x27;],
+    [&#x27;ATTACH&#x27;, &#x27;Attach file&#x27;],
 
-    [&#x27;NIF&#x27;, &#x27;Name&#x27;],
-    [&#x27;ADR&#x27;, &#x27;Address&#x27;],
-    [&#x27;CON&#x27;, &#x27;Contact&#x27;],
-    [&#x27;ORG&#x27;, &#x27;Organization&#x27;],
-    [&#x27;ANI&#x27;, &#x27;Additional name&#x27;],
-    [&#x27;BRT&#x27;, &#x27;Birth date&#x27;],
+    [&#x27;NAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;ADDR&#x27;, &#x27;Address&#x27;],
+    //[&#x27;ADNAME&#x27;, &#x27;Additional name (Name 2)&#x27;],
+    [&#x27;ADNAME&#x27;, &#x27;Name 2&#x27;],
+    [&#x27;BRTH&#x27;, &#x27;Birth date&#x27;],
     [&#x27;STR&#x27;, &#x27;Street&#x27;],
-    [&#x27;HNU&#x27;, &#x27;House no.&#x27;],
-    [&#x27;MBX&#x27;, &#x27;Mailbox&#x27;],
-    [&#x27;MBP&#x27;, &#x27;Mailbox ZIP&#x27;],
+    [&#x27;HNO&#x27;, &#x27;House no.&#x27;],
+    [&#x27;MAILBX&#x27;, &#x27;Mailbox&#x27;],
+    [&#x27;MAILBXZIP&#x27;, &#x27;Mailbox ZIP&#x27;],
     [&#x27;ZIP&#x27;, &#x27;ZIP&#x27;],
-    [&#x27;CIT&#x27;, &#x27;City&#x27;],
+    [&#x27;CITY&#x27;, &#x27;City&#x27;],
     [&#x27;COU&#x27;, &#x27;Country&#x27;],
     [&#x27;TEL&#x27;, &#x27;Phone&#x27;],
     [&#x27;FAX&#x27;, &#x27;Fax&#x27;],
     [&#x27;MOB&#x27;, &#x27;Mobile phone&#x27;],
-    [&#x27;EMA&#x27;, &#x27;Email address&#x27;],
+    [&#x27;EMAIL&#x27;, &#x27;Email address&#x27;],
 
     [&#x27;TAX&#x27;, &#x27;Tax ID&#x27;],
     [&#x27;VAT&#x27;, &#x27;VAT ID&#x27;],
-    [&#x27;IFI&#x27;, &#x27;Industry field&#x27;],
-    [&#x27;IFC&#x27;, &#x27;Industry field code&#x27;],
-    [&#x27;HSP&#x27;, &#x27;Supplier has SEPA direct debit&#x27;],
-    [&#x27;GSP&#x27;, &#x27;Grant SEPA direct debit&#x27;],
-    [&#x27;RSP&#x27;, &#x27;Request SEPA direct debit&#x27;],
+    [&#x27;INDFI&#x27;, &#x27;Industry field&#x27;],
+    [&#x27;INDFICODE&#x27;, &#x27;Industry field code&#x27;],
+    [&#x27;HSEPA&#x27;, &#x27;Supplier has SEPA direct debit&#x27;],
+    [&#x27;GSEPA&#x27;, &#x27;Grant SEPA direct debit&#x27;],
+    [&#x27;RSEPA&#x27;, &#x27;Request SEPA direct debit&#x27;],
     [&#x27;IBA&#x27;, &#x27;IBAN&#x27;],
-    [&#x27;BIC&#x27;, &#x27;BIC&#x27;],
-    [&#x27;BNK&#x27;, &#x27;Credit institution&#x27;],
-    [&#x27;CRL&#x27;, &#x27;Credit limit&#x27;],
-    [&#x27;TPA&#x27;, &#x27;Terms of payment&#x27;],
-    [&#x27;REF&#x27;, &#x27;Remarks field&#x27;],
+    [&#x27;CRELMT&#x27;, &#x27;Credit limit&#x27;],
+    [&#x27;PAYTERMS&#x27;, &#x27;Terms of payment&#x27;],
+    [&#x27;REMARKS&#x27;, &#x27;Remarks field&#x27;],
+    [&#x27;CHLEFT&#x27;, &#x27; characters left&#x27;],
 
-    [&#x27;APP&#x27;, &#x27;Applicant&#x27;],
-    [&#x27;AP1&#x27;, &#x27;Applicant 1&#x27;],
-    [&#x27;AP2&#x27;, &#x27;Applicant 2&#x27;],
+    [&#x27;APP&#x27;, &#x27;Applicant information&#x27;],
+    [&#x27;APP1&#x27;, &#x27;Applicant 1&#x27;],
+    [&#x27;APP2&#x27;, &#x27;Applicant 2&#x27;],
 
-    [&#x27;TLE&#x27;, &#x27;Title&#x27;],
+    [&#x27;TITLE&#x27;, &#x27;Title&#x27;],
     [&#x27;SAL&#x27;, &#x27;Salutation&#x27;],
-    [&#x27;COP&#x27;, &#x27;Company / Persons&#x27;],
-    [&#x27;FNA&#x27;, &#x27;Name&#x27;],
-    [&#x27;SNA&#x27;, &#x27;Surname&#x27;],
+    [&#x27;COMPERS&#x27;, &#x27;Company / Persons (Name 1)&#x27;],
+    [&#x27;FNAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;SNAME&#x27;, &#x27;Surname&#x27;],
     
-    [&#x27;EEM&#x27;, &#x27;Please enter your email address.&#x27;],
-    [&#x27;SUB&#x27;, &#x27;Submit&#x27;],
-    [&#x27;DIS&#x27;, &#x27;Send mask&#x27;],
-    [&#x27;DIQ&#x27;, &#x27;Do you want to send the mask directly?&#x27;],
+    [&#x27;ENTEMAIL&#x27;, &#x27;Please enter your email address.&#x27;],
+    [&#x27;SUBMIT&#x27;, &#x27;Submit&#x27;],
+    [&#x27;SNDCUS&#x27;, &#x27;Send customer&#x27;],
+    [&#x27;SNDDIR&#x27;, &#x27;Send directly&#x27;],
+    [&#x27;SNDCONFEMAIL&#x27;, &#x27;Send confirmation email&#x27;],
+    [&#x27;DELUSR1&#x27;, &quot;Delete &quot;],
+    [&#x27;DELUSR2&#x27;, &quot;?&quot;],
+    [&#x27;RESETPSWD1&#x27;, &quot;Reset password for &quot;],
+    [&#x27;RESETPSWD2&#x27;, &quot;?&quot;],
 
-    [&#x27;SNT&#x27;, &#x27;The mask was sent.&#x27;],
+    [&#x27;USRISNUPD&#x27;, &#x27;The account was not updated.&#x27;],
+
     [&#x27;SUC&#x27;, &#x27;Success!&#x27;],
+    [&#x27;ERR&#x27;, &#x27;Error!&#x27;],
+
+    //Messages
+    [&#x27;USRISCR&#x27;, &#x27;The account was created.&#x27;],
+    [&#x27;USRISUPD&#x27;, &#x27;The account was updated.&#x27;],
+    [&#x27;CUSISSND&#x27;, &#x27;The customer was sent.&#x27;],
+    [&#x27;CUSCONFISSND&#x27;, &#x27;The confirmation email was sent to your email address.&#x27;],
+    [&#x27;USRISBL&#x27;, &#x27;The account was blocked.&#x27;],
+    [&#x27;USRISUN&#x27;, &#x27;The account was unblocked.&#x27;],
+    [&#x27;USRISDEL&#x27;, &#x27;The account was deleted.&#x27;],
+    [&#x27;PSWDISRES&#x27;, &#x27;The password was reset.&#x27;],
+
+    //Errors
+    [&#x27;PSWDNMATCH&#x27;, &#x27;The passwords do not match.&#x27;],
+    [&#x27;PSWDOLDNMATCH&#x27;, &#x27;The old password does not match.&#x27;],
+    [&#x27;IDUSED&#x27;, &#x27;This email address or username is already being used.&#x27;],
+    [&#x27;IDINC&#x27;, &#x27;Your username/email or password are incorrect.&#x27;],
+
   ])</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/services/dictionary.service.ts:98</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="languages"></a>
-                        <span class="name">
-                            <b>
-                            languages</b>
-                            <a href="#languages"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Map([
-    [&#x27;DE&#x27;, &#x27;Deutsch&#x27;],
-    [&#x27;EN&#x27;, &#x27;English&#x27;],
-  ])</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/dictionary.service.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/services/dictionary.service.ts:163</a></div>
                             </td>
                         </tr>
 
@@ -591,167 +704,307 @@ export class DictionaryService {
 
   currentLanguage: string &#x3D; &#x27;DE&#x27;;
 
-  languages &#x3D; new Map([
-    [&#x27;DE&#x27;, &#x27;Deutsch&#x27;],
-    [&#x27;EN&#x27;, &#x27;English&#x27;],
-  ]);
-
   dictionaryDE &#x3D; new Map([
+    [&#x27;LOGIN&#x27;, &#x27;Anmeldung&#x27;],
+    [&#x27;HELLO&#x27;, &#x27;Hallo, &#x27;],
+    [&#x27;ID&#x27;, &#x27;E-Mail oder Benutzername&#x27;],
+    [&#x27;PSWDFOG&#x27;, &#x27;Passwort vergessen?&#x27;],
+    [&#x27;PSWDWILLRES&#x27;, &#x27;Eine Bestätigungsmail mit weiteren Anweisungen wird an Ihre E-Mail-Adresse gesendet.&#x27;],
+    
+    [&#x27;NEWCUS&#x27;, &#x27;Neuer Kunde&#x27;],
+    [&#x27;CUSS&#x27;, &#x27;Kunden&#x27;],
+    [&#x27;ACC&#x27;, &#x27;Konto&#x27;],
+    [&#x27;LANG&#x27;, &#x27;Sprache&#x27;],
+    [&#x27;LOGOUT&#x27;, &#x27;Abmelden&#x27;],
+    [&#x27;ADMINAREA&#x27;, &#x27;Admin-Bereich&#x27;],
+    
+    [&#x27;USRNAME&#x27;, &#x27;Benutzername&#x27;],
+    [&#x27;PSWD&#x27;, &#x27;Passwort&#x27;],
+    [&#x27;USR&#x27;, &#x27;Benutzer&#x27;],
+    [&#x27;ADM&#x27;, &#x27;Administrator&#x27;],
+    [&#x27;CREATE&#x27;, &#x27;Anlegen&#x27;],
+
+    [&#x27;RESETPSWDTEXT&#x27;, &#x60;Wenn Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. 
+    Geben Sie bitte Ihre registrierte E-Mail Adresse ein und drücken Sie “Passwort zurücksetzen”. 
+    Danach wird Ihnen eine E-Mail mit einem Link zugesandt.&#x60;],
+
+    [&#x27;RESETPSWD&#x27;, &#x27;Passwort zurücksetzen&#x27;],
+    [&#x27;BLOCKUSR&#x27;, &#x27;Sperren&#x27;],
+    [&#x27;UNBLOCKUSR&#x27;, &#x27;Entsperren&#x27;],
+    [&#x27;DELUSR&#x27;, &#x27;Löschen&#x27;],
+    [&#x27;BLOCKED&#x27;, &#x27;Gesperrt&#x27;],
+    [&#x27;EXPAND&#x27;, &#x27;Alle ausklappen&#x27;],
+    [&#x27;COLLAPSE&#x27;, &#x27;Alle zuklappen&#x27;],
+    [&#x27;SEARCH&#x27;, &#x27;Suche&#x27;],
+    [&#x27;ROLE&#x27;, &#x27;Rolle&#x27;],
+
+    [&#x27;ACCSET&#x27;, &#x27;Kontoeinstellungen&#x27;],
+    [&#x27;SECSET&#x27;, &#x27;Sicherheitseinstellungen&#x27;],
+
+    [&#x27;NEWACC&#x27;, &#x27;Konto anlegen&#x27;],
+    [&#x27;CHNGACC&#x27;, &#x27;Konto ändern&#x27;],
+    [&#x27;CHNG&#x27;, &#x27;Ändern&#x27;],
+    [&#x27;CONFIRM&#x27;, &#x27;Bestätigen&#x27;],
+    [&#x27;PSWDCONF&#x27;, &#x27;Passwortbestätigung&#x27;],
+    [&#x27;PSWDOLD&#x27;, &#x27;Altes Passwort&#x27;],
+    [&#x27;PSWDOLDNMATCH&#x27;, &#x27;Das alte Passwort ist falsch.&#x27;],
+    [&#x27;PSWDNMATCH&#x27;, &#x27;Die Passwörter stimmen nicht überein.&#x27;],
+    [&#x27;IDUSED&#x27;, &#x27;Diese E-Mail-Adresse oder Benutzername wird bereits verwendet.&#x27;],
+    [&#x27;IDINC&#x27;, &#x27;Ihr Benutzername/E-Mail-Adresse oder Ihr Passwort sind falsch.&#x27;],
+    [&#x27;USRISBL&#x27;, &#x27;Der Benutzer wurde gesperrt.&#x27;],
+    [&#x27;USRISUN&#x27;, &#x27;Der Benutzer wurde entsperrt.&#x27;],
+    [&#x27;USRISDEL&#x27;, &#x27;Der Benutzer wurde gelöscht.&#x27;],
+    [&#x27;PSWDISRES&#x27;, &#x27;Das Passwort wurde zurückgesetzt.&#x27;],
+    
+    [&#x27;NOTALLOWED&#x27;, &#x27;Sie sind nicht berechtigt auf diese Seite zuzugreifen. Sie werden zur Login-Seite weitergeleitet.&#x27;],
+
+    [&#x27;SAPID&#x27;, &#x27;SAP ID&#x27;],
+    [&#x27;HASH&#x27;, &#x27;Hash&#x27;],
+    [&#x27;DATE&#x27;, &#x27;Datum&#x27;],
+
+    [&#x27;APPLY&#x27;, &#x27;Übernehmen&#x27;],
+    [&#x27;CHNGPSWD&#x27;, &#x27;Passwort ändern&#x27;],
+
     [&#x27;YES&#x27;, &#x27;Ja&#x27;],
-    [&#x27;NOO&#x27;, &#x27;Nein&#x27;],
+    [&#x27;NO&#x27;, &#x27;Nein&#x27;],
     [&#x27;CAN&#x27;, &#x27;Abbrechen&#x27;],
     
     [&#x27;BCK&#x27;, &#x27;Zurück&#x27;],
     [&#x27;NXT&#x27;, &#x27;Weiter&#x27;],
     [&#x27;SND&#x27;, &#x27;Senden&#x27;],
-    [&#x27;ATB&#x27;, &#x27;Datei hinzufügen&#x27;],
+    [&#x27;ADDFILE&#x27;, &#x27;Datei hinzufügen&#x27;],
 
-    [&#x27;MGE&#x27;, &#x27;Maske generieren&#x27;],
-
-    [&#x27;PRS&#x27;, &#x27;Vorauswahl&#x27;],
-    [&#x27;CUT&#x27;, &#x27;Kundentyp&#x27;],
+    [&#x27;CUSTYPE&#x27;, &#x27;Kundentyp&#x27;],
     [&#x27;PER&#x27;, &#x27;Person&#x27;],
     [&#x27;ORG&#x27;, &#x27;Organisation&#x27;],
+    [&#x27;PERORG&#x27;, &#x27;Person / Organization&#x27;],
     [&#x27;DEB&#x27;, &#x27;Debitor&#x27;],
     [&#x27;CRE&#x27;, &#x27;Kreditor&#x27;],
-    [&#x27;CCO&#x27;, &#x27;Buchungskreis&#x27;],
+    [&#x27;DEBCRE&#x27;, &#x27;Debitor / Kreditor&#x27;],
+    [&#x27;COMCODE&#x27;, &#x27;Buchungskreis&#x27;],
 
-    [&#x27;LEF&#x27;, &#x27;Rechtsform&#x27;],
-    [&#x27;SSN&#x27;, &#x27;Schnittstellennummer&#x27;],
+    [&#x27;LEGFRM&#x27;, &#x27;Rechtsform&#x27;],
+    [&#x27;INTERFNUM&#x27;, &#x27;Schnittstellennummer&#x27;],
 
-    [&#x27;CND&#x27;, &#x27;Kontaktdaten&#x27;],
-    [&#x27;GEI&#x27;, &#x27;Allgemeine Informationen&#x27;],
-    [&#x27;ADI&#x27;, &#x27;Adressinformationen&#x27;],
-    [&#x27;PAI&#x27;, &#x27;Zahlungsinformationen&#x27;],
-    [&#x27;ATF&#x27;, &#x27;Datei anhängen&#x27;],
+    [&#x27;CONTACT&#x27;, &#x27;Kontaktdaten&#x27;],
+    [&#x27;GENINF&#x27;, &#x27;Allgemeine Informationen&#x27;],
+    [&#x27;CONTINF&#x27;, &#x27;Kontaktinformationen&#x27;],
+    [&#x27;PAYINF&#x27;, &#x27;Zahlungsinformationen&#x27;],
+    [&#x27;ATTACH&#x27;, &#x27;Datei anhängen&#x27;],
 
-    [&#x27;NIF&#x27;, &#x27;Namensangaben&#x27;],
-    [&#x27;ADR&#x27;, &#x27;Anschrift&#x27;],
-    [&#x27;CON&#x27;, &#x27;Kontakt&#x27;],
-    [&#x27;ANI&#x27;, &#x27;Zus. Namensangaben (c/o)&#x27;],
-    [&#x27;BRT&#x27;, &#x27;Geburtsdatum&#x27;],
+    [&#x27;NAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;ADDR&#x27;, &#x27;Anschrift&#x27;],
+    //[&#x27;ADNAME&#x27;, &#x27;Zus. Namensangaben (Name 2)&#x27;],
+    [&#x27;ADNAME&#x27;, &#x27;Name 2&#x27;],
+    [&#x27;BRTH&#x27;, &#x27;Geburtsdatum&#x27;],
     [&#x27;STR&#x27;, &#x27;Straße&#x27;],
-    [&#x27;HNU&#x27;, &#x27;Hnr.&#x27;],
-    [&#x27;MBX&#x27;, &#x27;Postfach&#x27;],
-    [&#x27;MBP&#x27;, &#x27;Postfach PLZ&#x27;],
+    [&#x27;HNO&#x27;, &#x27;Hnr.&#x27;],
+    [&#x27;MAILBX&#x27;, &#x27;Postfach&#x27;],
+    [&#x27;MAILBXZIP&#x27;, &#x27;Postfach PLZ&#x27;],
     [&#x27;ZIP&#x27;, &#x27;PLZ&#x27;],
-    [&#x27;CIT&#x27;, &#x27;Ort&#x27;],
+    [&#x27;CITY&#x27;, &#x27;Ort&#x27;],
     [&#x27;COU&#x27;, &#x27;Land&#x27;],
-    [&#x27;TEL&#x27;, &#x27;Telefon&#x27;],
+    [&#x27;TEL&#x27;, &#x27;Telefonnummer&#x27;],
     [&#x27;FAX&#x27;, &#x27;Telefax&#x27;],
-    [&#x27;MOB&#x27;, &#x27;Mobiltelefon&#x27;],
-    [&#x27;EMA&#x27;, &#x27;E-Mail-Adresse&#x27;],
+    [&#x27;MOB&#x27;, &#x27;Mobiltelefonnummer&#x27;],
+    [&#x27;EMAIL&#x27;, &#x27;E-Mail-Adresse&#x27;],
 
     [&#x27;TAX&#x27;, &#x27;Steuernummer&#x27;],
     [&#x27;VAT&#x27;, &#x27;Umsatzsteuer-ID&#x27;],
-    [&#x27;IFI&#x27;, &#x27;Branche&#x27;],
-    [&#x27;IFC&#x27;, &#x27;Branchencode&#x27;],
-    [&#x27;HSP&#x27;, &#x27;Lieferant hat SEPA-Lastschrift&#x27;],
-    [&#x27;GSP&#x27;, &#x27;SEPA-Lastschrift erteilen&#x27;],
-    [&#x27;RSP&#x27;, &#x27;SEPA-Lastschrift anfordern&#x27;],
+    [&#x27;INDFI&#x27;, &#x27;Branche&#x27;],
+    [&#x27;INDFICODE&#x27;, &#x27;Branchencode&#x27;],
+    [&#x27;HSEPA&#x27;, &#x27;Lieferant hat SEPA-Lastschrift&#x27;],
+    [&#x27;GSEPA&#x27;, &#x27;SEPA-Lastschrift erteilen&#x27;],
+    [&#x27;RSEPA&#x27;, &#x27;SEPA-Lastschrift anfordern&#x27;],
     [&#x27;IBA&#x27;, &#x27;IBAN&#x27;],
-    [&#x27;BIC&#x27;, &#x27;BIC&#x27;],
-    [&#x27;BNK&#x27;, &#x27;Kreditinstitut&#x27;],
-    [&#x27;TPA&#x27;, &#x27;Zahlungsbedingung&#x27;],
-    [&#x27;CRL&#x27;, &#x27;Kreditlimit&#x27;],
-    [&#x27;REF&#x27;, &#x27;Bemerkungsfeld&#x27;],
+    [&#x27;PAYTERMS&#x27;, &#x27;Zahlungsbedingung&#x27;],
+    [&#x27;CRELMT&#x27;, &#x27;Kreditlimit&#x27;],
+    [&#x27;REMARKS&#x27;, &#x27;Bemerkungsfeld&#x27;],
+    [&#x27;CHLEFT&#x27;, &#x27; Zeichen verbleibend&#x27;],
 
-    [&#x27;APP&#x27;, &#x27;Antragsteller&#x27;],
-    [&#x27;AP1&#x27;, &#x27;1. Antragsteller&#x27;],
-    [&#x27;AP2&#x27;, &#x27;2. Antragsteller&#x27;],
+    [&#x27;APP&#x27;, &#x27;Antragstellerinformationen&#x27;],
+    [&#x27;APP1&#x27;, &#x27;1. Antragsteller&#x27;],
+    [&#x27;APP2&#x27;, &#x27;2. Antragsteller&#x27;],
    
-    [&#x27;TLE&#x27;, &#x27;Titel&#x27;],
+    [&#x27;TITLE&#x27;, &#x27;Titel&#x27;],
     [&#x27;SAL&#x27;, &#x27;Anrede&#x27;],
-    [&#x27;COP&#x27;, &#x27;Firma / Personen&#x27;],
+    [&#x27;COMPERS&#x27;, &#x27;Firma / Personen (Name 1)&#x27;],
 
-    [&#x27;FNA&#x27;, &#x27;Vorname&#x27;],
-    [&#x27;SNA&#x27;, &#x27;Nachname&#x27;],
+    [&#x27;FNAME&#x27;, &#x27;Vorname&#x27;],
+    [&#x27;SNAME&#x27;, &#x27;Nachname&#x27;],
     
-    [&#x27;EEM&#x27;, &#x27;Bitte geben Sie Ihre E-Mail-Adresse ein.&#x27;],
-    [&#x27;SUB&#x27;, &#x27;Einreichen&#x27;],
-    [&#x27;DIS&#x27;, &#x27;Maske senden&#x27;],
-    [&#x27;DIQ&#x27;, &#x27;Wollen Sie die Maske direkt senden?&#x27;],    
-    [&#x27;SNT&#x27;, &#x27;Die Maske wurde gesendet.&#x27;],
+    [&#x27;ENTEMAIL&#x27;, &#x27;Bitte geben Sie Ihre E-Mail-Adresse ein.&#x27;],
+    [&#x27;SUBMIT&#x27;, &#x27;Einreichen&#x27;],
+    [&#x27;SNDCUS&#x27;, &#x27;Kunde senden&#x27;],
+    [&#x27;SNDDIR&#x27;, &#x27;Direkt senden&#x27;],
+    [&#x27;SNDCONFEMAIL&#x27;, &#x27;Bestätigungs-E-Mail senden&#x27;],
+
+    [&#x27;DELUSR1&#x27;, &quot;&quot;],
+    [&#x27;DELUSR2&#x27;, &quot; löschen?&quot;],
+    [&#x27;RESETPSWD1&#x27;, &quot;Passwort von &quot;],
+    [&#x27;RESETPSWD2&#x27;, &quot; zurücksetzen?&quot;],
+    [&#x27;CUSISSND&#x27;, &#x27;Der Kunde wurde gesendet.&#x27;],
+    [&#x27;CUSCONFISSND&#x27;, &#x27;Die Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.&#x27;],
+    [&#x27;USRISCR&#x27;, &#x27;Der Benutzer wurde angelegt.&#x27;],
+    [&#x27;USRISUPD&#x27;, &#x27;Der Benutzer wurde geändert.&#x27;],
+    [&#x27;USRISNUPD&#x27;, &#x27;Der Benutzer wurde nicht geändert.&#x27;],
+
     [&#x27;SUC&#x27;, &#x27;Erfolg!&#x27;],
+    [&#x27;ERR&#x27;, &#x27;Fehler!&#x27;],
   ])
 
   dictionaryEN &#x3D; new Map([
+
+    [&#x27;LOGIN&#x27;, &#x27;Sign in&#x27;],
+    [&#x27;USRNAME&#x27;, &#x27;Username&#x27;],
+    [&#x27;PSWD&#x27;, &#x27;Password&#x27;],
+    [&#x27;ID&#x27;, &#x27;Email or username&#x27;],
+    [&#x27;PSWDFOG&#x27;, &#x27;Forgot password?&#x27;],
+    [&#x27;PSWDWILLRES&#x27;, &#x27;A confirmation e-mail with further instructions will be sent to your e-mail address.&#x27;],
+    
+    [&#x27;NOTALLOWED&#x27;, &#x27;You are not allowed to view this page or take an action. You are redirected to enter the login page.&#x27;],
+    
+    [&#x27;SAPID&#x27;, &#x27;SAP ID&#x27;],
+    [&#x27;HASH&#x27;, &#x27;Hash&#x27;],
+    [&#x27;DATE&#x27;, &#x27;Date&#x27;],
+
+    [&#x27;APPLY&#x27;, &#x27;Apply&#x27;],
+    [&#x27;CHNGPSWD&#x27;, &#x27;Change password&#x27;],
+    [&#x27;NEWACC&#x27;, &#x27;Create account&#x27;],
+    [&#x27;CHNGACC&#x27;, &#x27;Change account&#x27;],
+    [&#x27;CHNG&#x27;, &#x27;Change&#x27;],
+    [&#x27;CONFIRM&#x27;, &#x27;Confirm&#x27;],
+    [&#x27;PSWDCONF&#x27;, &#x27;Password confirmation&#x27;],
+    [&#x27;PSWDOLD&#x27;, &#x27;Old password&#x27;],
+    
+    [&#x27;CREATE&#x27;, &#x27;Create&#x27;],
+    [&#x27;USR&#x27;, &#x27;Account&#x27;],
+    [&#x27;ADM&#x27;, &#x27;Administrator&#x27;],
+
+    [&#x27;HELLO&#x27;, &#x27;Hello, &#x27;],
+    [&#x27;NEWCUS&#x27;, &#x27;New customer&#x27;],
+    [&#x27;CUSS&#x27;, &#x27;Customer&#x27;],
+    [&#x27;LOGOUT&#x27;, &#x27;Sign out&#x27;],
+    [&#x27;ACC&#x27;, &#x27;Account&#x27;],
+    [&#x27;LANG&#x27;, &#x27;Language&#x27;],
+    [&#x27;ADMINAREA&#x27;, &#x27;Admin area&#x27;],
+    [&#x27;ROLE&#x27;, &#x27;Role&#x27;],
+
+    [&#x27;ACCSET&#x27;, &#x27;Account settings&#x27;],
+    [&#x27;SECSET&#x27;, &#x27;Security settings&#x27;],
+    
+    [&#x27;RESETPSWDTEXT&#x27;, &#x60;If you forget your password, you can request to reset your password. 
+    Please enter your registered email address and press “Reset password”. 
+    We will send you an email containing a link enabling you to create a new password.&#x60;],
+
+    [&#x27;RESETPSWD&#x27;, &#x27;Reset password&#x27;],
+    [&#x27;BLOCKUSR&#x27;, &#x27;Block&#x27;],
+    [&#x27;UNBLOCKUSR&#x27;, &#x27;Unblock&#x27;],
+    [&#x27;DELUSR&#x27;, &#x27;Delete&#x27;],
+    [&#x27;BLOCKED&#x27;, &#x27;Blocked&#x27;],
+    [&#x27;EXPAND&#x27;, &#x27;Expand all&#x27;],
+    [&#x27;COLLAPSE&#x27;, &#x27;Collapse all&#x27;],
+    [&#x27;SEARCH&#x27;, &#x27;Search&#x27;],
+
     [&#x27;YES&#x27;, &#x27;Yes&#x27;],
-    [&#x27;NOO&#x27;, &#x27;No&#x27;],
+    [&#x27;NO&#x27;, &#x27;No&#x27;],
     [&#x27;CAN&#x27;, &#x27;Cancel&#x27;],
 
     [&#x27;BCK&#x27;, &#x27;Back&#x27;],
     [&#x27;NXT&#x27;, &#x27;Next&#x27;],
     [&#x27;SND&#x27;, &#x27;Send&#x27;],
-    [&#x27;ATB&#x27;, &#x27;Add file&#x27;],
+    [&#x27;ADDFILE&#x27;, &#x27;Add file&#x27;],
     
-    [&#x27;MGE&#x27;, &#x27;Generate mask&#x27;],
-    [&#x27;PRS&#x27;, &#x27;Preselection&#x27;],
-    [&#x27;CUT&#x27;, &#x27;Customer type&#x27;],
+    [&#x27;CUSTYPE&#x27;, &#x27;Customer type&#x27;],
     [&#x27;PER&#x27;, &#x27;Person&#x27;],
+    [&#x27;ORG&#x27;, &#x27;Organization&#x27;],
+    [&#x27;PERORG&#x27;, &#x27;Person / Organization&#x27;],
     [&#x27;DEB&#x27;, &#x27;Debitor&#x27;],
     [&#x27;CRE&#x27;, &#x27;Creditor&#x27;],
-    [&#x27;CCO&#x27;, &#x27;Comapany code&#x27;],
+    [&#x27;DEBCRE&#x27;, &#x27;Debitor / Creditor&#x27;],
+    [&#x27;COMCODE&#x27;, &#x27;Comapany code&#x27;],
     
-    [&#x27;LEF&#x27;, &#x27;Legal form&#x27;],
+    [&#x27;LEGFRM&#x27;, &#x27;Legal form&#x27;],
     
-    [&#x27;SSN&#x27;, &#x27;Interface number&#x27;],
+    [&#x27;INTERFNUM&#x27;, &#x27;Interface number&#x27;],
     
-    [&#x27;CND&#x27;, &#x27;Contact&#x27;],
-    [&#x27;GEI&#x27;, &#x27;General information&#x27;],
-    [&#x27;ADI&#x27;, &#x27;Address information&#x27;],
-    [&#x27;PAI&#x27;, &#x27;Payment information&#x27;],
-    [&#x27;ATF&#x27;, &#x27;Attach file&#x27;],
+    [&#x27;CONTACT&#x27;, &#x27;Contact&#x27;],
+    [&#x27;GENINF&#x27;, &#x27;General information&#x27;],
+    [&#x27;CONTINF&#x27;, &#x27;Contact information&#x27;],
+    [&#x27;PAYINF&#x27;, &#x27;Payment information&#x27;],
+    [&#x27;ATTACH&#x27;, &#x27;Attach file&#x27;],
 
-    [&#x27;NIF&#x27;, &#x27;Name&#x27;],
-    [&#x27;ADR&#x27;, &#x27;Address&#x27;],
-    [&#x27;CON&#x27;, &#x27;Contact&#x27;],
-    [&#x27;ORG&#x27;, &#x27;Organization&#x27;],
-    [&#x27;ANI&#x27;, &#x27;Additional name&#x27;],
-    [&#x27;BRT&#x27;, &#x27;Birth date&#x27;],
+    [&#x27;NAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;ADDR&#x27;, &#x27;Address&#x27;],
+    //[&#x27;ADNAME&#x27;, &#x27;Additional name (Name 2)&#x27;],
+    [&#x27;ADNAME&#x27;, &#x27;Name 2&#x27;],
+    [&#x27;BRTH&#x27;, &#x27;Birth date&#x27;],
     [&#x27;STR&#x27;, &#x27;Street&#x27;],
-    [&#x27;HNU&#x27;, &#x27;House no.&#x27;],
-    [&#x27;MBX&#x27;, &#x27;Mailbox&#x27;],
-    [&#x27;MBP&#x27;, &#x27;Mailbox ZIP&#x27;],
+    [&#x27;HNO&#x27;, &#x27;House no.&#x27;],
+    [&#x27;MAILBX&#x27;, &#x27;Mailbox&#x27;],
+    [&#x27;MAILBXZIP&#x27;, &#x27;Mailbox ZIP&#x27;],
     [&#x27;ZIP&#x27;, &#x27;ZIP&#x27;],
-    [&#x27;CIT&#x27;, &#x27;City&#x27;],
+    [&#x27;CITY&#x27;, &#x27;City&#x27;],
     [&#x27;COU&#x27;, &#x27;Country&#x27;],
     [&#x27;TEL&#x27;, &#x27;Phone&#x27;],
     [&#x27;FAX&#x27;, &#x27;Fax&#x27;],
     [&#x27;MOB&#x27;, &#x27;Mobile phone&#x27;],
-    [&#x27;EMA&#x27;, &#x27;Email address&#x27;],
+    [&#x27;EMAIL&#x27;, &#x27;Email address&#x27;],
 
     [&#x27;TAX&#x27;, &#x27;Tax ID&#x27;],
     [&#x27;VAT&#x27;, &#x27;VAT ID&#x27;],
-    [&#x27;IFI&#x27;, &#x27;Industry field&#x27;],
-    [&#x27;IFC&#x27;, &#x27;Industry field code&#x27;],
-    [&#x27;HSP&#x27;, &#x27;Supplier has SEPA direct debit&#x27;],
-    [&#x27;GSP&#x27;, &#x27;Grant SEPA direct debit&#x27;],
-    [&#x27;RSP&#x27;, &#x27;Request SEPA direct debit&#x27;],
+    [&#x27;INDFI&#x27;, &#x27;Industry field&#x27;],
+    [&#x27;INDFICODE&#x27;, &#x27;Industry field code&#x27;],
+    [&#x27;HSEPA&#x27;, &#x27;Supplier has SEPA direct debit&#x27;],
+    [&#x27;GSEPA&#x27;, &#x27;Grant SEPA direct debit&#x27;],
+    [&#x27;RSEPA&#x27;, &#x27;Request SEPA direct debit&#x27;],
     [&#x27;IBA&#x27;, &#x27;IBAN&#x27;],
-    [&#x27;BIC&#x27;, &#x27;BIC&#x27;],
-    [&#x27;BNK&#x27;, &#x27;Credit institution&#x27;],
-    [&#x27;CRL&#x27;, &#x27;Credit limit&#x27;],
-    [&#x27;TPA&#x27;, &#x27;Terms of payment&#x27;],
-    [&#x27;REF&#x27;, &#x27;Remarks field&#x27;],
+    [&#x27;CRELMT&#x27;, &#x27;Credit limit&#x27;],
+    [&#x27;PAYTERMS&#x27;, &#x27;Terms of payment&#x27;],
+    [&#x27;REMARKS&#x27;, &#x27;Remarks field&#x27;],
+    [&#x27;CHLEFT&#x27;, &#x27; characters left&#x27;],
 
-    [&#x27;APP&#x27;, &#x27;Applicant&#x27;],
-    [&#x27;AP1&#x27;, &#x27;Applicant 1&#x27;],
-    [&#x27;AP2&#x27;, &#x27;Applicant 2&#x27;],
+    [&#x27;APP&#x27;, &#x27;Applicant information&#x27;],
+    [&#x27;APP1&#x27;, &#x27;Applicant 1&#x27;],
+    [&#x27;APP2&#x27;, &#x27;Applicant 2&#x27;],
 
-    [&#x27;TLE&#x27;, &#x27;Title&#x27;],
+    [&#x27;TITLE&#x27;, &#x27;Title&#x27;],
     [&#x27;SAL&#x27;, &#x27;Salutation&#x27;],
-    [&#x27;COP&#x27;, &#x27;Company / Persons&#x27;],
-    [&#x27;FNA&#x27;, &#x27;Name&#x27;],
-    [&#x27;SNA&#x27;, &#x27;Surname&#x27;],
+    [&#x27;COMPERS&#x27;, &#x27;Company / Persons (Name 1)&#x27;],
+    [&#x27;FNAME&#x27;, &#x27;Name&#x27;],
+    [&#x27;SNAME&#x27;, &#x27;Surname&#x27;],
     
-    [&#x27;EEM&#x27;, &#x27;Please enter your email address.&#x27;],
-    [&#x27;SUB&#x27;, &#x27;Submit&#x27;],
-    [&#x27;DIS&#x27;, &#x27;Send mask&#x27;],
-    [&#x27;DIQ&#x27;, &#x27;Do you want to send the mask directly?&#x27;],
+    [&#x27;ENTEMAIL&#x27;, &#x27;Please enter your email address.&#x27;],
+    [&#x27;SUBMIT&#x27;, &#x27;Submit&#x27;],
+    [&#x27;SNDCUS&#x27;, &#x27;Send customer&#x27;],
+    [&#x27;SNDDIR&#x27;, &#x27;Send directly&#x27;],
+    [&#x27;SNDCONFEMAIL&#x27;, &#x27;Send confirmation email&#x27;],
+    [&#x27;DELUSR1&#x27;, &quot;Delete &quot;],
+    [&#x27;DELUSR2&#x27;, &quot;?&quot;],
+    [&#x27;RESETPSWD1&#x27;, &quot;Reset password for &quot;],
+    [&#x27;RESETPSWD2&#x27;, &quot;?&quot;],
 
-    [&#x27;SNT&#x27;, &#x27;The mask was sent.&#x27;],
+    [&#x27;USRISNUPD&#x27;, &#x27;The account was not updated.&#x27;],
+
     [&#x27;SUC&#x27;, &#x27;Success!&#x27;],
+    [&#x27;ERR&#x27;, &#x27;Error!&#x27;],
+
+    //Messages
+    [&#x27;USRISCR&#x27;, &#x27;The account was created.&#x27;],
+    [&#x27;USRISUPD&#x27;, &#x27;The account was updated.&#x27;],
+    [&#x27;CUSISSND&#x27;, &#x27;The customer was sent.&#x27;],
+    [&#x27;CUSCONFISSND&#x27;, &#x27;The confirmation email was sent to your email address.&#x27;],
+    [&#x27;USRISBL&#x27;, &#x27;The account was blocked.&#x27;],
+    [&#x27;USRISUN&#x27;, &#x27;The account was unblocked.&#x27;],
+    [&#x27;USRISDEL&#x27;, &#x27;The account was deleted.&#x27;],
+    [&#x27;PSWDISRES&#x27;, &#x27;The password was reset.&#x27;],
+
+    //Errors
+    [&#x27;PSWDNMATCH&#x27;, &#x27;The passwords do not match.&#x27;],
+    [&#x27;PSWDOLDNMATCH&#x27;, &#x27;The old password does not match.&#x27;],
+    [&#x27;IDUSED&#x27;, &#x27;This email address or username is already being used.&#x27;],
+    [&#x27;IDINC&#x27;, &#x27;Your username/email or password are incorrect.&#x27;],
+
   ])
 
   dictionary &#x3D; new Map([

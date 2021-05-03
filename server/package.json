@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "activedirectory": "^0.7.2",
     "ajv": "^7.2.3",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -14,6 +15,7 @@
     "generate-password": "^1.6.0",
     "http-proxy-agent": "^4.0.1",
     "https-proxy-agent": "^5.0.0",
+    "jsdoc": "^3.6.6",
     "jsonwebtoken": "^8.5.1",
     "ldapjs": "^2.2.4",
     "moment": "^2.29.1",
@@ -31,7 +33,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "generate-docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC"

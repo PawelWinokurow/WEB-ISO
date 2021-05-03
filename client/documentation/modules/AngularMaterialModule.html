@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/angular-material.module.ts</code>
+            <code>src/app/modules/angular-material.module.ts</code>
         </p>
 
 
@@ -88,7 +88,7 @@ import { MatButtonToggleModule } from &#x27;@angular/material/button-toggle&#x27
 import { MatCardModule } from &#x27;@angular/material/card&#x27;;
 import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
 import { MatChipsModule } from &#x27;@angular/material/chips&#x27;;
-import { DateAdapter, MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, NativeDateAdapter } from &#x27;@angular/material/core&#x27;;
+import { DateAdapter, MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS } from &#x27;@angular/material/core&#x27;;
 import { MatDividerModule } from &#x27;@angular/material/divider&#x27;;
 import { MatExpansionModule } from &#x27;@angular/material/expansion&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
@@ -113,8 +113,8 @@ import { MatDatepickerModule } from &#x27;@angular/material/datepicker&#x27;;
 import { MatTooltipModule } from &#x27;@angular/material/tooltip&#x27;;
 import { MatStepperModule } from &#x27;@angular/material/stepper&#x27;;
 import { MatSlideToggleModule } from &#x27;@angular/material/slide-toggle&#x27;;
-import { AppDateAdapter, APP_DATE_FORMATS } from &#x27;./adapters/format-datepicker&#x27;;
 import { NgxMatSelectSearchModule } from &#x27;ngx-mat-select-search&#x27;;
+import { AppDateAdapter, APP_DATE_FORMATS } from &#x27;../adapters/format-datepicker&#x27;;
 
 const materialModules &#x3D; [
   CdkTreeModule,
@@ -152,7 +152,7 @@ const materialModules &#x3D; [
   MatTooltipModule,
   MatStepperModule,
   MatSlideToggleModule,
-  NgxMatSelectSearchModule
+  NgxMatSelectSearchModule,
 ];
 
 /**

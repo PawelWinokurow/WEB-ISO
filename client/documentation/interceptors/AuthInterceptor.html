@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content class">
+               <div class="content interceptor">
                    <div class="content-data">
 
 
@@ -37,12 +37,9 @@
 
 
 
-
-
-
 <ol class="breadcrumb">
-  <li>Classes</li>
-  <li>AppDateAdapter</li>
+  <li>Interceptors</li>
+  <li>AuthInterceptor</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,23 +57,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/adapters/format-datepicker.ts</code>
+            <code>src/app/services/auth/auth-interceptor.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Date adapter for Material Datepicker to show the date in DD-MM-YYYY format.</p>
-
-            </p>
-
-            <p class="comment">
-                <h3>Extends</h3>
-            </p>
-            <p class="comment">
-                    <code>NativeDateAdapter</code>
-            </p>
 
 
 
@@ -94,7 +76,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#format">format</a>
+                                <a href="#intercept">intercept</a>
                             </li>
                         </ul>
                     </td>
@@ -109,7 +91,6 @@
 </section>
 
 
-
             <section>
     
     <h3 id="methods">
@@ -119,26 +100,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="format"></a>
+                    <a name="intercept"></a>
                     <span class="name">
                         <b>
-                            format
+                            intercept
                         </b>
-                        <a href="#format"><span class="icon ion-ios-link"></span></a>
+                        <a href="#intercept"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>format(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, displayFormat: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>intercept(req: HttpRequest<any>, next: <a href="https://angular.io/api/common/http/HttpHandler" target="_blank">HttpHandler</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="7"
-                            class="link-to-prism">src/app/adapters/format-datepicker.ts:7</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="8"
+                            class="link-to-prism">src/app/services/auth/auth-interceptor.service.ts:8</a></div>
                 </td>
             </tr>
 
@@ -158,9 +139,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>date</td>
+                                    <td>req</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            <code>HttpRequest&lt;any&gt;</code>
                                     </td>
 
                                     <td>
@@ -170,9 +151,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>displayFormat</td>
+                                    <td>next</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
+                                                <code><a href="https://angular.io/api/common/http/HttpHandler" target="_blank" >HttpHandler</a></code>
                                     </td>
 
                                     <td>
@@ -187,7 +168,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;any&gt;&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -199,49 +180,37 @@
     </table>
 </section>
 
-
-
-
-
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { MatDateFormats, NativeDateAdapter } from &#x27;@angular/material/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 
-/**
- * Date adapter for Material Datepicker to show the date in DD-MM-YYYY format.
- */
-export class AppDateAdapter extends NativeDateAdapter {
-  format(date: Date, displayFormat: Object): string {
-    if (displayFormat &#x3D;&#x3D;&#x3D; &#x27;input&#x27;) {
-      var day &#x3D; &#x27;&#x27; + date.getDate()
-      var month &#x3D; &#x27;&#x27; + (date.getMonth() + 1)
-      var year &#x3D; date.getFullYear();
-      if (month.length &lt; 2)
-        month &#x3D; &#x27;0&#x27; + month;
-      if (day.length &lt; 2)
-        day &#x3D; &#x27;0&#x27; + day;
-      return &#x60;${day}-${month}-${year}&#x60;
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+
+    intercept(req: HttpRequest&lt;any&gt;,
+              next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+
+        const idToken &#x3D; localStorage.getItem(&quot;id_token&quot;);
+        if (idToken) {
+            const cloned &#x3D; req.clone({
+                headers: req.headers.set(&quot;Authorization&quot;, &quot;Bearer &quot; + idToken)
+            });
+            return next.handle(cloned);
+        }
+        else {
+            return next.handle(req);
+        }
     }
-    return date.toDateString();
-  }
-}
-export const APP_DATE_FORMATS: MatDateFormats &#x3D; {
-  parse: {
-    dateInput: { month: &#x27;short&#x27;, year: &#x27;numeric&#x27;, day: &#x27;numeric&#x27; },
-  },
-  display: {
-    dateInput: &#x27;input&#x27;,
-    monthYearLabel: { year: &#x27;numeric&#x27;, month: &#x27;numeric&#x27; },
-    dateA11yLabel: {
-      year: &#x27;numeric&#x27;, month: &#x27;long&#x27;, day: &#x27;numeric&#x27;
-    },
-    monthYearA11yLabel: { year: &#x27;numeric&#x27;, month: &#x27;long&#x27; },
-  }
-};</code></pre>
+}</code></pre>
     </div>
 </div>
+
+
+
 
 
 
@@ -266,8 +235,8 @@ export const APP_DATE_FORMATS: MatDateFormats &#x3D; {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppDateAdapter.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interceptor';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthInterceptor.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

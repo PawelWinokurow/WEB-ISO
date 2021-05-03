@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app-routing.module.ts</code>
+            <code>src/app/modules/app-routing.module.ts</code>
         </p>
 
 
@@ -72,24 +72,35 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
-import { MainComponent } from &#x27;./components/main/main.component&#x27;;
-import { NewISOComponent } from &#x27;./components/new-iso/new-iso.component&#x27;;
-import { PreselectionComponent } from &#x27;./components/preselection/preselection.component&#x27;;
+import { AdminComponent } from &#x27;../components/admin/admin.component&#x27;;
+import { CustomersComponent } from &#x27;../components/customers/customers.component&#x27;;
+import { LoginComponent } from &#x27;../components/login/login.component&#x27;;
+import { NewISOComponent } from &#x27;../components/new-iso/new-iso.component&#x27;;
+import { PreselectionComponent } from &#x27;../components/preselection/preselection.component&#x27;;
+import { ResetPasswordComponent } from &#x27;../components/reset-password/reset-password.component&#x27;;
+import { SettingsComponent } from &#x27;../components/settings/settings.component&#x27;;
+import { AuthGuardService } from &#x27;../services/auth/auth-guard.service&#x27;;
+
 
 const routes: Routes &#x3D; [
-  { path: &#x27;&#x27;, component: MainComponent },
-  { path: &#x27;iso&#x27;, component: NewISOComponent },
-  { path: &#x27;preselection&#x27;, component: PreselectionComponent },
+  { path: &#x27;&#x27;, component: LoginComponent },
+  { path: &#x27;login&#x27;, component: LoginComponent },
+  { path: &#x27;iso&#x27;, component: NewISOComponent, canActivate: [AuthGuardService], data: { roles: [&#x27;USER&#x27;, &#x27;ADMIN&#x27;] } },
+  { path: &#x27;preselection&#x27;, component: PreselectionComponent, canActivate: [AuthGuardService], data: { roles: [&#x27;USER&#x27;, &#x27;ADMIN&#x27;] } },
+  { path: &#x27;settings&#x27;, component: SettingsComponent, canActivate: [AuthGuardService], data: { roles: [&#x27;USER&#x27;, &#x27;ADMIN&#x27;] } },
+  { path: &#x27;customers&#x27;, component: CustomersComponent, canActivate: [AuthGuardService], data: { roles: [&#x27;USER&#x27;, &#x27;ADMIN&#x27;] } },
+  { path: &#x27;admin&#x27;, component: AdminComponent, canActivate: [AuthGuardService], data: { roles: [&#x27;ADMIN&#x27;] } },
+  { path: &#x27;resetpassword&#x27;, component: ResetPasswordComponent }
 ];
 
 /**
  * Ng module to define routes
  */
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: &#x27;legacy&#x27; })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 </code></pre>
     </div>
 </div>

@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>SearchService</li>
+  <li>AppDateAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,17 +56,23 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/search.service.ts</code>
+            <code>src/app/adapters/format-datepicker.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Enables free text search filtering.</p>
+                <p>Date adapter for Material Datepicker to show the date in DD-MM-YYYY format.</p>
 
             </p>
 
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                    <code>NativeDateAdapter</code>
+            </p>
 
 
             <section>
@@ -83,7 +89,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#filter">filter</a>
+                                <a href="#format">format</a>
                             </li>
                         </ul>
                     </td>
@@ -97,24 +103,6 @@
     </table>
 </section>
 
-            <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/search.service.ts:12</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
 
             <section>
     
@@ -125,34 +113,32 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="filter"></a>
+                    <a name="format"></a>
                     <span class="name">
                         <b>
-                            filter
+                            format
                         </b>
-                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                        <a href="#format"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>filter(ctrl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, list: <a href="../interfaces/CodeDetails.html">CodeDetails[]</a>, filteredValues: <a href="../interfaces/CodeDetails.html">ReplaySubject<CodeDetails[]></a>)</code>
+<code>format(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, displayFormat: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/services/search.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="9"
+                            class="link-to-prism">src/app/adapters/format-datepicker.ts:9</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filters list of values.</p>
-</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -162,14 +148,13 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ctrl</td>
+                                    <td>date</td>
                                     <td>
-                                                <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
                                     </td>
 
                                     <td>
@@ -177,15 +162,11 @@
                                     </td>
 
 
-                                    <td>
-                                        <p>Value to find</p>
-
-                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>list</td>
+                                    <td>displayFormat</td>
                                     <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >CodeDetails[]</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
                                     </td>
 
                                     <td>
@@ -193,26 +174,6 @@
                                     </td>
 
 
-                                    <td>
-                                        <p>List in which to search for</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>filteredValues</td>
-                                    <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >ReplaySubject&lt;CodeDetails[]&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Filtered values</p>
-
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -220,7 +181,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </div>
                     <div class="io-description">
@@ -237,43 +198,40 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { FormControl } from &#x27;@angular/forms&#x27;;
-import { ReplaySubject } from &#x27;rxjs&#x27;;
-import { CodeDetails } from &#x27;../interfaces/list&#x27;;
+import { MatDateFormats, NativeDateAdapter } from &#x27;@angular/material/core&#x27;;
 
 /**
- * Enables free text search filtering.
+ * Date adapter for Material Datepicker to show the date in DD-MM-YYYY format.
  */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class SearchService {
-
-  constructor() { }
-
-  /**
-   * Filters list of values.
-   * @param ctrl Value to find
-   * @param list List in which to search for
-   * @param filteredValues Filtered values
-   */
-  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject&lt;CodeDetails[]&gt;) {
-    if (!list) {
-      return;
+ @Injectable()
+export class AppDateAdapter extends NativeDateAdapter {
+  format(date: Date, displayFormat: Object): string {
+    if (displayFormat &#x3D;&#x3D;&#x3D; &#x27;input&#x27;) {
+      var day &#x3D; &#x27;&#x27; + date.getDate()
+      var month &#x3D; &#x27;&#x27; + (date.getMonth() + 1)
+      var year &#x3D; date.getFullYear();
+      if (month.length &lt; 2)
+        month &#x3D; &#x27;0&#x27; + month;
+      if (day.length &lt; 2)
+        day &#x3D; &#x27;0&#x27; + day;
+      return &#x60;${day}-${month}-${year}&#x60;
     }
-    let search &#x3D; ctrl.value;
-    if (!search) {
-      filteredValues.next(list.slice());
-      return;
-    } else {
-      search &#x3D; search.toLowerCase();
-    }
-    filteredValues.next(
-      list.filter(field &#x3D;&gt; field.details.toLowerCase().indexOf(search) &gt; -1)
-    );
+    return date.toDateString();
   }
 }
-</code></pre>
+export const APP_DATE_FORMATS: MatDateFormats &#x3D; {
+  parse: {
+    dateInput: { month: &#x27;short&#x27;, year: &#x27;numeric&#x27;, day: &#x27;numeric&#x27; },
+  },
+  display: {
+    dateInput: &#x27;input&#x27;,
+    monthYearLabel: { year: &#x27;numeric&#x27;, month: &#x27;numeric&#x27; },
+    dateA11yLabel: {
+      year: &#x27;numeric&#x27;, month: &#x27;long&#x27;, day: &#x27;numeric&#x27;
+    },
+    monthYearA11yLabel: { year: &#x27;numeric&#x27;, month: &#x27;long&#x27; },
+  }
+};</code></pre>
     </div>
 
 </div>
@@ -306,7 +264,7 @@ export class SearchService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'SearchService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppDateAdapter.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

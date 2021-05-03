@@ -1,0 +1,1506 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">client documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>AdminComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/admin/admin.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-admin</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./admin.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./admin.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accordion">accordion</a>
+                            </li>
+                            <li>
+                                <a href="#accounts">accounts</a>
+                            </li>
+                            <li>
+                                <a href="#companyCodeDetails">companyCodeDetails</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dictionaryService">dictionaryService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#errorMessageService">errorMessageService</a>
+                            </li>
+                            <li>
+                                <a href="#filter">filter</a>
+                            </li>
+                            <li>
+                                <a href="#filteredAccounts">filteredAccounts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#listService">listService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#blockAccount">blockAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteAccount">deleteAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#editAccount">editAccount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchAccounts">fetchAccounts</a>
+                            </li>
+                            <li>
+                                <a href="#filterQuery">filterQuery</a>
+                            </li>
+                            <li>
+                                <a href="#initAccountSearch">initAccountSearch</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#newAccount">newAccount</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetPassword">resetPassword</a>
+                            </li>
+                            <li>
+                                <a href="#sortByUsername">sortByUsername</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dictionaryService: <a href="../injectables/DictionaryService.html">DictionaryService</a>, errorMessageService: <a href="../injectables/ErrorMessageService.html">ErrorMessageService</a>, accountService: <a href="../injectables/AccountService.html">AccountService</a>, listService: <a href="../injectables/ListService.html">ListService</a>, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/admin/admin.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dictionaryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DictionaryService.html" target="_self" >DictionaryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>errorMessageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ErrorMessageService.html" target="_self" >ErrorMessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>accountService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AccountService.html" target="_self" >AccountService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>listService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ListService.html" target="_self" >ListService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blockAccount"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            blockAccount
+                        </b>
+                        <a href="#blockAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>blockAccount(accountToBlock)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountToBlock</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteAccount"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            deleteAccount
+                        </b>
+                        <a href="#deleteAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteAccount(accountToSend)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:84</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountToSend</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editAccount"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            editAccount
+                        </b>
+                        <a href="#editAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editAccount(accountToEdit)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:122</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountToEdit</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchAccounts"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            fetchAccounts
+                        </b>
+                        <a href="#fetchAccounts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchAccounts()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:39</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterQuery"></a>
+                    <span class="name">
+                        <b>
+                            filterQuery
+                        </b>
+                        <a href="#filterQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filterQuery(val)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>val</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initAccountSearch"></a>
+                    <span class="name">
+                        <b>
+                            initAccountSearch
+                        </b>
+                        <a href="#initAccountSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initAccountSearch()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newAccount"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            newAccount
+                        </b>
+                        <a href="#newAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>newAccount()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:73</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:33</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetPassword"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            resetPassword
+                        </b>
+                        <a href="#resetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetPassword(accountToReset)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:144</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accountToReset</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortByUsername"></a>
+                    <span class="name">
+                        <b>
+                            sortByUsername
+                        </b>
+                        <a href="#sortByUsername"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortByUsername(array)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>array</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="accordion"></a>
+                        <span class="name">
+                            <b>
+                            accordion</b>
+                            <a href="#accordion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatAccordion</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;accordion&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/admin/admin.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="accounts"></a>
+                        <span class="name">
+                            <b>
+                            accounts</b>
+                            <a href="#accounts"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/admin/admin.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="companyCodeDetails"></a>
+                        <span class="name">
+                            <b>
+                            companyCodeDetails</b>
+                            <a href="#companyCodeDetails"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/admin/admin.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dictionaryService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dictionaryService</b>
+                            <a href="#dictionaryService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/DictionaryService.html" target="_self" >DictionaryService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/admin/admin.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errorMessageService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            errorMessageService</b>
+                            <a href="#errorMessageService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ErrorMessageService.html" target="_self" >ErrorMessageService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/admin/admin.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filter"></a>
+                        <span class="name">
+                            <b>
+                            filter</b>
+                            <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new FormControl(&#x27;&#x27;)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/admin/admin.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filteredAccounts"></a>
+                        <span class="name">
+                            <b>
+                            filteredAccounts</b>
+                            <a href="#filteredAccounts"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/admin/admin.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="listService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            listService</b>
+                            <a href="#listService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ListService.html" target="_self" >ListService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/admin/admin.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { FormControl } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { MatAccordion } from &#x27;@angular/material/expansion&#x27;;
+import { DeleteAccountDialog } from &#x27;src/app/dialogs/delete-account-dialog/delete-account.dialog&#x27;;
+import { NewAccountDialog } from &#x27;src/app/dialogs/new-account-dialog/new-account.dialog&#x27;;
+import { DictionaryService } from &#x27;src/app/services/dictionary.service&#x27;;
+import { ErrorMessageService } from &#x27;src/app/services/error-message.service&#x27;;
+import { ListService } from &#x27;src/app/services/list.service&#x27;;
+import { ResetPasswordAdminDialog } from &#x27;src/app/dialogs/reset-password-admin/reset-password-admin.dialog&#x27;;
+import { AccountDTO } from &#x27;src/app/interfaces/account&#x27;;
+import { EditAccountDialog } from &#x27;src/app/dialogs/edit-account-dialog/edit-account.dialog&#x27;;
+import { AccountService } from &#x27;src/app/services/account/account.service&#x27;;
+
+@Component({
+  selector: &#x27;app-admin&#x27;,
+  templateUrl: &#x27;./admin.component.html&#x27;,
+  styleUrls: [&#x27;./admin.component.scss&#x27;]
+})
+export class AdminComponent implements OnInit {
+
+  accounts;
+  filteredAccounts;
+  companyCodeDetails;
+  filter: FormControl &#x3D; new FormControl(&#x27;&#x27;);
+
+  @ViewChild(&#x27;accordion&#x27;) accordion: MatAccordion;
+
+  constructor(public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService,
+    private accountService: AccountService, public listService: ListService, private dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.fetchAccounts();
+    this.initAccountSearch();
+    this.companyCodeDetails &#x3D; this.listService.companyCodes.reduce((acc, x) &#x3D;&gt; ({ ...acc, [x.code]: x.details }), {})
+  }
+
+  async fetchAccounts() {
+    try {
+      this.accounts &#x3D; await this.accountService.getAccounts().toPromise();
+      this.sortByUsername(this.accounts);
+      this.filteredAccounts &#x3D; [...this.accounts];
+    } catch (e) {
+      console.error(e.stack);
+    }
+  }
+
+  initAccountSearch() {
+    this.filter.valueChanges.subscribe(val &#x3D;&gt; {
+      this.filterQuery(val);
+    });
+  }
+
+  filterQuery(val) {
+    var val &#x3D; val.toLowerCase();
+    this.filteredAccounts &#x3D; this.accounts.filter(account &#x3D;&gt;
+      account.username.toLowerCase().includes(val)
+      || account.email.toLowerCase().includes(val)
+      || this.companyCodeDetails[account.companyCode].toLowerCase().includes(val)
+      || account.role.toLowerCase().includes(val)
+    );
+  }
+
+  sortByUsername(array) {
+    array.sort(function (a, b) {
+      var nameA &#x3D; a.username.toLowerCase();
+      var nameB &#x3D; b.username.toLowerCase();
+      return nameA &gt; nameB ? 1 : nameB &gt; nameA ? -1 : 0;
+    });
+  }
+
+  async newAccount() {
+    const newAccountDialog &#x3D; this.dialog.open(NewAccountDialog);
+    const result &#x3D; await newAccountDialog.afterClosed().toPromise();
+    if (result) {
+      await this.accountService.createAccount(result).toPromise();
+      this.accounts.push(result);
+      this.sortByUsername(this.accounts);
+      this.filterQuery(this.filter.value);
+    }
+  }
+
+  async deleteAccount(accountToSend) {
+    const deleteAccountDialog &#x3D; this.dialog.open(DeleteAccountDialog, {
+      data: {
+        username: accountToSend.username
+      }
+    });
+    const result &#x3D; await deleteAccountDialog.afterClosed().toPromise();
+    if (result) {
+      try {
+        await this.accountService.deleteAccount(accountToSend).toPromise();
+        //TODO iterate over array may be to slow
+        this.accounts &#x3D; this.accounts.filter(u &#x3D;&gt; u.email !&#x3D; accountToSend.email);
+        this.filteredAccounts &#x3D; this.filteredAccounts.filter(u &#x3D;&gt; u.email !&#x3D; accountToSend.email);
+      } catch (e) { }
+    }
+  }
+
+  async blockAccount(accountToBlock) {
+    try {
+      accountToBlock.blocked &#x3D; !accountToBlock.blocked;
+      const accountResponse &#x3D; await this.accountService.updateAccount&lt;AccountDTO&gt;(accountToBlock).toPromise();
+
+      if (&#x27;account&#x27; in accountResponse) {
+        //TODO iterate over array may be to slow
+        this.accounts.forEach(u &#x3D;&gt; {
+          if (u.email &#x3D;&#x3D;&#x3D; accountResponse.account.email) {
+            u.blocked &#x3D; accountResponse.account.blocked;
+          }
+        });
+        this.filteredAccounts.forEach(u &#x3D;&gt; {
+          if (u.email &#x3D;&#x3D;&#x3D; accountResponse.account.email) {
+            u.blocked &#x3D; accountResponse.account.blocked;
+          }
+        });
+      }
+    } catch (e) { }
+  }
+
+  async editAccount(accountToEdit) {
+    try {
+      const editAccountDialog &#x3D; this.dialog.open(EditAccountDialog, {
+        data: {
+          accountToEdit
+        }
+      });
+      const accountToSend &#x3D; await editAccountDialog.afterClosed().toPromise();
+      if (accountToSend) {
+        try {
+          await this.accountService.updateAccount(accountToSend).toPromise();
+          let indexAccounts &#x3D; this.accounts.findIndex((el) &#x3D;&gt; el.email &#x3D;&#x3D;&#x3D; accountToSend.email);
+          if (indexAccounts !&#x3D; -1) this.accounts[indexAccounts] &#x3D; accountToSend
+          let indexFilteredAccounts &#x3D; this.filteredAccounts.findIndex((el) &#x3D;&gt; el.email &#x3D;&#x3D;&#x3D; accountToSend.email);
+          if (indexFilteredAccounts !&#x3D; -1) this.filteredAccounts[indexFilteredAccounts] &#x3D; accountToSend
+        } catch (e) { }
+      }
+
+      await this.accountService.updateAccount&lt;AccountDTO&gt;(accountToEdit).toPromise();
+    } catch (e) { }
+  }
+
+  async resetPassword(accountToReset) {
+    const resetPasswordDialog &#x3D; this.dialog.open(ResetPasswordAdminDialog, {
+      data: {
+        username: accountToReset.username
+      }
+    });
+    const result &#x3D; await resetPasswordDialog.afterClosed().toPromise();
+    if (result) {
+      await this.accountService.requestPasswordReset(accountToReset).toPromise();
+    }
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;inner-component&quot;&gt;
+    &lt;div class&#x3D;&quot;form-vertical-flex&quot;&gt;
+        &lt;div class&#x3D;&quot;flex-column&quot; style&#x3D;&quot;padding-left: 15px;&quot;&gt;
+            &lt;div class&#x3D;&quot;alternate-theme&quot;&gt;
+                &lt;div class&#x3D;&quot;form-title&quot;&gt;
+                    &lt;span class&#x3D;&quot;mat-h2&quot;&gt;{{dictionaryService.get(&#x27;ADMINAREA&#x27;)}}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;search-part&quot;&gt;
+                    &lt;mat-form-field color&#x3D;&quot;primary&quot; appearance&#x3D;&quot;outline&quot; style&#x3D;&quot;flex: 2;&quot;&gt;
+                        &lt;mat-label&gt;{{dictionaryService.get(&#x27;SEARCH&#x27;)}}&lt;/mat-label&gt;
+                        &lt;input matInput [formControl]&#x3D;&quot;filter&quot;&gt;
+                        &lt;mat-icon matSuffix&gt;search&lt;/mat-icon&gt;
+                    &lt;/mat-form-field&gt;
+                    &lt;button mat-stroked-button (click)&#x3D;&quot;newAccount()&quot; style&#x3D;&quot;height: 60px; top: -5px; flex: 1;&quot;&gt;
+                        {{dictionaryService.get(&#x27;NEWACC&#x27;)}}
+                        &lt;mat-icon&gt;add&lt;/mat-icon&gt;
+                    &lt;/button&gt;
+                    &lt;button mat-stroked-button (click)&#x3D;&quot;accordion.openAll()&quot; style&#x3D;&quot;height: 60px; top: -5px; flex: 1;&quot;&gt;
+                        {{dictionaryService.get(&#x27;EXPAND&#x27;)}}
+                        &lt;mat-icon&gt;unfold_more&lt;/mat-icon&gt;
+                    &lt;/button&gt;
+                    &lt;button mat-stroked-button (click)&#x3D;&quot;accordion.closeAll()&quot; style&#x3D;&quot;height: 60px; top: -5px; flex: 1;&quot;&gt;
+                        {{dictionaryService.get(&#x27;COLLAPSE&#x27;)}}
+                        &lt;mat-icon&gt;unfold_less&lt;/mat-icon&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;form-data paddinglr10px rounded-border&quot;
+                    style&#x3D;&quot;width: 800px; background-color: rgb(235, 235, 235);&quot;&gt;
+                    &lt;mat-accordion #accordion&#x3D;&quot;matAccordion&quot; multi&gt;
+                        &lt;mat-expansion-panel *ngFor&#x3D;&quot;let account of filteredAccounts&quot;
+                            style&#x3D;&quot;padding: 5px; margin-top: 10px;&quot; (opened)&#x3D;&quot;panelOpenState &#x3D; true&quot;
+                            (closed)&#x3D;&quot;panelOpenState &#x3D; false&quot;&gt;
+                            &lt;mat-expansion-panel-header&gt;
+                                &lt;mat-panel-title&gt;
+                                    {{dictionaryService.get(&#x27;NAME&#x27;)}}: &amp;nbsp;
+                                    {{listService.salutationsPerson.getDetailsForCode(account.salutationCode)}} {{account.firstName}} {{account.secondName}}
+                                &lt;/mat-panel-title&gt;
+                                &lt;mat-panel-description&gt;
+                                    &lt;div class&#x3D;&quot;space&quot; style&#x3D;&quot;text-align: center;&quot;&gt;
+                                        &lt;span style&#x3D;&quot;color: rgb(179, 9, 9);&quot;
+                                            *ngIf&#x3D;&quot;account.blocked&quot;&gt;{{dictionaryService.get(&#x27;BLOCKED&#x27;)}}&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;mat-icon&gt;account_circle&lt;/mat-icon&gt;
+                                &lt;/mat-panel-description&gt;
+                            &lt;/mat-expansion-panel-header&gt;
+
+                            &lt;div style&#x3D;&quot;padding-left: 20px;&quot;&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;USRNAME&#x27;)}}:
+                                        {{account.username}}&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;EMAIL&#x27;)}}: {{account.email}}&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;COMCODE&#x27;)}}:
+                                        {{companyCodeDetails[account.companyCode]}}&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;TEL&#x27;)}}: {{account.phone}}&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;MOB&#x27;)}}: {{account.mobile}}&lt;/span&gt;&lt;/p&gt;
+                                &lt;p&gt;&lt;span class&#x3D;&quot;body-1&quot;&gt;{{dictionaryService.get(&#x27;ROLE&#x27;)}}: {{account.role}}&lt;/span&gt;&lt;/p&gt;
+                            &lt;/div&gt;
+
+                            &lt;mat-action-row style&#x3D;&quot;padding: 16px&quot; *ngIf&#x3D;&quot;account.role !&#x3D;&#x3D; &#x27;ADMIN&#x27;&quot;&gt;
+                                &lt;button mat-stroked-button (click)&#x3D;&quot;editAccount(account)&quot;&gt;
+                                    &lt;mat-icon inline&#x3D;true style&#x3D;&quot;margin-right: 5px;&quot;&gt;edit&lt;/mat-icon&gt;
+                                    {{dictionaryService.get(&#x27;CHNGACC&#x27;)}}
+                                &lt;/button&gt;
+                                &lt;button mat-stroked-button style&#x3D;&quot;color: rgb(179, 9, 9);&quot;
+                                    (click)&#x3D;&quot;deleteAccount(account)&quot;&gt;
+                                    &lt;mat-icon inline&#x3D;true style&#x3D;&quot;margin-right: 5px;&quot;&gt;delete&lt;/mat-icon&gt;
+                                    {{dictionaryService.get(&#x27;DELUSR&#x27;)}}
+                                &lt;/button&gt;
+                                &lt;button mat-stroked-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;blockAccount(account)&quot;
+                                    style&#x3D;&quot;width: 185px;&quot;&gt;
+                                    &lt;mat-icon *ngIf&#x3D;&quot;!account.blocked&quot; inline&#x3D;true style&#x3D;&quot;margin-right: 5px;&quot;&gt;block
+                                    &lt;/mat-icon&gt;
+                                    &lt;span *ngIf&#x3D;&quot;!account.blocked&quot;&gt;{{dictionaryService.get(&#x27;BLOCKUSR&#x27;)}}&lt;/span&gt;
+                                    &lt;mat-icon *ngIf&#x3D;&quot;account.blocked&quot; inline&#x3D;true style&#x3D;&quot;margin-right: 5px;&quot;&gt;done
+                                    &lt;/mat-icon&gt;
+                                    &lt;span *ngIf&#x3D;&quot;account.blocked&quot;&gt;{{dictionaryService.get(&#x27;UNBLOCKUSR&#x27;)}}&lt;/span&gt;
+                                &lt;/button&gt;
+                                &lt;button mat-stroked-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;resetPassword(account)&quot;&gt;
+                                    &lt;mat-icon inline&#x3D;true style&#x3D;&quot;margin-right: 5px;&quot;&gt;replay&lt;/mat-icon&gt;
+                                    {{dictionaryService.get(&#x27;RESETPSWD&#x27;)}}
+                                &lt;/button&gt;
+                            &lt;/mat-action-row&gt;
+                        &lt;/mat-expansion-panel&gt;
+
+                    &lt;/mat-accordion&gt;
+
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;space&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./admin.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: black !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: black !important;
+}
+
+.mat-input-element {
+  caret-color: black !important;
+}
+
+button.mat-button .mat-icon,
+.mat-button .mat-icon,
+.mat-raised-button .mat-icon,
+.mat-flat-button .mat-icon,
+.mat-stroked-button .mat-icon {
+  vertical-align: middle;
+  font-size: 1.5em;
+}
+
+ .search-part {
+  width: 800px;
+  display: flex;
+  align-items: baseline;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 12px;
+  width: 300px;
+}
+
+button.mat-stroked-button {
+  margin-left: 10px;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="inner-component">    <div class="form-vertical-flex">        <div class="flex-column" style="padding-left: 15px;">            <div class="alternate-theme">                <div class="form-title">                    <span class="mat-h2">{{dictionaryService.get(\'ADMINAREA\')}}</span>                </div>                <div class="search-part">                    <mat-form-field color="primary" appearance="outline" style="flex: 2;">                        <mat-label>{{dictionaryService.get(\'SEARCH\')}}</mat-label>                        <input matInput [formControl]="filter">                        <mat-icon matSuffix>search</mat-icon>                    </mat-form-field>                    <button mat-stroked-button (click)="newAccount()" style="height: 60px; top: -5px; flex: 1;">                        {{dictionaryService.get(\'NEWACC\')}}                        <mat-icon>add</mat-icon>                    </button>                    <button mat-stroked-button (click)="accordion.openAll()" style="height: 60px; top: -5px; flex: 1;">                        {{dictionaryService.get(\'EXPAND\')}}                        <mat-icon>unfold_more</mat-icon>                    </button>                    <button mat-stroked-button (click)="accordion.closeAll()" style="height: 60px; top: -5px; flex: 1;">                        {{dictionaryService.get(\'COLLAPSE\')}}                        <mat-icon>unfold_less</mat-icon>                    </button>                </div>                <div class="form-data paddinglr10px rounded-border"                    style="width: 800px; background-color: rgb(235, 235, 235);">                    <mat-accordion #accordion="matAccordion" multi>                        <mat-expansion-panel *ngFor="let account of filteredAccounts"                            style="padding: 5px; margin-top: 10px;" (opened)="panelOpenState = true"                            (closed)="panelOpenState = false">                            <mat-expansion-panel-header>                                <mat-panel-title>                                    {{dictionaryService.get(\'NAME\')}}: &nbsp;                                    {{listService.salutationsPerson.getDetailsForCode(account.salutationCode)}} {{account.firstName}} {{account.secondName}}                                </mat-panel-title>                                <mat-panel-description>                                    <div class="space" style="text-align: center;">                                        <span style="color: rgb(179, 9, 9);"                                            *ngIf="account.blocked">{{dictionaryService.get(\'BLOCKED\')}}</span>                                    </div>                                    <mat-icon>account_circle</mat-icon>                                </mat-panel-description>                            </mat-expansion-panel-header>                            <div style="padding-left: 20px;">                                <p><span class="body-1">{{dictionaryService.get(\'USRNAME\')}}:                                        {{account.username}}</span></p>                                <p><span class="body-1">{{dictionaryService.get(\'EMAIL\')}}: {{account.email}}</span></p>                                <p><span class="body-1">{{dictionaryService.get(\'COMCODE\')}}:                                        {{companyCodeDetails[account.companyCode]}}</span></p>                                <p><span class="body-1">{{dictionaryService.get(\'TEL\')}}: {{account.phone}}</span></p>                                <p><span class="body-1">{{dictionaryService.get(\'MOB\')}}: {{account.mobile}}</span></p>                                <p><span class="body-1">{{dictionaryService.get(\'ROLE\')}}: {{account.role}}</span></p>                            </div>                            <mat-action-row style="padding: 16px" *ngIf="account.role !== \'ADMIN\'">                                <button mat-stroked-button (click)="editAccount(account)">                                    <mat-icon inline=true style="margin-right: 5px;">edit</mat-icon>                                    {{dictionaryService.get(\'CHNGACC\')}}                                </button>                                <button mat-stroked-button style="color: rgb(179, 9, 9);"                                    (click)="deleteAccount(account)">                                    <mat-icon inline=true style="margin-right: 5px;">delete</mat-icon>                                    {{dictionaryService.get(\'DELUSR\')}}                                </button>                                <button mat-stroked-button color="primary" (click)="blockAccount(account)"                                    style="width: 185px;">                                    <mat-icon *ngIf="!account.blocked" inline=true style="margin-right: 5px;">block                                    </mat-icon>                                    <span *ngIf="!account.blocked">{{dictionaryService.get(\'BLOCKUSR\')}}</span>                                    <mat-icon *ngIf="account.blocked" inline=true style="margin-right: 5px;">done                                    </mat-icon>                                    <span *ngIf="account.blocked">{{dictionaryService.get(\'UNBLOCKUSR\')}}</span>                                </button>                                <button mat-stroked-button color="primary" (click)="resetPassword(account)">                                    <mat-icon inline=true style="margin-right: 5px;">replay</mat-icon>                                    {{dictionaryService.get(\'RESETPSWD\')}}                                </button>                            </mat-action-row>                        </mat-expansion-panel>                    </mat-accordion>                </div>            </div>            <div class="space"></div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomersComponent', 'selector': 'app-customers'},{'name': 'DeleteAccountDialog', 'selector': 'app-delete-account'},{'name': 'EditAccountDialog', 'selector': 'app-edit-account'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountDialog', 'selector': 'app-new-account'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'ResetPasswordAdminDialog', 'selector': 'app-reset-password-admin'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'ResetPasswordUserDialog', 'selector': 'app-reset-password-user'},{'name': 'SendCustomerConfirmationDialog', 'selector': 'app-send-customer-confirmation'},{'name': 'SettingsComponent', 'selector': 'app-settings'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AdminComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AdminComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>SearchService</li>
+  <li>JSONValidationService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,16 +56,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/search.service.ts</code>
+            <code>src/app/services/json-validation.service.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Enables free text search filtering.</p>
-
-            </p>
 
 
 
@@ -83,7 +76,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#filter">filter</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#parseErrors">parseErrors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateAccountWithoutPassword">validateAccountWithoutPassword</a>
                             </li>
                         </ul>
                     </td>
@@ -108,7 +106,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/search.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/json-validation.service.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -125,34 +123,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="filter"></a>
+                    <a name="parseErrors"></a>
                     <span class="name">
                         <b>
-                            filter
+                            <span class="modifier">Async</span>
+                            parseErrors
                         </b>
-                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                        <a href="#parseErrors"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>filter(ctrl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, list: <a href="../interfaces/CodeDetails.html">CodeDetails[]</a>, filteredValues: <a href="../interfaces/CodeDetails.html">ReplaySubject<CodeDetails[]></a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>parseErrors(validationErrors)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/services/search.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/services/json-validation.service.ts:39</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filters list of values.</p>
-</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -160,59 +158,18 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
-                                    <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ctrl</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
-                                    </td>
+                                    <td>validationErrors</td>
 
                                     <td>
                                         No
                                     </td>
 
 
-                                    <td>
-                                        <p>Value to find</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>list</td>
-                                    <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >CodeDetails[]</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>List in which to search for</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>filteredValues</td>
-                                    <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >ReplaySubject&lt;CodeDetails[]&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Filtered values</p>
-
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -220,7 +177,75 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAccountWithoutPassword"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            validateAccountWithoutPassword
+                        </b>
+                        <a href="#validateAccountWithoutPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateAccountWithoutPassword(model)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/services/json-validation.service.ts:27</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                     <div class="io-description">
@@ -236,41 +261,58 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { FormControl } from &#x27;@angular/forms&#x27;;
-import { ReplaySubject } from &#x27;rxjs&#x27;;
-import { CodeDetails } from &#x27;../interfaces/list&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &quot;@angular/core&quot;;
+//import Ajv, { JTDDataType } from &quot;ajv/dist/jtd&quot;
 
-/**
- * Enables free text search filtering.
- */
+const userSchema &#x3D; {
+  properties: {
+    username: { type: &quot;string&quot; },
+    email: { type: &quot;string&quot; },
+    role: { type: &quot;string&quot; },
+    companyCode: { type: &quot;string&quot; },
+    blocked: { type: &quot;boolean&quot; },
+  },
+  optionalProperties: {
+    password: { type: &quot;string&quot; },
+    passwordOld: { type: &quot;string&quot; }
+  }
+} as const;
+
+//type UserSchema &#x3D; JTDDataType&lt;typeof userSchema&gt;
+
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class SearchService {
+export class JSONValidationService {
 
   constructor() { }
 
-  /**
-   * Filters list of values.
-   * @param ctrl Value to find
-   * @param list List in which to search for
-   * @param filteredValues Filtered values
-   */
-  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject&lt;CodeDetails[]&gt;) {
-    if (!list) {
-      return;
+  async validateAccountWithoutPassword(model) {
+    /*const ajv &#x3D; new Ajv();
+    const validate &#x3D; ajv.compile&lt;UserSchema&gt;(userSchema)
+    const result &#x3D; await validate(model);
+    if (!result) {
+      const errors &#x3D; await this.parseErrors(validate.errors);
+      console.error(errors)
+      throw errors;
     }
-    let search &#x3D; ctrl.value;
-    if (!search) {
-      filteredValues.next(list.slice());
-      return;
-    } else {
-      search &#x3D; search.toLowerCase();
-    }
-    filteredValues.next(
-      list.filter(field &#x3D;&gt; field.details.toLowerCase().indexOf(search) &gt; -1)
-    );
+    return model;*/
+  }
+
+  async parseErrors(validationErrors) {
+    let errors &#x3D; [];
+    validationErrors.forEach(error &#x3D;&gt; {
+      errors.push({
+        param: error.params[&quot;missingProperty&quot;],
+        key: error.keyword,
+        message: error.message,
+        property: (function () {
+          return error.keyword &#x3D;&#x3D;&#x3D; &#x27;minimum&#x27; ? error.dataPath : undefined
+        })()
+      });
+    });
+
+    return errors;
   }
 }
 </code></pre>
@@ -306,7 +348,7 @@ export class SearchService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'SearchService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'JSONValidationService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

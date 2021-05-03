@@ -43,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>SharedMask</li>
+  <li>Account</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/interfaces/mask.ts</code>
+            <code>src/app/interfaces/account.ts</code>
         </p>
 
 
@@ -79,19 +79,28 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#IS_ADDRESS">IS_ADDRESS</a>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#blocked">blocked</a>
                                 </li>
                                 <li>
-                                        <a href="#IS_CENTRALDATAORGANIZATION">IS_CENTRALDATAORGANIZATION</a>
+                                        <a href="#companyCode">companyCode</a>
                                 </li>
                                 <li>
-                                        <a href="#IS_CENTRALDATAPERSON">IS_CENTRALDATAPERSON</a>
+                                        <a href="#email">email</a>
                                 </li>
                                 <li>
-                                        <a href="#IV_PARTNERCATEGORY">IV_PARTNERCATEGORY</a>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#password">password</a>
                                 </li>
                                 <li>
-                                        <a href="#IV_PARTNERGROUP">IV_PARTNERGROUP</a>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordOld">passwordOld</a>
+                                </li>
+                                <li>
+                                        <a href="#role">role</a>
+                                </li>
+                                <li>
+                                        <a href="#username">username</a>
                                 </li>
                             </ul>
                         </td>
@@ -108,13 +117,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="IS_ADDRESS"></a>
-                                        <span class="name"><b>IS_ADDRESS</b><a href="#IS_ADDRESS"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="blocked"></a>
+                                        <span class="name"><b>blocked</b><a href="#blocked"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>IS_ADDRESS:     <code>literal type</code>
+                                        <code>blocked:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -122,11 +131,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -137,71 +151,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="IS_CENTRALDATAORGANIZATION"></a>
-                                        <span class="name"><b>IS_CENTRALDATAORGANIZATION</b><a href="#IS_CENTRALDATAORGANIZATION"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="companyCode"></a>
+                                        <span class="name"><b>companyCode</b><a href="#companyCode"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>IS_CENTRALDATAORGANIZATION:     <code>literal type</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="IS_CENTRALDATAPERSON"></a>
-                                        <span class="name"><b>IS_CENTRALDATAPERSON</b><a href="#IS_CENTRALDATAPERSON"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>IS_CENTRALDATAPERSON:     <code>literal type</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="IV_PARTNERCATEGORY"></a>
-                                        <span class="name"><b>IV_PARTNERCATEGORY</b><a href="#IV_PARTNERCATEGORY"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>IV_PARTNERCATEGORY:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>companyCode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -224,13 +180,139 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="IV_PARTNERGROUP"></a>
-                                        <span class="name"><b>IV_PARTNERGROUP</b><a href="#IV_PARTNERGROUP"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="email"></a>
+                                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>IV_PARTNERGROUP:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="password"></a>
+                                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>password:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordOld"></a>
+                                        <span class="name"><b>passwordOld</b><a href="#passwordOld"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordOld:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="role"></a>
+                                        <span class="name"><b>role</b><a href="#role"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>role:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="username"></a>
+                                        <span class="name"><b>username</b><a href="#username"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>username:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -254,186 +336,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface SharedMask {
-    IV_PARTNERCATEGORY: string; //1: Person 2: Organization
-    IV_PARTNERGROUP: string,    //01: Debitor/Kreditor
-    IS_CENTRALDATAPERSON: {
-        FIRSTNAME: string;
-        LASTNAME: string;
-        TITLE_ACA1: string;
-        BIRTHDATE: string;      //YYYYMMDD
-    }
-    IS_ADDRESS: {
-        C_O_NAME: string;       //Zus. Namensangaben (c/o)
-        CITY: string;           
-        POSTL_COD1: string;     //PLZ
-        POSTL_COD2: string;     //Postfach PLZ
-        PO_BOX: string;         //Postfach
-        STREET: string;
-        HOUSE_NO: string;
-        COUNTRY: string;
-    },
-    IS_CENTRALDATAORGANIZATION: {
-        LEGALFORM: string;
-    }
-
-    //interfaceNumber
-    //salutation
-    //phone
-    //fax
-    //mobile
-    //email
-    //mailbox
-    //zipMailbox
-
-    //taxId
-    //vatId
-    //industryFieldCode
-    //industryField
-    //iban
-    //bic
-    //bank
-    //paymentTerm
-    //notes
-    //sepa
-    //agb
-    //creditLimit
-    //orgaPersons
-
-    //salutation
-    //title
-    //firstName
-    //secondName
-    //birthDate
-    //phone
-    //mobile
-    //email
-
-    //salutation1
-    //title1
-    //firstName1
-    //secondName1
-    //birthDate1
-    //phone1
-    //mobile1
-    //email1
-
-    //salutation2
-    //title2
-    //firstName2
-    //secondName2
-    //birthDate2
-    //phone2
-    //mobile2
-    //email2
-
-    //companyCode
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Account {
+    email: string,
+    username: string,
+    companyCode: string,
+    role: string,
+    blocked?: boolean,
+    password?: string
+    passwordOld?: string
 }
 
-export interface SharedMask2 {
-    //IV_PARTNERCATEGORY: string; //1: Person 2: Organization
-    //IV_PARTNERGROUP: string,    //01: Debitor/Kreditor
-    IS_EXTERN: {
-        PARTNER: {
-            CENTRAL_DATA: {
-                COMMON: {
-                    DATA: {
-                        BP_PERSON: {
-                            FIRSTNAME: string;
-                            LASTNAME: string;
-                            TITLE_ACA1: string;
-                            BIRTHDATE: string;      //YYYYMMDD
-                        }
-                    }
-                }
-
-            }
-
-
-
-
-
-
-
-        }
-    }
-
-    IS_ADDRESS: {
-        C_O_NAME: string;       //Zus. Namensangaben (c/o)
-        CITY: string;           
-        POSTL_COD1: string;     //PLZ
-        POSTL_COD2: string;     //Postfach PLZ
-        PO_BOX: string;         //Postfach
-        STREET: string;
-        HOUSE_NO: string;
-        COUNTRY: string;
-    },
-    IS_CENTRALDATAORGANIZATION: {
-        LEGALFORM: string;
-    }
-
-    //interfaceNumber
-    //salutation
-    //phone
-    //fax
-    //mobile
-    //email
-    //mailbox
-    //zipMailbox
-
-    //taxId
-    //vatId
-    //industryFieldCode
-    //industryField
-    //iban
-    //bic
-    //bank
-    //paymentTerm
-    //notes
-    //sepa
-    //agb
-    //creditLimit
-    //orgaPersons
-
-    //salutation
-    //title
-    //firstName
-    //secondName
-    //birthDate
-    //phone
-    //mobile
-    //email
-
-    //salutation1
-    //title1
-    //firstName1
-    //secondName1
-    //birthDate1
-    //phone1
-    //mobile1
-    //email1
-
-    //salutation2
-    //title2
-    //firstName2
-    //secondName2
-    //birthDate2
-    //phone2
-    //mobile2
-    //email2
-
-    //companyCode
+export interface AccountJWT {
+    idToken: string,
+    expiresIn: string,
+    account: Account
 }
 
-
-
-
-
-
-
-
-
-</code></pre>
+export interface AccountDTO {
+    account?: Account,
+    message?: string,
+    error?: string
+}</code></pre>
     </div>
 </div>
 
@@ -460,7 +383,7 @@ export interface SharedMask2 {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'SharedMask.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Account.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

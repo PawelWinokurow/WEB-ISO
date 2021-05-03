@@ -43,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>CodeDetails</li>
+  <li>AccountJWT</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,18 +61,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/interfaces/list.ts</code>
+            <code>src/app/interfaces/account.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Code details fileds:
-code: unique identifier also used in SAP system
-details: details showed in browser</p>
-
-            </p>
 
 
         <section>
@@ -88,10 +79,13 @@ details: details showed in browser</p>
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#code">code</a>
+                                        <a href="#account">account</a>
                                 </li>
                                 <li>
-                                        <a href="#details">details</a>
+                                        <a href="#expiresIn">expiresIn</a>
+                                </li>
+                                <li>
+                                        <a href="#idToken">idToken</a>
                                 </li>
                             </ul>
                         </td>
@@ -108,13 +102,42 @@ details: details showed in browser</p>
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="code"></a>
-                                        <span class="name"><b>code</b><a href="#code"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="account"></a>
+                                        <span class="name"><b>account</b><a href="#account"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>code:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>account:         <code><a href="../interfaces/Account.html" target="_self" >Account</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Account.html" target="_self" >Account</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="expiresIn"></a>
+                                        <span class="name"><b>expiresIn</b><a href="#expiresIn"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>expiresIn:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -137,13 +160,13 @@ details: details showed in browser</p>
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="details"></a>
-                                        <span class="name"><b>details</b><a href="#details"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="idToken"></a>
+                                        <span class="name"><b>idToken</b><a href="#idToken"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>details:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>idToken:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -167,9 +190,26 @@ details: details showed in browser</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface CodeDetails{
-    code: string, 
-    details: string,
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Account {
+    email: string,
+    username: string,
+    companyCode: string,
+    role: string,
+    blocked?: boolean,
+    password?: string
+    passwordOld?: string
+}
+
+export interface AccountJWT {
+    idToken: string,
+    expiresIn: string,
+    account: Account
+}
+
+export interface AccountDTO {
+    account?: Account,
+    message?: string,
+    error?: string
 }</code></pre>
     </div>
 </div>
@@ -197,7 +237,7 @@ details: details showed in browser</p>
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'CodeDetails.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AccountJWT.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

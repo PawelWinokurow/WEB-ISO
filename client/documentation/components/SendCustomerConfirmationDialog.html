@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>EmailDialogComponent</li>
+  <li>SendCustomerConfirmationDialog</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,14 +61,14 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/dialogs/email-dialog/email-dialog.component.ts</code>
+    <code>src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts</code>
 </p>
 
     <p class="comment">
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>The dialog to enter the email address for the confirmation email.</p>
+        <p>The dialog to choose the direct or indirect type of customer sending.</p>
 
     </p>
 
@@ -92,19 +92,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>email-dialog</code></td>
+                <td class="col-md-9"><code>app-send-customer-confirmation</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./email-dialog.component.scss</code></td>
+                <td class="col-md-9"><code>./send-customer-confirmation.dialog.scss</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./email-dialog.component.html</code></td>
+                <td class="col-md-9"><code>./send-customer-confirmation.dialog.html</code></td>
             </tr>
 
 
@@ -131,6 +131,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#captcha">captcha</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#dialogRef">dialogRef</a>
                             </li>
@@ -139,11 +142,7 @@
                                 <a href="#dictionaryService">dictionaryService</a>
                             </li>
                             <li>
-                                <a href="#email">email</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#errorMessageService">errorMessageService</a>
+                                <a href="#recaptchaSitekey">recaptchaSitekey</a>
                             </li>
                         </ul>
                     </td>
@@ -163,6 +162,10 @@
                             <li>
                                 <a href="#onYesClick">onYesClick</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resolved">resolved</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -181,12 +184,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(dialogRef: <a href="../components/EmailDialogComponent.html">MatDialogRef<EmailDialogComponent></a>, dictionaryService: <a href="../injectables/DictionaryService.html">DictionaryService</a>, errorMessageService: <a href="../injectables/ErrorMessageService.html">ErrorMessageService</a>)</code>
+<code>constructor(dialogRef: <a href="../components/SendCustomerConfirmationDialog.html">MatDialogRef<SendCustomerConfirmationDialog></a>, dictionaryService: <a href="../injectables/DictionaryService.html">DictionaryService</a>, recaptchaService: <a href="../injectables/RecaptchaService.html">RecaptchaService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -207,7 +210,7 @@
                                                         <td>dialogRef</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../components/EmailDialogComponent.html" target="_self" >MatDialogRef&lt;EmailDialogComponent&gt;</a></code>
+                                                                        <code><a href="../components/SendCustomerConfirmationDialog.html" target="_self" >MatDialogRef&lt;SendCustomerConfirmationDialog&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -228,10 +231,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>errorMessageService</td>
+                                                        <td>recaptchaService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ErrorMessageService.html" target="_self" >ErrorMessageService</a></code>
+                                                                        <code><a href="../injectables/RecaptchaService.html" target="_self" >RecaptchaService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -279,15 +282,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:47</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Click on the &quot;cancel&quot; button triggers this method. The method closes the dialog and returns &quot;false&quot; value. </p>
+                    <div class="io-description"><p>Click on the &quot;no&quot; button triggers this method. The method closes the dialog and returns &quot;false&quot; value. </p>
 </div>
 
                     <div class="io-description">
@@ -320,20 +323,90 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:40</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Click on the &quot;send&quot; button triggers this method. The method closes the dialog and returns &quot;email&quot; value as a string. </p>
+                    <div class="io-description"><p>Click on the &quot;yes&quot; button triggers this method. The method closes the dialog and returns &quot;true&quot; value. </p>
 </div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolved"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            resolved
+                        </b>
+                        <a href="#resolved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resolved(captcha)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:30</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Resolving captcha triggers this method. The methods sends captcha to the server.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>captcha</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -349,6 +422,38 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="captcha"></a>
+                        <span class="name">
+                            <b>
+                            captcha</b>
+                            <a href="#captcha"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new FormControl(&#x27;&#x27;, [Validators.required])</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="dialogRef"></a>
                         <span class="name">
                             <b>
@@ -360,13 +465,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../components/EmailDialogComponent.html" target="_self" >MatDialogRef&lt;EmailDialogComponent&gt;</a></code>
+                            <i>Type : </i>        <code><a href="../components/SendCustomerConfirmationDialog.html" target="_self" >MatDialogRef&lt;SendCustomerConfirmationDialog&gt;</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -394,7 +499,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -405,56 +510,22 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="email"></a>
+                        <a name="recaptchaSitekey"></a>
                         <span class="name">
                             <b>
-                            email</b>
-                            <a href="#email"><span class="icon ion-ios-link"></span></a>
+                            recaptchaSitekey</b>
+                            <a href="#recaptchaSitekey"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new FormControl(&#x27;&#x27;, [Validators.required, Validators.email])</code>
+                            <i>Default value : </i><code>environment.recaptchaSitekey</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:17</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="errorMessageService"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            errorMessageService</b>
-                            <a href="#errorMessageService"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../injectables/ErrorMessageService.html" target="_self" >ErrorMessageService</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/dialogs/email-dialog/email-dialog.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/dialogs/send-customer-confirmation-dialog/send-customer-confirmation.dialog.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -471,31 +542,47 @@
 import { FormControl, Validators } from &#x27;@angular/forms&#x27;;
 import { MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
 import { DictionaryService } from &#x27;src/app/services/dictionary.service&#x27;;
-import { ErrorMessageService } from &#x27;src/app/services/error-message.service&#x27;;
+import { RecaptchaService } from &#x27;src/app/services/recaptcha.service&#x27;;
+import { environment } from &#x27;../../../environments/environment&#x27;;
 
 /**
- * The dialog to enter the email address for the confirmation email.
+ * The dialog to choose the direct or indirect type of customer sending.
  */
 @Component({
-  selector: &#x27;email-dialog&#x27;,
-  templateUrl: &#x27;./email-dialog.component.html&#x27;,
-  styleUrls: [&#x27;./email-dialog.component.scss&#x27;]
+  selector: &#x27;app-send-customer-confirmation&#x27;,
+  templateUrl: &#x27;./send-customer-confirmation.dialog.html&#x27;,
+  styleUrls: [&#x27;./send-customer-confirmation.dialog.scss&#x27;]
 })
-export class EmailDialogComponent {
+export class SendCustomerConfirmationDialog {
 
-  email: FormControl &#x3D; new FormControl(&#x27;&#x27;, [Validators.required, Validators.email]);
+  recaptchaSitekey &#x3D; environment.recaptchaSitekey;
 
-  constructor(public dialogRef: MatDialogRef&lt;EmailDialogComponent&gt;, public dictionaryService: DictionaryService, public errorMessageService: ErrorMessageService) { }
-  
+  captcha: FormControl &#x3D; new FormControl(&#x27;&#x27;, [Validators.required]);
+
+  constructor(public dialogRef: MatDialogRef&lt;SendCustomerConfirmationDialog&gt;, public dictionaryService: DictionaryService, 
+    private recaptchaService: RecaptchaService) { }
+
   /**
-   * Click on the &quot;send&quot; button triggers this method. The method closes the dialog and returns &quot;email&quot; value as a string. 
+   * Resolving captcha triggers this method. The methods sends captcha to the server.
+   * @param event Recaptcha string token
    */
-  onYesClick() {
-    this.dialogRef.close(this.email.value);
+
+  async resolved(captcha) {
+    if (captcha !&#x3D; null) {
+      this.recaptchaService.sendToken(captcha).subscribe(res &#x3D;&gt; {
+      });
+    }
   }
 
   /**
-   * Click on the &quot;cancel&quot; button triggers this method. The method closes the dialog and returns &quot;false&quot; value. 
+   * Click on the &quot;yes&quot; button triggers this method. The method closes the dialog and returns &quot;true&quot; value. 
+   */
+  onYesClick() {
+    this.dialogRef.close(true);
+  }
+
+  /**
+   * Click on the &quot;no&quot; button triggers this method. The method closes the dialog and returns &quot;false&quot; value. 
    */
   onNoClick() {
     this.dialogRef.close(false);
@@ -507,32 +594,25 @@ export class EmailDialogComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;alternate-theme&quot;&gt;
-  &lt;h2 mat-dialog-title style&#x3D;&quot;text-align:center;&quot;&gt;{{dictionaryService.get(&#x27;EMA&#x27;)}}&lt;/h2&gt;
-  &lt;div mat-dialog-content&gt;
-    &lt;h3 style&#x3D;&quot;text-align:center;&quot;&gt;{{dictionaryService.get(&#x27;EEM&#x27;)}}&lt;/h3&gt;
+  &lt;h1 mat-dialog-title&gt;{{dictionaryService.get(&#x27;SNDCUS&#x27;)}}&lt;/h1&gt;
+  &lt;mat-dialog-content style&#x3D;&quot;padding-top: 10px;&quot;&gt;
+    &lt;div style&#x3D;&quot;text-align: center;&quot;&gt;
+      &lt;re-captcha style&#x3D;&quot;display: inline-block;&quot; (resolved)&#x3D;&quot;resolved($event)&quot; [formControl]&#x3D;&quot;captcha&quot; siteKey&#x3D;&quot;{{recaptchaSitekey}}&quot;&gt;
+      &lt;/re-captcha&gt;
+    &lt;/div&gt;
+  &lt;/mat-dialog-content&gt;
 
-    &lt;mat-form-field appearance&#x3D;&quot;outline&quot; color&#x3D;&quot;accent&quot;&gt;
-      &lt;mat-label&gt;{{dictionaryService.get(&#x27;EMA&#x27;)}}&lt;/mat-label&gt;
-      &lt;input matInput [formControl]&#x3D;&quot;email&quot;&gt;
-      &lt;mat-error *ngFor&#x3D;&quot;let errorType of email.errors | keyvalue;&quot;&gt;
-        &lt;mat-icon style&#x3D;&quot;margin-right: 5px;&quot;&gt;error&lt;/mat-icon&gt;
-        {{errorMessageService.getError(&#x27;EMA&#x27;, errorType.key)}}
-    &lt;/mat-error&gt;
-    &lt;/mat-form-field&gt;
-  &lt;/div&gt;
-
-  &lt;div mat-dialog-actions align&#x3D;&quot;center&quot; style&#x3D;&quot;padding-top: 10px;&quot;&gt;
+  &lt;div mat-dialog-actions align&#x3D;&quot;center&quot; style&#x3D;&quot;padding-top: 20px;&quot;&gt;
     &lt;div style&#x3D;&quot;display: inline-block; padding-right: 5px;&quot;&gt;
-      &lt;button mat-stroked-button (click)&#x3D;&quot;onYesClick()&quot;
-        [disabled]&#x3D;&quot;!email.valid&quot;&gt;
-        &lt;span&gt;{{dictionaryService.get(&#x27;SUB&#x27;)}}&lt;/span&gt;
-        &lt;mat-icon style&#x3D;&quot;margin-left: 5px;&quot;&gt;email&lt;/mat-icon&gt;
+      &lt;button mat-stroked-button (click)&#x3D;&quot;onYesClick()&quot; [disabled]&#x3D;&quot;!captcha.valid&quot;&gt;
+        &lt;mat-icon style&#x3D;&quot;margin-right: 5px;&quot;&gt;send&lt;/mat-icon&gt;
+        &lt;span&gt;{{dictionaryService.get(&#x27;SNDDIR&#x27;)}}&lt;/span&gt;
       &lt;/button&gt;
     &lt;/div&gt;
     &lt;div style&#x3D;&quot;display: inline-block; padding-left: 5px;&quot;&gt;
-      &lt;button  mat-stroked-button (click)&#x3D;&quot;onNoClick()&quot;&gt;
-        &lt;span&gt;{{dictionaryService.get(&#x27;CAN&#x27;)}}&lt;/span&gt;
-        &lt;mat-icon style&#x3D;&quot;margin-left: 5px;&quot;&gt;cancel&lt;/mat-icon&gt;
+      &lt;button mat-stroked-button (click)&#x3D;&quot;onNoClick()&quot; [disabled]&#x3D;&quot;!captcha.valid&quot;&gt;
+        &lt;mat-icon style&#x3D;&quot;margin-right: 5px;&quot;&gt;email&lt;/mat-icon&gt;
+        &lt;span&gt;{{dictionaryService.get(&#x27;SNDCONFEMAIL&#x27;)}}&lt;/span&gt;
       &lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -541,7 +621,7 @@ export class EmailDialogComponent {
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./email-dialog.component.scss</code>
+                    <code>./send-customer-confirmation.dialog.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
@@ -571,10 +651,10 @@ export class EmailDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="alternate-theme">  <h2 mat-dialog-title style="text-align:center;">{{dictionaryService.get(\'EMA\')}}</h2>  <div mat-dialog-content>    <h3 style="text-align:center;">{{dictionaryService.get(\'EEM\')}}</h3>    <mat-form-field appearance="outline" color="accent">      <mat-label>{{dictionaryService.get(\'EMA\')}}</mat-label>      <input matInput [formControl]="email">      <mat-error *ngFor="let errorType of email.errors | keyvalue;">        <mat-icon style="margin-right: 5px;">error</mat-icon>        {{errorMessageService.getError(\'EMA\', errorType.key)}}    </mat-error>    </mat-form-field>  </div>  <div mat-dialog-actions align="center" style="padding-top: 10px;">    <div style="display: inline-block; padding-right: 5px;">      <button mat-stroked-button (click)="onYesClick()"        [disabled]="!email.valid">        <span>{{dictionaryService.get(\'SUB\')}}</span>        <mat-icon style="margin-left: 5px;">email</mat-icon>      </button>    </div>    <div style="display: inline-block; padding-left: 5px;">      <button  mat-stroked-button (click)="onNoClick()">        <span>{{dictionaryService.get(\'CAN\')}}</span>        <mat-icon style="margin-left: 5px;">cancel</mat-icon>      </button>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailDialogComponent', 'selector': 'email-dialog'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'SendCustomerConfirmationDialogComponent', 'selector': 'app-send-customer-confirmation-dialog'}];
+        var COMPONENT_TEMPLATE = '<div><div class="alternate-theme">  <h1 mat-dialog-title>{{dictionaryService.get(\'SNDCUS\')}}</h1>  <mat-dialog-content style="padding-top: 10px;">    <div style="text-align: center;">      <re-captcha style="display: inline-block;" (resolved)="resolved($event)" [formControl]="captcha" siteKey="{{recaptchaSitekey}}">      </re-captcha>    </div>  </mat-dialog-content>  <div mat-dialog-actions align="center" style="padding-top: 20px;">    <div style="display: inline-block; padding-right: 5px;">      <button mat-stroked-button (click)="onYesClick()" [disabled]="!captcha.valid">        <mat-icon style="margin-right: 5px;">send</mat-icon>        <span>{{dictionaryService.get(\'SNDDIR\')}}</span>      </button>    </div>    <div style="display: inline-block; padding-left: 5px;">      <button mat-stroked-button (click)="onNoClick()" [disabled]="!captcha.valid">        <mat-icon style="margin-right: 5px;">email</mat-icon>        <span>{{dictionaryService.get(\'SNDCONFEMAIL\')}}</span>      </button>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomersComponent', 'selector': 'app-customers'},{'name': 'DeleteAccountDialog', 'selector': 'app-delete-account'},{'name': 'EditAccountDialog', 'selector': 'app-edit-account'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountDialog', 'selector': 'app-new-account'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'ResetPasswordAdminDialog', 'selector': 'app-reset-password-admin'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'ResetPasswordUserDialog', 'selector': 'app-reset-password-user'},{'name': 'SendCustomerConfirmationDialog', 'selector': 'app-send-customer-confirmation'},{'name': 'SettingsComponent', 'selector': 'app-settings'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'EmailDialogComponent'};
+    var ACTUAL_COMPONENT = {'name': 'SendCustomerConfirmationDialog'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -609,7 +689,7 @@ export class EmailDialogComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'EmailDialogComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SendCustomerConfirmationDialog.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

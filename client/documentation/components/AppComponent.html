@@ -119,54 +119,6 @@
 </section>
 
 
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/app.component.ts:14</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -179,8 +131,6 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
-
 
 /**
  * The entry point of the application.
@@ -191,11 +141,7 @@ import { Router } from &#x27;@angular/router&#x27;;
   styleUrls: [&#x27;./app.component.scss&#x27;]
 })
 
-export class AppComponent {
-  constructor(private router: Router,){
-    this.router.navigate([&#x27;/iso&#x27;]);
-  }
-}
+export class AppComponent {}
 </code></pre>
     </div>
 
@@ -236,7 +182,7 @@ export class AppComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><app-main></app-main></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailDialogComponent', 'selector': 'email-dialog'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'SendCustomerConfirmationDialogComponent', 'selector': 'app-send-customer-confirmation-dialog'}];
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomersComponent', 'selector': 'app-customers'},{'name': 'DeleteAccountDialog', 'selector': 'app-delete-account'},{'name': 'EditAccountDialog', 'selector': 'app-edit-account'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountDialog', 'selector': 'app-new-account'},{'name': 'NewISOComponent', 'selector': 'app-new-iso'},{'name': 'PreselectionComponent', 'selector': 'app-preselection'},{'name': 'ResetPasswordAdminDialog', 'selector': 'app-reset-password-admin'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'ResetPasswordUserDialog', 'selector': 'app-reset-password-user'},{'name': 'SendCustomerConfirmationDialog', 'selector': 'app-send-customer-confirmation'},{'name': 'SettingsComponent', 'selector': 'app-settings'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

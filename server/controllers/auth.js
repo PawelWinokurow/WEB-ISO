@@ -6,7 +6,7 @@ const databaseService = require('../services/database');
 const cryptoService = require('../services/crypto');
 const PRIVATE_KEY = fs.readFileSync(path.join(process.cwd(), process.env.PRIVATE_KEY));
 const ldap = require('ldapjs');
-const assert = require('assert');
+const ActiveDirectory = require('activedirectory');
 
 
 async function refreshToken(req, res) {
@@ -28,6 +28,7 @@ async function refreshToken(req, res) {
 function pBindLDAP(client, adSuffix, password) {
     return new Promise((resolve, reject) => {
         client.bind(adSuffix, password, (err, res) => {
+            client.unbind();
             if (err) {
                 reject(false);
             } else {
@@ -43,15 +44,12 @@ async function login(req, res) {
         const requestAccount = req.body.account;
         let dbAccount = await databaseService.getAccount(requestAccount);
         // LDAP Connection Settings
-        const server = "mucdc001.root.local";
-        const userPrincipalName = requestAccount.username;
         const password = requestAccount.password;
-        const adSuffix = `CN=${userPrincipalName},OU=D,OU=standarduser,OU=X-RIS,DC=root,DC=local`;
-        // Create client and bind to AD
+        const adSuffix = `CN=${requestAccount.username},OU=D,OU=standarduser,OU=X-RIS,DC=root,DC=local`;
+        const server = "mucdc001.root.local";
         const client = ldap.createClient({
             url: `ldap://${server}`
         });
-
         let isLDAPAuth = await pBindLDAP(client, adSuffix, password)
 
         if (dbAccount && isLDAPAuth && !dbAccount.blocked) {
@@ -65,19 +63,11 @@ async function login(req, res) {
                 error: `IDINC`
             })
         }
-
-
-        // Wrap up
-        client.unbind(err => {
-            assert.ifError(err);
-        });
-
     } catch (e) {
         errorHandler.unknownErrorResponse(e, 401);
     }
 }
 */
-
 
 async function login(req, res) {
     try {
@@ -98,7 +88,6 @@ async function login(req, res) {
         errorHandler.unknownErrorResponse(e, 401);
     }
 }
-
 
 function createJWT(account) {
     const jwtBearerToken = jwt.sign(account, PRIVATE_KEY, {

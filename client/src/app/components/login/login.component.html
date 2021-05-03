@@ -1,9 +1,8 @@
 <div class="inner-component">
     <mat-card class="card">
         <mat-card-title style="padding: 10px 0 0 10px;">{{dictionaryService.get('LOGIN')}}</mat-card-title>
-        <mat-card-content align="center" style="width: 350px;">
-            <form [formGroup]="loginForm" class="alternate-theme">
-
+        <mat-card-content align="center">
+            <form [formGroup]="loginForm" class="alternate-theme" (keydown)="login()">
                 <div class="paddinglr10px" style="margin-top:20px;">
                     <mat-form-field color="primary" appearance="outline">
                         <mat-label>{{dictionaryService.get('ID')}}</mat-label>

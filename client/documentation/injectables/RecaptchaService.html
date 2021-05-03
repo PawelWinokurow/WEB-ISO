@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>SearchService</li>
+  <li>RecaptchaService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,16 +56,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/search.service.ts</code>
+            <code>src/app/services/recaptcha.service.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Enables free text search filtering.</p>
-
-            </p>
 
 
 
@@ -83,7 +76,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#filter">filter</a>
+                                <a href="#sendToken">sendToken</a>
                             </li>
                         </ul>
                     </td>
@@ -103,15 +96,57 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(httpService: <a href="../injectables/HttpService.html">HttpService</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/search.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/recaptcha.service.ts:10</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>httpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -125,33 +160,33 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="filter"></a>
+                    <a name="sendToken"></a>
                     <span class="name">
                         <b>
-                            filter
+                            sendToken
                         </b>
-                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                        <a href="#sendToken"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>filter(ctrl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, list: <a href="../interfaces/CodeDetails.html">CodeDetails[]</a>, filteredValues: <a href="../interfaces/CodeDetails.html">ReplaySubject<CodeDetails[]></a>)</code>
+<code>sendToken(token)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/services/search.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">src/app/services/recaptcha.service.ts:18</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filters list of values.</p>
+                    <div class="io-description"><p>Sends captcha token to the server.</p>
 </div>
 
                     <div class="io-description">
@@ -160,59 +195,18 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
-                                    <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>ctrl</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
-                                    </td>
+                                    <td>token</td>
 
                                     <td>
                                         No
                                     </td>
 
 
-                                    <td>
-                                        <p>Value to find</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>list</td>
-                                    <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >CodeDetails[]</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>List in which to search for</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>filteredValues</td>
-                                    <td>
-                                                <code><a href="../interfaces/CodeDetails.html" target="_self" >ReplaySubject&lt;CodeDetails[]&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Filtered values</p>
-
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -220,7 +214,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -236,42 +230,26 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { FormControl } from &#x27;@angular/forms&#x27;;
-import { ReplaySubject } from &#x27;rxjs&#x27;;
-import { CodeDetails } from &#x27;../interfaces/list&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { environment } from &#x27;src/environments/environment&#x27;;
+import { HttpService } from &#x27;./http.service&#x27;;
 
-/**
- * Enables free text search filtering.
- */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class SearchService {
+export class RecaptchaService {
 
-  constructor() { }
+  constructor(private httpService: HttpService, private http: HttpClient) { }
 
-  /**
-   * Filters list of values.
-   * @param ctrl Value to find
-   * @param list List in which to search for
-   * @param filteredValues Filtered values
+    /**
+   * Sends captcha token to the server.
+   * @param token 
    */
-  filter(ctrl: FormControl, list: CodeDetails[], filteredValues: ReplaySubject&lt;CodeDetails[]&gt;) {
-    if (!list) {
-      return;
+     sendToken(token): Observable&lt;any&gt;{
+      return this.httpService.request(this.http.post(&#x60;${environment.serverURL}/customers/recaptcha&#x60;, {recaptcha: token}))
     }
-    let search &#x3D; ctrl.value;
-    if (!search) {
-      filteredValues.next(list.slice());
-      return;
-    } else {
-      search &#x3D; search.toLowerCase();
-    }
-    filteredValues.next(
-      list.filter(field &#x3D;&gt; field.details.toLowerCase().indexOf(search) &gt; -1)
-    );
-  }
 }
 </code></pre>
     </div>
@@ -306,7 +284,7 @@ export class SearchService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'SearchService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'RecaptchaService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
