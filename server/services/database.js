@@ -244,8 +244,6 @@ async function updateAccountADMIN(account) {
   await cudQuery(updateStatement, values);
 }
 
-
-
 /**
  * Deletes account from the database.
  * @param  {object} account Account object 
