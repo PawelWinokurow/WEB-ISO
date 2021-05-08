@@ -6,7 +6,6 @@ const databaseService = require('../services/database');
 const cryptoService = require('../services/crypto');
 const PRIVATE_KEY = fs.readFileSync(path.join(process.cwd(), process.env.PRIVATE_KEY));
 const ldap = require('ldapjs');
-const ActiveDirectory = require('activedirectory');
 
 
 async function refreshToken(req, res) {
